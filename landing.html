@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RouteBuilder AI - Plan Your Perfect Road Trip in Minutes</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap');
+        
+        * {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .feature-card {
+            transition: transform 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-8px);
+        }
+        
+        .hero-image {
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Header -->
+    <nav class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <div class="text-2xl font-bold text-purple-600">🗺️ RouteBuilder AI</div>
+                <a href="#signup" class="bg-purple-600 text-white px-6 py-2 rounded-lg font-semibold hover:bg-purple-700 transition">
+                    Get Early Access
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="gradient-bg text-white py-20">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div>
+                    <div class="inline-block bg-white/20 backdrop-blur px-4 py-2 rounded-full text-sm font-semibold mb-6">
+                        ✨ Coming Soon - Join the Waitlist
+                    </div>
+                    <h1 class="text-5xl lg:text-6xl font-bold mb-6 leading-tight">
+                        Plan Your Perfect Road Trip in <span class="text-yellow-300">Minutes</span>
+                    </h1>
+                    <p class="text-xl mb-8 text-purple-100 leading-relaxed">
+                        Stop spending hours on spreadsheets. Get a beautiful, interactive trip dashboard with budget tracking, hotels, restaurants, live photo sharing, and more—all powered by AI.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <a href="#signup" class="bg-white text-purple-600 px-8 py-4 rounded-lg font-bold text-lg hover:bg-gray-100 transition text-center">
+                            Join Waitlist - It's Free
+                        </a>
+                        <a href="#demo" class="border-2 border-white px-8 py-4 rounded-lg font-bold text-lg hover:bg-white/10 transition text-center">
+                            See Demo
+                        </a>
+                    </div>
+                    <p class="text-sm text-purple-200 mt-4">🎉 First 100 signups get 50% off for life!</p>
+                </div>
+                <div>
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='400' viewBox='0 0 600 400'%3E%3Crect fill='%23f3f4f6' width='600' height='400' rx='20'/%3E%3Ctext x='50%25' y='50%25' font-family='Arial' font-size='24' fill='%239ca3af' text-anchor='middle' dominant-baseline='middle'%3EDashboard Preview%3C/text%3E%3Cpath d='M50 80 L550 80 M50 150 L550 150 M50 220 L550 220' stroke='%23d1d5db' stroke-width='2'/%3E%3Ccircle cx='100' cy='80' r='25' fill='%23667eea'/%3E%3Ccircle cx='100' cy='150' r='25' fill='%23f59e0b'/%3E%3Ccircle cx='100' cy='220' r='25' fill='%2310b981'/%3E%3C/svg%3E" alt="Dashboard Preview" class="rounded-xl hero-image">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Problem Section -->
+    <section class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold mb-4">Road Trip Planning Shouldn't Take Days</h2>
+                <p class="text-xl text-gray-600">Sound familiar?</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-red-50 p-8 rounded-xl">
+                    <div class="text-4xl mb-4">😫</div>
+                    <h3 class="text-xl font-bold mb-3">Hours on Google Maps</h3>
+                    <p class="text-gray-700">Opening 20 tabs, copying hotel names into spreadsheets, losing track of your budget...</p>
+                </div>
+                <div class="bg-red-50 p-8 rounded-xl">
+                    <div class="text-4xl mb-4">💸</div>
+                    <h3 class="text-xl font-bold mb-3">Budget Chaos</h3>
+                    <p class="text-gray-700">No idea if you're over or under budget until it's too late. Receipts everywhere.</p>
+                </div>
+                <div class="bg-red-50 p-8 rounded-xl">
+                    <div class="text-4xl mb-4">🔄</div>
+                    <h3 class="text-xl font-bold mb-3">Constant Changes</h3>
+                    <p class="text-gray-700">"Can we add a stop in Denver?" means redoing everything. Again.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Solution Section -->
+    <section class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold mb-4">How RouteBuilder AI Works</h2>
+                <p class="text-xl text-gray-600">From idea to interactive dashboard in 3 simple steps</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-white p-8 rounded-xl shadow-lg text-center">
+                    <div class="bg-purple-100 w-16 h-16 rounded-full flex items-center justify-center text-3xl font-bold text-purple-600 mx-auto mb-6">1</div>
+                    <h3 class="text-xl font-bold mb-3">Describe Your Trip</h3>
+                    <p class="text-gray-700">"Atlanta to Seattle, 5 days, $1,200 budget, want to see mountains"</p>
+                </div>
+                <div class="bg-white p-8 rounded-xl shadow-lg text-center">
+                    <div class="bg-purple-100 w-16 h-16 rounded-full flex items-center justify-center text-3xl font-bold text-purple-600 mx-auto mb-6">2</div>
+                    <h3 class="text-xl font-bold mb-3">AI Builds Your Dashboard</h3>
+                    <p class="text-gray-700">Complete with route, hotels, restaurants, budget breakdown, and packing list</p>
+                </div>
+                <div class="bg-white p-8 rounded-xl shadow-lg text-center">
+                    <div class="bg-purple-100 w-16 h-16 rounded-full flex items-center justify-center text-3xl font-bold text-purple-600 mx-auto mb-6">3</div>
+                    <h3 class="text-xl font-bold mb-3">Download & Go</h3>
+                    <p class="text-gray-700">Interactive dashboard on your phone. Make changes anytime with simple requests.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- AI-Powered Smart Features -->
+    <section class="py-20 bg-gradient-to-br from-indigo-50 to-purple-50">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="text-center mb-12">
+                <div class="inline-block bg-purple-600 text-white px-4 py-2 rounded-full text-sm font-bold mb-4">
+                    🤖 POWERED BY AI
+                </div>
+                <h2 class="text-4xl font-bold mb-4">Smart Features That Actually Think</h2>
+                <p class="text-xl text-gray-600">Not just templates. Real AI that adapts to your needs.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Photo Sharing -->
+                <div class="bg-white rounded-2xl shadow-xl overflow-hidden transform hover:scale-105 transition duration-300">
+                    <div class="bg-gradient-to-r from-pink-500 to-rose-500 p-6 text-white">
+                        <div class="text-4xl mb-2">📸</div>
+                        <h3 class="text-2xl font-bold">Live Photo Sharing</h3>
+                    </div>
+                    <div class="p-6">
+                        <p class="text-gray-700 mb-4">Share one link with your whole family. Everyone can upload photos in real-time.</p>
+                        <div class="bg-gray-50 p-4 rounded-lg space-y-2 text-sm">
+                            <div class="flex items-start">
+                                <span class="text-green-500 mr-2">✓</span>
+                                <span>Dad uploads from Grand Canyon → Everyone sees it instantly</span>
+                            </div>
+                            <div class="flex items-start">
+                                <span class="text-green-500 mr-2">✓</span>
+                                <span>Organized by location automatically</span>
+                            </div>
+                            <div class="flex items-start">
+                                <span class="text-green-500 mr-2">✓</span>
+                                <span>No more group text spam with 47 photos</span>
+                            </div>
+                            <div class="flex items-start">
+                                <span class="text-green-500 mr-2">✓</span>
+                                <span>Grandparents at home follow along in real-time</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- AI Game Generator -->
+                <div class="bg-white rounded-2xl shadow-xl overflow-hidden transform hover:scale-105 transition duration-300">
+                    <div class="bg-gradient-to-r from-purple-500 to-indigo-500 p-6 text-white">
+                        <div class="text-4xl mb-2">🎮</div>
+                        <h3 class="text-2xl font-bold">AI Game Generator</h3>
+                    </div>
+                    <div class="p-6">
+                        <p class="text-gray-700 mb-4">Your dashboard includes games. But here's the magic: Ask AI to create MORE games with custom questions.</p>
+                        <div class="bg-gray-50 p-4 rounded-lg space-y-2 text-sm">
+                            <div class="font-semibold text-purple-600 mb-2">Examples:</div>
+                            <div class="flex items-start">
+                                <span class="text-blue-500 mr-2">→</span>
+                                <span>"Create trivia about the cities we're visiting"</span>
+                            </div>
+                            <div class="flex items-start">
+                                <span class="text-blue-500 mr-2">→</span>
+                                <span>"Make 50 'Would You Rather' questions for kids"</span>
+                            </div>
+                            <div class="flex items-start">
+                                <span class="text-blue-500 mr-2">→</span>
+                                <span>"Add a scavenger hunt for Route 66 landmarks"</span>
+                            </div>
+                            <div class="flex items-start">
+                                <span class="text-blue-500 mr-2">→</span>
+                                <span>"Create 'I Spy' prompts for our exact route"</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Smart Packing Lists -->
+                <div class="bg-white rounded-2xl shadow-xl overflow-hidden transform hover:scale-105 transition duration-300">
+                    <div class="bg-gradient-to-r from-green-500 to-emerald-500 p-6 text-white">
+                        <div class="text-4xl mb-2">🎒</div>
+                        <h3 class="text-2xl font-bold">AI-Powered Packing</h3>
+                    </div>
+                    <div class="p-6">
+                        <p class="text-gray-700 mb-4">AI creates your packing list based on weather, activities, and trip duration. Then customize however you want.</p>
+                        <div class="bg-gray-50 p-4 rounded-lg space-y-2 text-sm">
+                            <div class="font-semibold text-green-600 mb-2">Smart Features:</div>
+                            <div class="flex items-start">
+                                <span class="text-green-500 mr-2">✓</span>
+                                <span>Weather-aware (adds ice scraper for winter drives)</span>
+                            </div>
+                            <div class="flex items-start">
+                                <span class="text-green-500 mr-2">✓</span>
+                                <span>Split by person: "Mom's list", "Kids' list", "Dad's list"</span>
+                            </div>
+                            <div class="flex items-start">
+                                <span class="text-green-500 mr-2">✓</span>
+                                <span>Activity-based (hiking gear if you're hitting trails)</span>
+                            </div>
+                            <div class="flex items-start">
+                                <span class="text-green-500 mr-2">✓</span>
+                                <span>Ask AI: "Add items for camping" or "Remove snacks"</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Budget Intelligence -->
+                <div class="bg-white rounded-2xl shadow-xl overflow-hidden transform hover:scale-105 transition duration-300">
+                    <div class="bg-gradient-to-r from-orange-500 to-amber-500 p-6 text-white">
+                        <div class="text-4xl mb-2">💰</div>
+                        <h3 class="text-2xl font-bold">Budget Intelligence</h3>
+                    </div>
+                    <div class="p-6">
+                        <p class="text-gray-700 mb-4">Track spending in real-time. Upload receipts. AI warns you before you overspend.</p>
+                        <div class="bg-gray-50 p-4 rounded-lg space-y-2 text-sm">
+                            <div class="flex items-start">
+                                <span class="text-orange-500 mr-2">✓</span>
+                                <span>Photo receipts → Auto-categorized by AI</span>
+                            </div>
+                            <div class="flex items-start">
+                                <span class="text-orange-500 mr-2">✓</span>
+                                <span>Smart alerts: "You're 80% through hotel budget"</span>
+                            </div>
+                            <div class="flex items-start">
+                                <span class="text-orange-500 mr-2">✓</span>
+                                <span>Click any budget to edit it on the fly</span>
+                            </div>
+                            <div class="flex items-start">
+                                <span class="text-orange-500 mr-2">✓</span>
+                                <span>Export final report: "Here's what we actually spent"</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-12 bg-white rounded-xl p-8 shadow-lg max-w-4xl mx-auto border-2 border-purple-200">
+                <div class="flex items-start space-x-4">
+                    <div class="text-4xl">💡</div>
+                    <div>
+                        <h3 class="text-xl font-bold mb-2">The AI Difference</h3>
+                        <p class="text-gray-700">Most trip planners give you templates. We give you AI that understands plain English. Want to "add items for toddlers" or "create car games about national parks"? Just ask. The AI adapts your dashboard to your exact needs—not the other way around.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modifications Section -->
+    <section class="py-20 bg-purple-50">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold mb-4">Change Anything, Anytime</h2>
+                <p class="text-xl text-gray-600">Plans change. We make it easy. Just tell us what you want.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+                <div class="bg-white p-6 rounded-xl shadow-md">
+                    <div class="text-2xl mb-3">🗺️</div>
+                    <h3 class="font-bold mb-2">Route Changes</h3>
+                    <ul class="text-sm text-gray-700 space-y-1">
+                        <li>• "Add a stop in Denver"</li>
+                        <li>• "Avoid toll roads"</li>
+                        <li>• "Take scenic route through national parks"</li>
+                        <li>• "Make it 7 days instead of 5"</li>
+                    </ul>
+                </div>
+                
+                <div class="bg-white p-6 rounded-xl shadow-md">
+                    <div class="text-2xl mb-3">💰</div>
+                    <h3 class="font-bold mb-2">Budget Adjustments</h3>
+                    <ul class="text-sm text-gray-700 space-y-1">
+                        <li>• "Increase hotel budget to $150/night"</li>
+                        <li>• "Cut food budget to $50/day"</li>
+                        <li>• "Total budget now $2,000"</li>
+                        <li>• "Show me luxury options"</li>
+                    </ul>
+                </div>
+                
+                <div class="bg-white p-6 rounded-xl shadow-md">
+                    <div class="text-2xl mb-3">🏨</div>
+                    <h3 class="font-bold mb-2">Accommodation Preferences</h3>
+                    <ul class="text-sm text-gray-700 space-y-1">
+                        <li>• "Only boutique hotels"</li>
+                        <li>• "Pet-friendly places only"</li>
+                        <li>• "Hotels with pools"</li>
+                        <li>• "Camping instead of hotels"</li>
+                    </ul>
+                </div>
+                
+                <div class="bg-white p-6 rounded-xl shadow-md">
+                    <div class="text-2xl mb-3">⏱️</div>
+                    <h3 class="font-bold mb-2">Timing & Pace</h3>
+                    <ul class="text-sm text-gray-700 space-y-1">
+                        <li>• "No driving after 8pm"</li>
+                        <li>• "Maximum 6 hours driving per day"</li>
+                        <li>• "Leave 2 days earlier"</li>
+                        <li>• "Add more rest stops"</li>
+                    </ul>
+                </div>
+                
+                <div class="bg-white p-6 rounded-xl shadow-md">
+                    <div class="text-2xl mb-3">🍽️</div>
+                    <h3 class="font-bold mb-2">Food & Activities</h3>
+                    <ul class="text-sm text-gray-700 space-y-1">
+                        <li>• "Vegetarian restaurants only"</li>
+                        <li>• "Add hiking spots"</li>
+                        <li>• "Include breweries"</li>
+                        <li>• "Family-friendly activities"</li>
+                    </ul>
+                </div>
+                
+                <div class="bg-white p-6 rounded-xl shadow-md">
+                    <div class="text-2xl mb-3">🎨</div>
+                    <h3 class="font-bold mb-2">Style & Format</h3>
+                    <ul class="text-sm text-gray-700 space-y-1">
+                        <li>• "Change colors to blue"</li>
+                        <li>• "Remove countdown timer"</li>
+                        <li>• "Add weather section"</li>
+                        <li>• "Include meal planning"</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="bg-gradient-to-r from-purple-600 to-purple-700 rounded-xl p-8 text-white text-center max-w-3xl mx-auto">
+                <h3 class="text-2xl font-bold mb-3">Unlimited Modifications Included</h3>
+                <p class="text-purple-100 text-lg">Change your dashboard as many times as you want. No extra charges, no limits.</p>
+                <p class="text-sm text-purple-200 mt-4">Just describe what you want in plain English - we handle the rest.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="py-20 bg-white" id="demo">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold mb-4">Everything You Need in One Dashboard</h2>
+                <p class="text-xl text-gray-600">Professional planning tools, zero hassle</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="feature-card bg-purple-50 p-6 rounded-xl border-2 border-purple-200">
+                    <div class="text-3xl mb-3">📍</div>
+                    <h3 class="font-bold text-lg mb-2">Smart Route Planning</h3>
+                    <p class="text-gray-700 text-sm">Optimized routes with safety considerations, rest stops, and scenic options</p>
+                </div>
+                <div class="feature-card bg-blue-50 p-6 rounded-xl border-2 border-blue-200">
+                    <div class="text-3xl mb-3">💰</div>
+                    <h3 class="font-bold text-lg mb-2">Budget Tracking</h3>
+                    <p class="text-gray-700 text-sm">Real-time expense tracking with receipt uploads and spending alerts</p>
+                </div>
+                <div class="feature-card bg-green-50 p-6 rounded-xl border-2 border-green-200">
+                    <div class="text-3xl mb-3">🏨</div>
+                    <h3 class="font-bold text-lg mb-2">Hotel Recommendations</h3>
+                    <p class="text-gray-700 text-sm">6 vetted options per city with pricing and amenities</p>
+                </div>
+                <div class="feature-card bg-yellow-50 p-6 rounded-xl border-2 border-yellow-200">
+                    <div class="text-3xl mb-3">🍽️</div>
+                    <h3 class="font-bold text-lg mb-2">Restaurant Picks</h3>
+                    <p class="text-gray-700 text-sm">Local favorites, hidden gems, and dietary options</p>
+                </div>
+                <div class="feature-card bg-pink-50 p-6 rounded-xl border-2 border-pink-200">
+                    <div class="text-3xl mb-3">🎒</div>
+                    <h3 class="font-bold text-lg mb-2">Smart Packing Lists</h3>
+                    <p class="text-gray-700 text-sm">Customized checklists based on weather, duration, and activities</p>
+                </div>
+                <div class="feature-card bg-indigo-50 p-6 rounded-xl border-2 border-indigo-200">
+                    <div class="text-3xl mb-3">📸</div>
+                    <h3 class="font-bold text-lg mb-2">Live Photo Sharing</h3>
+                    <p class="text-gray-700 text-sm">Share your dashboard link - everyone sees photos instantly as you upload. No more "did you send me those pics?"</p>
+                </div>
+                <div class="feature-card bg-red-50 p-6 rounded-xl border-2 border-red-200">
+                    <div class="text-3xl mb-3">🌙</div>
+                    <h3 class="font-bold text-lg mb-2">Dark Mode</h3>
+                    <p class="text-gray-700 text-sm">Easy on the eyes for night driving</p>
+                </div>
+                <div class="feature-card bg-teal-50 p-6 rounded-xl border-2 border-teal-200">
+                    <div class="text-3xl mb-3">📶</div>
+                    <h3 class="font-bold text-lg mb-2">Works Offline</h3>
+                    <p class="text-gray-700 text-sm">No internet? No problem. Everything saves locally</p>
+                </div>
+                <div class="feature-card bg-orange-50 p-6 rounded-xl border-2 border-orange-200">
+                    <div class="text-3xl mb-3">🎮</div>
+                    <h3 class="font-bold text-lg mb-2">Road Trip Games</h3>
+                    <p class="text-gray-700 text-sm">Built-in entertainment including license plate bingo and trivia</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Preview -->
+    <section class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold mb-4">Simple, Fair Pricing</h2>
+                <p class="text-xl text-gray-600">No subscriptions. Pay only for what you use.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+                <div class="bg-white p-8 rounded-xl shadow-lg text-center">
+                    <h3 class="text-xl font-bold mb-2">Single Trip</h3>
+                    <div class="text-4xl font-bold text-purple-600 my-4">$15</div>
+                    <p class="text-gray-600 mb-6">Perfect for vacation planners</p>
+                    <ul class="text-left space-y-2 text-sm mb-6">
+                        <li>✓ 1 custom dashboard</li>
+                        <li>✓ Unlimited modifications</li>
+                        <li>✓ All features included</li>
+                        <li>✓ Download as HTML/PDF</li>
+                    </ul>
+                </div>
+                <div class="bg-purple-600 p-8 rounded-xl shadow-xl text-center text-white transform scale-105 relative">
+                    <div class="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-yellow-400 text-purple-900 px-4 py-1 rounded-full text-xs font-bold">
+                        MOST POPULAR
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Pro Plan</h3>
+                    <div class="text-4xl font-bold my-4">$25<span class="text-lg">/mo</span></div>
+                    <p class="text-purple-100 mb-6">For travel professionals</p>
+                    <ul class="text-left space-y-2 text-sm mb-6">
+                        <li>✓ Unlimited dashboards</li>
+                        <li>✓ Priority support</li>
+                        <li>✓ Custom branding</li>
+                        <li>✓ Client collaboration</li>
+                        <li>✓ API access</li>
+                    </ul>
+                </div>
+                <div class="bg-white p-8 rounded-xl shadow-lg text-center">
+                    <h3 class="text-xl font-bold mb-2">Enterprise</h3>
+                    <div class="text-4xl font-bold text-purple-600 my-4">Custom</div>
+                    <p class="text-gray-600 mb-6">For agencies & tour operators</p>
+                    <ul class="text-left space-y-2 text-sm mb-6">
+                        <li>✓ White-label solution</li>
+                        <li>✓ Team accounts</li>
+                        <li>✓ Dedicated support</li>
+                        <li>✓ Custom integrations</li>
+                        <li>✓ Volume discounts</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Social Proof / Use Cases -->
+    <section class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold mb-4">Perfect For</h2>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="bg-gray-50 p-6 rounded-xl text-center">
+                    <div class="text-4xl mb-3">👨‍👩‍👧‍👦</div>
+                    <h3 class="font-bold mb-2">Families</h3>
+                    <p class="text-gray-600 text-sm">Create memorable vacations without the planning stress</p>
+                </div>
+                <div class="bg-gray-50 p-6 rounded-xl text-center">
+                    <div class="text-4xl mb-3">✈️</div>
+                    <h3 class="font-bold mb-2">Travel Agents</h3>
+                    <p class="text-gray-600 text-sm">Impress clients with professional dashboards in minutes</p>
+                </div>
+                <div class="bg-gray-50 p-6 rounded-xl text-center">
+                    <div class="text-4xl mb-3">🏢</div>
+                    <h3 class="font-bold mb-2">Corporate</h3>
+                    <p class="text-gray-600 text-sm">Team retreats and client entertainment made easy</p>
+                </div>
+                <div class="bg-gray-50 p-6 rounded-xl text-center">
+                    <div class="text-4xl mb-3">🚐</div>
+                    <h3 class="font-bold mb-2">RV Renters</h3>
+                    <p class="text-gray-600 text-sm">Provide customers with complete trip planning</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA / Signup Section -->
+    <section class="py-20 gradient-bg text-white" id="signup">
+        <div class="max-w-4xl mx-auto px-4 text-center">
+            <h2 class="text-4xl lg:text-5xl font-bold mb-6">Ready to Plan Your Next Adventure?</h2>
+            <p class="text-xl text-purple-100 mb-8">Join our waitlist and be the first to know when we launch.</p>
+            
+            <!-- Email Signup Form -->
+            <div class="bg-white rounded-xl p-8 max-w-2xl mx-auto">
+                <form id="signupForm" class="space-y-4">
+                    <input 
+                        type="text" 
+                        id="name"
+                        placeholder="Your Name" 
+                        required
+                        class="w-full px-6 py-4 rounded-lg border-2 border-gray-200 focus:border-purple-500 focus:outline-none text-gray-800 text-lg"
+                    >
+                    <input 
+                        type="email" 
+                        id="email"
+                        placeholder="Your Email" 
+                        required
+                        class="w-full px-6 py-4 rounded-lg border-2 border-gray-200 focus:border-purple-500 focus:outline-none text-gray-800 text-lg"
+                    >
+                    <select 
+                        id="userType"
+                        class="w-full px-6 py-4 rounded-lg border-2 border-gray-200 focus:border-purple-500 focus:outline-none text-gray-800 text-lg"
+                    >
+                        <option value="">I am a...</option>
+                        <option value="family">Family vacation planner</option>
+                        <option value="agent">Travel agent / professional</option>
+                        <option value="corporate">Corporate / team planner</option>
+                        <option value="enthusiast">Road trip enthusiast</option>
+                        <option value="other">Other</option>
+                    </select>
+                    <button 
+                        type="submit"
+                        class="w-full bg-purple-600 text-white px-8 py-4 rounded-lg font-bold text-lg hover:bg-purple-700 transition"
+                    >
+                        Join the Waitlist - It's Free! 🚀
+                    </button>
+                    <p class="text-sm text-gray-600">🎁 First 100 signups get 50% off for life when we launch!</p>
+                </form>
+                <div id="successMessage" class="hidden mt-6 p-4 bg-green-100 border-2 border-green-400 rounded-lg">
+                    <p class="text-green-800 font-bold">🎉 You're on the list!</p>
+                    <p class="text-green-700 text-sm mt-2">We'll email you as soon as RouteBuilder AI launches. Check your inbox for confirmation!</p>
+                </div>
+            </div>
+            
+            <p class="text-sm text-purple-200 mt-6">No spam. Unsubscribe anytime. We respect your privacy.</p>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="py-20 bg-gray-50">
+        <div class="max-w-4xl mx-auto px-4">
+            <h2 class="text-4xl font-bold text-center mb-12">Frequently Asked Questions</h2>
+            <div class="space-y-6">
+                <div class="bg-white p-6 rounded-xl shadow">
+                    <h3 class="font-bold text-lg mb-2">How is this different from Google Maps?</h3>
+                    <p class="text-gray-700">Google Maps shows you routes. RouteBuilder AI creates a complete trip planning experience with hotels, restaurants, budget tracking, packing lists, and entertainment—all in one beautiful dashboard.</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow">
+                    <h3 class="font-bold text-lg mb-2">Can I modify the trip after it's generated?</h3>
+                    <p class="text-gray-700">Absolutely! Just tell us what you want to change: "Add a stop in Denver" or "Increase hotel budget to $600" and we'll regenerate your dashboard instantly.</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow">
+                    <h3 class="font-bold text-lg mb-2">Does it work on mobile?</h3>
+                    <p class="text-gray-700">Yes! Your dashboard works perfectly on phones, tablets, and computers. It even works offline once downloaded.</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow">
+                    <h3 class="font-bold text-lg mb-2">When will it launch?</h3>
+                    <p class="text-gray-700">We're aiming for Q1 2026. Join the waitlist to be notified the moment we launch!</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow">
+                    <h3 class="font-bold text-lg mb-2">Can I use this for my travel business?</h3>
+                    <p class="text-gray-700">Yes! Our Pro plan is designed specifically for travel agents, tour operators, and corporate travel coordinators. You can even white-label it with Enterprise.</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow">
+                    <h3 class="font-bold text-lg mb-2">How does photo sharing work?</h3>
+                    <p class="text-gray-700">When you share your dashboard link with family or friends, everyone can view AND upload photos in real-time. As soon as someone uploads a photo from the Grand Canyon, everyone with the link sees it instantly. No more "did you get my text with the pics?"</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow">
+                    <h3 class="font-bold text-lg mb-2">Is there a limit to how many times I can modify my trip?</h3>
+                    <p class="text-gray-700">Nope! Unlimited modifications are included. Change the route, adjust your budget, add stops, swap hotels—as many times as you want. We know plans change, so we make it easy.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-gray-400 py-12">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+                <div>
+                    <div class="text-2xl font-bold text-white mb-4">🗺️ RouteBuilder AI</div>
+                    <p class="text-sm">Plan your perfect road trip in minutes with AI-powered dashboards.</p>
+                </div>
+                <div>
+                    <h4 class="text-white font-bold mb-4">Product</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#demo" class="hover:text-white transition">Features</a></li>
+                        <li><a href="#signup" class="hover:text-white transition">Pricing</a></li>
+                        <li><a href="#signup" class="hover:text-white transition">Sign Up</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white font-bold mb-4">Contact</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li>Email: <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="eb838e878784ab99849e9f8e899e82878f8e99c58a82">[email&#160;protected]</a></li>
+                        <li>Coming Q1 2026</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 pt-8 text-center text-sm">
+                <p>&copy; 2025 RouteBuilder AI. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+        // Email signup form handler
+        document.getElementById('signupForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const userType = document.getElementById('userType').value;
+            
+            // For now, just show success message
+            // In production, you'd send this to a backend/email service
+            console.log('Signup:', { name, email, userType });
+            
+            // Show success message
+            document.getElementById('signupForm').classList.add('hidden');
+            document.getElementById('successMessage').classList.remove('hidden');
+            
+            // Optional: Send to Google Sheets, Airtable, or email service
+            // You can integrate with services like:
+            // - Mailchimp API
+            // - ConvertKit
+            // - Google Sheets via API
+            // - Simple backend endpoint
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
