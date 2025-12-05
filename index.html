@@ -1,0 +1,1729 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ATL → SEA Road Trip 2026 🚗</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap');
+        
+        * {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .phase-card {
+            transition: all 0.3s ease;
+            border-left: 4px solid transparent;
+        }
+        
+        .phase-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .phase-active {
+            border-left-color: #667eea;
+            background: linear-gradient(90deg, rgba(102, 126, 234, 0.05) 0%, rgba(255,255,255,0) 100%);
+        }
+        
+        .phase-complete {
+            border-left-color: #10b981;
+            opacity: 0.7;
+        }
+        
+        .tab-button {
+            transition: all 0.2s;
+            position: relative;
+        }
+        
+        .tab-button.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+        }
+        
+        .checklist-item {
+            transition: all 0.3s;
+        }
+        
+        .checklist-item.checked {
+            opacity: 0.5;
+            text-decoration: line-through;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        
+        .pulse {
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        
+        .stat-card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Dark Mode Styles */
+        .dark {
+            background-color: #1a1a1a;
+        }
+        
+        .dark .bg-gray-50 {
+            background-color: #1a1a1a;
+        }
+        
+        .dark .bg-white {
+            background-color: #2d2d2d;
+            color: #e5e5e5;
+        }
+        
+        .dark .stat-card {
+            background-color: #2d2d2d;
+            color: #e5e5e5;
+        }
+        
+        .dark .text-gray-600 {
+            color: #a0a0a0;
+        }
+        
+        .dark .text-gray-700 {
+            color: #b0b0b0;
+        }
+        
+        .dark .text-gray-800 {
+            color: #d0d0d0;
+        }
+        
+        .dark .text-gray-500 {
+            color: #909090;
+        }
+        
+        .dark .border-gray-300 {
+            border-color: #404040;
+        }
+        
+        .dark .bg-gray-100 {
+            background-color: #353535;
+        }
+        
+        .dark .bg-gray-200 {
+            background-color: #404040;
+        }
+        
+        .dark input, .dark select, .dark textarea {
+            background-color: #353535;
+            color: #e5e5e5;
+            border-color: #505050;
+        }
+        
+        .dark .phase-card {
+            background-color: #2d2d2d;
+        }
+        
+        .dark .hover\:bg-gray-50:hover {
+            background-color: #353535;
+        }
+    </style>
+    <script>
+        (function() {
+            const originalWarn = console.warn;
+            console.warn = function(...args) {
+                if (args[0]?.includes?.('cdn.tailwindcss.com')) return;
+                originalWarn.apply(console, args);
+            };
+        })();
+    </script>
+</head>
+<body class="bg-gray-50">
+    <div id="root"></div>
+
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <script type="text/babel">
+        const { useState, useEffect } = React;
+
+        // Would You Rather Questions
+        const wouldYouRatherQuestions = [
+            "Would you rather drive through a snowstorm or a thunderstorm?",
+            "Would you rather only listen to one song on repeat for the entire trip or complete silence?",
+            "Would you rather have unlimited snacks but no meals, or unlimited meals but no snacks?",
+            "Would you rather drive at night through empty roads or during the day in heavy traffic?",
+            "Would you rather visit every tourist trap or skip them all?",
+            "Would you rather have AC that's too cold or heat that's too hot?",
+            "Would you rather only eat gas station food or only eat fast food?",
+            "Would you rather be the driver for the entire trip or the passenger?",
+            "Would you rather listen to podcasts or audiobooks for 41 hours?",
+            "Would you rather take the fastest route or the most scenic route?",
+            "Would you rather share a hotel room or sleep in the car?",
+            "Would you rather never use cruise control or always use cruise control?",
+            "Would you rather have a GPS that never works or a map that's always outdated?",
+            "Would you rather sing along to every song or stay silent the whole time?",
+            "Would you rather pack too much or too little?",
+            "Would you rather encounter road construction delays or animal crossings?",
+            "Would you rather stop at every rest area or hold it as long as possible?",
+            "Would you rather have perfect weather but boring scenery, or dramatic weather with amazing views?",
+            "Would you rather get pulled over for speeding or run out of gas?",
+            "Would you rather have great conversations but bad music, or great music but awkward silence?",
+            "Would you rather drive through cities or through countryside?",
+            "Would you rather eat breakfast foods all day or dinner foods all day?",
+            "Would you rather have a flat tire in the middle of nowhere or lose your phone charger?",
+            "Would you rather play 100 rounds of I Spy or 100 rounds of 20 Questions?",
+            "Would you rather have a trunk full of luggage or a backseat full of snacks?",
+            "Would you rather see a celebrity on the road or a rare animal?",
+            "Would you rather take 100 selfies or 100 landscape photos?",
+            "Would you rather stay in fancy hotels or quirky roadside motels?",
+            "Would you rather have heated seats that won't turn off or no heated seats at all?",
+            "Would you rather drive a luxury car with bad gas mileage or a basic car with great gas mileage?",
+            "Would you rather encounter a speed trap or a DUI checkpoint?",
+            "Would you rather have a sunroof that leaks or windows that won't roll down?",
+            "Would you rather listen to AM radio or no radio at all?",
+            "Would you rather see UFOs or Bigfoot on your trip?",
+            "Would you rather have great cell service but no WiFi or WiFi everywhere but no cell service?",
+            "Would you rather only stop at Starbucks or only stop at local coffee shops?",
+            "Would you rather have an RV or a sports car for this trip?",
+            "Would you rather take a detour to see something cool or stay on schedule?",
+            "Would you rather have a co-pilot who sleeps the whole time or one who never stops talking?",
+            "Would you rather drive through a tunnel for an hour or over a bridge for an hour?",
+            "Would you rather get stuck behind a slow driver or have someone tailgating you?",
+            "Would you rather only be able to eat at diners or only at chain restaurants?",
+            "Would you rather have unlimited audiobooks but no music or unlimited music but no audiobooks?",
+            "Would you rather arrive early everywhere or late everywhere?",
+            "Would you rather have a dashboard camera or a backup camera?",
+            "Would you rather drive through fog or drive in heavy rain?",
+            "Would you rather have to parallel park at every stop or never find parking?",
+            "Would you rather see mountains or plains for the entire drive?",
+            "Would you rather have free gas for the trip or free hotels?",
+            "Would you rather make this trip in summer or winter?"
+        ];
+
+        // State Trivia
+        const stateTrivia = {
+            "South Dakota": [
+                "🏔️ Mount Rushmore features 60-foot tall faces of four presidents",
+                "🦬 Home to one of the largest buffalo herds in the USA",
+                "🌽 The Corn Palace in Mitchell is redecorated with corn annually",
+                "🏛️ No state income tax - one of only 9 states!",
+                "⛰️ Badlands National Park has 244,000 acres of dramatically eroded buttes",
+                "🏒 The official state sport is rodeo",
+                "❄️ The town of Lead has an average snowfall of 204 inches per year",
+                "🎰 Deadwood was the first city to allow legalized gambling in SD"
+            ],
+            "Wyoming": [
+                "🏔️ Yellowstone was the world's first national park (1872)",
+                "👥 Least populous state in the US - only ~580,000 people",
+                "🗳️ First state to grant women the right to vote (1869)",
+                "🦅 Grand Teton National Park is home to over 300 bird species",
+                "🌡️ Coldest temperature ever recorded: -66°F in 1933",
+                "⛰️ Has over 97,000 square miles but only 6 cities with 10,000+ people",
+                "🤠 The first dude ranch in the world opened in Wyoming",
+                "🏛️ Devils Tower was America's first national monument (1906)"
+            ],
+            "Montana": [
+                "🏔️ Has 77 named mountain ranges - more than any other state",
+                "💎 The state motto is 'Oro y Plata' (Gold and Silver)",
+                "🐻 Glacier National Park has 26 glaciers remaining",
+                "🌲 More than 16 million acres of wilderness",
+                "🦌 More elk, deer, and antelope than people in some counties",
+                "🛣️ Going-to-the-Sun Road in Glacier is an engineering marvel",
+                "📺 A River Runs Through It was filmed here",
+                "⛷️ Average of 15 feet of snow annually in mountainous areas"
+            ],
+            "Idaho": [
+                "🥔 Produces 1/3 of all potatoes in the United States",
+                "💎 Known as the 'Gem State' - 72 gemstone types found here",
+                "⛰️ Tallest sand dunes in North America (470 feet high)",
+                "🌲 38% of the state is covered in national forests",
+                "🏔️ Has more than 3,000 miles of rivers - more than any state",
+                "🎿 Sun Valley was America's first destination ski resort (1936)",
+                "🏛️ State capitol building is heated by geothermal water",
+                "🦅 Bald eagles nest along the Coeur d'Alene River"
+            ]
+        };
+
+        const tripData = {
+            phases: [
+                {
+                    id: 1,
+                    name: "The Night Hammer",
+                    start: "Atlanta, GA",
+                    end: "Sioux Falls, SD",
+                    startTime: "Jan 15, 10:00pm EST",
+                    endTime: "Jan 16, 3:00pm CST",
+                    localArrival: "3:00pm CST (Your clock shows 3:00pm when you arrive)",
+                    hours: 17,
+                    miles: 1150,
+                    icon: "🌙",
+                    color: "#667eea",
+                    timezone: "Gain 1 hour at Memphis (EST → CST)",
+                    hotels: ["Hotel on Phillips (Boutique Downtown)", "Hilton Garden Inn Downtown", "Courtyard by Marriott Downtown", "Holiday Inn City Centre", "Fairfield Inn & Suites", "Residence Inn Downtown"],
+                    restaurants: ["Phillips Avenue Diner (Classic American)", "Minervas (Steakhouse)", "Fernson Brewing (Craft Beer & Food)", "WoodGrain Brewing Company", "M.B. Haskett Delicatessen", "Chef Lance's on Phillips", "Sanaa's Gourmet Mediterranean", "Parker's Bistro", "Bread & Circus Sandwich Kitchen", "Severance Brewing Co."],
+                    highlights: ["Falls Park (Waterfalls)", "Downtown Phillips Avenue", "Brewing District"],
+                    eveningEvents: [
+                        "🏒 Check for Sioux Falls Stampede Hockey games at Denny Sanford PREMIER Center",
+                        "🍺 Live music often at Fernson Brewing and WoodGrain on Friday nights",
+                        "🌃 Downtown Phillips Avenue evening stroll with restaurants and bars"
+                    ],
+                    route: "I-24 → I-57 → I-55 → I-90"
+                },
+                {
+                    id: 2,
+                    name: "South Dakota Plains",
+                    start: "Sioux Falls, SD",
+                    end: "Sheridan, WY",
+                    startTime: "Jan 17, 8:00am CST",
+                    endTime: "Jan 17, 6:00pm MST",
+                    localArrival: "6:00pm MST (Your clock shows 6:00pm when you arrive)",
+                    hours: 9,
+                    miles: 630,
+                    icon: "🌾",
+                    color: "#f59e0b",
+                    timezone: "Gain 1 hour at Wyoming border (CST → MST)",
+                    hotels: ["Mill Inn (Historic)", "Best Western Sheridan Center", "Holiday Inn Sheridan", "Hampton Inn Sheridan", "Comfort Inn & Suites", "Super 8 by Wyndham"],
+                    restaurants: ["The Mint Bar (Since 1907!)", "Frackelton's (Fine Dining)", "Black Tooth Brewing", "Luminous Brewhouse", "Wyoming's Rib & Chop House", "Open Range (Steakhouse)", "Café M (French)", "The Sanford (Pizza & Pub)", "Pearl on the Creek", "Public House 149"],
+                    highlights: ["Mitchell Corn Palace", "Badlands Views", "Black Hills Approach", "Historic Main Street Downtown", "Cowboy Culture & Western Shops"],
+                    eveningEvents: [
+                        "🎵 Live music typically Friday nights at Black Tooth Brewing & Luminous Brewhouse",
+                        "🤠 The Mint Bar - Wyoming's oldest bar (1907), classic Western atmosphere",
+                        "🌆 Historic Main Street evening stroll with Western storefronts"
+                    ],
+                    route: "I-90 W (all the way!)"
+                },
+                {
+                    id: 3,
+                    name: "Big Sky to Idaho",
+                    start: "Sheridan, WY",
+                    end: "Coeur d'Alene, ID",
+                    startTime: "Jan 18, 9:00am MST",
+                    endTime: "Jan 18, 7:00pm PST",
+                    localArrival: "7:00pm PST (Your clock shows 7:00pm when you arrive)",
+                    hours: 10,
+                    miles: 730,
+                    icon: "🏔️",
+                    color: "#8b5cf6",
+                    timezone: "Gain 1 hour at Idaho border (MST → PST)",
+                    hotels: ["The Coeur d'Alene Resort (Luxury)", "Hampton Inn Downtown", "The Roosevelt Inn", "Holiday Inn Express", "Best Western Plus", "La Quinta Inn & Suites", "SpringHill Suites"],
+                    restaurants: ["Beverly's (Upscale, Resort)", "Crafted Tap House (Gastropub)", "Bardenay Restaurant & Distillery", "Dockside Restaurant (Waterfront)", "Tito Macaroni (Italian)", "Anthony's (Seafood)", "The Cellar (Wine Bar)", "Seasons of CDA", "Capone's Pub & Grill", "Figaro's Pizza", "Jimmy's Down the Street"],
+                    highlights: ["Montana Mountains", "Lake Coeur d'Alene Boardwalk", "Lookout Pass", "Downtown Sherman Avenue Shopping", "Tubbs Hill (If weather permits)"],
+                    eveningEvents: [
+                        "🌅 Sunset Boardwalk Stroll - Lake Coeur d'Alene waterfront lights up at dusk",
+                        "🎬 Check Coeur d'Alene Public Library for Saturday evening movie screenings",
+                        "🍷 Wine bars and breweries open late on Sherman Avenue"
+                    ],
+                    route: "I-90 W through Billings, Missoula"
+                },
+                {
+                    id: 4,
+                    name: "The Final Sprint",
+                    start: "Coeur d'Alene, ID",
+                    end: "Seattle Airport",
+                    startTime: "Jan 19, 9:00am PST",
+                    endTime: "Jan 19, 2:00pm PST",
+                    localArrival: "2:00pm PST (Your clock stays at 2:00pm - no change)",
+                    hours: 5,
+                    miles: 320,
+                    icon: "✈️",
+                    color: "#10b981",
+                    timezone: "No timezone change (PST all the way)",
+                    hotels: [],
+                    restaurants: [],
+                    highlights: ["Spokane Pass-through", "Cascade Mountains View", "SEA Arrival!", "Mission Accomplished! 🎉"],
+                    eveningEvents: [],
+                    route: "I-90 W → I-5 N"
+                }
+            ],
+            packingList: [
+                { category: "Vehicle Essentials", items: ["Phone charger", "Car adapter USB", "Jumper cables", "Flashlight with batteries", "Emergency blanket", "Ice scraper", "Washer fluid (extra bottle)", "Tire pressure gauge", "First aid kit", "Roadside emergency kit", "Duct tape", "Multi-tool", "Spare fuses"] },
+                { category: "Food & Drinks", items: ["Protein bars (12+)", "Beef jerky", "Trail mix", "Mixed nuts", "Granola bars", "Dried fruit", "Water bottles (case)"] },
+                { category: "Entertainment", items: ["Downloaded podcasts (20+ hours)", "Offline maps (all I-90)", "Audiobooks", "Road trip playlist", "Phone games (offline)", "Playing cards", "Travel journal", "Pen/pencil"] },
+                { category: "Personal Care", items: ["Sunglasses", "Prescription medications", "Pain relievers", "Hand warmers", "Wet wipes", "Hand sanitizer", "Toothbrush & toothpaste", "Deodorant", "Hairbrush"] },
+                { category: "Clothing", items: ["Winter jacket", "Extra layers", "Gloves", "Warm socks", "Comfortable shoes", "Hat/beanie", "Change of clothes", "Pajamas for hotels", "Undergarments (extra)"] },
+                { category: "Documents & Money", items: ["Driver's license", "Insurance card", "Hotel confirmations", "Credit/debit cards", "Cash ($200-300)", "AAA/roadside assistance card"] },
+                { category: "Tech & Chargers", items: ["Phone charger", "Portable battery pack", "Laptop/tablet (optional)", "Charging cables", "AUX cable or Bluetooth adapter"] },
+                { category: "Comfort Items", items: ["Pillow", "Blanket for passenger", "Neck pillow", "Eye mask", "Earplugs", "Book or magazine", "Snack cooler"] }
+            ],
+            games: [
+                { 
+                    name: "License Plate Bingo", 
+                    description: "Check off states as you see their plates",
+                    instructions: "Keep track of every state license plate you spot! First person to find 25 states wins. Bonus points for Alaska and Hawaii!"
+                },
+                { 
+                    name: "The Alphabet Game", 
+                    description: "Find letters A-Z on signs in order",
+                    instructions: "Find letters A through Z IN ORDER on signs, billboards, and buildings outside the car. First person to Z wins! Letters on license plates or inside the car don't count."
+                },
+                { 
+                    name: "20 Questions", 
+                    description: "Classic road trip game",
+                    instructions: "One person thinks of a person, place, or thing. Others take turns asking yes/no questions. You have 20 questions to figure it out!"
+                },
+                { 
+                    name: "Would You Rather", 
+                    description: "Debate impossible scenarios",
+                    instructions: "Take turns asking 'Would you rather...' questions. Make them tough! Example: Would you rather fight one horse-sized duck or 100 duck-sized horses?"
+                },
+                { 
+                    name: "Two Truths and a Lie", 
+                    description: "Learn something new about each other",
+                    instructions: "Each person tells three statements about themselves - two true, one false. The other person has to guess which is the lie!"
+                },
+                { 
+                    name: "The Movie Game", 
+                    description: "Connect actors and movies",
+                    instructions: "Start with an actor. Next person names a movie they're in. Next names another actor from that movie. Keep going! Can't repeat actors or movies."
+                },
+                { 
+                    name: "Story Building", 
+                    description: "Create a story together",
+                    instructions: "One person starts a story with one sentence. Take turns adding one sentence each. See how ridiculous it gets!"
+                },
+                { 
+                    name: "I Spy", 
+                    description: "Classic spotting game",
+                    instructions: "One person says 'I spy with my little eye, something...' and gives a color or description. Other person guesses what object you're seeing!"
+                },
+                { 
+                    name: "Name That Tune", 
+                    description: "Music recognition challenge",
+                    instructions: "Play 5 seconds of a song. First person to name the artist and song title gets a point. Keep score!"
+                },
+                { 
+                    name: "The Geography Game", 
+                    description: "Cities and places chain game",
+                    instructions: "Start with a city/place name. Next person names a place that starts with the last letter of previous place. Example: Atlanta → Amsterdam → Madrid"
+                },
+                { 
+                    name: "Never Have I Ever (Road Trip Edition)", 
+                    description: "Learn travel experiences",
+                    instructions: "Take turns saying 'Never have I ever...' related to travel/driving. If the other person HAS done it, they get a point. First to 10 points wins!"
+                }
+            ]
+        };
+
+        function App() {
+            const [activeTab, setActiveTab] = useState('overview');
+            const [currentPhase, setCurrentPhase] = useState(1);
+            const [completedPhases, setCompletedPhases] = useState([]);
+            const [checkedItems, setCheckedItems] = useState({});
+            const [expenses, setExpenses] = useState({ fuel: [], hotels: [], food: [], misc: [] });
+            const [darkMode, setDarkMode] = useState(false);
+            const [photos, setPhotos] = useState({ 1: [], 2: [], 3: [], 4: [] });
+            const [receipts, setReceipts] = useState({ fuel: [], hotels: [] });
+            const [countdown, setCountdown] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+            const [isOnline, setIsOnline] = useState(navigator.onLine);
+            const [budget, setBudget] = useState({
+                fuel: 320,
+                hotels: 500,
+                food: 250,
+                misc: 100
+            });
+
+            // Online/Offline detection
+            useEffect(() => {
+                const handleOnline = () => setIsOnline(true);
+                const handleOffline = () => setIsOnline(false);
+                
+                window.addEventListener('online', handleOnline);
+                window.addEventListener('offline', handleOffline);
+                
+                return () => {
+                    window.removeEventListener('online', handleOnline);
+                    window.removeEventListener('offline', handleOffline);
+                };
+            }, []);
+
+            // Countdown Timer
+            useEffect(() => {
+                const tripStart = new Date('2026-01-15T22:00:00-05:00');
+                
+                const updateCountdown = () => {
+                    const now = new Date();
+                    const diff = tripStart - now;
+                    
+                    if (diff > 0) {
+                        setCountdown({
+                            days: Math.floor(diff / (1000 * 60 * 60 * 24)),
+                            hours: Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
+                            minutes: Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60)),
+                            seconds: Math.floor((diff % (1000 * 60)) / 1000)
+                        });
+                    } else {
+                        setCountdown({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+                    }
+                };
+                
+                updateCountdown();
+                const timer = setInterval(updateCountdown, 1000);
+                return () => clearInterval(timer);
+            }, []);
+
+            // Dark mode effect
+            useEffect(() => {
+                if (darkMode) {
+                    document.documentElement.classList.add('dark');
+                } else {
+                    document.documentElement.classList.remove('dark');
+                }
+            }, [darkMode]);
+
+            const totalMiles = tripData.phases.reduce((sum, phase) => sum + phase.miles, 0);
+            const totalHours = tripData.phases.reduce((sum, phase) => sum + phase.hours, 0);
+            const completedMiles = tripData.phases.filter(p => completedPhases.includes(p.id)).reduce((sum, phase) => sum + phase.miles, 0);
+            const progressPercent = totalMiles > 0 ? (completedMiles / totalMiles) * 100 : 0;
+
+            const totalBudget = Object.values(budget).reduce((sum, val) => sum + val, 0);
+            const totalSpent = Object.entries(expenses).reduce((sum, [cat, items]) => 
+                sum + items.reduce((s, i) => s + parseFloat(i.amount || 0), 0), 0);
+
+            const togglePackingItem = (category, item) => {
+                const key = `${category}-${item}`;
+                setCheckedItems(prev => ({ ...prev, [key]: !prev[key] }));
+            };
+
+            const togglePhaseComplete = (phaseId) => {
+                setCompletedPhases(prev => 
+                    prev.includes(phaseId) ? prev.filter(id => id !== phaseId) : [...prev, phaseId]
+                );
+            };
+
+            const addPhoto = (phaseId, event) => {
+                const file = event.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = (e) => {
+                        setPhotos(prev => ({
+                            ...prev,
+                            [phaseId]: [...prev[phaseId], {
+                                data: e.target.result,
+                                name: file.name,
+                                date: new Date().toLocaleDateString()
+                            }]
+                        }));
+                    };
+                    reader.readAsDataURL(file);
+                }
+            };
+
+            const updateBudget = (category, value) => {
+                setBudget(prev => ({
+                    ...prev,
+                    [category]: parseFloat(value) || 0
+                }));
+            };
+
+            const generateShareCode = () => {
+                const code = Math.random().toString(36).substring(2, 8).toUpperCase();
+                const message = `Following along on the ATL→SEA road trip! 🚗
+                
+Phase ${completedPhases.length + 1}/4 - ${Math.round(progressPercent)}% complete
+${completedMiles} of ${totalMiles} miles driven
+
+Track code: ${code}`;
+                
+                if (navigator.share) {
+                    navigator.share({
+                        title: 'Road Trip Progress',
+                        text: message
+                    }).catch(() => {});
+                } else {
+                    navigator.clipboard.writeText(message);
+                    alert('Progress copied to clipboard!');
+                }
+            };
+
+            const exportTripReport = () => {
+                const totalReceipts = receipts.fuel.length + receipts.hotels.length;
+                const report = `ATLANTA → SEATTLE ROAD TRIP 2026
+Epic Sibling Adventure Report
+Generated: ${new Date().toLocaleDateString()}
+
+═══════════════════════════════════════
+
+📊 TRIP STATISTICS
+Total Distance: ${totalMiles} miles
+Total Drive Time: ${totalHours} hours
+Phases Completed: ${completedPhases.length}/4
+Progress: ${Math.round(progressPercent)}%
+
+💰 BUDGET SUMMARY
+Total Budget: $${totalBudget}
+Total Spent: $${totalSpent.toFixed(2)}
+Remaining: $${(totalBudget - totalSpent).toFixed(2)}
+
+Category Breakdown:
+Fuel: $${expenses.fuel.reduce((s, i) => s + parseFloat(i.amount || 0), 0).toFixed(2)}
+Hotels: $${expenses.hotels.reduce((s, i) => s + parseFloat(i.amount || 0), 0).toFixed(2)}
+Food: $${expenses.food.reduce((s, i) => s + parseFloat(i.amount || 0), 0).toFixed(2)}
+Misc: $${expenses.misc.reduce((s, i) => s + parseFloat(i.amount || 0), 0).toFixed(2)}
+
+📸 RECEIPTS UPLOADED (${totalReceipts} total)
+Fuel Receipts: ${receipts.fuel.length}
+${receipts.fuel.map((r, i) => `  ${i + 1}. ${r.name} (${r.date})`).join('\n')}
+
+Hotel Receipts: ${receipts.hotels.length}
+${receipts.hotels.map((r, i) => `  ${i + 1}. ${r.name} (${r.date})`).join('\n')}
+
+Note: Download receipt files from the dashboard Budget tab
+
+📸 PHOTOS CAPTURED
+Total Photos: ${Object.values(photos).reduce((sum, arr) => sum + arr.length, 0)}
+${tripData.phases.map(p => `${p.name}: ${photos[p.id].length} photos`).join('\n')}
+
+✅ PACKING CHECKLIST
+Items Packed: ${Object.values(checkedItems).filter(Boolean).length}/${tripData.packingList.reduce((sum, cat) => sum + cat.items.length, 0)}
+Packing Progress: ${Math.round((Object.values(checkedItems).filter(Boolean).length / tripData.packingList.reduce((sum, cat) => sum + cat.items.length, 0)) * 100)}%
+
+═══════════════════════════════════════
+Trip completed with memories to last a lifetime! 🎉`;
+
+                const blob = new Blob([report], { type: 'text/plain' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'road-trip-report-2026.txt';
+                a.click();
+                URL.revokeObjectURL(url);
+            };
+
+            return (
+                <div className="min-h-screen bg-gray-50">
+                    {/* Header */}
+                    <div className="gradient-bg text-white">
+                        <div className="max-w-7xl mx-auto px-4 py-8">
+                            <div className="flex items-center justify-between mb-6">
+                                <div>
+                                    <h1 className="text-4xl font-bold mb-2">Atlanta → Seattle 2026 🚗</h1>
+                                    <p className="text-purple-100">Epic Sibling Road Trip Adventure</p>
+                                    <div className="flex flex-wrap items-center gap-2 mt-2">
+                                        <div className={`px-3 py-1 rounded-full text-xs font-semibold ${isOnline ? 'bg-green-500' : 'bg-gray-500'}`}>
+                                            {isOnline ? '🟢 Online' : '⚫ Offline Mode'}
+                                        </div>
+                                        <button
+                                            onClick={generateShareCode}
+                                            className="px-3 py-1 bg-white/20 hover:bg-white/30 rounded-full text-xs font-semibold backdrop-blur transition"
+                                        >
+                                            📤 Share
+                                        </button>
+                                        <button
+                                            onClick={exportTripReport}
+                                            className="px-3 py-1 bg-white/20 hover:bg-white/30 rounded-full text-xs font-semibold backdrop-blur transition"
+                                        >
+                                            📄 Export
+                                        </button>
+                                    </div>
+                                </div>
+                                <div className="text-right">
+                                    <button
+                                        onClick={() => setDarkMode(!darkMode)}
+                                        className="mb-3 px-4 py-2 bg-white/20 hover:bg-white/30 rounded-lg backdrop-blur transition text-sm"
+                                    >
+                                        {darkMode ? '☀️ Light' : '🌙 Dark'}
+                                    </button>
+                                    <div className="text-3xl font-bold">{totalMiles.toLocaleString()} mi</div>
+                                    <div className="text-purple-100">{totalHours} hours</div>
+                                </div>
+                            </div>
+
+                            {/* Countdown Timer */}
+                            {countdown.days > 0 && (
+                                <div className="bg-white/20 backdrop-blur rounded-lg p-4 mb-4">
+                                    <div className="text-center text-sm mb-2">🚀 Countdown to Departure</div>
+                                    <div className="grid grid-cols-4 gap-4 text-center">
+                                        <div>
+                                            <div className="text-3xl font-bold">{countdown.days}</div>
+                                            <div className="text-xs text-purple-100">Days</div>
+                                        </div>
+                                        <div>
+                                            <div className="text-3xl font-bold">{countdown.hours}</div>
+                                            <div className="text-xs text-purple-100">Hours</div>
+                                        </div>
+                                        <div>
+                                            <div className="text-3xl font-bold">{countdown.minutes}</div>
+                                            <div className="text-xs text-purple-100">Minutes</div>
+                                        </div>
+                                        <div>
+                                            <div className="text-3xl font-bold">{countdown.seconds}</div>
+                                            <div className="text-xs text-purple-100">Seconds</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            )}
+
+                            {/* Progress Bar */}
+                            <div className="bg-white/20 rounded-full h-4 overflow-hidden backdrop-blur">
+                                <div 
+                                    className="bg-white h-full transition-all duration-1000"
+                                    style={{ width: `${progressPercent}%` }}
+                                ></div>
+                            </div>
+                            <div className="flex justify-between mt-2 text-sm text-purple-100">
+                                <span>{completedPhases.length} of 4 phases complete</span>
+                                <span>{Math.round(progressPercent)}% Complete</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Tabs */}
+                    <div className="bg-white border-b sticky top-0 z-10 shadow-sm">
+                        <div className="max-w-7xl mx-auto px-4">
+                            <div className="flex space-x-8 overflow-x-auto">
+                                {['overview', 'phases', 'photos', 'packing', 'budget', 'games'].map(tab => (
+                                    <button
+                                        key={tab}
+                                        onClick={() => setActiveTab(tab)}
+                                        className={`py-4 px-2 font-semibold capitalize tab-button whitespace-nowrap ${activeTab === tab ? 'active text-purple-600' : 'text-gray-600 hover:text-gray-900'}`}
+                                    >
+                                        {tab}
+                                    </button>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Content */}
+                    <div className="max-w-7xl mx-auto px-4 py-8">
+                        {activeTab === 'overview' && <OverviewTab tripData={tripData} completedPhases={completedPhases} togglePhaseComplete={togglePhaseComplete} />}
+                        {activeTab === 'phases' && <PhasesTab tripData={tripData} currentPhase={currentPhase} setCurrentPhase={setCurrentPhase} completedPhases={completedPhases} togglePhaseComplete={togglePhaseComplete} />}
+                        {activeTab === 'photos' && <PhotosTab tripData={tripData} photos={photos} addPhoto={addPhoto} />}
+                        {activeTab === 'packing' && <PackingTab tripData={tripData} checkedItems={checkedItems} togglePackingItem={togglePackingItem} />}
+                        {activeTab === 'budget' && <BudgetTab expenses={expenses} setExpenses={setExpenses} totalSpent={totalSpent} totalBudget={totalBudget} budget={budget} updateBudget={updateBudget} receipts={receipts} setReceipts={setReceipts} />}
+                        {activeTab === 'games' && <GamesTab tripData={tripData} />}
+                    </div>
+                </div>
+            );
+        }
+
+        function OverviewTab({ tripData, completedPhases, togglePhaseComplete }) {
+            return (
+                <div className="space-y-6">
+                    {/* Stats Cards */}
+                    <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+                        <div className="stat-card">
+                            <div className="text-gray-500 text-sm font-semibold mb-1">Total Distance</div>
+                            <div className="text-3xl font-bold text-purple-600">2,830 mi</div>
+                        </div>
+                        <div className="stat-card">
+                            <div className="text-gray-500 text-sm font-semibold mb-1">Drive Time</div>
+                            <div className="text-3xl font-bold text-purple-600">41 hrs</div>
+                        </div>
+                        <div className="stat-card">
+                            <div className="text-gray-500 text-sm font-semibold mb-1">Cities</div>
+                            <div className="text-3xl font-bold text-purple-600">3</div>
+                        </div>
+                        <div className="stat-card">
+                            <div className="text-gray-500 text-sm font-semibold mb-1">Time Zones</div>
+                            <div className="text-3xl font-bold text-purple-600">4</div>
+                            <div className="text-xs text-gray-500 mt-1">Gain 3 hours total!</div>
+                        </div>
+                    </div>
+
+                    {/* Route Visualization */}
+                    <div className="bg-white rounded-lg shadow-lg p-8">
+                        <h2 className="text-2xl font-bold mb-6">Your Journey</h2>
+                        <div className="relative">
+                            {tripData.phases.map((phase, idx) => (
+                                <div key={phase.id} className="mb-8 last:mb-0">
+                                    <div className="flex items-start">
+                                        <div className="flex-shrink-0">
+                                            <div className={`w-12 h-12 rounded-full flex items-center justify-center text-2xl ${completedPhases.includes(phase.id) ? 'bg-green-100' : 'bg-gray-100'}`}>
+                                                {phase.icon}
+                                            </div>
+                                        </div>
+                                        <div className="ml-6 flex-grow">
+                                            <div className="flex items-center justify-between mb-2">
+                                                <div className="flex items-center space-x-3">
+                                                    <h3 className="text-xl font-bold">{phase.name}</h3>
+                                                    <label className="flex items-center cursor-pointer">
+                                                        <input
+                                                            type="checkbox"
+                                                            checked={completedPhases.includes(phase.id)}
+                                                            onChange={() => togglePhaseComplete(phase.id)}
+                                                            className="w-5 h-5 text-green-600 rounded focus:ring-green-500"
+                                                        />
+                                                        <span className="ml-2 text-sm text-gray-600">Complete</span>
+                                                    </label>
+                                                </div>
+                                                <span className="text-sm text-gray-500">{phase.hours} hours</span>
+                                            </div>
+                                            <div className="text-gray-600 mb-2">
+                                                <span className="font-semibold">{phase.start}</span> → <span className="font-semibold">{phase.end}</span>
+                                            </div>
+                                            <div className="text-sm text-gray-500 mb-1">
+                                                {phase.miles} miles • Depart: {phase.startTime}
+                                            </div>
+                                            <div className="text-sm font-semibold text-purple-600 mb-2">
+                                                🕐 Arrive: {phase.localArrival}
+                                            </div>
+                                            <div className="mt-2">
+                                                <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-semibold bg-blue-100 text-blue-700">
+                                                    ⏰ {phase.timezone}
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {idx < tripData.phases.length - 1 && (
+                                        <div className="ml-6 mt-4 mb-4 border-l-2 border-gray-300 h-8"></div>
+                                    )}
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+
+                    {/* Quick Tips */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div className="bg-blue-50 border-l-4 border-blue-500 p-6 rounded-r-lg">
+                            <h3 className="font-bold text-lg mb-2 text-blue-900">🌨️ Winter Driving Tips</h3>
+                            <ul className="text-blue-800 space-y-1 text-sm">
+                                <li>• Check 511 road conditions: 1-800-226-7623</li>
+                                <li>• I-90 northern route avoids mountain passes</li>
+                                <li>• Keep tank above 1/4 (gas stations sparse)</li>
+                                <li>• Lookout Pass (MT/ID) - take it slow if icy</li>
+                            </ul>
+                        </div>
+                        <div className="bg-green-50 border-l-4 border-green-500 p-6 rounded-r-lg">
+                            <h3 className="font-bold text-lg mb-2 text-green-900">💡 Pro Tips</h3>
+                            <ul className="text-green-800 space-y-1 text-sm">
+                                <li>• Download offline maps for entire I-90</li>
+                                <li>• Set alarms every 2 hours for breaks</li>
+                                <li>• Keep cabin temp 65-68°F (stays alert)</li>
+                                <li>• GasBuddy app for cheapest fuel</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    {/* Offline Features */}
+                    <div className="bg-purple-50 border-l-4 border-purple-500 p-6 rounded-r-lg">
+                        <h3 className="font-bold text-lg mb-3 text-purple-900">📶 Offline Mode Features</h3>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+                            <div>
+                                <h4 className="font-semibold text-purple-800 mb-2">✅ Works Offline:</h4>
+                                <ul className="text-purple-700 space-y-1">
+                                    <li>• All phases & route info</li>
+                                    <li>• Packing checklist</li>
+                                    <li>• Budget tracker</li>
+                                    <li>• Photo gallery</li>
+                                    <li>• All games</li>
+                                    <li>• Would You Rather</li>
+                                    <li>• State trivia</li>
+                                    <li>• Dark mode</li>
+                                    <li>• Export report</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 className="font-semibold text-purple-800 mb-2">📡 Needs Internet:</h4>
+                                <ul className="text-purple-700 space-y-1">
+                                    <li>• Share progress</li>
+                                    <li>• Real-time weather</li>
+                                    <li>• Live traffic</li>
+                                    <li>• Hotel booking</li>
+                                </ul>
+                                <div className="mt-3 bg-purple-100 p-3 rounded text-xs">
+                                    💾 <strong>Tip:</strong> All data saves in your browser!
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+
+        function PhasesTab({ tripData, completedPhases, togglePhaseComplete }) {
+            return (
+                <div className="space-y-6">
+                    {tripData.phases.map((phase) => (
+                        <div 
+                            key={phase.id}
+                            className={`phase-card bg-white rounded-lg shadow-lg p-6 ${completedPhases.includes(phase.id) ? 'phase-complete' : ''}`}
+                        >
+                            <div className="flex items-start justify-between mb-4">
+                                <div className="flex items-center space-x-4">
+                                    <div className="text-4xl">{phase.icon}</div>
+                                    <div>
+                                        <h3 className="text-2xl font-bold">{phase.name}</h3>
+                                        <p className="text-gray-600">{phase.start} → {phase.end}</p>
+                                    </div>
+                                </div>
+                                <div className="text-right">
+                                    <div className="text-2xl font-bold" style={{ color: phase.color }}>{phase.hours}h</div>
+                                    <div className="text-sm text-gray-500">{phase.miles} mi</div>
+                                    <label className="flex items-center mt-2 cursor-pointer">
+                                        <input
+                                            type="checkbox"
+                                            checked={completedPhases.includes(phase.id)}
+                                            onChange={() => togglePhaseComplete(phase.id)}
+                                            className="w-4 h-4 text-green-600 rounded focus:ring-green-500"
+                                        />
+                                        <span className="ml-2 text-xs text-gray-600">Done</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div className="mb-4">
+                                <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-semibold bg-blue-100 text-blue-800">
+                                    ⏰ {phase.timezone}
+                                </span>
+                            </div>
+
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
+                                <div>
+                                    <h4 className="font-semibold text-sm text-gray-500 mb-2">⏰ TIMING</h4>
+                                    <p className="text-sm mb-1">Depart: {phase.startTime}</p>
+                                    <p className="text-sm font-semibold text-purple-600">Arrive: {phase.localArrival}</p>
+                                </div>
+                                <div>
+                                    <h4 className="font-semibold text-sm text-gray-500 mb-2">🛣️ ROUTE</h4>
+                                    <p className="text-sm">{phase.route}</p>
+                                </div>
+                            </div>
+
+                            {phase.hotels.length > 0 && (
+                                <div className="mt-4">
+                                    <h4 className="font-semibold text-sm text-gray-500 mb-2">🏨 HOTELS</h4>
+                                    <div className="flex flex-wrap gap-2">
+                                        {phase.hotels.map((hotel, i) => (
+                                            <span key={i} className="bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-sm">
+                                                {hotel}
+                                            </span>
+                                        ))}
+                                    </div>
+                                </div>
+                            )}
+
+                            {phase.restaurants.length > 0 && (
+                                <div className="mt-4">
+                                    <h4 className="font-semibold text-sm text-gray-500 mb-2">🍽️ FOOD & DRINKS</h4>
+                                    <div className="flex flex-wrap gap-2">
+                                        {phase.restaurants.map((rest, i) => (
+                                            <span key={i} className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">
+                                                {rest}
+                                            </span>
+                                        ))}
+                                    </div>
+                                </div>
+                            )}
+
+                            <div className="mt-4">
+                                <h4 className="font-semibold text-sm text-gray-500 mb-2">⭐ DAYTIME HIGHLIGHTS</h4>
+                                <div className="flex flex-wrap gap-2">
+                                    {phase.highlights.map((highlight, i) => (
+                                        <span key={i} className="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm">
+                                            {highlight}
+                                        </span>
+                                    ))}
+                                </div>
+                            </div>
+
+                            {phase.eveningEvents && phase.eveningEvents.length > 0 && (
+                                <div className="mt-4">
+                                    <h4 className="font-semibold text-sm text-gray-500 mb-2">🌙 EVENING EVENTS & ACTIVITIES</h4>
+                                    <div className="space-y-2">
+                                        {phase.eveningEvents.map((event, i) => (
+                                            <div key={i} className="bg-amber-50 border-l-4 border-amber-400 p-3 rounded-r text-sm text-amber-900">
+                                                {event}
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+                            )}
+                        </div>
+                    ))}
+                </div>
+            );
+        }
+
+        function PhotosTab({ tripData, photos, addPhoto }) {
+            const totalPhotos = Object.values(photos).reduce((sum, arr) => sum + arr.length, 0);
+
+            return (
+                <div className="space-y-6">
+                    <div className="bg-white rounded-lg shadow-lg p-6">
+                        <div className="flex items-center justify-between mb-6">
+                            <h2 className="text-2xl font-bold">📸 Trip Photo Gallery</h2>
+                            <div className="text-right">
+                                <div className="text-3xl font-bold text-purple-600">{totalPhotos}</div>
+                                <div className="text-sm text-gray-500">photos</div>
+                            </div>
+                        </div>
+
+                        {/* Share Dashboard Section */}
+                        <div className="bg-gradient-to-r from-pink-50 to-rose-50 border-2 border-pink-200 rounded-xl p-6 mb-6">
+                            <div className="flex items-start space-x-3">
+                                <div className="text-3xl">🔗</div>
+                                <div className="flex-1">
+                                    <h3 className="font-bold text-lg text-pink-900 mb-2">Share This Dashboard</h3>
+                                    <p className="text-sm text-pink-800 mb-4">
+                                        Share this link with family and friends. Everyone can view AND upload photos in real-time!
+                                    </p>
+                                    <div className="bg-white rounded-lg p-4 mb-4">
+                                        <div className="flex items-center space-x-2">
+                                            <input
+                                                type="text"
+                                                value={window.location.href}
+                                                readOnly
+                                                className="flex-1 px-3 py-2 bg-gray-50 border border-gray-300 rounded text-sm"
+                                            />
+                                            <button
+                                                onClick={() => {
+                                                    navigator.clipboard.writeText(window.location.href);
+                                                    alert('Link copied! Share with your travel companions.');
+                                                }}
+                                                className="bg-pink-600 text-white px-4 py-2 rounded hover:bg-pink-700 transition text-sm font-semibold whitespace-nowrap"
+                                            >
+                                                📋 Copy Link
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div className="space-y-2 text-sm text-pink-800">
+                                        <div className="flex items-start space-x-2">
+                                            <span className="text-green-500">✓</span>
+                                            <span>Everyone with the link can upload photos from their phones</span>
+                                        </div>
+                                        <div className="flex items-start space-x-2">
+                                            <span className="text-green-500">✓</span>
+                                            <span>Photos appear instantly for all viewers (no group text needed!)</span>
+                                        </div>
+                                        <div className="flex items-start space-x-2">
+                                            <span className="text-green-500">✓</span>
+                                            <span>Organized by location automatically</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Daily Photo Digest (Coming Soon) */}
+                        <div className="bg-gradient-to-r from-blue-50 to-indigo-50 border-2 border-blue-200 rounded-xl p-6 mb-6">
+                            <div className="flex items-start space-x-3">
+                                <div className="text-3xl">📱</div>
+                                <div className="flex-1">
+                                    <div className="flex items-center space-x-2 mb-2">
+                                        <h3 className="font-bold text-lg text-blue-900">Daily Photo Digest</h3>
+                                        <span className="bg-blue-600 text-white text-xs px-2 py-1 rounded-full font-semibold">COMING SOON</span>
+                                    </div>
+                                    <p className="text-sm text-blue-800 mb-4">
+                                        Set up automatic daily texts with photo summaries sent at 8pm to your family and friends.
+                                    </p>
+                                    <div className="bg-white rounded-lg p-4 space-y-3">
+                                        <div className="text-sm font-semibold text-blue-900 mb-2">How it works:</div>
+                                        <div className="flex items-start space-x-2 text-sm text-gray-700">
+                                            <span className="text-blue-600">1.</span>
+                                            <span>Add phone numbers of people who want updates</span>
+                                        </div>
+                                        <div className="flex items-start space-x-2 text-sm text-gray-700">
+                                            <span className="text-blue-600">2.</span>
+                                            <span>Set your preferred time (default: 8pm in your timezone)</span>
+                                        </div>
+                                        <div className="flex items-start space-x-2 text-sm text-gray-700">
+                                            <span className="text-blue-600">3.</span>
+                                            <span>Everyone gets a text: "Here are today's 7 photos from Colorado! 📸" with a link</span>
+                                        </div>
+                                        <div className="flex items-start space-x-2 text-sm text-gray-700">
+                                            <span className="text-blue-600">4.</span>
+                                            <span>Grandparents at home follow your adventure in real-time!</span>
+                                        </div>
+                                        
+                                        {/* Mockup of phone number input */}
+                                        <div className="border-t pt-3 mt-3">
+                                            <label className="text-xs text-gray-600 mb-2 block">Add Recipients (Preview)</label>
+                                            <div className="space-y-2">
+                                                <input 
+                                                    type="tel" 
+                                                    placeholder="Mom: (555) 123-4567"
+                                                    disabled
+                                                    className="w-full px-3 py-2 border rounded text-sm bg-gray-100 cursor-not-allowed"
+                                                />
+                                                <input 
+                                                    type="tel" 
+                                                    placeholder="Grandma: (555) 987-6543"
+                                                    disabled
+                                                    className="w-full px-3 py-2 border rounded text-sm bg-gray-100 cursor-not-allowed"
+                                                />
+                                                <button 
+                                                    disabled
+                                                    className="text-sm text-blue-600 font-semibold cursor-not-allowed opacity-50"
+                                                >
+                                                    + Add Another
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="mt-3 text-xs text-blue-700 italic">
+                                        💡 This feature requires backend integration and will be available in the full product
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        {tripData.phases.map((phase) => (
+                            <div key={phase.id} className="mb-8 last:mb-0">
+                                <div className="flex items-center justify-between mb-4">
+                                    <div className="flex items-center space-x-3">
+                                        <span className="text-3xl">{phase.icon}</span>
+                                        <div>
+                                            <h3 className="text-xl font-bold">{phase.name}</h3>
+                                            <p className="text-sm text-gray-600">{phase.end}</p>
+                                        </div>
+                                    </div>
+                                    <label className="cursor-pointer">
+                                        <div className="bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition text-sm font-semibold">
+                                            + Add Photo
+                                        </div>
+                                        <input
+                                            type="file"
+                                            accept="image/*"
+                                            capture="environment"
+                                            onChange={(e) => addPhoto(phase.id, e)}
+                                            className="hidden"
+                                        />
+                                    </label>
+                                </div>
+
+                                {photos[phase.id].length > 0 ? (
+                                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                                        {photos[phase.id].map((photo, idx) => (
+                                            <div key={idx} className="relative group">
+                                                <img
+                                                    src={photo.data}
+                                                    alt={photo.name}
+                                                    className="w-full h-48 object-cover rounded-lg shadow-md"
+                                                />
+                                                <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-50 transition rounded-lg flex items-end p-2">
+                                                    <div className="text-white text-xs opacity-0 group-hover:opacity-100 transition">
+                                                        {photo.date}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        ))}
+                                    </div>
+                                ) : (
+                                    <div className="text-center py-12 bg-gray-50 rounded-lg border-2 border-dashed border-gray-300">
+                                        <div className="text-4xl mb-2">📷</div>
+                                        <p className="text-gray-500">No photos yet - add some memories!</p>
+                                    </div>
+                                )}
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            );
+        }
+
+        function PackingTab({ tripData, checkedItems, togglePackingItem }) {
+            const totalItems = tripData.packingList.reduce((sum, cat) => sum + cat.items.length, 0);
+            const checkedCount = Object.values(checkedItems).filter(Boolean).length;
+            const percentComplete = Math.round((checkedCount / totalItems) * 100);
+
+            return (
+                <div className="space-y-6">
+                    <div className="bg-white rounded-lg shadow-lg p-6">
+                        <div className="flex items-center justify-between mb-6">
+                            <h2 className="text-2xl font-bold">Packing Checklist</h2>
+                            <div className="text-right">
+                                <div className="text-3xl font-bold text-purple-600">{checkedCount}/{totalItems}</div>
+                                <div className="text-sm text-gray-500">{percentComplete}% packed</div>
+                            </div>
+                        </div>
+                        <div className="bg-gray-200 rounded-full h-3 overflow-hidden mb-6">
+                            <div 
+                                className="bg-gradient-to-r from-purple-500 to-pink-500 h-full transition-all duration-500"
+                                style={{ width: `${percentComplete}%` }}
+                            ></div>
+                        </div>
+
+                        {/* AI Customization Info */}
+                        <div className="bg-gradient-to-r from-green-50 to-emerald-50 border-2 border-green-200 rounded-xl p-6 mb-6">
+                            <div className="flex items-start space-x-3">
+                                <div className="text-3xl">🤖</div>
+                                <div className="flex-1">
+                                    <h3 className="font-bold text-lg text-green-900 mb-2">AI-Powered Customization</h3>
+                                    <p className="text-sm text-green-800 mb-3">
+                                        This packing list was generated by AI based on your trip details (weather, activities, duration). 
+                                        Want to customize it? Just ask!
+                                    </p>
+                                    <div className="bg-white rounded-lg p-4 space-y-2 text-sm">
+                                        <div className="font-semibold text-green-900 mb-2">✨ You can request:</div>
+                                        <div className="flex items-start space-x-2">
+                                            <span className="text-green-600">→</span>
+                                            <span className="text-gray-700">"Split this list for Mom, Dad, and 2 kids"</span>
+                                        </div>
+                                        <div className="flex items-start space-x-2">
+                                            <span className="text-green-600">→</span>
+                                            <span className="text-gray-700">"Add items for camping instead of hotels"</span>
+                                        </div>
+                                        <div className="flex items-start space-x-2">
+                                            <span className="text-green-600">→</span>
+                                            <span className="text-gray-700">"Remove all snacks, we'll buy on the road"</span>
+                                        </div>
+                                        <div className="flex items-start space-x-2">
+                                            <span className="text-green-600">→</span>
+                                            <span className="text-gray-700">"Add items for a baby (6 months old)"</span>
+                                        </div>
+                                    </div>
+                                    <div className="mt-3 text-xs text-green-700 italic">
+                                        💡 Future feature: Click "Customize with AI" to make changes instantly
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="space-y-6">
+                            {tripData.packingList.map((category) => (
+                                <div key={category.category} className="border-b pb-6 last:border-b-0">
+                                    <h3 className="font-bold text-lg mb-4 text-gray-800">{category.category}</h3>
+                                    <div className="space-y-2">
+                                        {category.items.map((item) => {
+                                            const key = `${category.category}-${item}`;
+                                            const isChecked = checkedItems[key];
+                                            return (
+                                                <label 
+                                                    key={item}
+                                                    className={`flex items-center p-3 rounded-lg hover:bg-gray-50 cursor-pointer checklist-item ${isChecked ? 'checked' : ''}`}
+                                                >
+                                                    <input
+                                                        type="checkbox"
+                                                        checked={isChecked || false}
+                                                        onChange={() => togglePackingItem(category.category, item)}
+                                                        className="w-5 h-5 text-purple-600 rounded focus:ring-purple-500"
+                                                    />
+                                                    <span className="ml-3 text-gray-800">{item}</span>
+                                                </label>
+                                            );
+                                        })}
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+
+        function BudgetTab({ expenses, setExpenses, totalSpent, totalBudget, budget, updateBudget, receipts, setReceipts }) {
+            const [newExpense, setNewExpense] = useState({ category: 'fuel', description: '', amount: '' });
+            const [editingBudget, setEditingBudget] = useState(null);
+
+            const addExpense = () => {
+                if (newExpense.description && newExpense.amount) {
+                    setExpenses(prev => ({
+                        ...prev,
+                        [newExpense.category]: [...prev[newExpense.category], { 
+                            description: newExpense.description, 
+                            amount: newExpense.amount,
+                            date: new Date().toLocaleDateString()
+                        }]
+                    }));
+                    setNewExpense({ category: 'fuel', description: '', amount: '' });
+                }
+            };
+
+            const handleReceiptUpload = (category, event) => {
+                const file = event.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = (e) => {
+                        setReceipts(prev => ({
+                            ...prev,
+                            [category]: [...prev[category], {
+                                name: file.name,
+                                data: e.target.result,
+                                date: new Date().toLocaleDateString()
+                            }]
+                        }));
+                    };
+                    reader.readAsDataURL(file);
+                }
+            };
+
+            const budgetPercent = Math.round((totalSpent / totalBudget) * 100);
+            const remaining = totalBudget - totalSpent;
+
+            return (
+                <div className="space-y-6">
+                    {/* Budget Overview */}
+                    <div className="bg-white rounded-lg shadow-lg p-6 mb-6">
+                        <h3 className="text-xl font-bold mb-4">💡 Budget Overview - Click $ amounts to edit</h3>
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                            <div className="stat-card border-l-4 border-purple-500">
+                                <div className="text-gray-500 text-sm font-semibold mb-1">Total Budget</div>
+                                <div className="text-3xl font-bold text-purple-600">${totalBudget.toFixed(2)}</div>
+                                <div className="text-xs text-gray-500 mt-2">Fuel: ${budget.fuel} • Hotels: ${budget.hotels}</div>
+                                <div className="text-xs text-gray-500">Food: ${budget.food} • Misc: ${budget.misc}</div>
+                            </div>
+                            <div className="stat-card border-l-4 border-blue-500">
+                                <div className="text-gray-500 text-sm font-semibold mb-1">Total Spent</div>
+                                <div className="text-3xl font-bold text-blue-600">${totalSpent.toFixed(2)}</div>
+                            </div>
+                            <div className="stat-card border-l-4 border-green-500">
+                                <div className="text-gray-500 text-sm font-semibold mb-1">Remaining</div>
+                                <div className={`text-3xl font-bold ${remaining >= 0 ? 'text-green-600' : 'text-red-600'}`}>
+                                    ${Math.abs(remaining).toFixed(2)}
+                                </div>
+                                <div className={`text-sm font-semibold mt-1 ${remaining >= 0 ? 'text-green-600' : 'text-red-600'}`}>
+                                    {remaining >= 0 ? 'Under budget' : 'Over budget'}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Progress */}
+                    <div className="bg-white rounded-lg shadow-lg p-6">
+                        <div className="flex justify-between mb-2">
+                            <span className="font-semibold">Budget Usage</span>
+                            <span className="text-gray-600">{budgetPercent}%</span>
+                        </div>
+                        <div className="bg-gray-200 rounded-full h-4 overflow-hidden">
+                            <div 
+                                className={`h-full transition-all duration-500 ${budgetPercent > 100 ? 'bg-red-500' : 'bg-gradient-to-r from-purple-500 to-pink-500'}`}
+                                style={{ width: `${Math.min(budgetPercent, 100)}%` }}
+                            ></div>
+                        </div>
+                    </div>
+
+                    {/* Add Expense */}
+                    <div className="bg-white rounded-lg shadow-lg p-6">
+                        <h3 className="text-xl font-bold mb-4">Add Expense</h3>
+                        <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+                            <select 
+                                value={newExpense.category}
+                                onChange={(e) => setNewExpense({...newExpense, category: e.target.value})}
+                                className="border rounded-lg px-4 py-2"
+                            >
+                                <option value="fuel">⛽ Fuel</option>
+                                <option value="hotels">🏨 Hotels</option>
+                                <option value="food">🍽️ Food</option>
+                                <option value="misc">📦 Misc</option>
+                            </select>
+                            <input
+                                type="text"
+                                placeholder="Description"
+                                value={newExpense.description}
+                                onChange={(e) => setNewExpense({...newExpense, description: e.target.value})}
+                                className="border rounded-lg px-4 py-2"
+                            />
+                            <input
+                                type="number"
+                                placeholder="Amount"
+                                value={newExpense.amount}
+                                onChange={(e) => setNewExpense({...newExpense, amount: e.target.value})}
+                                className="border rounded-lg px-4 py-2"
+                            />
+                            <button
+                                onClick={addExpense}
+                                className="bg-purple-600 text-white rounded-lg px-6 py-2 font-semibold hover:bg-purple-700 transition"
+                            >
+                                Add
+                            </button>
+                        </div>
+                    </div>
+
+                    {/* Receipt Upload Section - Enhanced */}
+                    <div className="bg-gradient-to-r from-orange-50 to-amber-50 border-2 border-orange-200 rounded-xl p-6 mb-6">
+                        <div className="flex items-start space-x-3 mb-4">
+                            <div className="text-3xl">📸</div>
+                            <div className="flex-1">
+                                <h3 className="font-bold text-lg text-orange-900 mb-2">Smart Receipt Tracking</h3>
+                                <p className="text-sm text-orange-800">
+                                    Upload receipt photos to keep track of your biggest expenses. They'll be included in your trip report export!
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            {['fuel', 'hotels'].map(category => (
+                                <div key={category} className="bg-white rounded-lg shadow-md p-5 border-2 border-transparent hover:border-orange-300 transition">
+                                    <h4 className="font-bold mb-4 capitalize flex items-center text-lg">
+                                        {category === 'fuel' ? '⛽' : '🏨'} {category} Receipts
+                                    </h4>
+                                    
+                                    <label className="block mb-4">
+                                        <div className="border-2 border-dashed border-orange-300 rounded-lg p-6 text-center hover:bg-orange-50 transition cursor-pointer">
+                                            <div className="text-3xl mb-2">📷</div>
+                                            <div className="text-sm font-semibold text-orange-900 mb-1">Click to upload receipt</div>
+                                            <div className="text-xs text-gray-600">Photos or PDFs accepted</div>
+                                        </div>
+                                        <input
+                                            type="file"
+                                            accept="image/*,.pdf"
+                                            capture="environment"
+                                            onChange={(e) => handleReceiptUpload(category, e)}
+                                            className="hidden"
+                                        />
+                                    </label>
+                                    
+                                    <div className="space-y-2 max-h-48 overflow-y-auto">
+                                        {receipts[category].map((receipt, idx) => (
+                                            <div key={idx} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition">
+                                                <div className="flex items-center space-x-3 flex-1 min-w-0">
+                                                    <span className="text-2xl flex-shrink-0">📄</span>
+                                                    <div className="flex-1 min-w-0">
+                                                        <div className="text-sm font-medium truncate">{receipt.name}</div>
+                                                        <div className="text-xs text-gray-500">{receipt.date}</div>
+                                                    </div>
+                                                </div>
+                                                <a 
+                                                    href={receipt.data} 
+                                                    download={receipt.name}
+                                                    className="bg-orange-600 text-white px-3 py-1 rounded text-xs font-semibold hover:bg-orange-700 transition flex-shrink-0 ml-2"
+                                                >
+                                                    View
+                                                </a>
+                                            </div>
+                                        ))}
+                                        {receipts[category].length === 0 && (
+                                            <div className="text-center py-8 text-gray-400 text-sm">
+                                                <div className="text-3xl mb-2">📭</div>
+                                                <div>No receipts yet</div>
+                                            </div>
+                                        )}
+                                    </div>
+                                    
+                                    {receipts[category].length > 0 && (
+                                        <div className="mt-3 pt-3 border-t text-xs text-gray-600 text-center">
+                                            ✓ {receipts[category].length} receipt{receipts[category].length > 1 ? 's' : ''} uploaded
+                                        </div>
+                                    )}
+                                </div>
+                            ))}
+                        </div>
+                        
+                        <div className="mt-4 bg-white rounded-lg p-3 text-xs text-gray-700">
+                            <span className="font-semibold">💡 Tip:</span> All receipts will be included in your trip report export with download links
+                        </div>
+                    </div>
+
+                    {/* Category Breakdown */}
+                    <div className="bg-white rounded-lg shadow-lg p-6 mb-6">
+                        <h3 className="text-xl font-bold mb-2">Edit Budget by Category</h3>
+                        <p className="text-sm text-gray-600 mb-4">Click the dollar amount next to "of" to change your budget for each category</p>
+                    </div>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        {Object.entries(budget).map(([category, budgetAmount]) => {
+                            const spent = expenses[category].reduce((sum, item) => sum + parseFloat(item.amount || 0), 0);
+                            const percent = budgetAmount > 0 ? Math.round((spent / budgetAmount) * 100) : 0;
+                            const categoryRemaining = budgetAmount - spent;
+                            const icons = { fuel: '⛽', hotels: '🏨', food: '🍽️', misc: '📦' };
+                            
+                            return (
+                                <div key={category} className="bg-white rounded-lg shadow-lg p-6 border-2 hover:border-purple-300 transition">
+                                    <div className="flex items-center justify-between mb-4">
+                                        <h4 className="font-bold text-lg capitalize">{icons[category]} {category}</h4>
+                                        <div className="text-right">
+                                            <div className="text-2xl font-bold text-blue-600">${spent.toFixed(2)}</div>
+                                            <div className="text-sm text-gray-500 flex items-center justify-end space-x-1">
+                                                <span>of</span>
+                                                {editingBudget === category ? (
+                                                    <div className="flex items-center space-x-1">
+                                                        <span>$</span>
+                                                        <input
+                                                            type="number"
+                                                            value={budgetAmount}
+                                                            onChange={(e) => updateBudget(category, e.target.value)}
+                                                            onBlur={() => setEditingBudget(null)}
+                                                            onKeyPress={(e) => e.key === 'Enter' && setEditingBudget(null)}
+                                                            className="w-20 px-2 py-1 border-2 border-purple-500 rounded text-center font-semibold"
+                                                            autoFocus
+                                                        />
+                                                    </div>
+                                                ) : (
+                                                    <button
+                                                        onClick={() => setEditingBudget(category)}
+                                                        className="font-semibold text-purple-600 hover:text-purple-800 hover:underline transition px-1"
+                                                        title="Click to edit budget"
+                                                    >
+                                                        ${budgetAmount}
+                                                    </button>
+                                                )}
+                                            </div>
+                                            <div className={`text-sm font-bold mt-2 ${categoryRemaining >= 0 ? 'text-green-600' : 'text-red-600'}`}>
+                                                {categoryRemaining >= 0 ? '✓' : '⚠️'} ${Math.abs(categoryRemaining).toFixed(2)} {categoryRemaining >= 0 ? 'remaining' : 'over budget'}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="bg-gray-200 rounded-full h-3 overflow-hidden mb-4">
+                                        <div 
+                                            className={`h-full transition-all duration-300 ${percent > 100 ? 'bg-red-500' : percent > 80 ? 'bg-yellow-500' : 'bg-green-500'}`}
+                                            style={{ width: `${Math.min(percent, 100)}%` }}
+                                        ></div>
+                                    </div>
+                                    <div className="space-y-2 max-h-40 overflow-y-auto">
+                                        {expenses[category].map((expense, idx) => (
+                                            <div key={idx} className="flex justify-between text-sm py-2 border-b last:border-b-0">
+                                                <div>
+                                                    <div className="font-medium">{expense.description}</div>
+                                                    <div className="text-gray-500 text-xs">{expense.date}</div>
+                                                </div>
+                                                <div className="font-semibold">${expense.amount}</div>
+                                            </div>
+                                        ))}
+                                        {expenses[category].length === 0 && (
+                                            <p className="text-gray-400 text-sm text-center py-4">No expenses yet</p>
+                                        )}
+                                    </div>
+                                </div>
+                            );
+                        })}
+                    </div>
+                </div>
+            );
+        }
+
+        function GamesTab({ tripData }) {
+            const [statesFound, setStatesFound] = useState([]);
+            const [alphabetProgress, setAlphabetProgress] = useState([]);
+            const [expandedGame, setExpandedGame] = useState(null);
+            const [currentWYR, setCurrentWYR] = useState(0);
+            const [selectedState, setSelectedState] = useState('South Dakota');
+            
+            const allStates = ['AL', 'AK', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'FL', 'GA', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'OH', 'OK', 'OR', 'PA', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VA', 'WA', 'WV', 'WI', 'WY'];
+            const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
+
+            const toggleState = (state) => {
+                setStatesFound(prev => 
+                    prev.includes(state) ? prev.filter(s => s !== state) : [...prev, state]
+                );
+            };
+
+            const toggleLetter = (letter) => {
+                setAlphabetProgress(prev => 
+                    prev.includes(letter) ? prev.filter(l => l !== letter) : [...prev, letter]
+                );
+            };
+
+            const nextWYR = () => {
+                setCurrentWYR((currentWYR + 1) % wouldYouRatherQuestions.length);
+            };
+
+            const prevWYR = () => {
+                setCurrentWYR(currentWYR === 0 ? wouldYouRatherQuestions.length - 1 : currentWYR - 1);
+            };
+
+            const randomWYR = () => {
+                setCurrentWYR(Math.floor(Math.random() * wouldYouRatherQuestions.length));
+            };
+
+            return (
+                <div className="space-y-6">
+                    {/* AI Game Customization Info */}
+                    <div className="bg-gradient-to-r from-purple-50 to-indigo-50 border-2 border-purple-200 rounded-xl p-6">
+                        <div className="flex items-start space-x-3">
+                            <div className="text-3xl">🎮</div>
+                            <div className="flex-1">
+                                <h3 className="font-bold text-lg text-purple-900 mb-2">AI Game Generator</h3>
+                                <p className="text-sm text-purple-800 mb-3">
+                                    These games are pre-loaded, but here's the magic: AI can create MORE custom games with questions tailored to YOUR trip!
+                                </p>
+                                <div className="bg-white rounded-lg p-4 space-y-2 text-sm">
+                                    <div className="font-semibold text-purple-900 mb-2">✨ Request custom games like:</div>
+                                    <div className="flex items-start space-x-2">
+                                        <span className="text-purple-600">→</span>
+                                        <span className="text-gray-700">"Create 50 trivia questions about the cities we're visiting"</span>
+                                    </div>
+                                    <div className="flex items-start space-x-2">
+                                        <span className="text-purple-600">→</span>
+                                        <span className="text-gray-700">"Make 'Would You Rather' questions for kids ages 6-10"</span>
+                                    </div>
+                                    <div className="flex items-start space-x-2">
+                                        <span className="text-purple-600">→</span>
+                                        <span className="text-gray-700">"Add a scavenger hunt for Route 66 landmarks"</span>
+                                    </div>
+                                    <div className="flex items-start space-x-2">
+                                        <span className="text-purple-600">→</span>
+                                        <span className="text-gray-700">"Create 'I Spy' prompts specific to our route"</span>
+                                    </div>
+                                    <div className="flex items-start space-x-2">
+                                        <span className="text-purple-600">→</span>
+                                        <span className="text-gray-700">"Make a 20 Questions game about national parks"</span>
+                                    </div>
+                                </div>
+                                <div className="mt-3 text-xs text-purple-700 italic">
+                                    💡 Future feature: Click "Generate Custom Game" to create games instantly with AI
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Would You Rather */}
+                    <div className="bg-white rounded-lg shadow-lg p-6">
+                        <h2 className="text-2xl font-bold mb-4">🤔 Would You Rather?</h2>
+                        <div className="bg-gradient-to-r from-purple-100 to-pink-100 p-8 rounded-lg mb-4">
+                            <p className="text-xl font-semibold text-center text-gray-800 leading-relaxed">
+                                {wouldYouRatherQuestions[currentWYR]}
+                            </p>
+                        </div>
+                        <div className="flex justify-center space-x-4">
+                            <button
+                                onClick={prevWYR}
+                                className="px-6 py-2 bg-gray-200 hover:bg-gray-300 rounded-lg font-semibold transition"
+                            >
+                                ← Previous
+                            </button>
+                            <button
+                                onClick={randomWYR}
+                                className="px-6 py-2 bg-purple-600 text-white hover:bg-purple-700 rounded-lg font-semibold transition"
+                            >
+                                🎲 Random
+                            </button>
+                            <button
+                                onClick={nextWYR}
+                                className="px-6 py-2 bg-gray-200 hover:bg-gray-300 rounded-lg font-semibold transition"
+                            >
+                                Next →
+                            </button>
+                        </div>
+                        <p className="text-center text-sm text-gray-500 mt-3">
+                            Question {currentWYR + 1} of {wouldYouRatherQuestions.length}
+                        </p>
+                    </div>
+
+                    {/* State Trivia */}
+                    <div className="bg-white rounded-lg shadow-lg p-6">
+                        <h2 className="text-2xl font-bold mb-4">🧠 State Trivia</h2>
+                        <div className="flex space-x-2 mb-4 overflow-x-auto pb-2">
+                            {Object.keys(stateTrivia).map(state => (
+                                <button
+                                    key={state}
+                                    onClick={() => setSelectedState(state)}
+                                    className={`px-4 py-2 rounded-lg font-semibold transition whitespace-nowrap ${
+                                        selectedState === state
+                                            ? 'bg-purple-600 text-white'
+                                            : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+                                    }`}
+                                >
+                                    {state}
+                                </button>
+                            ))}
+                        </div>
+                        <div className="space-y-3">
+                            {stateTrivia[selectedState].map((fact, idx) => (
+                                <div key={idx} className="bg-blue-50 border-l-4 border-blue-500 p-4 rounded-r-lg">
+                                    <p className="text-gray-800">{fact}</p>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+
+                    {/* Road Trip Games */}
+                    <div className="bg-white rounded-lg shadow-lg p-6">
+                        <h2 className="text-2xl font-bold mb-6">🎮 Road Trip Games</h2>
+                        <div className="space-y-3">
+                            {tripData.games.map((game, idx) => (
+                                <div key={idx} className="border-2 border-purple-200 rounded-lg overflow-hidden">
+                                    <button
+                                        onClick={() => setExpandedGame(expandedGame === idx ? null : idx)}
+                                        className="w-full p-4 text-left hover:bg-purple-50 transition flex justify-between items-center"
+                                    >
+                                        <div>
+                                            <h3 className="font-bold text-lg">{game.name}</h3>
+                                            <p className="text-gray-600 text-sm">{game.description}</p>
+                                        </div>
+                                        <span className="text-2xl">{expandedGame === idx ? '−' : '+'}</span>
+                                    </button>
+                                    {expandedGame === idx && (
+                                        <div className="p-4 bg-purple-50 border-t-2 border-purple-200">
+                                            <h4 className="font-semibold mb-2">How to Play:</h4>
+                                            <p className="text-gray-700">{game.instructions}</p>
+                                        </div>
+                                    )}
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+
+                    {/* License Plate Bingo */}
+                    <div className="bg-white rounded-lg shadow-lg p-6">
+                        <div className="flex justify-between items-center mb-6">
+                            <h2 className="text-2xl font-bold">🚗 License Plate Bingo</h2>
+                            <div className="text-right">
+                                <div className="text-3xl font-bold text-purple-600">{statesFound.length}/50</div>
+                                <div className="text-sm text-gray-500">states found</div>
+                            </div>
+                        </div>
+                        <div className="grid grid-cols-5 md:grid-cols-10 gap-2">
+                            {allStates.map(state => (
+                                <button
+                                    key={state}
+                                    onClick={() => toggleState(state)}
+                                    className={`aspect-square rounded-lg font-bold text-sm transition ${
+                                        statesFound.includes(state) 
+                                            ? 'bg-green-500 text-white' 
+                                            : 'bg-gray-200 text-gray-600 hover:bg-gray-300'
+                                    }`}
+                                >
+                                    {state}
+                                </button>
+                            ))}
+                        </div>
+                    </div>
+
+                    {/* Alphabet Game */}
+                    <div className="bg-white rounded-lg shadow-lg p-6">
+                        <div className="flex justify-between items-center mb-4">
+                            <h2 className="text-2xl font-bold">🔤 The Alphabet Game</h2>
+                            <div className="text-right">
+                                <div className="text-3xl font-bold text-purple-600">{alphabetProgress.length}/26</div>
+                                <div className="text-sm text-gray-500">letters found</div>
+                            </div>
+                        </div>
+                        <p className="text-sm text-gray-600 mb-4">Find letters A-Z in order on signs outside the car!</p>
+                        <div className="grid grid-cols-7 md:grid-cols-13 gap-2">
+                            {alphabet.map(letter => (
+                                <button
+                                    key={letter}
+                                    onClick={() => toggleLetter(letter)}
+                                    className={`aspect-square rounded-lg font-bold text-lg transition ${
+                                        alphabetProgress.includes(letter)
+                                            ? 'bg-purple-500 text-white' 
+                                            : 'bg-gray-200 text-gray-600 hover:bg-gray-300'
+                                    }`}
+                                >
+                                    {letter}
+                                </button>
+                            ))}
+                        </div>
+                    </div>
+
+                    {/* Playlist Suggestions */}
+                    <div className="bg-white rounded-lg shadow-lg p-6">
+                        <h2 className="text-2xl font-bold mb-4">🎵 Playlist Suggestions</h2>
+                        <div className="space-y-4">
+                            <div className="border-l-4 border-blue-500 pl-4 py-2">
+                                <h3 className="font-bold">Road Trip Classics</h3>
+                                <p className="text-sm text-gray-600">Life is a Highway, Born to Run, Take It Easy, Sweet Home Alabama</p>
+                            </div>
+                            <div className="border-l-4 border-purple-500 pl-4 py-2">
+                                <h3 className="font-bold">Late Night Driving</h3>
+                                <p className="text-sm text-gray-600">Chill beats, lo-fi, ambient music to keep you calm but alert</p>
+                            </div>
+                            <div className="border-l-4 border-green-500 pl-4 py-2">
+                                <h3 className="font-bold">Sing-Along Anthems</h3>
+                                <p className="text-sm text-gray-600">Don't Stop Believin', Mr. Brightside, Bohemian Rhapsody</p>
+                            </div>
+                            <div className="border-l-4 border-orange-500 pl-4 py-2">
+                                <h3 className="font-bold">Podcasts</h3>
+                                <p className="text-sm text-gray-600">True crime, comedy, storytelling - downloads for offline listening</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+
+        ReactDOM.render(<App />, document.getElementById('root'));
+    </script>
+</body>
+</html>
