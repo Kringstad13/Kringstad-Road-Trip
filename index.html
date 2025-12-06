@@ -423,7 +423,7 @@
             const [expenses, setExpenses] = useState({ fuel: [], hotels: [], food: [], misc: [] });
             const [darkMode, setDarkMode] = useState(false);
             const [photos, setPhotos] = useState({ 1: [], 2: [], 3: [], 4: [] });
-            const [receipts, setReceipts] = useState({ fuel: [], hotels: [] });
+            const [receipts, setReceipts] = useState({ fuel: [], hotels: [], food: [], misc: [] });
             const [countdown, setCountdown] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
             const [isOnline, setIsOnline] = useState(navigator.onLine);
             const [budget, setBudget] = useState({
@@ -547,7 +547,7 @@ Track code: ${code}`;
             };
 
             const exportTripReport = () => {
-                const totalReceipts = receipts.fuel.length + receipts.hotels.length;
+                const totalReceipts = receipts.fuel.length + receipts.hotels.length + receipts.food.length + receipts.misc.length;
                 const report = `ATLANTA → SEATTLE ROAD TRIP 2026
 Epic Sibling Adventure Report
 Generated: ${new Date().toLocaleDateString()}
@@ -577,6 +577,12 @@ ${receipts.fuel.map((r, i) => `  ${i + 1}. ${r.name} (${r.date})`).join('\n')}
 
 Hotel Receipts: ${receipts.hotels.length}
 ${receipts.hotels.map((r, i) => `  ${i + 1}. ${r.name} (${r.date})`).join('\n')}
+
+Food Receipts: ${receipts.food.length}
+${receipts.food.map((r, i) => `  ${i + 1}. ${r.name} (${r.date})`).join('\n')}
+
+Misc Receipts: ${receipts.misc.length}
+${receipts.misc.map((r, i) => `  ${i + 1}. ${r.name} (${r.date})`).join('\n')}
 
 Note: Download receipt files from the dashboard Budget tab
 
@@ -1344,10 +1350,14 @@ Trip completed with memories to last a lifetime! 🎉`;
                         </div>
                         
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            {['fuel', 'hotels'].map(category => (
+                            {['fuel', 'hotels', 'food', 'misc'].map(category => {
+                                const categoryIcons = { fuel: '⛽', hotels: '🏨', food: '🍽️', misc: '📦' };
+                                const categoryNames = { fuel: 'Fuel', hotels: 'Hotels', food: 'Food', misc: 'Misc' };
+                                
+                                return (
                                 <div key={category} className="bg-white rounded-lg shadow-md p-5 border-2 border-transparent hover:border-orange-300 transition">
                                     <h4 className="font-bold mb-4 capitalize flex items-center text-lg">
-                                        {category === 'fuel' ? '⛽' : '🏨'} {category} Receipts
+                                        {categoryIcons[category]} {categoryNames[category]} Receipts
                                     </h4>
                                     
                                     <label className="block mb-4">
@@ -1398,7 +1408,8 @@ Trip completed with memories to last a lifetime! 🎉`;
                                         </div>
                                     )}
                                 </div>
-                            ))}
+                                );
+                            })}
                         </div>
                         
                         <div className="mt-4 bg-white rounded-lg p-3 text-xs text-gray-700">
