@@ -684,6 +684,27 @@ Trip completed with memories to last a lifetime! 🎉`;
                         </div>
                     </div>
 
+                    {/* Welcome Banner */}
+                    <div className="bg-gradient-to-r from-blue-50 to-purple-50 border-b-4 border-purple-300">
+                        <div className="max-w-7xl mx-auto px-4 py-4">
+                            <div className="flex items-center justify-between">
+                                <div className="flex items-center space-x-3">
+                                    <span className="text-3xl">👋</span>
+                                    <div>
+                                        <h3 className="font-bold text-lg text-purple-900">This is a Demo Dashboard</h3>
+                                        <p className="text-sm text-purple-700">Imagine this same interface for YOUR road trip - any route, any duration, any travel style!</p>
+                                    </div>
+                                </div>
+                                <a 
+                                    href="https://kringstad13.github.io/Kringstad-Road-Trip/landing.html"
+                                    className="hidden md:block bg-purple-600 text-white px-4 py-2 rounded-lg font-semibold hover:bg-purple-700 transition text-sm whitespace-nowrap"
+                                >
+                                    ← Back to RouteBuilder.ai
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
                     {/* Tabs */}
                     <div className="bg-white border-b sticky top-0 z-10 shadow-sm">
                         <div className="max-w-7xl mx-auto px-4">
@@ -697,6 +718,43 @@ Trip completed with memories to last a lifetime! 🎉`;
                                         {tab}
                                     </button>
                                 ))}
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* AI Features Banner */}
+                    <div className="bg-gradient-to-r from-green-50 to-emerald-50 border-b-2 border-green-300">
+                        <div className="max-w-7xl mx-auto px-4 py-3">
+                            <div className="flex items-center justify-center space-x-2 text-sm">
+                                <span className="text-xl">🤖</span>
+                                <span className="font-semibold text-green-900">AI-Powered Features:</span>
+                                <span className="text-green-700">Click</span>
+                                <button 
+                                    onClick={() => setActiveTab('packing')}
+                                    className="bg-green-600 text-white px-3 py-1 rounded font-semibold hover:bg-green-700 transition text-xs"
+                                >
+                                    Packing
+                                </button>
+                                <button 
+                                    onClick={() => setActiveTab('photos')}
+                                    className="bg-green-600 text-white px-3 py-1 rounded font-semibold hover:bg-green-700 transition text-xs"
+                                >
+                                    Photos
+                                </button>
+                                <button 
+                                    onClick={() => setActiveTab('budget')}
+                                    className="bg-green-600 text-white px-3 py-1 rounded font-semibold hover:bg-green-700 transition text-xs"
+                                >
+                                    Budget
+                                </button>
+                                <span className="text-green-700">or</span>
+                                <button 
+                                    onClick={() => setActiveTab('games')}
+                                    className="bg-green-600 text-white px-3 py-1 rounded font-semibold hover:bg-green-700 transition text-xs"
+                                >
+                                    Games
+                                </button>
+                                <span className="text-green-700">to see AI in action!</span>
                             </div>
                         </div>
                     </div>
@@ -1117,9 +1175,10 @@ Trip completed with memories to last a lifetime! 🎉`;
                                         ))}
                                     </div>
                                 ) : (
-                                    <div className="text-center py-12 bg-gray-50 rounded-lg border-2 border-dashed border-gray-300">
+                                    <div className="text-center py-12 bg-gradient-to-br from-purple-50 to-pink-50 rounded-lg border-2 border-dashed border-purple-300">
                                         <div className="text-4xl mb-2">📷</div>
-                                        <p className="text-gray-500">No photos yet - add some memories!</p>
+                                        <p className="text-gray-700 font-semibold mb-2">No photos yet - try uploading one!</p>
+                                        <p className="text-sm text-gray-600">👆 Click "+ Add Photo" above to test the upload feature</p>
                                     </div>
                                 )}
                             </div>
@@ -1395,9 +1454,10 @@ Trip completed with memories to last a lifetime! 🎉`;
                                             </div>
                                         ))}
                                         {receipts[category].length === 0 && (
-                                            <div className="text-center py-8 text-gray-400 text-sm">
+                                            <div className="text-center py-8 bg-gradient-to-br from-orange-50 to-amber-50 rounded-lg border border-orange-200">
                                                 <div className="text-3xl mb-2">📭</div>
-                                                <div>No receipts yet</div>
+                                                <div className="text-gray-700 font-semibold">No receipts yet - try uploading one!</div>
+                                                <div className="text-xs text-gray-600 mt-1">👆 Click above to test receipt upload</div>
                                             </div>
                                         )}
                                     </div>
