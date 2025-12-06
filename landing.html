@@ -616,8 +616,15 @@
                         <option value="enthusiast">Road trip enthusiast</option>
                         <option value="other">Other</option>
                     </select>
+                    <textarea
+                        id="feedback"
+                        placeholder="Any feedback, suggestions, or questions? (Optional)"
+                        rows="3"
+                        class="w-full px-6 py-4 rounded-lg border-2 border-gray-200 focus:border-purple-500 focus:outline-none text-gray-800 text-lg resize-none"
+                    ></textarea>
                     <button 
                         type="submit"
+                        id="submitButton"
                         class="w-full bg-purple-600 text-white px-8 py-4 rounded-lg font-bold text-lg hover:bg-purple-700 transition"
                     >
                         Join the Waitlist - It's Free! 🚀
@@ -627,6 +634,10 @@
                 <div id="successMessage" class="hidden mt-6 p-4 bg-green-100 border-2 border-green-400 rounded-lg">
                     <p class="text-green-800 font-bold">🎉 You're on the list!</p>
                     <p class="text-green-700 text-sm mt-2">We'll email you as soon as RouteBuilder AI launches. Check your inbox for confirmation!</p>
+                </div>
+                <div id="errorMessage" class="hidden mt-6 p-4 bg-red-100 border-2 border-red-400 rounded-lg">
+                    <p class="text-red-800 font-bold">❌ Oops! Something went wrong.</p>
+                    <p class="text-red-700 text-sm mt-2">Please try again or email us at hello@routebuilderai.com</p>
                 </div>
             </div>
             
@@ -712,28 +723,58 @@
     </footer>
 
     <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-        // Email signup form handler
-        document.getElementById('signupForm').addEventListener('submit', function(e) {
+        // Email signup form handler - sends to Google Sheets
+        document.getElementById('signupForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             
+            const submitButton = document.getElementById('submitButton');
+            const originalButtonText = submitButton.innerHTML;
+            
+            // Disable button and show loading
+            submitButton.disabled = true;
+            submitButton.innerHTML = 'Submitting... ⏳';
+            
+            // Get form values
             const name = document.getElementById('name').value;
             const email = document.getElementById('email').value;
             const userType = document.getElementById('userType').value;
+            const feedback = document.getElementById('feedback').value;
             
-            // For now, just show success message
-            // In production, you'd send this to a backend/email service
-            console.log('Signup:', { name, email, userType });
+            // Validate user type
+            if (!userType) {
+                alert('Please select what type of user you are');
+                submitButton.disabled = false;
+                submitButton.innerHTML = originalButtonText;
+                return;
+            }
             
-            // Show success message
-            document.getElementById('signupForm').classList.add('hidden');
-            document.getElementById('successMessage').classList.remove('hidden');
-            
-            // Optional: Send to Google Sheets, Airtable, or email service
-            // You can integrate with services like:
-            // - Mailchimp API
-            // - ConvertKit
-            // - Google Sheets via API
-            // - Simple backend endpoint
+            try {
+                // Send to Google Sheets
+                const response = await fetch('https://script.google.com/macros/s/AKfycbzCuBR4aKQk--KcfIv3qnUee63hyY7QuoAtkH6N8KGpqpRzw03UEdF7NlRUzxQzoNQMPg/exec', {
+                    method: 'POST',
+                    mode: 'no-cors', // Important for Google Apps Script
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        name: name,
+                        email: email,
+                        userType: userType,
+                        feedback: feedback
+                    })
+                });
+                
+                // Show success message (no-cors mode means we can't read response, but if no error thrown, it worked)
+                document.getElementById('signupForm').classList.add('hidden');
+                document.getElementById('successMessage').classList.remove('hidden');
+                
+            } catch (error) {
+                console.error('Error:', error);
+                // Show error message
+                document.getElementById('errorMessage').classList.remove('hidden');
+                submitButton.disabled = false;
+                submitButton.innerHTML = originalButtonText;
+            }
         });
         
         // Smooth scrolling for anchor links
