@@ -1029,41 +1029,49 @@ Trip completed with memories to last a lifetime! 🎉`;
                             <div className="flex items-start space-x-3">
                                 <div className="text-3xl">🔗</div>
                                 <div className="flex-1">
-                                    <h3 className="font-bold text-lg text-pink-900 mb-2">Share This Dashboard</h3>
+                                    <div className="flex items-center space-x-2 mb-2">
+                                        <h3 className="font-bold text-lg text-pink-900">Share Dashboard</h3>
+                                        <span className="bg-pink-600 text-white text-xs px-2 py-1 rounded-full font-semibold">FULL PRODUCT FEATURE</span>
+                                    </div>
                                     <p className="text-sm text-pink-800 mb-4">
-                                        Share this link with family and friends. Everyone can view AND upload photos in real-time!
+                                        In the real RouteBuilder product, you'll be able to share a link where everyone can upload photos in real-time!
                                     </p>
                                     <div className="bg-white rounded-lg p-4 mb-4">
                                         <div className="flex items-center space-x-2">
                                             <input
                                                 type="text"
-                                                value={window.location.href}
+                                                value="your-trip-dashboard.routebuilder.ai/share"
                                                 readOnly
-                                                className="flex-1 px-3 py-2 bg-gray-50 border border-gray-300 rounded text-sm"
+                                                className="flex-1 px-3 py-2 bg-gray-50 border border-gray-300 rounded text-sm text-gray-500"
                                             />
                                             <button
-                                                onClick={() => {
-                                                    navigator.clipboard.writeText(window.location.href);
-                                                    alert('Link copied! Share with your travel companions.');
-                                                }}
-                                                className="bg-pink-600 text-white px-4 py-2 rounded hover:bg-pink-700 transition text-sm font-semibold whitespace-nowrap"
+                                                disabled
+                                                className="bg-gray-300 text-gray-500 px-4 py-2 rounded text-sm font-semibold whitespace-nowrap cursor-not-allowed"
                                             >
                                                 📋 Copy Link
                                             </button>
                                         </div>
+                                        <div className="mt-3 text-xs text-gray-600 bg-yellow-50 border border-yellow-200 rounded p-2">
+                                            <strong>📝 Demo Note:</strong> This demo is single-user to protect your privacy. The real product includes full multi-user sharing!
+                                        </div>
                                     </div>
                                     <div className="space-y-2 text-sm text-pink-800">
+                                        <div className="text-xs font-semibold text-pink-900 mb-2">How it works in the full product:</div>
                                         <div className="flex items-start space-x-2">
-                                            <span className="text-green-500">✓</span>
+                                            <span className="text-pink-500">✓</span>
                                             <span>Everyone with the link can upload photos from their phones</span>
                                         </div>
                                         <div className="flex items-start space-x-2">
-                                            <span className="text-green-500">✓</span>
-                                            <span>Photos appear instantly for all viewers (no group text needed!)</span>
+                                            <span className="text-pink-500">✓</span>
+                                            <span>Photos sync instantly for all viewers (no group text spam!)</span>
                                         </div>
                                         <div className="flex items-start space-x-2">
-                                            <span className="text-green-500">✓</span>
+                                            <span className="text-pink-500">✓</span>
                                             <span>Organized by location automatically</span>
+                                        </div>
+                                        <div className="flex items-start space-x-2">
+                                            <span className="text-pink-500">✓</span>
+                                            <span>Access from any device - data stays synced</span>
                                         </div>
                                     </div>
                                 </div>
