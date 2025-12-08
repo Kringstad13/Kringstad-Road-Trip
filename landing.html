@@ -66,8 +66,30 @@
                     </div>
                     <p class="text-sm text-purple-200 mt-4">🎉 First 100 signups get 50% off for life!</p>
                 </div>
-                <div>
-                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='400' viewBox='0 0 600 400'%3E%3Crect fill='%23f3f4f6' width='600' height='400' rx='20'/%3E%3Ctext x='50%25' y='50%25' font-family='Arial' font-size='24' fill='%239ca3af' text-anchor='middle' dominant-baseline='middle'%3EDashboard Preview%3C/text%3E%3Cpath d='M50 80 L550 80 M50 150 L550 150 M50 220 L550 220' stroke='%23d1d5db' stroke-width='2'/%3E%3Ccircle cx='100' cy='80' r='25' fill='%23667eea'/%3E%3Ccircle cx='100' cy='150' r='25' fill='%23f59e0b'/%3E%3Ccircle cx='100' cy='220' r='25' fill='%2310b981'/%3E%3C/svg%3E" alt="Dashboard Preview" class="rounded-xl hero-image">
+                <div class="relative">
+                    <a href="https://kringstad13.github.io/Kringstad-Road-Trip/" target="_blank" class="block hover:opacity-90 transition">
+                        <div class="bg-white rounded-xl shadow-2xl overflow-hidden border-4 border-purple-300">
+                            <div class="bg-gradient-to-r from-purple-600 to-indigo-600 p-4 flex items-center justify-between">
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-3 h-3 rounded-full bg-red-400"></div>
+                                    <div class="w-3 h-3 rounded-full bg-yellow-400"></div>
+                                    <div class="w-3 h-3 rounded-full bg-green-400"></div>
+                                </div>
+                                <div class="text-white text-sm font-semibold">ATL → SEA Road Trip 2026</div>
+                            </div>
+                            <iframe 
+                                src="https://kringstad13.github.io/Kringstad-Road-Trip/" 
+                                class="w-full h-96 border-0"
+                                title="Dashboard Preview"
+                                scrolling="no"
+                            ></iframe>
+                        </div>
+                        <div class="absolute inset-0 flex items-center justify-center bg-black bg-opacity-0 hover:bg-opacity-10 transition rounded-xl">
+                            <div class="opacity-0 hover:opacity-100 transition bg-purple-600 text-white px-6 py-3 rounded-lg font-bold text-lg shadow-xl">
+                                🚀 See Live Demo
+                            </div>
+                        </div>
+                    </a>
                 </div>
             </div>
         </div>
@@ -607,8 +629,8 @@
                             <span>Dedicated account manager</span>
                         </li>
                     </ul>
-                    <a href="mailto:hello@routebuilder.ai" class="inline-block bg-purple-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-purple-700 transition text-sm">
-                        Contact for Pricing
+                    <a href="#signup" class="inline-block bg-purple-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-purple-700 transition text-sm">
+                        Join Waitlist for Enterprise
                     </a>
                     <div class="text-xs text-gray-500 mt-4">Great discounts for high volume</div>
                 </div>
@@ -802,7 +824,7 @@
         </div>
     </footer>
 
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
         // Email signup form handler - sends to Google Sheets
         document.getElementById('signupForm').addEventListener('submit', async function(e) {
             e.preventDefault();
@@ -858,7 +880,4 @@
         });
         
         // Smooth scrolling for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = docum
+        document.querySelectorAll('a[href^="#"]').
