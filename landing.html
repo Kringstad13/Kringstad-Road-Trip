@@ -505,47 +505,127 @@
     <section class="py-20 bg-gray-50">
         <div class="max-w-7xl mx-auto px-4">
             <div class="text-center mb-16">
-                <h2 class="text-4xl font-bold mb-4">Simple, Fair Pricing</h2>
-                <p class="text-xl text-gray-600">No subscriptions. Pay only for what you use.</p>
+                <h2 class="text-4xl font-bold mb-4">Simple, Transparent Pricing</h2>
+                <p class="text-xl text-gray-600">Start with pay-per-trip. Scale with subscriptions.</p>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-                <div class="bg-white p-8 rounded-xl shadow-lg text-center">
-                    <h3 class="text-xl font-bold mb-2">Single Trip</h3>
-                    <div class="text-4xl font-bold text-purple-600 my-4">$15</div>
-                    <p class="text-gray-600 mb-6">Perfect for vacation planners</p>
+                <!-- Consumer Tier -->
+                <div class="bg-white p-8 rounded-xl shadow-lg text-center border-2 border-gray-200 hover:border-purple-300 transition">
+                    <h3 class="text-xl font-bold mb-2">Pay Per Trip</h3>
+                    <div class="text-5xl font-bold text-purple-600 my-4">$9</div>
+                    <p class="text-gray-600 mb-6">Perfect for occasional travelers</p>
                     <ul class="text-left space-y-2 text-sm mb-6">
-                        <li>✓ 1 custom dashboard</li>
-                        <li>✓ Unlimited modifications</li>
-                        <li>✓ All features included</li>
-                        <li>✓ Download as HTML/PDF</li>
+                        <li class="flex items-start">
+                            <span class="text-green-500 mr-2 flex-shrink-0">✓</span>
+                            <span>1 custom dashboard per purchase</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-green-500 mr-2 flex-shrink-0">✓</span>
+                            <span>AI-powered planning & modifications</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-green-500 mr-2 flex-shrink-0">✓</span>
+                            <span>All features included</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-green-500 mr-2 flex-shrink-0">✓</span>
+                            <span>Keep it forever</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-green-500 mr-2 flex-shrink-0">✓</span>
+                            <span>Download trip report</span>
+                        </li>
                     </ul>
+                    <div class="text-xs text-gray-500 mt-4">No subscription required</div>
                 </div>
+
+                <!-- Pro Tier -->
                 <div class="bg-purple-600 p-8 rounded-xl shadow-xl text-center text-white transform scale-105 relative">
                     <div class="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-yellow-400 text-purple-900 px-4 py-1 rounded-full text-xs font-bold">
-                        MOST POPULAR
+                        BEST FOR AGENTS
                     </div>
-                    <h3 class="text-xl font-bold mb-2">Pro Plan</h3>
-                    <div class="text-4xl font-bold my-4">$25<span class="text-lg">/mo</span></div>
-                    <p class="text-purple-100 mb-6">For travel professionals</p>
+                    <h3 class="text-xl font-bold mb-2">Pro</h3>
+                    <div class="text-5xl font-bold my-4">$29<span class="text-lg">/mo</span></div>
+                    <p class="text-purple-100 mb-6">For travel agents & planners</p>
                     <ul class="text-left space-y-2 text-sm mb-6">
-                        <li>✓ Unlimited dashboards</li>
-                        <li>✓ Priority support</li>
-                        <li>✓ Custom branding</li>
-                        <li>✓ Client collaboration</li>
-                        <li>✓ API access</li>
+                        <li class="flex items-start">
+                            <span class="text-yellow-300 mr-2 flex-shrink-0">✓</span>
+                            <span><strong>5 active dashboards</strong></span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-yellow-300 mr-2 flex-shrink-0">✓</span>
+                            <span>Unlimited archived trips</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-yellow-300 mr-2 flex-shrink-0">✓</span>
+                            <span>Additional dashboards: $2 each</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-yellow-300 mr-2 flex-shrink-0">✓</span>
+                            <span>Custom branding (your logo)</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-yellow-300 mr-2 flex-shrink-0">✓</span>
+                            <span>Priority support</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-yellow-300 mr-2 flex-shrink-0">✓</span>
+                            <span>Client collaboration tools</span>
+                        </li>
                     </ul>
+                    <div class="text-xs text-purple-200 mt-4">Perfect for 3-7 clients/month</div>
                 </div>
-                <div class="bg-white p-8 rounded-xl shadow-lg text-center">
+
+                <!-- Enterprise Tier -->
+                <div class="bg-white p-8 rounded-xl shadow-lg text-center border-2 border-gray-200 hover:border-purple-300 transition">
                     <h3 class="text-xl font-bold mb-2">Enterprise</h3>
-                    <div class="text-4xl font-bold text-purple-600 my-4">Custom</div>
+                    <div class="text-4xl font-bold text-purple-600 my-4">Let's Talk</div>
                     <p class="text-gray-600 mb-6">For agencies & tour operators</p>
                     <ul class="text-left space-y-2 text-sm mb-6">
-                        <li>✓ White-label solution</li>
-                        <li>✓ Team accounts</li>
-                        <li>✓ Dedicated support</li>
-                        <li>✓ Custom integrations</li>
-                        <li>✓ Volume discounts</li>
+                        <li class="flex items-start">
+                            <span class="text-green-500 mr-2 flex-shrink-0">✓</span>
+                            <span><strong>Custom dashboard volumes</strong></span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-green-500 mr-2 flex-shrink-0">✓</span>
+                            <span>Volume discounts available</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-green-500 mr-2 flex-shrink-0">✓</span>
+                            <span>Full white-label solution</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-green-500 mr-2 flex-shrink-0">✓</span>
+                            <span>Unlimited team accounts</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-green-500 mr-2 flex-shrink-0">✓</span>
+                            <span>API access included</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-green-500 mr-2 flex-shrink-0">✓</span>
+                            <span>Dedicated account manager</span>
+                        </li>
                     </ul>
+                    <a href="mailto:hello@routebuilder.ai" class="inline-block bg-purple-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-purple-700 transition text-sm">
+                        Contact for Pricing
+                    </a>
+                    <div class="text-xs text-gray-500 mt-4">Great discounts for high volume</div>
+                </div>
+            </div>
+
+            <!-- Pricing Comparison Note -->
+            <div class="mt-12 max-w-3xl mx-auto bg-purple-50 border-2 border-purple-200 rounded-xl p-6">
+                <div class="flex items-start space-x-3">
+                    <div class="text-3xl">💡</div>
+                    <div>
+                        <h4 class="font-bold text-purple-900 mb-2">How to Choose Your Plan</h4>
+                        <div class="text-sm text-purple-800 space-y-1">
+                            <p><strong>Occasional traveler (1-3 trips/year)?</strong> Pay-per-trip at $9 is perfect. No commitment needed.</p>
+                            <p><strong>Travel agent with 3-7 active clients?</strong> Pro plan at $29/month gives you 5 slots plus custom branding.</p>
+                            <p><strong>Large agency or tour operator?</strong> Contact us for Enterprise pricing with volume discounts and white-label options.</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
