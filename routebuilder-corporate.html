@@ -1335,7 +1335,7 @@
 
         /* Footer */
         .footer {
-            padding: 3rem 2rem;
+            padding: 4rem 2rem 2rem;
             background: var(--ink);
             color: var(--cream);
         }
@@ -1343,36 +1343,126 @@
         .footer-content {
             max-width: 1200px;
             margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid rgba(250, 249, 247, 0.1);
+        }
+
+        @media (max-width: 768px) {
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
         }
 
         .footer-logo {
             display: flex;
             align-items: center;
             gap: 0.75rem;
+            margin-bottom: 1rem;
         }
 
         .footer-logo-icon {
-            width: 32px;
-            height: 32px;
+            width: 40px;
+            height: 40px;
             background: var(--gold);
-            border-radius: 8px;
+            border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1rem;
+            font-size: 1.25rem;
         }
 
         .footer-logo-text {
             font-family: 'Fraunces', serif;
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+
+        .footer-description {
+            font-size: 0.9rem;
+            color: rgba(250, 249, 247, 0.6);
+            line-height: 1.6;
+        }
+
+        .footer-column-title {
+            font-family: 'Fraunces', serif;
             font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--cream);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-links a {
+            color: rgba(250, 249, 247, 0.6);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.2s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--gold);
+        }
+
+        .footer-contact-item {
+            color: rgba(250, 249, 247, 0.6);
+            font-size: 0.9rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-contact-item a {
+            color: rgba(250, 249, 247, 0.6);
+            text-decoration: none;
+        }
+
+        .footer-contact-item a:hover {
+            color: var(--gold);
+        }
+
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        @media (max-width: 768px) {
+            .footer-bottom {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
         }
 
         .footer-copy {
             font-size: 0.85rem;
-            color: rgba(250, 249, 247, 0.5);
+            color: rgba(250, 249, 247, 0.4);
+        }
+
+        .footer-back-link {
+            color: var(--gold);
+            text-decoration: none;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .footer-back-link:hover {
+            text-decoration: underline;
         }
 
         /* Responsive */
@@ -1952,11 +2042,45 @@
     <!-- Footer -->
     <footer class="footer">
         <div class="footer-content">
-            <div class="footer-logo">
-                <div class="footer-logo-icon">🗺️</div>
-                <span class="footer-logo-text">RouteBuilder AI</span>
+            <div class="footer-grid">
+                <div>
+                    <div class="footer-logo">
+                        <div class="footer-logo-icon">🗺️</div>
+                        <span class="footer-logo-text">RouteBuilder AI</span>
+                    </div>
+                    <p class="footer-description">Professional trip planning for business travel coordinators and travel agents. AI-powered dashboards with expense tracking, receipt management, and exportable reports.</p>
+                </div>
+                <div>
+                    <h4 class="footer-column-title">Product</h4>
+                    <ul class="footer-links">
+                        <li><a href="#use-cases">Use Cases</a></li>
+                        <li><a href="#expense-management">Expense Tracking</a></li>
+                        <li><a href="#how-it-works">How It Works</a></li>
+                        <li><a href="#pricing">Pricing</a></li>
+                        <li><a href="#signup">Get Early Access</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="footer-column-title">Contact</h4>
+                    <div class="footer-contact-item">
+                        Email: <a href="mailto:hello@routebuilder.ai">hello@routebuilder.ai</a>
+                    </div>
+                    <div class="footer-contact-item">
+                        Launching Q1 2026
+                    </div>
+                    <div class="footer-contact-item" style="margin-top: 1.5rem;">
+                        <a href="https://kringstad13.github.io/Kringstad-Road-Trip/landing.html" class="footer-back-link">
+                            ← Back to Main Site
+                        </a>
+                    </div>
+                </div>
             </div>
-            <p class="footer-copy">© 2025 RouteBuilder AI. All rights reserved. Launching Q1 2025.</p>
+            <div class="footer-bottom">
+                <p class="footer-copy">© 2025 RouteBuilder AI. All rights reserved.</p>
+                <a href="https://kringstad13.github.io/Kringstad-Road-Trip/demo-corporate.html" class="footer-back-link">
+                    View Corporate Demo →
+                </a>
+            </div>
         </div>
     </footer>
 
