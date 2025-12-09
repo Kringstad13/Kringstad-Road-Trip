@@ -133,6 +133,12 @@
                     },
                     hotels: ["The Ritz-Carlton Denver (Downtown)", "Four Seasons Denver (LoDo)", "The Oxford Hotel (Historic Boutique)", "JW Marriott Cherry Creek", "Halcyon Hotel (Cherry Creek)", "The Maven Hotel (Dairy Block)"],
                     restaurants: ["Guard and Grace - Premier Steakhouse", "Fruition Restaurant - Farm-to-Table", "Stoic & Genuine - Seafood", "Rioja - Mediterranean", "Mercantile Dining & Provision", "Urban Farmer - Sustainable"],
+                    activities: {
+                        fitness: "Ritz-Carlton Spa & Fitness Center (24hr) • Equinox Union Station",
+                        evening: ["🎭 Denver Center for Performing Arts - Broadway shows", "🎷 Nocturne Jazz Club - Live music & cocktails", "🍺 Denver Beer Trail - Craft brewery scene", "🎱 Punch Bowl Social - Games & drinks"],
+                        networking: "The Cooper Lounge (Union Station) • Death & Co (RiNo) • Williams & Graham (speakeasy)",
+                        nearby: ["16th Street Mall (5 min walk)", "Union Station District", "Larimer Square - Shopping & dining"]
+                    },
                     meetings: [
                         { time: "11:00 AM", client: "TechCorp Industries", location: "1700 Lincoln St, Suite 2400", contact: "Sarah Mitchell, VP Operations", purpose: "Contract renewal discussion" },
                         { time: "4:00 PM", client: "Hotel Check-in", location: "The Ritz-Carlton Denver", contact: "Confirmation: RC-789456", purpose: "" }
@@ -148,6 +154,12 @@
                     color: "#2d5a87",
                     hotels: [],
                     restaurants: ["Tavernetta - Italian", "Beckon - Tasting Menu", "Acorn - New American", "The Wolf's Tailor", "Barolo Grill - Northern Italian"],
+                    activities: {
+                        fitness: "Hotel gym (6am-10pm) • Corepower Yoga - Downtown",
+                        evening: ["🏒 Colorado Avalanche - Ball Arena (if game night)", "🎤 Comedy Works - Stand-up comedy", "🍷 Wine Bar District - Larimer Square", "🎰 Ameristar Casino - Black Hawk (45 min)"],
+                        networking: "54thirty Rooftop - City views • Green Russell (speakeasy) • Corridor 44 - Champagne bar",
+                        nearby: ["RiNo Art District - Galleries & street art", "Dairy Block - Restaurants & shops", "Denver Art Museum (open late Thursdays)"]
+                    },
                     meetings: [
                         { time: "9:00 AM", client: "Mountain West Solutions", location: "1999 Broadway, Floor 35", contact: "James Porter, CEO", purpose: "Q1 Roadmap Presentation" },
                         { time: "2:00 PM", client: "Denver Digital", location: "2420 17th St (RiNo)", contact: "Amanda Lee, CTO", purpose: "Pilot program proposal" }
@@ -163,6 +175,12 @@
                     color: "#3d7ab5",
                     hotels: [],
                     restaurants: ["Snooze AM Eatery - Breakfast", "Work & Class - Lunch", "El Five - Rooftop Dinner"],
+                    activities: {
+                        fitness: "Morning run - City Park Loop (5K) • Cherry Creek Trail",
+                        evening: ["🎵 Red Rocks Amphitheatre - Concert venue (30 min)", "🏔️ Golden - Coors Brewery Tour (20 min)", "🎳 Punch Bowl Social - Wind down", "🛁 Ritz-Carlton Spa - Evening massage"],
+                        networking: "Hearth & Dram - Whiskey lounge • B&GC - Sophisticated cocktails",
+                        nearby: ["Cherry Creek Shopping District", "Denver Botanic Gardens (until 9pm)", "City Park - Evening walk"]
+                    },
                     meetings: [
                         { time: "9:00 AM", client: "Internal Call", location: "Hotel Business Center", contact: "Chicago HQ Team", purpose: "Deal pipeline review" },
                         { time: "11:00 AM", client: "TechCorp Follow-up", location: "Phone Call", contact: "Sarah Mitchell", purpose: "Contract terms discussion" },
@@ -633,6 +651,57 @@ Submitted by: ${tripData.traveler.name}
                                                 <span key={i} className="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-xs">{rest}</span>
                                             ))}
                                         </div>
+                                    </div>
+                                )}
+
+                                {/* Activities & Evening Options */}
+                                {phase.activities && (
+                                    <div className="mt-6 bg-gradient-to-r from-indigo-50 to-blue-50 rounded-lg p-4 border border-indigo-100">
+                                        <div className="text-sm font-semibold text-indigo-900 mb-3 flex items-center gap-2">
+                                            <span>🌙</span> After Hours & Activities
+                                        </div>
+                                        
+                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                            {/* Fitness */}
+                                            {phase.activities.fitness && (
+                                                <div className="bg-white rounded-lg p-3">
+                                                    <div className="text-xs font-medium text-gray-500 uppercase tracking-wide mb-1">💪 Fitness</div>
+                                                    <p className="text-sm text-gray-700">{phase.activities.fitness}</p>
+                                                </div>
+                                            )}
+                                            
+                                            {/* Networking Spots */}
+                                            {phase.activities.networking && (
+                                                <div className="bg-white rounded-lg p-3">
+                                                    <div className="text-xs font-medium text-gray-500 uppercase tracking-wide mb-1">🍸 Networking Spots</div>
+                                                    <p className="text-sm text-gray-700">{phase.activities.networking}</p>
+                                                </div>
+                                            )}
+                                        </div>
+                                        
+                                        {/* Evening Entertainment */}
+                                        {phase.activities.evening && (
+                                            <div className="mt-3">
+                                                <div className="text-xs font-medium text-gray-500 uppercase tracking-wide mb-2">🎭 Evening Entertainment</div>
+                                                <div className="flex flex-wrap gap-2">
+                                                    {phase.activities.evening.map((activity, i) => (
+                                                        <span key={i} className="bg-white text-indigo-700 px-3 py-1.5 rounded-lg text-xs border border-indigo-200">{activity}</span>
+                                                    ))}
+                                                </div>
+                                            </div>
+                                        )}
+                                        
+                                        {/* Nearby Attractions */}
+                                        {phase.activities.nearby && (
+                                            <div className="mt-3">
+                                                <div className="text-xs font-medium text-gray-500 uppercase tracking-wide mb-2">📍 Nearby</div>
+                                                <div className="flex flex-wrap gap-2">
+                                                    {phase.activities.nearby.map((place, i) => (
+                                                        <span key={i} className="bg-white text-gray-600 px-3 py-1 rounded-full text-xs border border-gray-200">{place}</span>
+                                                    ))}
+                                                </div>
+                                            </div>
+                                        )}
                                     </div>
                                 )}
                             </div>
