@@ -1228,7 +1228,7 @@
                 </div>
                 <div class="hero-actions">
                     <a href="#signup" class="btn-primary">Join Waitlist →</a>
-                    <a href="https://kringstad13.github.io/Kringstad-Road-Trip/" class="btn-secondary" target="_blank">See Live Demo</a>
+                    <a href="https://kringstad13.github.io/Kringstad-Road-Trip/demo-corporate.html" class="btn-secondary" target="_blank">See Corporate Demo</a>
                 </div>
             </div>
             <div class="hero-visual">
@@ -1537,7 +1537,7 @@
             </div>
             <div id="errorMessage" class="message message-error hidden">
                 <p class="message-title">❌ Oops! Something went wrong.</p>
-                <p class="message-text">Please try again or email us at hello@routebuilder.ai</p>
+                <p class="message-text">Please try again or email us at <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="78101d141417380a170d0c1d1a0d11141c1d0a561911">[email&#160;protected]</a></p>
             </div>
             
             <p class="cta-note"><span>🎁 First 100 signups</span> get lifetime 50% discount</p>
@@ -1556,7 +1556,7 @@
         </div>
     </footer>
 
-    <script>
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
         document.getElementById('signupForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             
@@ -1601,12 +1601,4 @@
                 
             } catch (error) {
                 // Show error message
-                errorMessage.classList.remove('hidden');
-                submitButton.disabled = false;
-                submitButton.textContent = 'Join the Waitlist — It\'s Free →';
-            }
-        });
-    </script>
-
-</body>
-</html>
+            
