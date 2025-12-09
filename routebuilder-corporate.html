@@ -1,0 +1,1432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RouteBuilder AI for Business | Professional Trip Planning</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --ink: #1a1a2e;
+            --ink-light: #2d2d44;
+            --ink-muted: #6b6b8a;
+            --cream: #faf9f7;
+            --cream-warm: #f5f3ef;
+            --gold: #c9a962;
+            --gold-light: #e8d9a8;
+            --gold-dark: #a68b3d;
+            --emerald: #2d6a4f;
+            --emerald-light: #40916c;
+            --coral: #e07a5f;
+            --white: #ffffff;
+            --shadow-sm: 0 2px 8px rgba(26, 26, 46, 0.06);
+            --shadow-md: 0 8px 24px rgba(26, 26, 46, 0.08);
+            --shadow-lg: 0 16px 48px rgba(26, 26, 46, 0.12);
+            --radius-sm: 6px;
+            --radius-md: 12px;
+            --radius-lg: 20px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--cream);
+            color: var(--ink);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Fraunces', serif;
+            font-weight: 600;
+            line-height: 1.2;
+        }
+
+        /* Refined grain texture overlay */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            opacity: 0.015;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+            z-index: 9999;
+        }
+
+        /* Navigation */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 1rem 2rem;
+            background: rgba(250, 249, 247, 0.9);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(26, 26, 46, 0.06);
+            transition: all 0.3s ease;
+        }
+
+        .nav-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+            color: var(--ink);
+        }
+
+        .nav-logo-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+        }
+
+        .nav-logo-text {
+            font-family: 'Fraunces', serif;
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+
+        .nav-logo-badge {
+            font-size: 0.65rem;
+            font-weight: 600;
+            color: var(--gold-dark);
+            background: var(--gold-light);
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--ink-muted);
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.2s ease;
+        }
+
+        .nav-link:hover {
+            color: var(--ink);
+        }
+
+        .nav-cta {
+            background: var(--ink);
+            color: var(--cream);
+            padding: 0.75rem 1.5rem;
+            border-radius: var(--radius-sm);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.2s ease;
+        }
+
+        .nav-cta:hover {
+            background: var(--ink-light);
+            transform: translateY(-1px);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            padding: 8rem 2rem 6rem;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 80%;
+            height: 150%;
+            background: radial-gradient(ellipse at center, var(--gold-light) 0%, transparent 60%);
+            opacity: 0.15;
+            pointer-events: none;
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .hero-text {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--white);
+            padding: 0.5rem 1rem;
+            border-radius: 100px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--ink-muted);
+            box-shadow: var(--shadow-sm);
+            margin-bottom: 1.5rem;
+            animation: fadeInUp 0.6s ease;
+        }
+
+        .hero-badge-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--emerald);
+            border-radius: 50%;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.7; transform: scale(1.1); }
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 5vw, 3.75rem);
+            color: var(--ink);
+            margin-bottom: 1.5rem;
+            animation: fadeInUp 0.6s ease 0.1s both;
+        }
+
+        .hero h1 span {
+            color: var(--gold-dark);
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            color: var(--ink-muted);
+            margin-bottom: 2rem;
+            max-width: 500px;
+            animation: fadeInUp 0.6s ease 0.2s both;
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 3rem;
+            margin-bottom: 2.5rem;
+            animation: fadeInUp 0.6s ease 0.3s both;
+        }
+
+        .hero-stat {
+            text-align: left;
+        }
+
+        .hero-stat-number {
+            font-family: 'Fraunces', serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--ink);
+            line-height: 1;
+        }
+
+        .hero-stat-label {
+            font-size: 0.85rem;
+            color: var(--ink-muted);
+            margin-top: 0.25rem;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 1rem;
+            animation: fadeInUp 0.6s ease 0.4s both;
+        }
+
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--ink);
+            color: var(--cream);
+            padding: 1rem 2rem;
+            border-radius: var(--radius-sm);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-primary:hover {
+            background: var(--ink-light);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .btn-secondary {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--white);
+            color: var(--ink);
+            padding: 1rem 2rem;
+            border-radius: var(--radius-sm);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(26, 26, 46, 0.1);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--ink);
+            transform: translateY(-2px);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Hero Visual */
+        .hero-visual {
+            position: relative;
+            animation: fadeInUp 0.8s ease 0.3s both;
+        }
+
+        .hero-card {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-lg);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .hero-card-header {
+            background: linear-gradient(135deg, var(--ink) 0%, var(--ink-light) 100%);
+            padding: 1.5rem 2rem;
+            color: var(--cream);
+        }
+
+        .hero-card-title {
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            opacity: 0.7;
+            margin-bottom: 0.5rem;
+        }
+
+        .hero-card-route {
+            font-family: 'Fraunces', serif;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .hero-card-arrow {
+            width: 40px;
+            height: 2px;
+            background: var(--gold);
+            position: relative;
+        }
+
+        .hero-card-arrow::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: -4px;
+            border: solid var(--gold);
+            border-width: 0 2px 2px 0;
+            padding: 4px;
+            transform: rotate(-45deg);
+        }
+
+        .hero-card-body {
+            padding: 1.5rem 2rem;
+        }
+
+        .hero-card-tabs {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-card-tab {
+            padding: 0.5rem 1rem;
+            font-size: 0.8rem;
+            font-weight: 500;
+            border-radius: var(--radius-sm);
+            background: var(--cream);
+            color: var(--ink-muted);
+        }
+
+        .hero-card-tab.active {
+            background: var(--ink);
+            color: var(--cream);
+        }
+
+        .hero-card-details {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .hero-card-detail {
+            padding: 1rem;
+            background: var(--cream-warm);
+            border-radius: var(--radius-sm);
+        }
+
+        .hero-card-detail-label {
+            font-size: 0.75rem;
+            color: var(--ink-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.25rem;
+        }
+
+        .hero-card-detail-value {
+            font-family: 'Fraunces', serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--ink);
+        }
+
+        .hero-card-floating {
+            position: absolute;
+            background: var(--white);
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-md);
+            padding: 1rem 1.25rem;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .hero-card-floating.ai {
+            top: -20px;
+            right: -20px;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .hero-card-floating.ai::before {
+            content: '✨';
+            font-size: 1.25rem;
+        }
+
+        .hero-card-floating.savings {
+            bottom: 30px;
+            left: -30px;
+            animation-delay: 1.5s;
+        }
+
+        .hero-card-floating-label {
+            font-size: 0.75rem;
+            color: var(--ink-muted);
+        }
+
+        .hero-card-floating-value {
+            font-family: 'Fraunces', serif;
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--emerald);
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* Use Cases Section */
+        .use-cases {
+            padding: 6rem 2rem;
+            background: var(--white);
+        }
+
+        .use-cases-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-eyebrow {
+            display: inline-block;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--gold-dark);
+            margin-bottom: 1rem;
+        }
+
+        .section-title {
+            font-size: clamp(2rem, 4vw, 2.75rem);
+            color: var(--ink);
+            margin-bottom: 1rem;
+        }
+
+        .section-subtitle {
+            font-size: 1.1rem;
+            color: var(--ink-muted);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .use-cases-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+        }
+
+        .use-case-card {
+            background: var(--cream);
+            border-radius: var(--radius-lg);
+            padding: 2.5rem;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .use-case-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .use-case-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--gold);
+        }
+
+        .use-case-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--white);
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.75rem;
+            margin-bottom: 1.5rem;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .use-case-title {
+            font-size: 1.5rem;
+            color: var(--ink);
+            margin-bottom: 0.75rem;
+        }
+
+        .use-case-description {
+            color: var(--ink-muted);
+            margin-bottom: 1.5rem;
+            font-size: 1rem;
+        }
+
+        .use-case-example {
+            background: var(--white);
+            border-radius: var(--radius-md);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .use-case-example-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(26, 26, 46, 0.06);
+        }
+
+        .use-case-example-title {
+            font-weight: 600;
+            color: var(--ink);
+            font-size: 0.9rem;
+        }
+
+        .use-case-example-badge {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--emerald);
+            background: rgba(45, 106, 79, 0.1);
+            padding: 0.25rem 0.75rem;
+            border-radius: 100px;
+        }
+
+        .use-case-example-details {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.75rem;
+        }
+
+        .use-case-example-detail {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+            color: var(--ink-muted);
+        }
+
+        .use-case-example-detail span {
+            color: var(--ink);
+            font-weight: 500;
+        }
+
+        .use-case-features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .use-case-feature {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            font-size: 0.85rem;
+            color: var(--ink-muted);
+            background: var(--white);
+            padding: 0.5rem 0.75rem;
+            border-radius: 100px;
+        }
+
+        .use-case-feature::before {
+            content: '✓';
+            color: var(--emerald);
+            font-weight: 700;
+        }
+
+        /* Process Section */
+        .process {
+            padding: 6rem 2rem;
+            background: linear-gradient(180deg, var(--cream) 0%, var(--cream-warm) 100%);
+        }
+
+        .process-content {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .process-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 3rem;
+        }
+
+        .process-step {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 2rem;
+            align-items: start;
+        }
+
+        .process-step-number {
+            width: 60px;
+            height: 60px;
+            background: var(--ink);
+            color: var(--gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Fraunces', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .process-step-content {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .process-step-title {
+            font-size: 1.35rem;
+            color: var(--ink);
+            margin-bottom: 0.75rem;
+        }
+
+        .process-step-description {
+            color: var(--ink-muted);
+            margin-bottom: 1.25rem;
+        }
+
+        .process-step-example {
+            background: var(--cream);
+            padding: 1.25rem;
+            border-radius: var(--radius-sm);
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.95rem;
+            color: var(--ink);
+            border-left: 3px solid var(--gold);
+        }
+
+        /* Pricing Section */
+        .pricing {
+            padding: 6rem 2rem;
+            background: var(--white);
+        }
+
+        .pricing-content {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+
+        .pricing-card {
+            background: var(--cream);
+            border-radius: var(--radius-lg);
+            padding: 2.5rem;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-4px);
+        }
+
+        .pricing-card.featured {
+            background: var(--ink);
+            color: var(--cream);
+        }
+
+        .pricing-card.featured .pricing-card-price,
+        .pricing-card.featured .pricing-card-title {
+            color: var(--cream);
+        }
+
+        .pricing-card.featured .pricing-card-description,
+        .pricing-card.featured .pricing-card-feature {
+            color: rgba(250, 249, 247, 0.7);
+        }
+
+        .pricing-card.featured .pricing-card-feature::before {
+            color: var(--gold);
+        }
+
+        .pricing-badge {
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--gold);
+            color: var(--ink);
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            padding: 0.5rem 1rem;
+            border-radius: 100px;
+        }
+
+        .pricing-card-eyebrow {
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--gold-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .pricing-card.featured .pricing-card-eyebrow {
+            color: var(--gold);
+        }
+
+        .pricing-card-title {
+            font-size: 1.5rem;
+            color: var(--ink);
+            margin-bottom: 0.5rem;
+        }
+
+        .pricing-card-price {
+            font-family: 'Fraunces', serif;
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--ink);
+            margin-bottom: 0.25rem;
+        }
+
+        .pricing-card-price span {
+            font-size: 1rem;
+            font-weight: 400;
+            opacity: 0.7;
+        }
+
+        .pricing-card-description {
+            font-size: 0.9rem;
+            color: var(--ink-muted);
+            margin-bottom: 2rem;
+        }
+
+        .pricing-card-features {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .pricing-card-feature {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            font-size: 0.95rem;
+            color: var(--ink-muted);
+            margin-bottom: 0.75rem;
+        }
+
+        .pricing-card-feature::before {
+            content: '✓';
+            color: var(--emerald);
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .pricing-card-cta {
+            display: block;
+            width: 100%;
+            text-align: center;
+            padding: 1rem;
+            border-radius: var(--radius-sm);
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+
+        .pricing-card .pricing-card-cta {
+            background: var(--ink);
+            color: var(--cream);
+        }
+
+        .pricing-card .pricing-card-cta:hover {
+            background: var(--ink-light);
+        }
+
+        .pricing-card.featured .pricing-card-cta {
+            background: var(--gold);
+            color: var(--ink);
+        }
+
+        .pricing-card.featured .pricing-card-cta:hover {
+            background: var(--gold-light);
+        }
+
+        /* ROI Calculator */
+        .roi {
+            padding: 6rem 2rem;
+            background: var(--ink);
+            color: var(--cream);
+        }
+
+        .roi-content {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .roi .section-eyebrow {
+            color: var(--gold);
+        }
+
+        .roi .section-title {
+            color: var(--cream);
+        }
+
+        .roi .section-subtitle {
+            color: rgba(250, 249, 247, 0.7);
+        }
+
+        .roi-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .roi-card {
+            background: rgba(250, 249, 247, 0.05);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            text-align: center;
+            border: 1px solid rgba(250, 249, 247, 0.1);
+        }
+
+        .roi-card-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .roi-card-label {
+            font-size: 0.85rem;
+            color: rgba(250, 249, 247, 0.6);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 0.5rem;
+        }
+
+        .roi-card-value {
+            font-family: 'Fraunces', serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--gold);
+        }
+
+        .roi-card-comparison {
+            font-size: 0.85rem;
+            color: rgba(250, 249, 247, 0.5);
+            margin-top: 0.5rem;
+        }
+
+        .roi-card-comparison span {
+            text-decoration: line-through;
+        }
+
+        /* CTA Section */
+        .cta {
+            padding: 6rem 2rem;
+            background: linear-gradient(135deg, var(--cream-warm) 0%, var(--cream) 100%);
+        }
+
+        .cta-content {
+            max-width: 700px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .cta-title {
+            font-size: clamp(2rem, 4vw, 2.75rem);
+            color: var(--ink);
+            margin-bottom: 1rem;
+        }
+
+        .cta-subtitle {
+            font-size: 1.1rem;
+            color: var(--ink-muted);
+            margin-bottom: 2rem;
+        }
+
+        .cta-form {
+            display: flex;
+            gap: 1rem;
+            max-width: 500px;
+            margin: 0 auto 1.5rem;
+        }
+
+        .cta-input {
+            flex: 1;
+            padding: 1rem 1.25rem;
+            border: 1px solid rgba(26, 26, 46, 0.15);
+            border-radius: var(--radius-sm);
+            font-size: 1rem;
+            font-family: inherit;
+            background: var(--white);
+            transition: all 0.2s ease;
+        }
+
+        .cta-input:focus {
+            outline: none;
+            border-color: var(--ink);
+        }
+
+        .cta-note {
+            font-size: 0.85rem;
+            color: var(--ink-muted);
+        }
+
+        .cta-note span {
+            color: var(--gold-dark);
+            font-weight: 600;
+        }
+
+        /* Footer */
+        .footer {
+            padding: 3rem 2rem;
+            background: var(--ink);
+            color: var(--cream);
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .footer-logo-icon {
+            width: 32px;
+            height: 32px;
+            background: var(--gold);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+        }
+
+        .footer-logo-text {
+            font-family: 'Fraunces', serif;
+            font-size: 1rem;
+        }
+
+        .footer-copy {
+            font-size: 0.85rem;
+            color: rgba(250, 249, 247, 0.5);
+        }
+
+        /* Responsive */
+        @media (max-width: 968px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero-subtitle {
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .hero-stats {
+                justify-content: center;
+            }
+
+            .hero-actions {
+                justify-content: center;
+            }
+
+            .hero-visual {
+                max-width: 500px;
+                margin: 0 auto;
+            }
+
+            .use-cases-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .pricing-grid {
+                grid-template-columns: 1fr;
+                max-width: 400px;
+                margin: 0 auto;
+            }
+
+            .roi-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .cta-form {
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .hero-stats {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+
+            .process-step {
+                grid-template-columns: 1fr;
+            }
+
+            .process-step-number {
+                width: 48px;
+                height: 48px;
+                font-size: 1.25rem;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-content">
+            <a href="#" class="nav-logo">
+                <div class="nav-logo-icon">🗺️</div>
+                <span class="nav-logo-text">RouteBuilder</span>
+                <span class="nav-logo-badge">For Business</span>
+            </a>
+            <div class="nav-links">
+                <a href="#use-cases" class="nav-link">Use Cases</a>
+                <a href="#how-it-works" class="nav-link">How It Works</a>
+                <a href="#pricing" class="nav-link">Pricing</a>
+                <a href="#signup" class="nav-cta">Get Early Access</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-text">
+                <div class="hero-badge">
+                    <span class="hero-badge-dot"></span>
+                    Now accepting early access signups
+                </div>
+                <h1>Professional Trip Planning in <span>3 Minutes</span></h1>
+                <p class="hero-subtitle">AI-powered dashboards for travel agents, corporate coordinators, and professionals who value their time. Generate complete itineraries for $9—not $150.</p>
+                <div class="hero-stats">
+                    <div class="hero-stat">
+                        <div class="hero-stat-number">6+ hrs</div>
+                        <div class="hero-stat-label">Saved per trip</div>
+                    </div>
+                    <div class="hero-stat">
+                        <div class="hero-stat-number">94%</div>
+                        <div class="hero-stat-label">Cost reduction</div>
+                    </div>
+                    <div class="hero-stat">
+                        <div class="hero-stat-number">$9</div>
+                        <div class="hero-stat-label">Per dashboard</div>
+                    </div>
+                </div>
+                <div class="hero-actions">
+                    <a href="#signup" class="btn-primary">Join Waitlist →</a>
+                    <a href="https://kringstad13.github.io/Kringstad-Road-Trip/" class="btn-secondary" target="_blank">See Live Demo</a>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="hero-card">
+                    <div class="hero-card-floating ai">
+                        <span style="font-size: 0.85rem; font-weight: 600; color: var(--ink);">AI Generated</span>
+                    </div>
+                    <div class="hero-card-floating savings">
+                        <div class="hero-card-floating-label">Time saved</div>
+                        <div class="hero-card-floating-value">6.5 hours</div>
+                    </div>
+                    <div class="hero-card-header">
+                        <div class="hero-card-title">Corporate Travel Dashboard</div>
+                        <div class="hero-card-route">
+                            Chicago
+                            <span class="hero-card-arrow"></span>
+                            Denver
+                        </div>
+                    </div>
+                    <div class="hero-card-body">
+                        <div class="hero-card-tabs">
+                            <span class="hero-card-tab active">Route</span>
+                            <span class="hero-card-tab">Hotels</span>
+                            <span class="hero-card-tab">Budget</span>
+                            <span class="hero-card-tab">Expenses</span>
+                        </div>
+                        <div class="hero-card-details">
+                            <div class="hero-card-detail">
+                                <div class="hero-card-detail-label">Duration</div>
+                                <div class="hero-card-detail-value">5 Days</div>
+                            </div>
+                            <div class="hero-card-detail">
+                                <div class="hero-card-detail-label">Budget</div>
+                                <div class="hero-card-detail-value">$2,400</div>
+                            </div>
+                            <div class="hero-card-detail">
+                                <div class="hero-card-detail-label">Hotels</div>
+                                <div class="hero-card-detail-value">6 Options</div>
+                            </div>
+                            <div class="hero-card-detail">
+                                <div class="hero-card-detail-label">Meetings</div>
+                                <div class="hero-card-detail-value">3 Cities</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Use Cases Section -->
+    <section class="use-cases" id="use-cases">
+        <div class="use-cases-content">
+            <div class="section-header">
+                <span class="section-eyebrow">Built for Professionals</span>
+                <h2 class="section-title">Two Powerful Use Cases</h2>
+                <p class="section-subtitle">Whether you're managing corporate travel or delighting vacation clients, RouteBuilder adapts to your needs.</p>
+            </div>
+            <div class="use-cases-grid">
+                <!-- Corporate Travel -->
+                <div class="use-case-card">
+                    <div class="use-case-icon">🏢</div>
+                    <h3 class="use-case-title">Corporate Travel Coordinators</h3>
+                    <p class="use-case-description">Plan multi-city business trips with conference-ready hotels, client dinner venues, and automated expense tracking.</p>
+                    
+                    <div class="use-case-example">
+                        <div class="use-case-example-header">
+                            <span class="use-case-example-title">Example: Regional Sales Trip</span>
+                            <span class="use-case-example-badge">5-Day Itinerary</span>
+                        </div>
+                        <div class="use-case-example-details">
+                            <div class="use-case-example-detail">📍 <span>Chicago → Denver</span></div>
+                            <div class="use-case-example-detail">👤 <span>1 Executive</span></div>
+                            <div class="use-case-example-detail">💰 <span>$2,400 Budget</span></div>
+                            <div class="use-case-example-detail">🏨 <span>Business Class Hotels</span></div>
+                        </div>
+                    </div>
+
+                    <div class="use-case-features">
+                        <span class="use-case-feature">Conference hotels</span>
+                        <span class="use-case-feature">Client dinner spots</span>
+                        <span class="use-case-feature">Receipt tracking</span>
+                        <span class="use-case-feature">Expense reports</span>
+                        <span class="use-case-feature">Meeting schedules</span>
+                    </div>
+                </div>
+
+                <!-- Travel Agent -->
+                <div class="use-case-card">
+                    <div class="use-case-icon">✈️</div>
+                    <h3 class="use-case-title">Travel Agents & Planners</h3>
+                    <p class="use-case-description">Impress clients with polished, professional dashboards featuring family-friendly activities, dining, and accommodations.</p>
+                    
+                    <div class="use-case-example">
+                        <div class="use-case-example-header">
+                            <span class="use-case-example-title">Example: Premium Family Vacation</span>
+                            <span class="use-case-example-badge">7-Day Itinerary</span>
+                        </div>
+                        <div class="use-case-example-details">
+                            <div class="use-case-example-detail">📍 <span>San Francisco → LA</span></div>
+                            <div class="use-case-example-detail">👨‍👩‍👧‍👦 <span>Family of 5</span></div>
+                            <div class="use-case-example-detail">💰 <span>$4,500 Budget</span></div>
+                            <div class="use-case-example-detail">🏨 <span>Family Suites</span></div>
+                        </div>
+                    </div>
+
+                    <div class="use-case-features">
+                        <span class="use-case-feature">Custom branding</span>
+                        <span class="use-case-feature">Kid-friendly stops</span>
+                        <span class="use-case-feature">Pool hotels</span>
+                        <span class="use-case-feature">Activity planning</span>
+                        <span class="use-case-feature">Road trip games</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process Section -->
+    <section class="process" id="how-it-works">
+        <div class="process-content">
+            <div class="section-header">
+                <span class="section-eyebrow">Simple Process</span>
+                <h2 class="section-title">From Request to Dashboard in 3 Minutes</h2>
+                <p class="section-subtitle">No training required. Just describe the trip in plain English and let AI handle the rest.</p>
+            </div>
+            <div class="process-steps">
+                <div class="process-step">
+                    <div class="process-step-number">1</div>
+                    <div class="process-step-content">
+                        <h3 class="process-step-title">Describe the Trip Requirements</h3>
+                        <p class="process-step-description">Enter the basics: origin, destination, dates, budget, and trip type. Add any special requirements in plain English.</p>
+                        <div class="process-step-example">
+                            <strong>Corporate example:</strong> "Chicago to Denver, 5 days, $2,400 budget. Need hotels with conference rooms and client dinner restaurants. Executive traveling solo."
+                        </div>
+                    </div>
+                </div>
+                <div class="process-step">
+                    <div class="process-step-number">2</div>
+                    <div class="process-step-content">
+                        <h3 class="process-step-title">AI Builds Your Custom Dashboard</h3>
+                        <p class="process-step-description">In under 3 minutes, receive a complete dashboard with routes, accommodations, dining, packing lists, and budget tracking—all tailored to your specific needs.</p>
+                        <div class="process-step-example">
+                            <strong>Travel agent example:</strong> "San Francisco to LA, 7 days, family of 5 with kids ages 4, 8, and 12. $4,500 budget. Want beaches, theme parks, and family-friendly dining."
+                        </div>
+                    </div>
+                </div>
+                <div class="process-step">
+                    <div class="process-step-number">3</div>
+                    <div class="process-step-content">
+                        <h3 class="process-step-title">Refine with Unlimited Modifications</h3>
+                        <p class="process-step-description">Need changes? Just ask in plain English. "Swap the second hotel for something with a pool" or "Add vegetarian restaurant options." No limits, no extra charges.</p>
+                        <div class="process-step-example">
+                            <strong>Modification example:</strong> "Move the Monterey stay to day 3 instead of day 4, add the aquarium as a must-see stop, and increase the dining budget by $200."
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="pricing" id="pricing">
+        <div class="pricing-content">
+            <div class="section-header">
+                <span class="section-eyebrow">Transparent Pricing</span>
+                <h2 class="section-title">Plans That Scale With You</h2>
+                <p class="section-subtitle">Start with pay-per-trip. Graduate to Pro when you're ready.</p>
+            </div>
+            <div class="pricing-grid">
+                <!-- Consumer -->
+                <div class="pricing-card">
+                    <span class="pricing-card-eyebrow">Pay Per Trip</span>
+                    <h3 class="pricing-card-title">Occasional Use</h3>
+                    <div class="pricing-card-price">$9</div>
+                    <p class="pricing-card-description">Per dashboard. No subscription. Keep forever.</p>
+                    <ul class="pricing-card-features">
+                        <li class="pricing-card-feature">1 complete dashboard</li>
+                        <li class="pricing-card-feature">All AI features included</li>
+                        <li class="pricing-card-feature">Unlimited modifications</li>
+                        <li class="pricing-card-feature">Receipt & expense tracking</li>
+                        <li class="pricing-card-feature">Downloadable trip report</li>
+                    </ul>
+                    <a href="#signup" class="pricing-card-cta">Get Started</a>
+                </div>
+
+                <!-- Pro -->
+                <div class="pricing-card featured">
+                    <span class="pricing-badge">Best for Agents</span>
+                    <span class="pricing-card-eyebrow">Monthly</span>
+                    <h3 class="pricing-card-title">Pro Plan</h3>
+                    <div class="pricing-card-price">$29<span>/mo</span></div>
+                    <p class="pricing-card-description">For travel agents managing multiple clients.</p>
+                    <ul class="pricing-card-features">
+                        <li class="pricing-card-feature">5 active dashboards included</li>
+                        <li class="pricing-card-feature">Unlimited archived trips</li>
+                        <li class="pricing-card-feature">Additional dashboards: $2 each</li>
+                        <li class="pricing-card-feature">Custom branding (your logo)</li>
+                        <li class="pricing-card-feature">Client collaboration tools</li>
+                        <li class="pricing-card-feature">Priority support</li>
+                    </ul>
+                    <a href="#signup" class="pricing-card-cta">Join Waitlist</a>
+                </div>
+
+                <!-- Enterprise -->
+                <div class="pricing-card">
+                    <span class="pricing-card-eyebrow">Custom</span>
+                    <h3 class="pricing-card-title">Enterprise</h3>
+                    <div class="pricing-card-price">Let's Talk</div>
+                    <p class="pricing-card-description">For agencies and corporate travel teams.</p>
+                    <ul class="pricing-card-features">
+                        <li class="pricing-card-feature">Custom dashboard volumes</li>
+                        <li class="pricing-card-feature">Volume discounts available</li>
+                        <li class="pricing-card-feature">Full white-label solution</li>
+                        <li class="pricing-card-feature">Unlimited team accounts</li>
+                        <li class="pricing-card-feature">API access</li>
+                        <li class="pricing-card-feature">Dedicated account manager</li>
+                    </ul>
+                    <a href="#signup" class="pricing-card-cta">Contact Sales</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ROI Section -->
+    <section class="roi">
+        <div class="roi-content">
+            <div class="section-header">
+                <span class="section-eyebrow">The Numbers</span>
+                <h2 class="section-title">Your Time Is Worth More</h2>
+                <p class="section-subtitle">Traditional trip planning costs more than you think. We fix that.</p>
+            </div>
+            <div class="roi-grid">
+                <div class="roi-card">
+                    <div class="roi-card-icon">⏱️</div>
+                    <div class="roi-card-label">Time to Plan</div>
+                    <div class="roi-card-value">3 min</div>
+                    <div class="roi-card-comparison">vs <span>6-8 hours</span> manually</div>
+                </div>
+                <div class="roi-card">
+                    <div class="roi-card-icon">💵</div>
+                    <div class="roi-card-label">Cost Per Trip</div>
+                    <div class="roi-card-value">$9</div>
+                    <div class="roi-card-comparison">vs <span>$100-150</span> traditional</div>
+                </div>
+                <div class="roi-card">
+                    <div class="roi-card-icon">📊</div>
+                    <div class="roi-card-label">Profit Margin</div>
+                    <div class="roi-card-value">$120+</div>
+                    <div class="roi-card-comparison">saved per client trip</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta" id="signup">
+        <div class="cta-content">
+            <h2 class="cta-title">Ready to Transform Your Workflow?</h2>
+            <p class="cta-subtitle">Join the waitlist for early access. First 100 signups get 50% off for life.</p>
+            <form class="cta-form" action="https://docs.google.com/forms/d/e/1FAIpQLSdYXKCQXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX/formResponse" method="POST" target="_blank">
+                <input type="email" name="entry.email" class="cta-input" placeholder="Enter your work email" required>
+                <button type="submit" class="btn-primary">Join Waitlist →</button>
+            </form>
+            <p class="cta-note"><span>🎁 First 100 signups</span> get lifetime 50% discount</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-logo">
+                <div class="footer-logo-icon">🗺️</div>
+                <span class="footer-logo-text">RouteBuilder AI</span>
+            </div>
+            <p class="footer-copy">© 2025 RouteBuilder AI. All rights reserved. Launching Q1 2025.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
