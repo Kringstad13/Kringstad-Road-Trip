@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SF → LA Family Adventure 2025 🎢</title>
+    <title>SF → LA California Coast 2025 🌴</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap');
@@ -13,7 +13,7 @@
         }
         
         .gradient-bg {
-            background: linear-gradient(135deg, #ff6b6b 0%, #feca57 50%, #48dbfb 100%);
+            background: linear-gradient(135deg, #3b82f6 0%, #f97316 50%, #06b6d4 100%);
         }
         
         .phase-card {
@@ -27,8 +27,8 @@
         }
         
         .phase-active {
-            border-left-color: #ff6b6b;
-            background: linear-gradient(90deg, rgba(255, 107, 107, 0.05) 0%, rgba(255,255,255,0) 100%);
+            border-left-color: #3b82f6;
+            background: linear-gradient(90deg, rgba(59, 130, 246, 0.05) 0%, rgba(255,255,255,0) 100%);
         }
         
         .phase-complete {
@@ -48,7 +48,7 @@
             left: 0;
             right: 0;
             height: 3px;
-            background: linear-gradient(90deg, #ff6b6b, #feca57);
+            background: linear-gradient(90deg, #3b82f6, #f97316);
         }
         
         .checklist-item {
@@ -188,106 +188,109 @@
     <script type="text/babel">
         const { useState, useEffect } = React;
 
-        // Kid-Friendly Would You Rather Questions
+        // Mixed Would You Rather Questions (Kids & Adults)
         const wouldYouRatherQuestions = [
+            // Kid-friendly
             "Would you rather have a pet dinosaur or a pet dragon? 🦖🐉",
             "Would you rather be able to fly or be able to breathe underwater? ✈️🐠",
             "Would you rather eat only pizza or only ice cream for a week? 🍕🍦",
             "Would you rather live in a treehouse or in a castle? 🌳🏰",
             "Would you rather be super strong or super fast? 💪⚡",
-            "Would you rather have a magic carpet or a talking pet? 🧞‍♂️🐕",
             "Would you rather visit the moon or the bottom of the ocean? 🌙🌊",
-            "Would you rather be invisible or be able to read minds? 👻🧠",
             "Would you rather have roller coaster rides every day or movie nights every day? 🎢🎬",
-            "Would you rather meet your favorite cartoon character or your favorite superhero? 🦸‍♀️",
-            "Would you rather have a pool in your backyard or a trampoline? 🏊‍♂️",
-            "Would you rather never have homework or never have chores? 📚🧹",
-            "Would you rather be the best singer or the best dancer? 🎤💃",
-            "Would you rather have a snow day or a beach day? ❄️🏖️",
-            "Would you rather eat breakfast for dinner or dinner for breakfast? 🥞🍝",
-            "Would you rather have a pet unicorn or a pet phoenix? 🦄🔥",
             "Would you rather slide down a rainbow or jump on clouds? 🌈☁️",
-            "Would you rather have super hearing or super smell? 👂👃",
-            "Would you rather live in Disneyland or at the beach? 🏰🏖️",
-            "Would you rather have a room full of LEGOs or a room full of stuffed animals? 🧱🧸",
-            "Would you rather be a famous YouTuber or a famous athlete? 📱⚽",
-            "Would you rather have a tail or have wings? 🐒🦋",
-            "Would you rather always have to skip or always have to hop? 🦘",
-            "Would you rather have gummy bears for teeth or have spaghetti for hair? 🍬🍝",
-            "Would you rather see a real mermaid or a real fairy? 🧜‍♀️🧚",
-            "Would you rather have the power to make anyone laugh or make anyone dance? 😂💃",
-            "Would you rather live in a giant shoe or a giant pumpkin? 👟🎃",
-            "Would you rather be friends with Elsa or Moana? ❄️🌊",
-            "Would you rather have x-ray vision or be able to walk through walls? 👀",
-            "Would you rather have a robot best friend or an alien best friend? 🤖👽"
+            "Would you rather have a snow day or a beach day? ❄️🏖️",
+            "Would you rather have a pet unicorn or a pet phoenix? 🦄🔥",
+            // Adult/Everyone
+            "Would you rather drive through a snowstorm or a thunderstorm? 🌨️⛈️",
+            "Would you rather only listen to one song on repeat or complete silence for the whole trip?",
+            "Would you rather take the fastest route or the most scenic route? 🛣️",
+            "Would you rather stay in fancy hotels or quirky roadside motels? 🏨",
+            "Would you rather have perfect weather but boring scenery, or dramatic weather with amazing views?",
+            "Would you rather eat only at diners or only at chain restaurants?",
+            "Would you rather have free gas for the trip or free hotels? ⛽🏨",
+            "Would you rather make this trip in summer or winter? ☀️❄️",
+            "Would you rather visit every tourist trap or skip them all?",
+            "Would you rather have a GPS that's always wrong or a map that's always outdated? 🗺️",
+            // Mix for everyone
+            "Would you rather go wine tasting or brewery hopping? 🍷🍺",
+            "Would you rather hike to a waterfall or relax on a beach? 🏞️🏖️",
+            "Would you rather eat street tacos or fine dining? 🌮🍽️",
+            "Would you rather see a sunrise or a sunset? 🌅",
+            "Would you rather take 100 photos or just enjoy the moment? 📸",
+            "Would you rather try the local specialty (even if weird) or stick to what you know?",
+            "Would you rather drive a convertible or an RV? 🚗🚐",
+            "Would you rather spend more time at fewer stops or see as many places as possible?",
+            "Would you rather have an ocean view room or a mountain view room? 🌊⛰️",
+            "Would you rather visit a famous landmark or a hidden gem? 🗽💎"
         ];
 
-        // California Fun Facts for Kids
+        // California Fun Facts (Mix of kid & adult content)
         const californiaFacts = {
             "San Francisco": [
                 "🌉 The Golden Gate Bridge is painted 'International Orange' - not gold!",
                 "🦭 Sea lions hang out at Pier 39 - sometimes over 1,000 of them!",
-                "🚃 Cable cars are the only mobile National Historic Landmark",
-                "🌫️ The fog has a name - it's called Karl!",
-                "🍫 Ghirardelli chocolate was invented here in 1852",
-                "🏝️ Alcatraz prison is on an island in the bay",
-                "🎨 The Painted Ladies are colorful houses from the 1800s",
-                "🦀 Fisherman's Wharf has the best clam chowder in bread bowls!"
+                "🚃 Cable cars are the only mobile National Historic Landmark in the US",
+                "🌫️ The fog has a name - locals call it Karl!",
+                "🍫 Ghirardelli chocolate has been made here since 1852",
+                "🍷 Napa Valley wine country is just an hour north",
+                "🏛️ Alcatraz held famous prisoners like Al Capone",
+                "🦀 Fisherman's Wharf is famous for clam chowder in sourdough bread bowls"
             ],
             "Monterey": [
-                "🦑 The Monterey Bay Aquarium has over 35,000 creatures!",
-                "🦦 Sea otters float on their backs and hold hands while sleeping",
-                "🐋 You can see whales swimming right from the shore",
-                "🦈 The aquarium has a million-gallon ocean tank",
-                "🪼 Jellyfish at the aquarium glow in the dark",
-                "🎣 Cannery Row was once full of sardine canneries",
-                "🚗 17-Mile Drive has the famous Lone Cypress tree",
-                "🐧 Penguins at the aquarium get fish delivered by hand!"
+                "🦑 The Monterey Bay Aquarium has over 35,000 sea creatures!",
+                "🦦 Sea otters hold hands while sleeping so they don't drift apart",
+                "🐋 Gray whales migrate past here - best viewing December-April",
+                "🍷 Carmel-by-the-Sea has over 20 wine tasting rooms",
+                "🎭 Clint Eastwood was once the mayor of Carmel",
+                "🚗 17-Mile Drive features the famous Lone Cypress tree",
+                "📚 John Steinbeck set 'Cannery Row' here",
+                "🦈 The aquarium's million-gallon Open Sea exhibit is mesmerizing"
             ],
             "Santa Barbara": [
-                "🌴 Called the 'American Riviera' because it looks like the Mediterranean",
-                "🏖️ The beach has the softest sand in California",
-                "🦋 Millions of monarch butterflies visit every winter",
-                "🐬 Dolphins swim along the coast almost every day",
-                "🌺 The courthouse has a clock tower you can climb",
-                "🦞 The pier is over 100 years old",
-                "⛵ You can see the Channel Islands on clear days",
-                "🍦 Best ice cream shops along State Street!"
+                "🌴 Called the 'American Riviera' for its Mediterranean climate",
+                "🍷 Santa Barbara wine country inspired the movie 'Sideways'",
+                "🦋 Millions of monarch butterflies visit Ellwood Grove each winter",
+                "🏖️ East Beach has calm waves - perfect for families",
+                "🏛️ The County Courthouse has a free tower with panoramic views",
+                "🦞 Santa Barbara spot prawns are a local delicacy",
+                "⛵ The Channel Islands are just offshore for kayaking & diving",
+                "🌺 The Mission Santa Barbara is called 'Queen of the Missions'"
             ],
             "Los Angeles": [
-                "🎬 Hollywood makes more movies than anywhere else in the world",
+                "🎬 Hollywood produces more movies than anywhere else in the world",
                 "⭐ Over 2,700 stars are on the Hollywood Walk of Fame",
-                "🏰 Disneyland was the first Disney theme park ever built (1955)",
-                "🦖 The La Brea Tar Pits have real dinosaur bones... wait, mammoths!",
+                "🏰 Disneyland opened in 1955 - the first Disney park ever",
+                "🦕 La Brea Tar Pits have fossils from the Ice Age",
                 "🎡 Santa Monica Pier has the world's only solar-powered Ferris wheel",
-                "🌴 There are over 2 million palm trees in LA",
-                "🎢 Universal Studios has rides based on your favorite movies",
-                "🏀 Home to the Lakers, Dodgers, and lots of movie stars!"
+                "🍕 LA has incredible food from every cuisine imaginable",
+                "🎢 Universal Studios combines movie magic with thrill rides",
+                "🌴 There are over 2 million palm trees in Los Angeles"
             ]
         };
 
-        // Scavenger Hunt Items
+        // Scavenger Hunt Items (California Edition)
         const scavengerHuntItems = [
             { item: "A palm tree 🌴", points: 5 },
-            { item: "A seagull 🐦", points: 5 },
-            { item: "A lifeguard tower 🏖️", points: 10 },
+            { item: "A Tesla 🚗", points: 5 },
             { item: "A surfboard 🏄", points: 10 },
-            { item: "A pelican 🐦", points: 15 },
+            { item: "A vineyard or winery 🍷", points: 15 },
+            { item: "A sea lion or seal 🦭", points: 15 },
+            { item: "The Golden Gate Bridge 🌉", points: 10 },
+            { item: "A celebrity (good luck!) ⭐", points: 50 },
+            { item: "A food truck 🚚", points: 10 },
+            { item: "Someone on a skateboard 🛹", points: 10 },
             { item: "A dolphin 🐬", points: 25 },
-            { item: "A sea lion 🦭", points: 20 },
-            { item: "A rainbow 🌈", points: 30 },
-            { item: "A cable car 🚃", points: 20 },
-            { item: "The Golden Gate Bridge 🌉", points: 15 },
-            { item: "A starfish ⭐", points: 25 },
-            { item: "A crab 🦀", points: 20 },
-            { item: "A jellyfish 🪼", points: 20 },
             { item: "A lighthouse 🏠", points: 15 },
-            { item: "A seal 🦭", points: 15 },
-            { item: "A whale (even from far away!) 🐋", points: 50 },
-            { item: "A Hollywood star ⭐", points: 10 },
-            { item: "Mickey Mouse ears 🐭", points: 15 },
-            { item: "A movie theater 🎬", points: 10 },
-            { item: "A convertible car 🚗", points: 10 }
+            { item: "A whale (jackpot!) 🐋", points: 50 },
+            { item: "A Hollywood star on the ground ⭐", points: 10 },
+            { item: "A convertible with top down 🚗", points: 10 },
+            { item: "A beach bonfire 🔥", points: 20 },
+            { item: "A street performer 🎭", points: 15 },
+            { item: "An In-N-Out Burger 🍔", points: 5 },
+            { item: "A movie being filmed 🎬", points: 40 },
+            { item: "A cable car 🚃", points: 15 },
+            { item: "A pelican 🐦", points: 15 }
         ];
 
         const tripData = {
@@ -306,14 +309,21 @@
                     color: "#ff6b6b",
                     timezone: "Pacific Time (PST)",
                     hotels: ["Hotel Nikko San Francisco (Family Suites)", "Hyatt Regency Embarcadero (Bay Views)", "Hilton Union Square (Central Location)", "Marriott Marquis (Near Cable Cars)", "Holiday Inn Fisherman's Wharf (Kids Stay Free)", "Embassy Suites (Free Breakfast!)"],
-                    restaurants: ["Boudin Bakery - Famous Sourdough Bread Bowls 🥖", "Ghirardelli Ice Cream & Chocolate 🍫", "Rainforest Cafe - Jungle Adventure! 🦁", "Hard Rock Cafe - Rock & Roll 🎸", "Joe's Crab Shack - Crab Feast! 🦀", "In-N-Out Burger - California Classic 🍔", "Fog Harbor Fish House - Pier 39 🐟", "Bubba Gump Shrimp - Run Forrest Run! 🦐"],
-                    highlights: ["Golden Gate Bridge 🌉", "Pier 39 & Sea Lions 🦭", "Exploratorium (Science Museum) 🔬", "Cable Car Rides 🚃", "Ghirardelli Square 🍫", "Alcatraz (for older kids) 🏝️"],
+                    restaurants: ["Boudin Bakery - Famous Sourdough Bread Bowls 🥖", "Ghirardelli Ice Cream & Chocolate 🍫", "Fog Harbor Fish House - Waterfront Dining 🐟", "Waterbar - Upscale Seafood 🦞", "Joe's Crab Shack - Crab Feast! 🦀", "In-N-Out Burger - California Classic 🍔", "The Slanted Door - Vietnamese Fine Dining 🍜", "Hog Island Oyster - Ferry Building 🦪"],
+                    highlights: ["Golden Gate Bridge 🌉", "Pier 39 & Sea Lions 🦭", "Exploratorium (Science Museum) 🔬", "Cable Car Rides 🚃", "Ghirardelli Square 🍫", "Alcatraz Island 🏝️"],
                     kidsActivities: [
                         "🔬 Exploratorium - Hands-on science museum with over 600 exhibits!",
                         "🦭 Watch sea lions bark and play at Pier 39",
                         "🚃 Ride a real cable car up the steep hills",
                         "🎠 Ride the historic carousel at Pier 39",
                         "🍫 Free chocolate samples at Ghirardelli!"
+                    ],
+                    adultActivities: [
+                        "🍷 Wine tasting at Ferry Building or North Beach",
+                        "🌉 Walk or bike across the Golden Gate Bridge",
+                        "🍽️ Fine dining in the Mission District",
+                        "🎭 Catch a show at one of the historic theaters",
+                        "☕ Explore the coffee culture in Hayes Valley"
                     ],
                     route: "Airport Shuttle or Uber → Downtown"
                 },
@@ -331,14 +341,21 @@
                     color: "#48dbfb",
                     timezone: "Pacific Time (PST)",
                     hotels: ["Portola Hotel & Spa (Next to Aquarium)", "Monterey Plaza Hotel (Ocean Views)", "InterContinental The Clement (Luxury)", "Embassy Suites Seaside (Free Breakfast)", "Hampton Inn Monterey (Pool!)", "Best Western Plus (Budget Friendly)"],
-                    restaurants: ["Bubba Gump - Another One! 🦐", "Fish Hopper - Ocean View Dining 🐟", "Old Fisherman's Grotto - Clam Chowder! 🥣", "Loulou's Griddle - Best Breakfast 🥞", "Gianni's Pizza - Kid Favorite! 🍕", "The Sardine Factory - Famous! 🐟", "First Awakenings - Huge Pancakes 🥞", "Poke Lab - Hawaiian Bowls 🥗"],
-                    highlights: ["Monterey Bay Aquarium 🐠", "Cannery Row 🏭", "17-Mile Drive 🚗", "Whale Watching 🐋", "Old Fisherman's Wharf 🎣", "Dennis the Menace Playground 🛝"],
+                    restaurants: ["The Sardine Factory - Fine Dining 🐟", "Fish Hopper - Ocean View Dining 🐟", "Old Fisherman's Grotto - Clam Chowder! 🥣", "Loulou's Griddle - Best Breakfast 🥞", "Passionfish - Sustainable Seafood 🦐", "Schooners - Waterfront Patio 🌊", "First Awakenings - Huge Pancakes 🥞", "Poke Lab - Hawaiian Bowls 🥗"],
+                    highlights: ["Monterey Bay Aquarium 🐠", "Cannery Row 🏭", "17-Mile Drive 🚗", "Whale Watching 🐋", "Old Fisherman's Wharf 🎣", "Carmel-by-the-Sea 🏘️"],
                     kidsActivities: [
                         "🐠 Touch tide pool animals at the Aquarium!",
                         "🦦 Watch sea otters crack shells on their tummies",
                         "🪼 Walk through the jellyfish tunnel",
                         "🐧 See penguins get fed at 10:30am and 3pm",
-                        "🛝 Play at Dennis the Menace Playground - designed by the comic creator!"
+                        "🛝 Play at Dennis the Menace Playground"
+                    ],
+                    adultActivities: [
+                        "🍷 Wine tasting in Carmel Valley or Carmel-by-the-Sea",
+                        "🚗 Drive scenic 17-Mile Drive through Pebble Beach",
+                        "🦞 Fresh seafood on Cannery Row",
+                        "🐋 Whale watching tour (seasonal)",
+                        "🎨 Browse galleries in charming Carmel"
                     ],
                     route: "Highway 1 (Pacific Coast Highway) - SCENIC!"
                 },
@@ -356,14 +373,21 @@
                     color: "#feca57",
                     timezone: "Pacific Time (PST)",
                     hotels: ["Hilton Santa Barbara Beachfront (ON the beach!)", "Hotel Milo (Pool with Ocean Views)", "The Goodland (Fun Retro Vibe)", "Hyatt Centric (Downtown)", "Holiday Inn Express (Free Breakfast)", "Best Western Plus (Heated Pool)"],
-                    restaurants: ["Sambo's on the Beach - Breakfast ON the sand! 🏖️", "The Boathouse at Hendry's Beach 🚤", "McConnell's Ice Cream - AMAZING! 🍦", "Blenders in the Grass - Smoothies 🥤", "Santa Barbara Shellfish Company - Lobster! 🦞", "Holdren's Steaks & Seafood 🥩", "La Super-Rica Taqueria - Best Tacos! 🌮", "Shoreline Beach Cafe - Toes in Sand 🏖️"],
-                    highlights: ["Stearns Wharf (Free!) 🎡", "Santa Barbara Zoo 🦁", "East Beach (Calm Waves) 🏖️", "Butterfly Beach 🦋", "State Street Shopping 🛍️", "Courthouse Tower (Free Views!) 🏛️"],
+                    restaurants: ["Brophy Bros - Waterfront Seafood 🦞", "The Lark - Farm-to-Table Fine Dining 🍽️", "McConnell's Ice Cream - AMAZING! 🍦", "Loquita - Spanish Tapas & Paella 🥘", "Santa Barbara Shellfish Company - Lobster! 🦞", "Holdren's Steaks & Seafood 🥩", "La Super-Rica Taqueria - Best Tacos! 🌮", "Shoreline Beach Cafe - Toes in Sand 🏖️"],
+                    highlights: ["Stearns Wharf 🎡", "Santa Barbara Zoo 🦁", "East Beach 🏖️", "State Street 🛍️", "Wine Country 🍷", "Mission Santa Barbara 🏛️"],
                     kidsActivities: [
                         "🦁 Santa Barbara Zoo - See giraffes with ocean views!",
                         "🏖️ Build sandcastles on East Beach",
                         "🦋 Look for butterflies at the Butterfly Grove",
                         "🍦 Get McConnell's ice cream - voted best in California!",
                         "🎡 Walk the pier and look for sea creatures below"
+                    ],
+                    adultActivities: [
+                        "🍷 Wine tasting in the Funk Zone or Santa Ynez Valley",
+                        "🍽️ Farm-to-table dining on State Street",
+                        "🏛️ Tour the historic Mission Santa Barbara",
+                        "🛍️ Shop boutiques along State Street",
+                        "🌅 Sunset cocktails at a rooftop bar"
                     ],
                     route: "Highway 101 South (Fast) or Highway 1 (Scenic)"
                 },
@@ -381,8 +405,8 @@
                     color: "#ff9ff3",
                     timezone: "Pacific Time (PST)",
                     hotels: ["Disneyland Hotel (Walk to Parks!)", "Disney's Grand Californian (INSIDE the park!)", "Courtyard by Marriott Anaheim (Shuttle)", "Hilton Anaheim (Convention Center)", "Embassy Suites (Free Breakfast)", "Howard Johnson (Pool & Splash Pad)"],
-                    restaurants: ["Blue Bayou - INSIDE Pirates of the Caribbean! 🏴‍☠️", "Goofy's Kitchen - Character Breakfast! 🐕", "Rainforest Cafe Downtown Disney 🦁", "ESPN Zone - Sports! ⚽", "Buca di Beppo - Family Style Italian 🍝", "Medieval Times - Dinner & Tournament! 🏰", "The Cheesecake Factory - Giant Menu 🍰", "Splitsville - Bowling & Food 🎳"],
-                    highlights: ["Disneyland Park 🏰", "Disney California Adventure 🎢", "Universal Studios Hollywood 🎬", "Santa Monica Pier 🎡", "Hollywood Walk of Fame ⭐", "Griffith Observatory 🔭"],
+                    restaurants: ["Blue Bayou - INSIDE Pirates of the Caribbean! 🏴‍☠️", "Goofy's Kitchen - Character Breakfast! 🐕", "Napa Rose - Fine Dining at Grand Californian 🍷", "Carthay Circle - Disney California Adventure 🎬", "Catch LA - Rooftop Seafood 🦞", "Providence - Michelin Star Seafood 🌟", "The Cheesecake Factory - Giant Menu 🍰", "In-N-Out - The Original Location! 🍔"],
+                    highlights: ["Disneyland Park 🏰", "Disney California Adventure 🎢", "Universal Studios 🎬", "Santa Monica Pier 🎡", "Hollywood Walk of Fame ⭐", "Griffith Observatory 🔭"],
                     kidsActivities: [
                         "🏰 Meet Mickey & Minnie at Disneyland!",
                         "🎢 Ride Radiator Springs Racers at California Adventure",
@@ -390,24 +414,31 @@
                         "🎬 Experience movie magic at Universal Studios",
                         "⭐ Find your favorite star on Hollywood Boulevard"
                     ],
+                    adultActivities: [
+                        "🍸 Rooftop bars in Downtown LA",
+                        "🎭 Catch a show at the Hollywood Bowl",
+                        "🌃 Sunset views from Griffith Observatory",
+                        "🍽️ World-class dining in Santa Monica or Beverly Hills",
+                        "🛍️ Shopping on Rodeo Drive or The Grove"
+                    ],
                     route: "Highway 101 → I-5 South"
                 }
             ],
             packingList: [
-                { category: "👶 For Little Ones (Age 4)", items: ["Favorite stuffed animal", "Coloring books & crayons", "Tablet with downloaded movies", "Headphones (kid-sized)", "Comfort blanket", "Sippy cup/water bottle", "Extra clothes (accidents happen!)", "Pull-ups for long car rides", "Snacks they love", "Small toys for car"] },
-                { category: "🧒 For Middle Kid (Age 8)", items: ["Nintendo Switch/tablet", "Headphones", "Chapter books", "Travel games", "Sketch pad", "Water bottle", "Sunglasses", "Baseball cap", "Favorite snacks", "Small backpack"] },
-                { category: "👦 For Big Kid (Age 12)", items: ["Phone/tablet & charger", "Headphones", "Books or Kindle", "Portable charger", "Journal", "Camera (disposable or real)", "Spending money", "Comfortable walking shoes", "Sunscreen", "Backpack"] },
-                { category: "👨‍👩‍👧‍👦 Family Essentials", items: ["First aid kit", "Sunscreen (lots!)", "Hand sanitizer", "Wet wipes", "Tissues", "Plastic bags (for wet swimsuits)", "Stroller (if needed)", "Beach towels", "Cooler for snacks", "Phone chargers"] },
-                { category: "🏖️ Beach & Pool Gear", items: ["Swimsuits (2 each)", "Swim diapers (if needed)", "Beach toys", "Sand toys", "Goggles", "Floaties/puddle jumper", "Rash guards", "Beach umbrella", "Beach blanket", "Water shoes"] },
-                { category: "🎢 Theme Park Must-Haves", items: ["Comfortable walking shoes", "Lightweight backpack", "Ponchos (for water rides)", "Autograph book", "Glow sticks (for night)", "Portable phone chargers", "Snacks (save money!)", "Refillable water bottles", "Hand fan", "Change of socks"] },
-                { category: "📱 Entertainment", items: ["Tablets (charged!)", "Downloaded movies/shows", "Audiobooks", "Travel games", "Card games (Uno!)", "Sticker books", "Mad Libs", "I Spy books", "Playlist ready", "Podcasts for kids"] },
-                { category: "🍎 Snacks & Drinks", items: ["Goldfish crackers", "Fruit snacks", "Apple slices", "String cheese", "Granola bars", "Juice boxes", "Water bottles", "Trail mix", "Pretzels", "Animal crackers"] }
+                { category: "📱 Tech & Essentials", items: ["Phone chargers & car charger", "Portable battery packs", "Wallets, IDs & credit cards", "Car insurance & registration", "Downloaded offline maps", "Camera for photos", "Tablets (charged!)", "Headphones for everyone", "Multi-port USB charger", "Bluetooth speaker"] },
+                { category: "👕 Adults' Packing", items: ["Casual clothes (5-7 outfits)", "Nice outfit for dinners out", "Swimsuits (2 each)", "Comfortable walking shoes", "Sandals or flip flops", "Light jacket for SF fog", "Sunglasses", "Toiletries & cosmetics", "Books or Kindle", "Medications"] },
+                { category: "👶 Kids' Packing", items: ["Clothes (7+ outfits)", "Swimsuits (2-3 each)", "Comfortable shoes (2 pairs)", "Favorite stuffed animal", "Pajamas & light jacket", "Their own small backpack", "Kid-friendly sunscreen", "Band-aids with fun designs", "Comfort items", "Entertainment for car"] },
+                { category: "🏖️ Beach & Pool Gear", items: ["Beach towels (quick-dry)", "Extra swimsuits", "Sand toys & buckets", "Goggles & swim floaties", "Beach umbrella or pop-up tent", "Cooler for drinks & snacks", "Beach reads", "Cover-ups / rash guards", "Water shoes", "Reef-safe sunscreen"] },
+                { category: "🎢 Theme Park Ready", items: ["VERY comfortable walking shoes", "Small backpack or fanny pack", "Portable phone chargers", "Sunscreen (reapply often!)", "Empty water bottles", "Blister band-aids", "Ponchos for water rides", "Autograph book & marker", "Snacks (check park rules)", "Disney/Universal app downloaded"] },
+                { category: "🎮 Entertainment", items: ["Tablets with downloaded movies", "Nintendo Switch / games", "Kids' headphones (volume limited)", "Card games (Uno, etc.)", "Coloring books & crayons", "Audiobooks for the car", "Road trip playlist ready", "Travel games", "Books & magazines", "Mad Libs / activity books"] },
+                { category: "🍎 Snacks & Drinks", items: ["Reusable water bottles", "Juice boxes & drink pouches", "Fresh fruit (apples, grapes)", "Trail mix & nuts", "String cheese & snack packs", "Pretzels & crackers", "Coffee for early mornings", "Small cooler with ice packs", "Trash bags for the car", "Treats for good behavior 😉"] },
+                { category: "🚗 Car Comfort", items: ["Travel pillows & blankets", "Car trash can/bag", "Paper towels & tissues", "Stain remover wipes", "Window sun shades", "First aid kit", "Hand sanitizer & wipes", "Air freshener", "Umbrella", "Roadside emergency kit"] }
             ],
             games: [
                 { 
                     name: "🚗 California Road Trip Bingo", 
-                    description: "Spot California things!",
-                    instructions: "Find these California items: palm tree, surfboard, In-N-Out, convertible, Hollywood sign, beach umbrella, seagull, lifeguard tower. First to find 5 wins!"
+                    description: "Spot California sights!",
+                    instructions: "Find these California items: palm tree, surfboard, In-N-Out, convertible, Hollywood sign, vineyard, beach umbrella, Tesla. First to find 5 wins!"
                 },
                 { 
                     name: "🔤 The Alphabet Game", 
@@ -415,14 +446,9 @@
                     instructions: "Find letters A through Z IN ORDER on signs outside. First person to get to Z wins! Letters inside the car don't count."
                 },
                 { 
-                    name: "🎵 Name That Disney Song", 
-                    description: "Guess the Disney movie!",
-                    instructions: "Play 5 seconds of a Disney song. First person to name the movie gets a point! Play to 10 points."
-                },
-                { 
-                    name: "🦁 Animal Safari", 
-                    description: "Spot animals along the way!",
-                    instructions: "Look for animals! Dogs = 1 point, Cats = 2 points, Horses = 3 points, Cows = 5 points, Wild animals = 10 points!"
+                    name: "🎵 Name That Tune", 
+                    description: "Guess the song!",
+                    instructions: "Play 5 seconds of a song. First person to name the song AND artist gets a point! Take turns picking the genre. Play to 10 points."
                 },
                 { 
                     name: "🌈 Color Car Game", 
@@ -431,33 +457,38 @@
                 },
                 { 
                     name: "📖 Story Round Robin", 
-                    description: "Make up a silly story together!",
-                    instructions: "First person says one sentence to start a story. Each person adds ONE sentence. See how silly it gets!"
+                    description: "Make up a story together!",
+                    instructions: "First person says one sentence to start a story. Each person adds ONE sentence. See how creative (or silly) it gets!"
                 },
                 { 
                     name: "🎤 Car Karaoke", 
                     description: "Sing your heart out!",
-                    instructions: "Put on kid-friendly music and have a singing contest! Everyone gets a turn to pick a song."
+                    instructions: "Put on music and have a singing contest! Everyone takes turns being the DJ. Belt it out - no judgment!"
                 },
                 { 
-                    name: "👀 I Spy - Beach Edition", 
-                    description: "Spot beach things!",
-                    instructions: "When near the beach, play I Spy with beach items: waves, sand, shells, birds, boats, surfboards!"
-                },
-                { 
-                    name: "🧮 Math Race", 
-                    description: "Add up license plates!",
-                    instructions: "Find a license plate and add all the numbers together. First to yell the correct answer gets a point!"
-                },
-                { 
-                    name: "🎭 Character Guess", 
-                    description: "Act out Disney characters!",
-                    instructions: "One person acts like a Disney character (no talking!). Others guess who it is. Take turns!"
+                    name: "🧠 20 Questions", 
+                    description: "Guess what I'm thinking!",
+                    instructions: "One person thinks of something. Others ask yes/no questions to figure it out. 20 questions max. Take turns thinking!"
                 },
                 { 
                     name: "🗺️ Geography Challenge", 
                     description: "Name places A-Z!",
                     instructions: "Start with 'A' and name a place. Next person names a place starting with the last letter. Example: Anaheim → Miami → Indiana"
+                },
+                { 
+                    name: "🎬 Movie Quote Game", 
+                    description: "Guess the movie!",
+                    instructions: "Say a famous movie quote. Others guess the movie. Keep score - first to 10 wins! Family-friendly quotes only 😉"
+                },
+                { 
+                    name: "🍽️ Restaurant Game", 
+                    description: "Spot restaurant signs!",
+                    instructions: "Each person picks a restaurant chain. First to spot theirs 3 times wins! Fast food, coffee shops, everything counts."
+                },
+                { 
+                    name: "✨ Two Truths and a Lie", 
+                    description: "Can you spot the fib?",
+                    instructions: "Each person shares 3 statements - 2 true, 1 false. Others guess the lie. Great way to learn fun facts about each other!"
                 }
             ]
         };
@@ -467,17 +498,18 @@
             const [currentPhase, setCurrentPhase] = useState(1);
             const [completedPhases, setCompletedPhases] = useState([]);
             const [checkedItems, setCheckedItems] = useState({});
-            const [expenses, setExpenses] = useState({ fuel: [], hotels: [], food: [], misc: [] });
+            const [expenses, setExpenses] = useState({ fuel: [], hotels: [], food: [], activities: [], misc: [] });
             const [darkMode, setDarkMode] = useState(false);
             const [photos, setPhotos] = useState({ 1: [], 2: [], 3: [], 4: [] });
-            const [receipts, setReceipts] = useState({ fuel: [], hotels: [], food: [], misc: [] });
+            const [receipts, setReceipts] = useState({ fuel: [], hotels: [], food: [], activities: [], misc: [] });
             const [countdown, setCountdown] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
             const [isOnline, setIsOnline] = useState(navigator.onLine);
             const [budget, setBudget] = useState({
                 fuel: 200,
                 hotels: 2800,
                 food: 1000,
-                misc: 500
+                activities: 400,
+                misc: 400
             });
 
             useEffect(() => {
@@ -561,15 +593,15 @@
             };
 
             const generateShareCode = () => {
-                const message = `🌴 Following the Johnson Family California Adventure! 🎢
+                const message = `🌴 California Coast Adventure! 🌊
                 
 Day ${completedPhases.length + 1}/7 - ${Math.round(progressPercent)}% complete
 ${completedMiles} of ${totalMiles} miles traveled
 
-So much fun! 🏖️🌉🦦🏰`;
+SF → LA road trip vibes! 🏖️🌉🦦🏰`;
                 
                 if (navigator.share) {
-                    navigator.share({ title: 'Family Road Trip', text: message }).catch(() => {});
+                    navigator.share({ title: 'Road Trip', text: message }).catch(() => {});
                 } else {
                     navigator.clipboard.writeText(message);
                     alert('Progress copied! 📋');
@@ -577,8 +609,8 @@ So much fun! 🏖️🌉🦦🏰`;
             };
 
             const exportTripReport = () => {
-                const report = `🌴 CALIFORNIA FAMILY ADVENTURE 2025 🎢
-Johnson Family Trip Report
+                const report = `🌴 CALIFORNIA COAST ADVENTURE 2025 🌊
+San Francisco → Los Angeles Trip Report
 Generated: ${new Date().toLocaleDateString()}
 
 ═══════════════════════════════════════
@@ -615,8 +647,8 @@ Best Family Trip Ever! 🎉`;
                         <div className="max-w-7xl mx-auto px-4 py-8">
                             <div className="flex items-center justify-between mb-6">
                                 <div>
-                                    <h1 className="text-4xl font-bold mb-2">🌴 California Family Adventure! 🎢</h1>
-                                    <p className="text-white/90">SF → LA • 7 Days • Family of 5</p>
+                                    <h1 className="text-4xl font-bold mb-2">🌴 California Coast Adventure 🌊</h1>
+                                    <p className="text-white/90">San Francisco → Los Angeles • 7 Days • Family of 5</p>
                                     <div className="flex flex-wrap items-center gap-2 mt-2">
                                         <div className={`px-3 py-1 rounded-full text-xs font-semibold ${isOnline ? 'bg-green-500' : 'bg-gray-500'}`}>
                                             {isOnline ? '🟢 Online' : '⚫ Offline'}
@@ -667,17 +699,17 @@ Best Family Trip Ever! 🎉`;
                     </div>
 
                     {/* Demo Banner */}
-                    <div className="bg-gradient-to-r from-pink-100 to-yellow-100 border-b-4 border-pink-300">
+                    <div className="bg-gradient-to-r from-blue-50 to-orange-50 border-b-4 border-blue-300">
                         <div className="max-w-7xl mx-auto px-4 py-4">
                             <div className="flex items-center justify-between">
                                 <div className="flex items-center space-x-3">
-                                    <span className="text-3xl bounce">✨</span>
+                                    <span className="text-3xl">🌴</span>
                                     <div>
-                                        <h3 className="font-bold text-lg text-pink-900">Travel Agent Demo: Family of 5</h3>
-                                        <p className="text-sm text-pink-700">Ages 4, 8, and 12 • $4,500 Budget • 7 Magical Days</p>
+                                        <h3 className="font-bold text-lg text-blue-900">Demo: California Coast Road Trip</h3>
+                                        <p className="text-sm text-blue-700">7 Days • San Francisco → Los Angeles • $4,800 Budget</p>
                                     </div>
                                 </div>
-                                <a href="https://kringstad13.github.io/Kringstad-Road-Trip/landing.html" className="hidden md:block bg-pink-600 text-white px-4 py-2 rounded-lg font-semibold hover:bg-pink-700 transition text-sm">
+                                <a href="https://kringstad13.github.io/Kringstad-Road-Trip/landing.html" className="hidden md:block bg-blue-600 text-white px-4 py-2 rounded-lg font-semibold hover:bg-blue-700 transition text-sm">
                                     ← Back to RouteBuilder.ai
                                 </a>
                             </div>
@@ -699,7 +731,7 @@ Best Family Trip Ever! 🎉`;
                                     <button
                                         key={tab.id}
                                         onClick={() => setActiveTab(tab.id)}
-                                        className={`py-4 px-2 font-semibold tab-button whitespace-nowrap ${activeTab === tab.id ? 'active text-pink-600' : 'text-gray-600 hover:text-gray-900'}`}
+                                        className={`py-4 px-2 font-semibold tab-button whitespace-nowrap ${activeTab === tab.id ? 'active text-blue-600' : 'text-gray-600 hover:text-gray-900'}`}
                                     >
                                         {tab.icon} {tab.label}
                                     </button>
@@ -727,7 +759,7 @@ Best Family Trip Ever! 🎉`;
                     {/* Fun Stats */}
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                         {[
-                            { label: 'Miles of Fun', value: '505', icon: '🚗', color: 'pink' },
+                            { label: 'Miles of Fun', value: '505', icon: '🚗', color: 'blue' },
                             { label: 'Days of Adventure', value: '7', icon: '🌟', color: 'yellow' },
                             { label: 'Amazing Stops', value: '4', icon: '📍', color: 'blue' },
                             { label: 'Memories to Make', value: '∞', icon: '💖', color: 'purple' }
@@ -749,7 +781,7 @@ Best Family Trip Ever! 🎉`;
                                 <div key={phase.id} className="mb-8 last:mb-0">
                                     <div className="flex items-start">
                                         <div className="flex-shrink-0">
-                                            <div className={`w-16 h-16 rounded-2xl flex items-center justify-center text-3xl shadow-lg ${completedPhases.includes(phase.id) ? 'bg-green-100 border-4 border-green-400' : 'bg-gradient-to-br from-pink-100 to-yellow-100'}`}>
+                                            <div className={`w-16 h-16 rounded-2xl flex items-center justify-center text-3xl shadow-lg ${completedPhases.includes(phase.id) ? 'bg-green-100 border-4 border-green-400' : 'bg-gradient-to-br from-blue-100 to-orange-100'}`}>
                                                 {phase.icon}
                                             </div>
                                         </div>
@@ -766,7 +798,7 @@ Best Family Trip Ever! 🎉`;
                                             <div className="text-gray-600 mb-2 font-semibold">{phase.end}</div>
                                             <div className="flex flex-wrap gap-2 mt-2">
                                                 {phase.highlights.slice(0, 3).map((h, i) => (
-                                                    <span key={i} className="bg-gradient-to-r from-pink-200 to-yellow-200 px-3 py-1 rounded-full text-sm font-medium">{h}</span>
+                                                    <span key={i} className="bg-gradient-to-r from-blue-200 to-cyan-200 px-3 py-1 rounded-full text-sm font-medium">{h}</span>
                                                 ))}
                                             </div>
                                         </div>
@@ -825,21 +857,35 @@ Best Family Trip Ever! 🎉`;
                                 </label>
                             </div>
 
-                            {/* Kids Activities - Special Section */}
-                            <div className="bg-gradient-to-r from-pink-50 to-yellow-50 rounded-xl p-4 mb-4 border-2 border-dashed border-pink-300">
-                                <h4 className="font-bold text-pink-800 mb-3 flex items-center gap-2">
-                                    <span className="text-2xl">🎈</span> Fun for Kids!
-                                </h4>
-                                <div className="space-y-2">
-                                    {phase.kidsActivities.map((activity, i) => (
-                                        <div key={i} className="bg-white rounded-lg p-3 text-sm shadow-sm">{activity}</div>
-                                    ))}
+                            {/* Activities - Split for Kids & Adults */}
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                                <div className="bg-gradient-to-r from-blue-50 to-cyan-50 rounded-xl p-4 border-2 border-dashed border-blue-300">
+                                    <h4 className="font-bold text-blue-800 mb-3 flex items-center gap-2">
+                                        <span className="text-xl">🎈</span> Fun for Kids
+                                    </h4>
+                                    <div className="space-y-2">
+                                        {phase.kidsActivities.map((activity, i) => (
+                                            <div key={i} className="bg-white rounded-lg p-2 text-sm shadow-sm">{activity}</div>
+                                        ))}
+                                    </div>
                                 </div>
+                                {phase.adultActivities && (
+                                    <div className="bg-gradient-to-r from-purple-50 to-blue-50 rounded-xl p-4 border-2 border-dashed border-purple-300">
+                                        <h4 className="font-bold text-purple-800 mb-3 flex items-center gap-2">
+                                            <span className="text-xl">🍷</span> For the Adults
+                                        </h4>
+                                        <div className="space-y-2">
+                                            {phase.adultActivities.map((activity, i) => (
+                                                <div key={i} className="bg-white rounded-lg p-2 text-sm shadow-sm">{activity}</div>
+                                            ))}
+                                        </div>
+                                    </div>
+                                )}
                             </div>
 
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <div>
-                                    <h4 className="font-semibold text-sm text-gray-500 mb-2">🏨 FAMILY-FRIENDLY HOTELS</h4>
+                                    <h4 className="font-semibold text-sm text-gray-500 mb-2">🏨 RECOMMENDED HOTELS</h4>
                                     <div className="flex flex-wrap gap-2">
                                         {phase.hotels.slice(0, 4).map((hotel, i) => (
                                             <span key={i} className="bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-sm">{hotel}</span>
@@ -847,7 +893,7 @@ Best Family Trip Ever! 🎉`;
                                     </div>
                                 </div>
                                 <div>
-                                    <h4 className="font-semibold text-sm text-gray-500 mb-2">🍕 KID-APPROVED RESTAURANTS</h4>
+                                    <h4 className="font-semibold text-sm text-gray-500 mb-2">🍽️ RESTAURANTS</h4>
                                     <div className="flex flex-wrap gap-2">
                                         {phase.restaurants.slice(0, 4).map((rest, i) => (
                                             <span key={i} className="bg-orange-100 text-orange-800 px-3 py-1 rounded-full text-sm">{rest}</span>
@@ -876,18 +922,18 @@ Best Family Trip Ever! 🎉`;
                 <div className="space-y-6">
                     <div className="bg-white rounded-2xl shadow-lg p-6">
                         <div className="flex items-center justify-between mb-6">
-                            <h2 className="text-2xl font-bold">📸 Family Photo Album</h2>
+                            <h2 className="text-2xl font-bold">📸 Trip Photo Album</h2>
                             <div className="text-right">
-                                <div className="text-3xl font-bold text-pink-600">{totalPhotos}</div>
+                                <div className="text-3xl font-bold text-blue-600">{totalPhotos}</div>
                                 <div className="text-sm text-gray-500">memories captured!</div>
                             </div>
                         </div>
 
-                        <div className="bg-gradient-to-r from-pink-50 to-purple-50 border-2 border-pink-200 rounded-xl p-6 mb-6">
-                            <h3 className="font-bold text-lg text-pink-900 mb-2">📱 Share with Grandma & Grandpa!</h3>
-                            <p className="text-sm text-pink-800 mb-4">In the full product, share a link so everyone can see your vacation photos in real-time!</p>
+                        <div className="bg-gradient-to-r from-blue-50 to-cyan-50 border-2 border-blue-200 rounded-xl p-6 mb-6">
+                            <h3 className="font-bold text-lg text-blue-900 mb-2">📱 Share with Friends & Family!</h3>
+                            <p className="text-sm text-blue-800 mb-4">In the full product, share a link so everyone can see your vacation photos in real-time!</p>
                             <div className="bg-white rounded-lg p-3 text-sm text-gray-600">
-                                💡 No more group text with 100 photos - everyone sees them as you upload!
+                                💡 No more group texts with 100 photos - everyone sees them as you upload!
                             </div>
                         </div>
 
@@ -899,7 +945,7 @@ Best Family Trip Ever! 🎉`;
                                         <h3 className="text-xl font-bold">{phase.name}</h3>
                                     </div>
                                     <label className="cursor-pointer">
-                                        <div className="bg-gradient-to-r from-pink-500 to-orange-500 text-white px-4 py-2 rounded-xl font-semibold text-sm">+ Add Photo</div>
+                                        <div className="bg-gradient-to-r from-blue-500 to-cyan-500 text-white px-4 py-2 rounded-xl font-semibold text-sm">+ Add Photo</div>
                                         <input type="file" accept="image/*" onChange={(e) => addPhoto(phase.id, e)} className="hidden" />
                                     </label>
                                 </div>
@@ -910,7 +956,7 @@ Best Family Trip Ever! 🎉`;
                                         ))}
                                     </div>
                                 ) : (
-                                    <div className="text-center py-12 bg-gradient-to-br from-pink-50 to-yellow-50 rounded-xl border-2 border-dashed border-pink-300">
+                                    <div className="text-center py-12 bg-gradient-to-br from-blue-50 to-cyan-50 rounded-xl border-2 border-dashed border-blue-300">
                                         <div className="text-5xl mb-2">📷</div>
                                         <p className="text-gray-700 font-semibold">No photos yet!</p>
                                         <p className="text-sm text-gray-500">Click "+ Add Photo" to start your album</p>
@@ -934,12 +980,12 @@ Best Family Trip Ever! 🎉`;
                         <div className="flex items-center justify-between mb-6">
                             <h2 className="text-2xl font-bold">🎒 Family Packing Lists</h2>
                             <div className="text-right">
-                                <div className="text-3xl font-bold text-pink-600">{checkedCount}/{totalItems}</div>
+                                <div className="text-3xl font-bold text-blue-600">{checkedCount}/{totalItems}</div>
                                 <div className="text-sm text-gray-500">{percentComplete}% packed!</div>
                             </div>
                         </div>
-                        <div className="bg-gradient-to-r from-pink-200 to-yellow-200 rounded-full h-4 overflow-hidden mb-6">
-                            <div className="bg-gradient-to-r from-pink-500 to-orange-500 h-full transition-all duration-500" style={{ width: `${percentComplete}%` }}></div>
+                        <div className="bg-gradient-to-r from-blue-200 to-cyan-200 rounded-full h-4 overflow-hidden mb-6">
+                            <div className="bg-gradient-to-r from-blue-500 to-cyan-500 h-full transition-all duration-500" style={{ width: `${percentComplete}%` }}></div>
                         </div>
 
                         <div className="bg-gradient-to-r from-green-50 to-teal-50 border-2 border-green-200 rounded-xl p-4 mb-6">
@@ -956,8 +1002,8 @@ Best Family Trip Ever! 🎉`;
                                             const key = `${category.category}-${item}`;
                                             const isChecked = checkedItems[key];
                                             return (
-                                                <label key={item} className={`flex items-center p-3 rounded-xl cursor-pointer transition ${isChecked ? 'bg-green-100 line-through opacity-60' : 'bg-gray-50 hover:bg-pink-50'}`}>
-                                                    <input type="checkbox" checked={isChecked || false} onChange={() => togglePackingItem(category.category, item)} className="w-5 h-5 text-pink-600 rounded" />
+                                                <label key={item} className={`flex items-center p-3 rounded-xl cursor-pointer transition ${isChecked ? 'bg-green-100 line-through opacity-60' : 'bg-gray-50 hover:bg-blue-50'}`}>
+                                                    <input type="checkbox" checked={isChecked || false} onChange={() => togglePackingItem(category.category, item)} className="w-5 h-5 text-blue-600 rounded" />
                                                     <span className="ml-3">{item}</span>
                                                 </label>
                                             );
@@ -1002,15 +1048,15 @@ Best Family Trip Ever! 🎉`;
             return (
                 <div className="space-y-6">
                     <div className="bg-white rounded-2xl shadow-lg p-6">
-                        <h3 className="text-xl font-bold mb-4">💰 Family Trip Budget</h3>
+                        <h3 className="text-xl font-bold mb-4">💰 Trip Budget</h3>
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                            <div className="stat-card border-l-4 border-pink-500">
-                                <div className="text-gray-500 text-sm font-semibold">Total Budget</div>
-                                <div className="text-3xl font-bold text-pink-600">${totalBudget}</div>
-                            </div>
                             <div className="stat-card border-l-4 border-blue-500">
+                                <div className="text-gray-500 text-sm font-semibold">Total Budget</div>
+                                <div className="text-3xl font-bold text-blue-600">${totalBudget}</div>
+                            </div>
+                            <div className="stat-card border-l-4 border-orange-500">
                                 <div className="text-gray-500 text-sm font-semibold">Spent So Far</div>
-                                <div className="text-3xl font-bold text-blue-600">${totalSpent.toFixed(2)}</div>
+                                <div className="text-3xl font-bold text-orange-600">${totalSpent.toFixed(2)}</div>
                             </div>
                             <div className="stat-card border-l-4 border-green-500">
                                 <div className="text-gray-500 text-sm font-semibold">Remaining</div>
@@ -1026,11 +1072,11 @@ Best Family Trip Ever! 🎉`;
                                 <option value="fuel">⛽ Gas</option>
                                 <option value="hotels">🏨 Hotels</option>
                                 <option value="food">🍕 Food</option>
-                                <option value="misc">🎁 Souvenirs</option>
+                                <option value="misc">🎁 Souvenirs & Extras</option>
                             </select>
                             <input type="text" placeholder="What did you buy?" value={newExpense.description} onChange={(e) => setNewExpense({...newExpense, description: e.target.value})} className="border-2 rounded-xl px-4 py-3" />
                             <input type="number" placeholder="How much?" value={newExpense.amount} onChange={(e) => setNewExpense({...newExpense, amount: e.target.value})} className="border-2 rounded-xl px-4 py-3" />
-                            <button onClick={addExpense} className="bg-gradient-to-r from-pink-500 to-orange-500 text-white rounded-xl px-6 py-3 font-bold">Add!</button>
+                            <button onClick={addExpense} className="bg-gradient-to-r from-blue-500 to-cyan-500 text-white rounded-xl px-6 py-3 font-bold">Add!</button>
                         </div>
                     </div>
 
@@ -1041,14 +1087,14 @@ Best Family Trip Ever! 🎉`;
                             return (
                                 <div key={category} className="bg-white rounded-2xl shadow-lg p-6">
                                     <div className="flex items-center justify-between mb-4">
-                                        <h4 className="font-bold text-lg capitalize">{icons[category]} {category === 'misc' ? 'Souvenirs' : category}</h4>
+                                        <h4 className="font-bold text-lg capitalize">{icons[category]} {category === 'misc' ? 'Extras' : category}</h4>
                                         <div className="text-right">
                                             <div className="text-2xl font-bold text-blue-600">${spent.toFixed(2)}</div>
                                             <div className="text-sm text-gray-500">of ${budgetAmount}</div>
                                         </div>
                                     </div>
                                     <div className="bg-gray-200 rounded-full h-3 overflow-hidden mb-4">
-                                        <div className={`h-full transition-all ${percent > 100 ? 'bg-red-500' : 'bg-gradient-to-r from-pink-500 to-orange-500'}`} style={{ width: `${Math.min(percent, 100)}%` }}></div>
+                                        <div className={`h-full transition-all ${percent > 100 ? 'bg-red-500' : 'bg-gradient-to-r from-blue-500 to-cyan-500'}`} style={{ width: `${Math.min(percent, 100)}%` }}></div>
                                     </div>
                                     <div className="space-y-2 max-h-32 overflow-y-auto">
                                         {expenses[category].map((expense, idx) => (
@@ -1082,9 +1128,9 @@ Best Family Trip Ever! 🎉`;
             return (
                 <div className="space-y-6">
                     {/* Fun Header */}
-                    <div className="bg-gradient-to-r from-pink-100 via-yellow-100 to-blue-100 rounded-2xl p-6 text-center">
-                        <h2 className="text-3xl font-bold text-gray-800 mb-2">🎮 Game Time! 🎉</h2>
-                        <p className="text-gray-600">Fun games for the whole family - no internet needed!</p>
+                    <div className="bg-gradient-to-r from-blue-100 via-orange-100 to-cyan-100 rounded-2xl p-6 text-center">
+                        <h2 className="text-3xl font-bold text-gray-800 mb-2">🎮 Road Trip Games 🎉</h2>
+                        <p className="text-gray-600">Fun games for the whole car - no internet needed!</p>
                     </div>
 
                     {/* Would You Rather - Kid Friendly */}
@@ -1092,14 +1138,14 @@ Best Family Trip Ever! 🎉`;
                         <h2 className="text-2xl font-bold mb-4 flex items-center gap-2">
                             <span className="bounce">🤔</span> Would You Rather?
                         </h2>
-                        <div className="bg-gradient-to-r from-pink-100 via-purple-100 to-blue-100 p-8 rounded-2xl mb-4 border-4 border-dashed border-pink-300">
+                        <div className="bg-gradient-to-r from-blue-100 via-purple-100 to-orange-100 p-8 rounded-2xl mb-4 border-4 border-dashed border-blue-300">
                             <p className="text-2xl font-bold text-center text-gray-800 leading-relaxed">
                                 {wouldYouRatherQuestions[currentWYR]}
                             </p>
                         </div>
                         <div className="flex justify-center gap-4">
                             <button onClick={() => setCurrentWYR(currentWYR === 0 ? wouldYouRatherQuestions.length - 1 : currentWYR - 1)} className="px-6 py-3 bg-gray-200 hover:bg-gray-300 rounded-xl font-bold">← Back</button>
-                            <button onClick={() => setCurrentWYR(Math.floor(Math.random() * wouldYouRatherQuestions.length))} className="px-6 py-3 bg-gradient-to-r from-pink-500 to-orange-500 text-white rounded-xl font-bold">🎲 Random!</button>
+                            <button onClick={() => setCurrentWYR(Math.floor(Math.random() * wouldYouRatherQuestions.length))} className="px-6 py-3 bg-gradient-to-r from-blue-500 to-orange-500 text-white rounded-xl font-bold">🎲 Random!</button>
                             <button onClick={() => setCurrentWYR((currentWYR + 1) % wouldYouRatherQuestions.length)} className="px-6 py-3 bg-gray-200 hover:bg-gray-300 rounded-xl font-bold">Next →</button>
                         </div>
                         <p className="text-center text-sm text-gray-500 mt-3">Question {currentWYR + 1} of {wouldYouRatherQuestions.length}</p>
@@ -1109,10 +1155,10 @@ Best Family Trip Ever! 🎉`;
                     <div className="bg-white rounded-2xl shadow-lg p-6">
                         <div className="flex items-center justify-between mb-4">
                             <h2 className="text-2xl font-bold flex items-center gap-2">
-                                <span>🔍</span> California Scavenger Hunt!
+                                <span>🔍</span> California Scavenger Hunt
                             </h2>
                             <div className="text-right">
-                                <div className="text-3xl font-bold text-pink-600">{scavengerPoints}</div>
+                                <div className="text-3xl font-bold text-blue-600">{scavengerPoints}</div>
                                 <div className="text-sm text-gray-500">points earned!</div>
                             </div>
                         </div>
@@ -1122,7 +1168,7 @@ Best Family Trip Ever! 🎉`;
                                 <button
                                     key={idx}
                                     onClick={() => toggleScavengerItem(item.item)}
-                                    className={`p-3 rounded-xl text-left transition-all ${scavengerFound.includes(item.item) ? 'bg-green-100 border-2 border-green-400' : 'bg-gray-100 hover:bg-pink-50 border-2 border-transparent'}`}
+                                    className={`p-3 rounded-xl text-left transition-all ${scavengerFound.includes(item.item) ? 'bg-green-100 border-2 border-green-400' : 'bg-gray-100 hover:bg-blue-50 border-2 border-transparent'}`}
                                 >
                                     <div className="font-semibold text-sm">{item.item}</div>
                                     <div className="text-xs text-gray-500">{item.points} pts</div>
@@ -1133,13 +1179,13 @@ Best Family Trip Ever! 🎉`;
 
                     {/* California Fun Facts */}
                     <div className="bg-white rounded-2xl shadow-lg p-6">
-                        <h2 className="text-2xl font-bold mb-4">🧠 California Fun Facts!</h2>
+                        <h2 className="text-2xl font-bold mb-4">🧠 California Fun Facts</h2>
                         <div className="flex flex-wrap gap-2 mb-4">
                             {Object.keys(californiaFacts).map(city => (
                                 <button
                                     key={city}
                                     onClick={() => setSelectedCity(city)}
-                                    className={`px-4 py-2 rounded-xl font-semibold transition ${selectedCity === city ? 'bg-gradient-to-r from-pink-500 to-orange-500 text-white' : 'bg-gray-200 hover:bg-gray-300'}`}
+                                    className={`px-4 py-2 rounded-xl font-semibold transition ${selectedCity === city ? 'bg-gradient-to-r from-blue-500 to-cyan-500 text-white' : 'bg-gray-200 hover:bg-gray-300'}`}
                                 >
                                     {city}
                                 </button>
@@ -1156,11 +1202,11 @@ Best Family Trip Ever! 🎉`;
 
                     {/* Other Games */}
                     <div className="bg-white rounded-2xl shadow-lg p-6">
-                        <h2 className="text-2xl font-bold mb-6">🎯 More Road Trip Games!</h2>
+                        <h2 className="text-2xl font-bold mb-6">🎯 More Road Trip Games</h2>
                         <div className="space-y-3">
                             {tripData.games.map((game, idx) => (
-                                <div key={idx} className="border-2 border-pink-200 rounded-xl overflow-hidden">
-                                    <button onClick={() => setExpandedGame(expandedGame === idx ? null : idx)} className="w-full p-4 text-left hover:bg-pink-50 transition flex justify-between items-center">
+                                <div key={idx} className="border-2 border-blue-200 rounded-xl overflow-hidden">
+                                    <button onClick={() => setExpandedGame(expandedGame === idx ? null : idx)} className="w-full p-4 text-left hover:bg-blue-50 transition flex justify-between items-center">
                                         <div>
                                             <h3 className="font-bold text-lg">{game.name}</h3>
                                             <p className="text-gray-600 text-sm">{game.description}</p>
@@ -1168,7 +1214,7 @@ Best Family Trip Ever! 🎉`;
                                         <span className="text-2xl">{expandedGame === idx ? '−' : '+'}</span>
                                     </button>
                                     {expandedGame === idx && (
-                                        <div className="p-4 bg-gradient-to-r from-pink-50 to-yellow-50 border-t-2 border-pink-200">
+                                        <div className="p-4 bg-gradient-to-r from-blue-50 to-cyan-50 border-t-2 border-blue-200">
                                             <h4 className="font-semibold mb-2">How to Play:</h4>
                                             <p className="text-gray-700">{game.instructions}</p>
                                         </div>
