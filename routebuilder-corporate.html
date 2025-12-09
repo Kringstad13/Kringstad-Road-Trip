@@ -483,6 +483,270 @@
             background: var(--white);
         }
 
+        /* Expense Management Section */
+        .expense-section {
+            padding: 6rem 2rem;
+            background: linear-gradient(135deg, var(--ink) 0%, var(--ink-light) 100%);
+            color: var(--cream);
+        }
+
+        .expense-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .expense-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .expense-header .section-eyebrow {
+            color: var(--gold);
+            background: rgba(201, 169, 98, 0.15);
+        }
+
+        .expense-header .section-title {
+            color: var(--cream);
+        }
+
+        .expense-header .section-subtitle {
+            color: rgba(250, 249, 247, 0.7);
+        }
+
+        .expense-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        @media (max-width: 900px) {
+            .expense-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .expense-features {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .expense-feature-card {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: var(--radius-md);
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .expense-feature-card:hover {
+            background: rgba(255, 255, 255, 0.12);
+            transform: translateX(8px);
+        }
+
+        .expense-feature-icon {
+            font-size: 2rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .expense-feature-title {
+            font-family: 'Fraunces', serif;
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--cream);
+            margin-bottom: 0.5rem;
+        }
+
+        .expense-feature-description {
+            font-size: 0.95rem;
+            color: rgba(250, 249, 247, 0.7);
+            line-height: 1.6;
+        }
+
+        .expense-mockup {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-lg);
+            overflow: hidden;
+        }
+
+        .expense-mockup-header {
+            background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%);
+            padding: 1rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .expense-mockup-title {
+            font-family: 'Fraunces', serif;
+            color: var(--ink);
+            font-weight: 600;
+        }
+
+        .expense-mockup-badge {
+            background: var(--ink);
+            color: var(--gold);
+            padding: 0.25rem 0.75rem;
+            border-radius: 999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .expense-mockup-body {
+            padding: 1.5rem;
+            background: var(--cream);
+        }
+
+        .expense-mockup-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .expense-mockup-stat {
+            background: var(--white);
+            border-radius: var(--radius-sm);
+            padding: 1rem;
+            text-align: center;
+            border: 1px solid rgba(26, 26, 46, 0.08);
+        }
+
+        .expense-mockup-stat-value {
+            font-family: 'Fraunces', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--ink);
+        }
+
+        .expense-mockup-stat-value.green { color: var(--emerald); }
+        .expense-mockup-stat-value.gold { color: var(--gold-dark); }
+
+        .expense-mockup-stat-label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--ink-muted);
+            margin-top: 0.25rem;
+        }
+
+        .expense-mockup-receipt {
+            background: var(--white);
+            border-radius: var(--radius-sm);
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border: 1px solid rgba(26, 26, 46, 0.08);
+        }
+
+        .expense-mockup-receipt-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.75rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px dashed rgba(26, 26, 46, 0.1);
+        }
+
+        .expense-mockup-receipt-title {
+            font-weight: 600;
+            color: var(--ink);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .expense-mockup-receipt-amount {
+            font-family: 'Fraunces', serif;
+            font-weight: 700;
+            color: var(--ink);
+        }
+
+        .expense-mockup-receipt-details {
+            display: flex;
+            gap: 1rem;
+            font-size: 0.85rem;
+            color: var(--ink-muted);
+        }
+
+        .expense-mockup-receipt-photo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.8rem;
+            color: var(--emerald);
+            margin-top: 0.5rem;
+        }
+
+        .expense-mockup-categories {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0.5rem;
+        }
+
+        .expense-mockup-category {
+            text-align: center;
+            padding: 0.75rem 0.5rem;
+            background: var(--white);
+            border-radius: var(--radius-sm);
+            border: 1px solid rgba(26, 26, 46, 0.08);
+        }
+
+        .expense-mockup-category-icon {
+            font-size: 1.25rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .expense-mockup-category-name {
+            font-size: 0.7rem;
+            color: var(--ink-muted);
+        }
+
+        .expense-mockup-category-amount {
+            font-family: 'Fraunces', serif;
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: var(--ink);
+        }
+
+        .expense-bottom-features {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            margin-top: 4rem;
+            padding-top: 3rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        @media (max-width: 900px) {
+            .expense-bottom-features {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .expense-bottom-feature {
+            text-align: center;
+        }
+
+        .expense-bottom-feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .expense-bottom-feature-title {
+            font-family: 'Fraunces', serif;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--cream);
+            margin-bottom: 0.5rem;
+        }
+
+        .expense-bottom-feature-desc {
+            font-size: 0.85rem;
+            color: rgba(250, 249, 247, 0.6);
+        }
+
         .use-cases-content {
             max-width: 1200px;
             margin: 0 auto;
@@ -1194,7 +1458,9 @@
                 <span class="nav-logo-badge">For Business</span>
             </a>
             <div class="nav-links">
+                <a href="https://kringstad13.github.io/Kringstad-Road-Trip/landing.html" class="nav-link">← Back to Main Site</a>
                 <a href="#use-cases" class="nav-link">Use Cases</a>
+                <a href="#expense-management" class="nav-link">Expenses</a>
                 <a href="#how-it-works" class="nav-link">How It Works</a>
                 <a href="#pricing" class="nav-link">Pricing</a>
                 <a href="#signup" class="nav-cta">Get Early Access</a>
@@ -1342,6 +1608,144 @@
                         <span class="use-case-feature">Activity planning</span>
                         <span class="use-case-feature">Road trip games</span>
                     </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Expense Management Section -->
+    <section class="expense-section" id="expense-management">
+        <div class="expense-content">
+            <div class="expense-header">
+                <span class="section-eyebrow">Built for Business</span>
+                <h2 class="section-title">Expense Tracking That Actually Works</h2>
+                <p class="section-subtitle">Snap receipt photos, track spending by category, and export professional expense reports—all from one dashboard.</p>
+            </div>
+            
+            <div class="expense-grid">
+                <div class="expense-features">
+                    <div class="expense-feature-card">
+                        <div class="expense-feature-icon">📸</div>
+                        <h3 class="expense-feature-title">Receipt Photo Upload</h3>
+                        <p class="expense-feature-description">Snap a photo of any receipt and attach it directly to your expense. No more lost receipts or crumpled papers in your wallet. Everything stays organized and audit-ready.</p>
+                    </div>
+                    
+                    <div class="expense-feature-card">
+                        <div class="expense-feature-icon">📊</div>
+                        <h3 class="expense-feature-title">Real-Time Budget Tracking</h3>
+                        <p class="expense-feature-description">See exactly where you stand against your travel budget. Visual progress bars show spending by category: flights, hotels, meals, transportation, and miscellaneous.</p>
+                    </div>
+                    
+                    <div class="expense-feature-card">
+                        <div class="expense-feature-icon">📄</div>
+                        <h3 class="expense-feature-title">One-Click Expense Reports</h3>
+                        <p class="expense-feature-description">Export a complete, formatted expense report with all receipts attached. Compatible with most corporate expense systems. Submit to finance in seconds, not hours.</p>
+                    </div>
+                    
+                    <div class="expense-feature-card">
+                        <div class="expense-feature-icon">👥</div>
+                        <h3 class="expense-feature-title">Share with Finance Team</h3>
+                        <p class="expense-feature-description">Give your admin or finance team view-only access. They can monitor expenses in real-time without interrupting your meetings. Everyone stays informed.</p>
+                    </div>
+                </div>
+                
+                <div class="expense-mockup">
+                    <div class="expense-mockup-header">
+                        <span class="expense-mockup-title">💰 Expense Dashboard</span>
+                        <span class="expense-mockup-badge">Denver Trip</span>
+                    </div>
+                    <div class="expense-mockup-body">
+                        <div class="expense-mockup-stats">
+                            <div class="expense-mockup-stat">
+                                <div class="expense-mockup-stat-value">$2,400</div>
+                                <div class="expense-mockup-stat-label">Budget</div>
+                            </div>
+                            <div class="expense-mockup-stat">
+                                <div class="expense-mockup-stat-value gold">$1,847</div>
+                                <div class="expense-mockup-stat-label">Spent</div>
+                            </div>
+                            <div class="expense-mockup-stat">
+                                <div class="expense-mockup-stat-value green">$553</div>
+                                <div class="expense-mockup-stat-label">Remaining</div>
+                            </div>
+                        </div>
+                        
+                        <div class="expense-mockup-receipt">
+                            <div class="expense-mockup-receipt-header">
+                                <span class="expense-mockup-receipt-title">🍽️ Guard and Grace</span>
+                                <span class="expense-mockup-receipt-amount">$247.50</span>
+                            </div>
+                            <div class="expense-mockup-receipt-details">
+                                <span>📍 Denver, CO</span>
+                                <span>📅 Mar 10, 2025</span>
+                                <span>🏷️ Client Dinner</span>
+                            </div>
+                            <div class="expense-mockup-receipt-photo">
+                                ✓ Receipt photo attached
+                            </div>
+                        </div>
+                        
+                        <div class="expense-mockup-receipt">
+                            <div class="expense-mockup-receipt-header">
+                                <span class="expense-mockup-receipt-title">🏨 Ritz-Carlton Denver</span>
+                                <span class="expense-mockup-receipt-amount">$897.00</span>
+                            </div>
+                            <div class="expense-mockup-receipt-details">
+                                <span>📍 Denver, CO</span>
+                                <span>📅 Mar 10-13</span>
+                                <span>🏷️ Hotel</span>
+                            </div>
+                            <div class="expense-mockup-receipt-photo">
+                                ✓ Receipt photo attached
+                            </div>
+                        </div>
+                        
+                        <div class="expense-mockup-categories">
+                            <div class="expense-mockup-category">
+                                <div class="expense-mockup-category-icon">✈️</div>
+                                <div class="expense-mockup-category-name">Flights</div>
+                                <div class="expense-mockup-category-amount">$423</div>
+                            </div>
+                            <div class="expense-mockup-category">
+                                <div class="expense-mockup-category-icon">🏨</div>
+                                <div class="expense-mockup-category-name">Hotels</div>
+                                <div class="expense-mockup-category-amount">$897</div>
+                            </div>
+                            <div class="expense-mockup-category">
+                                <div class="expense-mockup-category-icon">🍽️</div>
+                                <div class="expense-mockup-category-name">Meals</div>
+                                <div class="expense-mockup-category-amount">$412</div>
+                            </div>
+                            <div class="expense-mockup-category">
+                                <div class="expense-mockup-category-icon">🚕</div>
+                                <div class="expense-mockup-category-name">Transport</div>
+                                <div class="expense-mockup-category-amount">$115</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="expense-bottom-features">
+                <div class="expense-bottom-feature">
+                    <div class="expense-bottom-feature-icon">🔒</div>
+                    <h4 class="expense-bottom-feature-title">Secure & Private</h4>
+                    <p class="expense-bottom-feature-desc">Your financial data is encrypted and never shared with third parties</p>
+                </div>
+                <div class="expense-bottom-feature">
+                    <div class="expense-bottom-feature-icon">📱</div>
+                    <h4 class="expense-bottom-feature-title">Works Offline</h4>
+                    <p class="expense-bottom-feature-desc">Add receipts without WiFi. Syncs automatically when connected</p>
+                </div>
+                <div class="expense-bottom-feature">
+                    <div class="expense-bottom-feature-icon">🧾</div>
+                    <h4 class="expense-bottom-feature-title">IRS Compliant</h4>
+                    <p class="expense-bottom-feature-desc">Date, amount, vendor, and purpose captured for tax records</p>
+                </div>
+                <div class="expense-bottom-feature">
+                    <div class="expense-bottom-feature-icon">⚡</div>
+                    <h4 class="expense-bottom-feature-title">Instant Export</h4>
+                    <p class="expense-bottom-feature-desc">Download CSV or PDF reports compatible with most systems</p>
                 </div>
             </div>
         </div>
