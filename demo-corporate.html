@@ -1,0 +1,901 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ORD → DEN Business Trip | Q1 2025</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        * {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #1e3a5f 0%, #2d5a87 100%);
+        }
+        
+        .phase-card {
+            transition: all 0.3s ease;
+            border-left: 4px solid transparent;
+        }
+        
+        .phase-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .phase-complete {
+            border-left-color: #10b981;
+            opacity: 0.8;
+        }
+        
+        .tab-button {
+            transition: all 0.2s;
+            position: relative;
+        }
+        
+        .tab-button.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: #c9a962;
+        }
+        
+        .checklist-item.checked {
+            opacity: 0.5;
+            text-decoration: line-through;
+        }
+        
+        .stat-card {
+            background: white;
+            border-radius: 8px;
+            padding: 1.25rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+        
+        .gold-accent {
+            color: #c9a962;
+        }
+        
+        .gold-bg {
+            background-color: #c9a962;
+        }
+        
+        /* Dark Mode */
+        .dark { background-color: #0f172a; }
+        .dark .bg-gray-50 { background-color: #0f172a; }
+        .dark .bg-white { background-color: #1e293b; color: #e2e8f0; }
+        .dark .stat-card { background-color: #1e293b; color: #e2e8f0; }
+        .dark .text-gray-600 { color: #94a3b8; }
+        .dark .text-gray-700 { color: #cbd5e1; }
+        .dark .text-gray-800 { color: #e2e8f0; }
+        .dark .text-gray-500 { color: #64748b; }
+        .dark .border-gray-200 { border-color: #334155; }
+        .dark .bg-gray-100 { background-color: #334155; }
+        .dark input, .dark select, .dark textarea { background-color: #334155; color: #e2e8f0; border-color: #475569; }
+        .dark .phase-card { background-color: #1e293b; }
+    </style>
+    <script>
+        (function() {
+            const originalWarn = console.warn;
+            console.warn = function(...args) {
+                if (args[0]?.includes?.('cdn.tailwindcss.com')) return;
+                originalWarn.apply(console, args);
+            };
+        })();
+    </script>
+</head>
+<body class="bg-gray-50">
+    <div id="root"></div>
+
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <script type="text/babel">
+        const { useState, useEffect } = React;
+
+        const tripData = {
+            traveler: {
+                name: "Michael Chen",
+                title: "Regional Sales Director",
+                company: "Apex Technologies",
+                email: "m.chen@apextech.com"
+            },
+            trip: {
+                purpose: "Q1 Client Meetings & Partnership Review",
+                clients: ["TechCorp Industries", "Mountain West Solutions", "Denver Digital"],
+                objectives: [
+                    "Renew TechCorp annual contract ($450K)",
+                    "Present Q1 roadmap to Mountain West",
+                    "Close Denver Digital pilot program"
+                ]
+            },
+            phases: [
+                {
+                    id: 1,
+                    name: "Day 1: Arrival & TechCorp",
+                    date: "Monday, March 10",
+                    type: "travel",
+                    icon: "✈️",
+                    color: "#1e3a5f",
+                    flight: {
+                        departure: "ORD 7:15 AM",
+                        arrival: "DEN 8:45 AM (Local)",
+                        airline: "United UA 1247",
+                        seat: "4A (First Class)",
+                        confirmation: "ABC123"
+                    },
+                    hotels: ["The Ritz-Carlton Denver (Downtown)", "Four Seasons Denver (LoDo)", "The Oxford Hotel (Historic Boutique)", "JW Marriott Cherry Creek", "Halcyon Hotel (Cherry Creek)", "The Maven Hotel (Dairy Block)"],
+                    restaurants: ["Guard and Grace - Premier Steakhouse", "Fruition Restaurant - Farm-to-Table", "Stoic & Genuine - Seafood", "Rioja - Mediterranean", "Mercantile Dining & Provision", "Urban Farmer - Sustainable"],
+                    meetings: [
+                        { time: "11:00 AM", client: "TechCorp Industries", location: "1700 Lincoln St, Suite 2400", contact: "Sarah Mitchell, VP Operations", purpose: "Contract renewal discussion" },
+                        { time: "4:00 PM", client: "Hotel Check-in", location: "The Ritz-Carlton Denver", contact: "Confirmation: RC-789456", purpose: "" }
+                    ],
+                    dinner: { time: "7:00 PM", venue: "Guard and Grace", guests: "Sarah Mitchell, Tom Rodriguez (TechCorp)", notes: "Client dinner - expense approved" }
+                },
+                {
+                    id: 2,
+                    name: "Day 2: Mountain West & Denver Digital",
+                    date: "Tuesday, March 11",
+                    type: "meetings",
+                    icon: "🤝",
+                    color: "#2d5a87",
+                    hotels: [],
+                    restaurants: ["Tavernetta - Italian", "Beckon - Tasting Menu", "Acorn - New American", "The Wolf's Tailor", "Barolo Grill - Northern Italian"],
+                    meetings: [
+                        { time: "9:00 AM", client: "Mountain West Solutions", location: "1999 Broadway, Floor 35", contact: "James Porter, CEO", purpose: "Q1 Roadmap Presentation" },
+                        { time: "2:00 PM", client: "Denver Digital", location: "2420 17th St (RiNo)", contact: "Amanda Lee, CTO", purpose: "Pilot program proposal" }
+                    ],
+                    dinner: { time: "7:30 PM", venue: "Tavernetta", guests: "James Porter, Lisa Chen (MW Solutions)", notes: "Partnership celebration dinner" }
+                },
+                {
+                    id: 3,
+                    name: "Day 3: Follow-ups & Prep",
+                    date: "Wednesday, March 12",
+                    type: "work",
+                    icon: "💼",
+                    color: "#3d7ab5",
+                    hotels: [],
+                    restaurants: ["Snooze AM Eatery - Breakfast", "Work & Class - Lunch", "El Five - Rooftop Dinner"],
+                    meetings: [
+                        { time: "9:00 AM", client: "Internal Call", location: "Hotel Business Center", contact: "Chicago HQ Team", purpose: "Deal pipeline review" },
+                        { time: "11:00 AM", client: "TechCorp Follow-up", location: "Phone Call", contact: "Sarah Mitchell", purpose: "Contract terms discussion" },
+                        { time: "3:00 PM", client: "Denver Digital", location: "2420 17th St", contact: "Amanda Lee", purpose: "Technical requirements review" }
+                    ],
+                    dinner: { time: "7:00 PM", venue: "El Five", guests: "Solo - Expense report prep", notes: "Working dinner" }
+                },
+                {
+                    id: 4,
+                    name: "Day 4: Departure",
+                    date: "Thursday, March 13",
+                    type: "travel",
+                    icon: "🛫",
+                    color: "#10b981",
+                    flight: {
+                        departure: "DEN 2:45 PM",
+                        arrival: "ORD 6:15 PM (Local)",
+                        airline: "United UA 1892",
+                        seat: "3D (First Class)",
+                        confirmation: "XYZ789"
+                    },
+                    hotels: [],
+                    restaurants: ["The Lobby at The Ritz - Breakfast"],
+                    meetings: [
+                        { time: "8:00 AM", client: "Hotel Checkout", location: "The Ritz-Carlton", contact: "", purpose: "Express checkout" },
+                        { time: "9:30 AM", client: "Denver Digital", location: "Coffee meeting - Thump Coffee", contact: "Amanda Lee", purpose: "Final questions before pilot" }
+                    ],
+                    dinner: null
+                }
+            ],
+            packingList: [
+                { category: "Business Attire", items: ["Navy suit (2-piece)", "Charcoal suit (2-piece)", "Dress shirts (4)", "Ties (3)", "Dress shoes (black & brown)", "Belt (black & brown)", "Cufflinks", "Pocket squares"] },
+                { category: "Business Casual", items: ["Sport coat (navy)", "Chinos (khaki & gray)", "Polo shirts (2)", "Casual button-down", "Loafers", "Casual belt"] },
+                { category: "Technology", items: ["Laptop & charger", "Phone & charger", "Portable battery pack", "USB-C hub", "Presentation clicker", "Noise-canceling headphones", "International adapter (backup)", "Business cards (50+)"] },
+                { category: "Documents", items: ["Passport/ID", "Company credit card", "Personal credit card", "Travel itinerary (printed)", "Client contracts (digital)", "Presentation materials", "NDA copies", "Expense report forms"] },
+                { category: "Personal Care", items: ["Toiletry kit", "Prescription medications", "Advil/Tylenol", "Eye drops", "Breath mints", "Shoe polish kit", "Lint roller", "Umbrella (compact)"] },
+                { category: "Workout (Optional)", items: ["Running shoes", "Athletic wear", "Gym membership card", "Wireless earbuds"] }
+            ],
+            games: [] // Corporate trips don't need games
+        };
+
+        function App() {
+            const [activeTab, setActiveTab] = useState('overview');
+            const [completedPhases, setCompletedPhases] = useState([]);
+            const [checkedItems, setCheckedItems] = useState({});
+            const [expenses, setExpenses] = useState({ flights: [], hotels: [], meals: [], transport: [], misc: [] });
+            const [darkMode, setDarkMode] = useState(false);
+            const [photos, setPhotos] = useState({ 1: [], 2: [], 3: [], 4: [] });
+            const [receipts, setReceipts] = useState({ flights: [], hotels: [], meals: [], transport: [], misc: [] });
+            const [isOnline, setIsOnline] = useState(navigator.onLine);
+            const [budget, setBudget] = useState({
+                flights: 850,
+                hotels: 900,
+                meals: 400,
+                transport: 150,
+                misc: 100
+            });
+
+            useEffect(() => {
+                const handleOnline = () => setIsOnline(true);
+                const handleOffline = () => setIsOnline(false);
+                window.addEventListener('online', handleOnline);
+                window.addEventListener('offline', handleOffline);
+                return () => {
+                    window.removeEventListener('online', handleOnline);
+                    window.removeEventListener('offline', handleOffline);
+                };
+            }, []);
+
+            useEffect(() => {
+                if (darkMode) {
+                    document.documentElement.classList.add('dark');
+                } else {
+                    document.documentElement.classList.remove('dark');
+                }
+            }, [darkMode]);
+
+            const totalBudget = Object.values(budget).reduce((sum, val) => sum + val, 0);
+            const totalSpent = Object.entries(expenses).reduce((sum, [cat, items]) => 
+                sum + items.reduce((s, i) => s + parseFloat(i.amount || 0), 0), 0);
+
+            const togglePackingItem = (category, item) => {
+                const key = `${category}-${item}`;
+                setCheckedItems(prev => ({ ...prev, [key]: !prev[key] }));
+            };
+
+            const togglePhaseComplete = (phaseId) => {
+                setCompletedPhases(prev => 
+                    prev.includes(phaseId) ? prev.filter(id => id !== phaseId) : [...prev, phaseId]
+                );
+            };
+
+            const addPhoto = (phaseId, event) => {
+                const file = event.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = (e) => {
+                        setPhotos(prev => ({
+                            ...prev,
+                            [phaseId]: [...prev[phaseId], { data: e.target.result, name: file.name, date: new Date().toLocaleDateString() }]
+                        }));
+                    };
+                    reader.readAsDataURL(file);
+                }
+            };
+
+            const exportExpenseReport = () => {
+                const totalReceipts = Object.values(receipts).reduce((sum, arr) => sum + arr.length, 0);
+                const report = `EXPENSE REPORT
+═══════════════════════════════════════
+Traveler: ${tripData.traveler.name}
+Title: ${tripData.traveler.title}
+Company: ${tripData.traveler.company}
+Trip: Chicago (ORD) → Denver (DEN)
+Dates: March 10-13, 2025
+Purpose: ${tripData.trip.purpose}
+
+BUDGET SUMMARY
+───────────────────────────────────────
+Approved Budget: $${totalBudget.toFixed(2)}
+Total Spent: $${totalSpent.toFixed(2)}
+Variance: $${(totalBudget - totalSpent).toFixed(2)} ${totalSpent <= totalBudget ? '(Under Budget)' : '(Over Budget)'}
+
+EXPENSE BREAKDOWN
+───────────────────────────────────────
+Flights: $${expenses.flights.reduce((s, i) => s + parseFloat(i.amount || 0), 0).toFixed(2)}
+${expenses.flights.map(e => `  • ${e.description}: $${e.amount}`).join('\n')}
+
+Hotels: $${expenses.hotels.reduce((s, i) => s + parseFloat(i.amount || 0), 0).toFixed(2)}
+${expenses.hotels.map(e => `  • ${e.description}: $${e.amount}`).join('\n')}
+
+Meals & Entertainment: $${expenses.meals.reduce((s, i) => s + parseFloat(i.amount || 0), 0).toFixed(2)}
+${expenses.meals.map(e => `  • ${e.description}: $${e.amount}`).join('\n')}
+
+Ground Transport: $${expenses.transport.reduce((s, i) => s + parseFloat(i.amount || 0), 0).toFixed(2)}
+${expenses.transport.map(e => `  • ${e.description}: $${e.amount}`).join('\n')}
+
+Miscellaneous: $${expenses.misc.reduce((s, i) => s + parseFloat(i.amount || 0), 0).toFixed(2)}
+${expenses.misc.map(e => `  • ${e.description}: $${e.amount}`).join('\n')}
+
+RECEIPTS ATTACHED: ${totalReceipts}
+───────────────────────────────────────
+${Object.entries(receipts).map(([cat, items]) => items.map(r => `• ${cat}: ${r.name} (${r.date})`).join('\n')).join('\n')}
+
+TRIP OBJECTIVES STATUS
+───────────────────────────────────────
+${tripData.trip.objectives.map((obj, i) => `${completedPhases.length > i ? '✓' : '○'} ${obj}`).join('\n')}
+
+Generated: ${new Date().toLocaleString()}
+Submitted by: ${tripData.traveler.name}
+`;
+                const blob = new Blob([report], { type: 'text/plain' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `expense-report-denver-${new Date().toISOString().split('T')[0]}.txt`;
+                a.click();
+            };
+
+            return (
+                <div className="min-h-screen bg-gray-50">
+                    {/* Header */}
+                    <div className="gradient-bg text-white">
+                        <div className="max-w-6xl mx-auto px-4 py-6">
+                            <div className="flex items-center justify-between mb-4">
+                                <div>
+                                    <div className="flex items-center gap-3 mb-1">
+                                        <h1 className="text-2xl font-semibold">Chicago → Denver</h1>
+                                        <span className="px-2 py-1 bg-white/20 rounded text-xs font-medium">Q1 2025</span>
+                                    </div>
+                                    <p className="text-blue-200 text-sm">{tripData.trip.purpose}</p>
+                                    <div className="flex items-center gap-3 mt-2">
+                                        <span className={`px-2 py-1 rounded text-xs font-medium ${isOnline ? 'bg-green-500/80' : 'bg-gray-500/80'}`}>
+                                            {isOnline ? '● Online' : '○ Offline'}
+                                        </span>
+                                        <button onClick={exportExpenseReport} className="px-3 py-1 bg-white/20 hover:bg-white/30 rounded text-xs font-medium">
+                                            📊 Export Report
+                                        </button>
+                                    </div>
+                                </div>
+                                <div className="text-right">
+                                    <button onClick={() => setDarkMode(!darkMode)} className="mb-2 px-3 py-1 bg-white/20 hover:bg-white/30 rounded text-xs">
+                                        {darkMode ? '☀️' : '🌙'}
+                                    </button>
+                                    <div className="text-sm text-blue-200">Traveler</div>
+                                    <div className="font-semibold">{tripData.traveler.name}</div>
+                                    <div className="text-xs text-blue-200">{tripData.traveler.title}</div>
+                                </div>
+                            </div>
+
+                            {/* Trip Summary Bar */}
+                            <div className="grid grid-cols-4 gap-4 bg-white/10 rounded-lg p-4 backdrop-blur">
+                                <div className="text-center">
+                                    <div className="text-2xl font-bold">4</div>
+                                    <div className="text-xs text-blue-200">Days</div>
+                                </div>
+                                <div className="text-center">
+                                    <div className="text-2xl font-bold">3</div>
+                                    <div className="text-xs text-blue-200">Clients</div>
+                                </div>
+                                <div className="text-center">
+                                    <div className="text-2xl font-bold">6</div>
+                                    <div className="text-xs text-blue-200">Meetings</div>
+                                </div>
+                                <div className="text-center">
+                                    <div className="text-2xl font-bold gold-accent">${totalBudget}</div>
+                                    <div className="text-xs text-blue-200">Budget</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Demo Banner */}
+                    <div className="bg-gradient-to-r from-amber-50 to-yellow-50 border-b border-amber-200">
+                        <div className="max-w-6xl mx-auto px-4 py-3">
+                            <div className="flex items-center justify-between">
+                                <div className="flex items-center space-x-3">
+                                    <span className="text-xl">💼</span>
+                                    <div>
+                                        <h3 className="font-semibold text-amber-900 text-sm">Corporate Travel Demo</h3>
+                                        <p className="text-xs text-amber-700">4-Day Business Trip • Flight-Based • $2,400 Budget</p>
+                                    </div>
+                                </div>
+                                <a href="https://kringstad13.github.io/Kringstad-Road-Trip/landing.html" className="hidden md:block bg-amber-600 text-white px-3 py-1.5 rounded text-xs font-semibold hover:bg-amber-700 transition">
+                                    ← Back to RouteBuilder.ai
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Tabs */}
+                    <div className="bg-white border-b sticky top-0 z-10">
+                        <div className="max-w-6xl mx-auto px-4">
+                            <div className="flex space-x-8 overflow-x-auto">
+                                {[
+                                    { id: 'overview', label: 'Overview' },
+                                    { id: 'itinerary', label: 'Itinerary' },
+                                    { id: 'expenses', label: 'Expenses' },
+                                    { id: 'packing', label: 'Packing' },
+                                    { id: 'documents', label: 'Documents' }
+                                ].map(tab => (
+                                    <button
+                                        key={tab.id}
+                                        onClick={() => setActiveTab(tab.id)}
+                                        className={`py-4 px-1 text-sm font-medium tab-button whitespace-nowrap ${activeTab === tab.id ? 'active text-gray-900' : 'text-gray-500 hover:text-gray-700'}`}
+                                    >
+                                        {tab.label}
+                                    </button>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Content */}
+                    <div className="max-w-6xl mx-auto px-4 py-6">
+                        {activeTab === 'overview' && <OverviewTab tripData={tripData} completedPhases={completedPhases} togglePhaseComplete={togglePhaseComplete} totalBudget={totalBudget} totalSpent={totalSpent} />}
+                        {activeTab === 'itinerary' && <ItineraryTab tripData={tripData} completedPhases={completedPhases} togglePhaseComplete={togglePhaseComplete} />}
+                        {activeTab === 'expenses' && <ExpensesTab expenses={expenses} setExpenses={setExpenses} totalSpent={totalSpent} totalBudget={totalBudget} budget={budget} receipts={receipts} setReceipts={setReceipts} exportExpenseReport={exportExpenseReport} />}
+                        {activeTab === 'packing' && <PackingTab tripData={tripData} checkedItems={checkedItems} togglePackingItem={togglePackingItem} />}
+                        {activeTab === 'documents' && <DocumentsTab tripData={tripData} photos={photos} addPhoto={addPhoto} />}
+                    </div>
+                </div>
+            );
+        }
+
+        function OverviewTab({ tripData, completedPhases, togglePhaseComplete, totalBudget, totalSpent }) {
+            return (
+                <div className="space-y-6">
+                    {/* Flight Info Cards */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div className="bg-white rounded-lg shadow-sm p-5 border-l-4 border-blue-600">
+                            <div className="flex items-center justify-between mb-3">
+                                <span className="text-2xl">✈️</span>
+                                <span className="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded font-medium">OUTBOUND</span>
+                            </div>
+                            <div className="text-sm text-gray-500 mb-1">Monday, March 10</div>
+                            <div className="font-semibold text-lg mb-2">ORD → DEN</div>
+                            <div className="grid grid-cols-2 gap-4 text-sm">
+                                <div>
+                                    <div className="text-gray-500">Departure</div>
+                                    <div className="font-medium">7:15 AM CST</div>
+                                </div>
+                                <div>
+                                    <div className="text-gray-500">Arrival</div>
+                                    <div className="font-medium">8:45 AM MST</div>
+                                </div>
+                                <div>
+                                    <div className="text-gray-500">Flight</div>
+                                    <div className="font-medium">UA 1247</div>
+                                </div>
+                                <div>
+                                    <div className="text-gray-500">Seat</div>
+                                    <div className="font-medium">4A (First)</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="bg-white rounded-lg shadow-sm p-5 border-l-4 border-green-600">
+                            <div className="flex items-center justify-between mb-3">
+                                <span className="text-2xl">🛫</span>
+                                <span className="text-xs bg-green-100 text-green-800 px-2 py-1 rounded font-medium">RETURN</span>
+                            </div>
+                            <div className="text-sm text-gray-500 mb-1">Thursday, March 13</div>
+                            <div className="font-semibold text-lg mb-2">DEN → ORD</div>
+                            <div className="grid grid-cols-2 gap-4 text-sm">
+                                <div>
+                                    <div className="text-gray-500">Departure</div>
+                                    <div className="font-medium">2:45 PM MST</div>
+                                </div>
+                                <div>
+                                    <div className="text-gray-500">Arrival</div>
+                                    <div className="font-medium">6:15 PM CST</div>
+                                </div>
+                                <div>
+                                    <div className="text-gray-500">Flight</div>
+                                    <div className="font-medium">UA 1892</div>
+                                </div>
+                                <div>
+                                    <div className="text-gray-500">Seat</div>
+                                    <div className="font-medium">3D (First)</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Trip Objectives */}
+                    <div className="bg-white rounded-lg shadow-sm p-5">
+                        <h3 className="font-semibold text-gray-900 mb-4">Trip Objectives</h3>
+                        <div className="space-y-3">
+                            {tripData.trip.objectives.map((obj, i) => (
+                                <div key={i} className="flex items-start gap-3 p-3 bg-gray-50 rounded-lg">
+                                    <div className={`w-6 h-6 rounded-full flex items-center justify-center text-sm ${completedPhases.includes(i + 1) ? 'bg-green-500 text-white' : 'bg-gray-200 text-gray-500'}`}>
+                                        {completedPhases.includes(i + 1) ? '✓' : i + 1}
+                                    </div>
+                                    <div className="flex-1">
+                                        <div className="font-medium text-gray-900">{obj}</div>
+                                        <div className="text-xs text-gray-500 mt-1">Client: {tripData.trip.clients[i]}</div>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+
+                    {/* Quick Stats */}
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                        <div className="stat-card border-l-4 border-blue-500">
+                            <div className="text-xs text-gray-500 uppercase tracking-wide">Budget</div>
+                            <div className="text-2xl font-bold text-gray-900">${totalBudget}</div>
+                        </div>
+                        <div className="stat-card border-l-4 border-amber-500">
+                            <div className="text-xs text-gray-500 uppercase tracking-wide">Spent</div>
+                            <div className="text-2xl font-bold text-gray-900">${totalSpent.toFixed(2)}</div>
+                        </div>
+                        <div className="stat-card border-l-4 border-green-500">
+                            <div className="text-xs text-gray-500 uppercase tracking-wide">Remaining</div>
+                            <div className={`text-2xl font-bold ${totalBudget - totalSpent >= 0 ? 'text-green-600' : 'text-red-600'}`}>${(totalBudget - totalSpent).toFixed(2)}</div>
+                        </div>
+                        <div className="stat-card border-l-4 border-purple-500">
+                            <div className="text-xs text-gray-500 uppercase tracking-wide">Meetings</div>
+                            <div className="text-2xl font-bold text-gray-900">6</div>
+                        </div>
+                    </div>
+
+                    {/* Hotel Info */}
+                    <div className="bg-white rounded-lg shadow-sm p-5">
+                        <h3 className="font-semibold text-gray-900 mb-4">🏨 Accommodation</h3>
+                        <div className="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-lg p-4">
+                            <div className="font-semibold text-lg text-gray-900">The Ritz-Carlton Denver</div>
+                            <div className="text-sm text-gray-600 mt-1">1881 Curtis Street, Denver, CO 80202</div>
+                            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-4 text-sm">
+                                <div>
+                                    <div className="text-gray-500">Check-in</div>
+                                    <div className="font-medium">Mar 10, 4:00 PM</div>
+                                </div>
+                                <div>
+                                    <div className="text-gray-500">Check-out</div>
+                                    <div className="font-medium">Mar 13, 8:00 AM</div>
+                                </div>
+                                <div>
+                                    <div className="text-gray-500">Confirmation</div>
+                                    <div className="font-medium">RC-789456</div>
+                                </div>
+                                <div>
+                                    <div className="text-gray-500">Rate</div>
+                                    <div className="font-medium">$299/night</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+
+        function ItineraryTab({ tripData, completedPhases, togglePhaseComplete }) {
+            return (
+                <div className="space-y-6">
+                    {tripData.phases.map((phase) => (
+                        <div key={phase.id} className={`bg-white rounded-lg shadow-sm overflow-hidden ${completedPhases.includes(phase.id) ? 'opacity-70' : ''}`}>
+                            <div className="p-5 border-l-4" style={{ borderLeftColor: phase.color }}>
+                                <div className="flex items-center justify-between mb-4">
+                                    <div className="flex items-center gap-3">
+                                        <span className="text-2xl">{phase.icon}</span>
+                                        <div>
+                                            <h3 className="font-semibold text-gray-900">{phase.name}</h3>
+                                            <p className="text-sm text-gray-500">{phase.date}</p>
+                                        </div>
+                                    </div>
+                                    <label className="flex items-center gap-2 cursor-pointer">
+                                        <input type="checkbox" checked={completedPhases.includes(phase.id)} onChange={() => togglePhaseComplete(phase.id)} className="w-4 h-4 text-green-600 rounded" />
+                                        <span className="text-xs text-gray-500">Complete</span>
+                                    </label>
+                                </div>
+
+                                {/* Flight Info */}
+                                {phase.flight && (
+                                    <div className="bg-blue-50 rounded-lg p-4 mb-4">
+                                        <div className="text-xs font-medium text-blue-800 uppercase tracking-wide mb-2">Flight</div>
+                                        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 text-sm">
+                                            <div><span className="text-gray-500">Depart:</span> {phase.flight.departure}</div>
+                                            <div><span className="text-gray-500">Arrive:</span> {phase.flight.arrival}</div>
+                                            <div><span className="text-gray-500">Flight:</span> {phase.flight.airline}</div>
+                                            <div><span className="text-gray-500">Seat:</span> {phase.flight.seat}</div>
+                                        </div>
+                                    </div>
+                                )}
+
+                                {/* Meetings */}
+                                {phase.meetings && phase.meetings.length > 0 && (
+                                    <div className="mb-4">
+                                        <div className="text-xs font-medium text-gray-500 uppercase tracking-wide mb-2">Meetings & Appointments</div>
+                                        <div className="space-y-2">
+                                            {phase.meetings.map((meeting, i) => (
+                                                <div key={i} className="bg-gray-50 rounded-lg p-3 flex items-start gap-3">
+                                                    <div className="text-sm font-medium text-gray-900 w-20 flex-shrink-0">{meeting.time}</div>
+                                                    <div className="flex-1">
+                                                        <div className="font-medium text-gray-900">{meeting.client}</div>
+                                                        {meeting.location && <div className="text-xs text-gray-500">{meeting.location}</div>}
+                                                        {meeting.contact && <div className="text-xs text-gray-500">{meeting.contact}</div>}
+                                                        {meeting.purpose && <div className="text-xs text-blue-600 mt-1">{meeting.purpose}</div>}
+                                                    </div>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </div>
+                                )}
+
+                                {/* Dinner */}
+                                {phase.dinner && (
+                                    <div className="bg-amber-50 rounded-lg p-4">
+                                        <div className="text-xs font-medium text-amber-800 uppercase tracking-wide mb-2">Client Dinner</div>
+                                        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 text-sm">
+                                            <div><span className="text-gray-500">Time:</span> {phase.dinner.time}</div>
+                                            <div><span className="text-gray-500">Venue:</span> {phase.dinner.venue}</div>
+                                            <div className="col-span-2"><span className="text-gray-500">Guests:</span> {phase.dinner.guests}</div>
+                                        </div>
+                                        {phase.dinner.notes && <div className="text-xs text-amber-700 mt-2">📝 {phase.dinner.notes}</div>}
+                                    </div>
+                                )}
+
+                                {/* Restaurant Recommendations */}
+                                {phase.restaurants && phase.restaurants.length > 0 && (
+                                    <div className="mt-4">
+                                        <div className="text-xs font-medium text-gray-500 uppercase tracking-wide mb-2">Recommended Restaurants</div>
+                                        <div className="flex flex-wrap gap-2">
+                                            {phase.restaurants.map((rest, i) => (
+                                                <span key={i} className="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-xs">{rest}</span>
+                                            ))}
+                                        </div>
+                                    </div>
+                                )}
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            );
+        }
+
+        function ExpensesTab({ expenses, setExpenses, totalSpent, totalBudget, budget, receipts, setReceipts, exportExpenseReport }) {
+            const [newExpense, setNewExpense] = useState({ category: 'meals', description: '', amount: '' });
+
+            const addExpense = () => {
+                if (newExpense.description && newExpense.amount) {
+                    setExpenses(prev => ({
+                        ...prev,
+                        [newExpense.category]: [...prev[newExpense.category], { description: newExpense.description, amount: newExpense.amount, date: new Date().toLocaleDateString() }]
+                    }));
+                    setNewExpense({ category: 'meals', description: '', amount: '' });
+                }
+            };
+
+            const handleReceiptUpload = (category, event) => {
+                const file = event.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = (e) => {
+                        setReceipts(prev => ({ ...prev, [category]: [...prev[category], { name: file.name, data: e.target.result, date: new Date().toLocaleDateString() }] }));
+                    };
+                    reader.readAsDataURL(file);
+                }
+            };
+
+            const remaining = totalBudget - totalSpent;
+            const icons = { flights: '✈️', hotels: '🏨', meals: '🍽️', transport: '🚗', misc: '📦' };
+            const labels = { flights: 'Flights', hotels: 'Hotels', meals: 'Meals & Entertainment', transport: 'Ground Transport', misc: 'Miscellaneous' };
+
+            return (
+                <div className="space-y-6">
+                    {/* Budget Summary */}
+                    <div className="bg-white rounded-lg shadow-sm p-5">
+                        <div className="flex items-center justify-between mb-4">
+                            <h3 className="font-semibold text-gray-900">Budget Summary</h3>
+                            <button onClick={exportExpenseReport} className="bg-blue-600 text-white px-4 py-2 rounded text-sm font-medium hover:bg-blue-700">
+                                📊 Export Report
+                            </button>
+                        </div>
+                        <div className="grid grid-cols-3 gap-4 mb-4">
+                            <div className="text-center p-4 bg-gray-50 rounded-lg">
+                                <div className="text-xs text-gray-500 uppercase">Approved</div>
+                                <div className="text-2xl font-bold text-gray-900">${totalBudget}</div>
+                            </div>
+                            <div className="text-center p-4 bg-gray-50 rounded-lg">
+                                <div className="text-xs text-gray-500 uppercase">Spent</div>
+                                <div className="text-2xl font-bold text-blue-600">${totalSpent.toFixed(2)}</div>
+                            </div>
+                            <div className="text-center p-4 bg-gray-50 rounded-lg">
+                                <div className="text-xs text-gray-500 uppercase">Remaining</div>
+                                <div className={`text-2xl font-bold ${remaining >= 0 ? 'text-green-600' : 'text-red-600'}`}>${Math.abs(remaining).toFixed(2)}</div>
+                            </div>
+                        </div>
+                        <div className="bg-gray-200 rounded-full h-2 overflow-hidden">
+                            <div className={`h-full transition-all ${totalSpent > totalBudget ? 'bg-red-500' : 'bg-blue-600'}`} style={{ width: `${Math.min((totalSpent / totalBudget) * 100, 100)}%` }}></div>
+                        </div>
+                        <div className="text-xs text-gray-500 text-right mt-1">{Math.round((totalSpent / totalBudget) * 100)}% of budget used</div>
+                    </div>
+
+                    {/* Add Expense */}
+                    <div className="bg-white rounded-lg shadow-sm p-5">
+                        <h3 className="font-semibold text-gray-900 mb-4">Add Expense</h3>
+                        <div className="grid grid-cols-1 md:grid-cols-4 gap-3">
+                            <select value={newExpense.category} onChange={(e) => setNewExpense({...newExpense, category: e.target.value})} className="border rounded-lg px-4 py-2 text-sm">
+                                {Object.entries(labels).map(([key, label]) => (
+                                    <option key={key} value={key}>{icons[key]} {label}</option>
+                                ))}
+                            </select>
+                            <input type="text" placeholder="Description" value={newExpense.description} onChange={(e) => setNewExpense({...newExpense, description: e.target.value})} className="border rounded-lg px-4 py-2 text-sm" />
+                            <input type="number" placeholder="Amount" value={newExpense.amount} onChange={(e) => setNewExpense({...newExpense, amount: e.target.value})} className="border rounded-lg px-4 py-2 text-sm" />
+                            <button onClick={addExpense} className="bg-blue-600 text-white rounded-lg px-4 py-2 text-sm font-medium hover:bg-blue-700">Add</button>
+                        </div>
+                    </div>
+
+                    {/* Expense Categories */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        {Object.entries(budget).map(([category, budgetAmount]) => {
+                            const spent = expenses[category].reduce((sum, item) => sum + parseFloat(item.amount || 0), 0);
+                            const percent = budgetAmount > 0 ? Math.round((spent / budgetAmount) * 100) : 0;
+                            return (
+                                <div key={category} className="bg-white rounded-lg shadow-sm p-5">
+                                    <div className="flex items-center justify-between mb-3">
+                                        <h4 className="font-medium text-gray-900">{icons[category]} {labels[category]}</h4>
+                                        <div className="text-right">
+                                            <div className="font-semibold text-gray-900">${spent.toFixed(2)}</div>
+                                            <div className="text-xs text-gray-500">of ${budgetAmount}</div>
+                                        </div>
+                                    </div>
+                                    <div className="bg-gray-200 rounded-full h-2 overflow-hidden mb-3">
+                                        <div className={`h-full ${percent > 100 ? 'bg-red-500' : percent > 80 ? 'bg-amber-500' : 'bg-green-500'}`} style={{ width: `${Math.min(percent, 100)}%` }}></div>
+                                    </div>
+                                    
+                                    {/* Receipt Upload */}
+                                    <label className="block mb-3">
+                                        <div className="border-2 border-dashed border-gray-300 rounded-lg p-3 text-center hover:bg-gray-50 cursor-pointer text-xs">
+                                            📷 Upload Receipt
+                                        </div>
+                                        <input type="file" accept="image/*,.pdf" onChange={(e) => handleReceiptUpload(category, e)} className="hidden" />
+                                    </label>
+
+                                    {/* Receipts */}
+                                    {receipts[category].length > 0 && (
+                                        <div className="mb-3 space-y-1">
+                                            {receipts[category].map((r, i) => (
+                                                <div key={i} className="flex items-center justify-between text-xs bg-gray-50 p-2 rounded">
+                                                    <span className="truncate">{r.name}</span>
+                                                    <a href={r.data} download={r.name} className="text-blue-600 hover:underline">View</a>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    )}
+
+                                    {/* Expenses List */}
+                                    <div className="space-y-2 max-h-32 overflow-y-auto">
+                                        {expenses[category].map((expense, idx) => (
+                                            <div key={idx} className="flex justify-between text-sm py-2 border-b last:border-b-0">
+                                                <div>
+                                                    <div className="text-gray-900">{expense.description}</div>
+                                                    <div className="text-xs text-gray-500">{expense.date}</div>
+                                                </div>
+                                                <div className="font-medium">${expense.amount}</div>
+                                            </div>
+                                        ))}
+                                        {expenses[category].length === 0 && <p className="text-gray-400 text-xs text-center py-2">No expenses</p>}
+                                    </div>
+                                </div>
+                            );
+                        })}
+                    </div>
+                </div>
+            );
+        }
+
+        function PackingTab({ tripData, checkedItems, togglePackingItem }) {
+            const totalItems = tripData.packingList.reduce((sum, cat) => sum + cat.items.length, 0);
+            const checkedCount = Object.values(checkedItems).filter(Boolean).length;
+
+            return (
+                <div className="space-y-6">
+                    <div className="bg-white rounded-lg shadow-sm p-5">
+                        <div className="flex items-center justify-between mb-4">
+                            <h3 className="font-semibold text-gray-900">Business Travel Checklist</h3>
+                            <div className="text-sm text-gray-500">{checkedCount}/{totalItems} packed</div>
+                        </div>
+                        <div className="bg-gray-200 rounded-full h-2 overflow-hidden mb-6">
+                            <div className="bg-blue-600 h-full transition-all" style={{ width: `${(checkedCount / totalItems) * 100}%` }}></div>
+                        </div>
+                        <div className="space-y-6">
+                            {tripData.packingList.map((category) => (
+                                <div key={category.category}>
+                                    <h4 className="font-medium text-gray-700 mb-3">{category.category}</h4>
+                                    <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
+                                        {category.items.map((item) => {
+                                            const key = `${category.category}-${item}`;
+                                            const isChecked = checkedItems[key];
+                                            return (
+                                                <label key={item} className={`flex items-center p-2 rounded cursor-pointer text-sm ${isChecked ? 'bg-green-50 line-through text-gray-400' : 'bg-gray-50 hover:bg-gray-100'}`}>
+                                                    <input type="checkbox" checked={isChecked || false} onChange={() => togglePackingItem(category.category, item)} className="w-4 h-4 text-blue-600 rounded mr-2" />
+                                                    {item}
+                                                </label>
+                                            );
+                                        })}
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+
+        function DocumentsTab({ tripData, photos, addPhoto }) {
+            return (
+                <div className="space-y-6">
+                    {/* Quick Reference */}
+                    <div className="bg-white rounded-lg shadow-sm p-5">
+                        <h3 className="font-semibold text-gray-900 mb-4">Quick Reference</h3>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div className="bg-blue-50 rounded-lg p-4">
+                                <div className="text-xs font-medium text-blue-800 uppercase mb-2">Flight Confirmations</div>
+                                <div className="space-y-2 text-sm">
+                                    <div><span className="text-gray-500">Outbound:</span> ABC123</div>
+                                    <div><span className="text-gray-500">Return:</span> XYZ789</div>
+                                </div>
+                            </div>
+                            <div className="bg-amber-50 rounded-lg p-4">
+                                <div className="text-xs font-medium text-amber-800 uppercase mb-2">Hotel Confirmation</div>
+                                <div className="space-y-2 text-sm">
+                                    <div><span className="text-gray-500">Property:</span> The Ritz-Carlton Denver</div>
+                                    <div><span className="text-gray-500">Confirmation:</span> RC-789456</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Client Contacts */}
+                    <div className="bg-white rounded-lg shadow-sm p-5">
+                        <h3 className="font-semibold text-gray-900 mb-4">Client Contacts</h3>
+                        <div className="space-y-3">
+                            {[
+                                { company: 'TechCorp Industries', contact: 'Sarah Mitchell', title: 'VP Operations', phone: '(303) 555-0101' },
+                                { company: 'Mountain West Solutions', contact: 'James Porter', title: 'CEO', phone: '(303) 555-0202' },
+                                { company: 'Denver Digital', contact: 'Amanda Lee', title: 'CTO', phone: '(303) 555-0303' }
+                            ].map((client, i) => (
+                                <div key={i} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                                    <div>
+                                        <div className="font-medium text-gray-900">{client.company}</div>
+                                        <div className="text-sm text-gray-500">{client.contact} • {client.title}</div>
+                                    </div>
+                                    <div className="text-sm text-gray-600">{client.phone}</div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+
+                    {/* Business Card/Document Photos */}
+                    <div className="bg-white rounded-lg shadow-sm p-5">
+                        <div className="flex items-center justify-between mb-4">
+                            <h3 className="font-semibold text-gray-900">Document Photos</h3>
+                            <label className="cursor-pointer">
+                                <div className="bg-blue-600 text-white px-4 py-2 rounded text-sm font-medium hover:bg-blue-700">+ Add Photo</div>
+                                <input type="file" accept="image/*" onChange={(e) => addPhoto(1, e)} className="hidden" />
+                            </label>
+                        </div>
+                        <p className="text-sm text-gray-500 mb-4">Upload business cards, whiteboard notes, or meeting documents.</p>
+                        {Object.values(photos).flat().length > 0 ? (
+                            <div className="grid grid-cols-3 md:grid-cols-4 gap-3">
+                                {Object.values(photos).flat().map((photo, idx) => (
+                                    <img key={idx} src={photo.data} alt="" className="w-full h-24 object-cover rounded-lg" />
+                                ))}
+                            </div>
+                        ) : (
+                            <div className="text-center py-8 bg-gray-50 rounded-lg">
+                                <div className="text-3xl mb-2">📄</div>
+                                <p className="text-gray-500 text-sm">No documents uploaded yet</p>
+                            </div>
+                        )}
+                    </div>
+
+                    {/* Emergency Info */}
+                    <div className="bg-red-50 border border-red-200 rounded-lg p-5">
+                        <h3 className="font-semibold text-red-900 mb-3">Emergency Information</h3>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+                            <div>
+                                <div className="text-red-700 font-medium">Company Travel Support</div>
+                                <div className="text-red-900">1-800-APEX-TRAVEL</div>
+                            </div>
+                            <div>
+                                <div className="text-red-700 font-medium">Corporate Card Lost/Stolen</div>
+                                <div className="text-red-900">1-800-AMEX-HELP</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+
+        ReactDOM.render(<App />, document.getElementById('root'));
+    </script>
+</body>
+</html>
