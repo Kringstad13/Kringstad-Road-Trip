@@ -929,26 +929,109 @@ Best Family Trip Ever! 🎉`;
                             </div>
                         </div>
 
-                        <div className="bg-gradient-to-r from-blue-50 to-cyan-50 border-2 border-blue-200 rounded-xl p-6 mb-6">
-                            <h3 className="font-bold text-lg text-blue-900 mb-3">📱 Live Photo Sharing - Coming Soon!</h3>
-                            <p className="text-sm text-blue-800 mb-4">Share one link with your whole family. Everyone can upload photos in real-time!</p>
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm">
-                                <div className="bg-white rounded-lg p-3 flex items-start gap-2">
-                                    <span className="text-green-500">✓</span>
-                                    <span>Dad uploads from Grand Canyon → Everyone sees it instantly</span>
+                        {/* Share Dashboard - Full Product Feature */}
+                        <div className="bg-gradient-to-r from-pink-50 to-red-50 border-2 border-pink-200 rounded-xl p-6 mb-6">
+                            <div className="flex items-center gap-3 mb-3">
+                                <span className="text-2xl">🔗</span>
+                                <h3 className="font-bold text-xl text-gray-800">Share Dashboard</h3>
+                                <span className="bg-pink-500 text-white text-xs font-bold px-3 py-1 rounded-full">FULL PRODUCT FEATURE</span>
+                            </div>
+                            <p className="text-gray-600 mb-4">In the real RouteBuilder product, you'll be able to share a link where everyone can upload photos in real-time!</p>
+                            
+                            {/* Fake Share Link */}
+                            <div className="flex items-center gap-2 mb-3">
+                                <div className="flex-grow bg-white border-2 border-gray-200 rounded-lg px-4 py-3 text-gray-500">
+                                    your-trip-dashboard.routebuilder.ai/share
                                 </div>
-                                <div className="bg-white rounded-lg p-3 flex items-start gap-2">
-                                    <span className="text-green-500">✓</span>
-                                    <span>Photos organized by location automatically</span>
+                                <button className="bg-pink-100 text-pink-700 px-4 py-3 rounded-lg font-semibold flex items-center gap-2 hover:bg-pink-200 transition">
+                                    📋 Copy Link
+                                </button>
+                            </div>
+                            
+                            {/* Demo Note */}
+                            <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-3 mb-4">
+                                <p className="text-sm text-yellow-800">📝 <strong>Demo Note:</strong> This demo is single-user to protect your privacy. The real product includes full multi-user sharing!</p>
+                            </div>
+                            
+                            {/* How it works */}
+                            <div className="mb-4">
+                                <h4 className="font-semibold text-gray-700 mb-2">How it works in the full product:</h4>
+                                <div className="space-y-2 text-sm">
+                                    <div className="flex items-center gap-2 text-gray-700">
+                                        <span className="text-green-500">✓</span>
+                                        Everyone with the link can upload photos from their phones
+                                    </div>
+                                    <div className="flex items-center gap-2 text-gray-700">
+                                        <span className="text-green-500">✓</span>
+                                        Photos sync instantly for all viewers (no group text spam!)
+                                    </div>
+                                    <div className="flex items-center gap-2 text-gray-700">
+                                        <span className="text-green-500">✓</span>
+                                        Organized by location automatically
+                                    </div>
+                                    <div className="flex items-center gap-2 text-gray-700">
+                                        <span className="text-green-500">✓</span>
+                                        Access from any device - data stays synced
+                                    </div>
                                 </div>
-                                <div className="bg-white rounded-lg p-3 flex items-start gap-2">
-                                    <span className="text-green-500">✓</span>
-                                    <span>No more group text spam with 47 photos!</span>
+                            </div>
+                            
+                            {/* Privacy Options */}
+                            <div>
+                                <h4 className="font-semibold text-gray-700 mb-3 flex items-center gap-2">🔒 Privacy & Control Options:</h4>
+                                <div className="space-y-2">
+                                    <div className="bg-white border border-gray-200 rounded-lg p-3">
+                                        <div className="font-semibold text-gray-800 flex items-center gap-2">🌐 Public Sharing</div>
+                                        <p className="text-sm text-gray-500">Anyone with the link can view and contribute</p>
+                                    </div>
+                                    <div className="bg-white border border-gray-200 rounded-lg p-3">
+                                        <div className="font-semibold text-gray-800 flex items-center gap-2">🔒 Private</div>
+                                        <p className="text-sm text-gray-500">Only you can access - must be logged in</p>
+                                    </div>
+                                    <div className="bg-white border border-gray-200 rounded-lg p-3">
+                                        <div className="font-semibold text-gray-800 flex items-center gap-2">👥 Invite-Only</div>
+                                        <p className="text-sm text-gray-500">Specific people only - email/phone verification</p>
+                                    </div>
                                 </div>
-                                <div className="bg-white rounded-lg p-3 flex items-start gap-2">
-                                    <span className="text-green-500">✓</span>
-                                    <span>Grandparents at home can follow along live</span>
+                                <p className="text-sm text-gray-500 italic mt-3">You control who sees each trip. Different trips can have different privacy settings.</p>
+                            </div>
+                        </div>
+
+                        {/* Daily Photo Digest - Coming Soon */}
+                        <div className="bg-gradient-to-r from-blue-50 to-indigo-50 border-2 border-blue-200 rounded-xl p-6 mb-6">
+                            <div className="flex items-center gap-3 mb-3">
+                                <span className="text-2xl">📱</span>
+                                <h3 className="font-bold text-xl text-gray-800">Daily Photo Digest</h3>
+                                <span className="bg-blue-500 text-white text-xs font-bold px-3 py-1 rounded-full">COMING SOON</span>
+                            </div>
+                            <p className="text-gray-600 mb-4">Set up automatic daily texts with photo summaries sent at 8pm to your family and friends.</p>
+                            
+                            <div className="bg-white border border-gray-200 rounded-lg p-4 mb-4">
+                                <h4 className="font-semibold text-gray-700 mb-3">How it works:</h4>
+                                <ol className="space-y-2 text-sm text-gray-700">
+                                    <li>1. Add phone numbers of people who want updates</li>
+                                    <li>2. Set your preferred time (default: 8pm in your timezone)</li>
+                                    <li>3. Everyone gets a text: "Here are today's 7 photos from California! 📸" with a link</li>
+                                    <li>4. Grandparents at home follow your adventure in real-time!</li>
+                                </ol>
+                            </div>
+                            
+                            {/* Recipients Preview */}
+                            <div className="mb-4">
+                                <h4 className="text-sm font-semibold text-gray-600 mb-2">Add Recipients (Preview)</h4>
+                                <div className="space-y-2">
+                                    <div className="bg-white border border-gray-200 rounded-lg px-4 py-3 text-gray-500">
+                                        Mom: (555) 123-4567
+                                    </div>
+                                    <div className="bg-white border border-gray-200 rounded-lg px-4 py-3 text-gray-500">
+                                        Grandma: (555) 987-6543
+                                    </div>
                                 </div>
+                                <button className="text-blue-600 text-sm font-semibold mt-2 hover:text-blue-800">+ Add Another</button>
+                            </div>
+                            
+                            <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-3">
+                                <p className="text-sm text-yellow-700">💡 This feature requires backend integration and will be available in the full product</p>
                             </div>
                         </div>
 

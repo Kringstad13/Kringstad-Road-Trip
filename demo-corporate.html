@@ -338,6 +338,9 @@ Submitted by: ${tripData.traveler.name}
                                         <span className={`px-2 py-1 rounded text-xs font-medium ${isOnline ? 'bg-green-500/80' : 'bg-gray-500/80'}`}>
                                             {isOnline ? '● Online' : '○ Offline'}
                                         </span>
+                                        <button onClick={() => { navigator.clipboard.writeText('Business trip dashboard shared!'); alert('Share link copied! 📋'); }} className="px-3 py-1 bg-white/20 hover:bg-white/30 rounded text-xs font-medium">
+                                            📤 Share
+                                        </button>
                                         <button onClick={exportExpenseReport} className="px-3 py-1 bg-white/20 hover:bg-white/30 rounded text-xs font-medium">
                                             📊 Export Report
                                         </button>
@@ -812,6 +815,111 @@ Submitted by: ${tripData.traveler.name}
         function DocumentsTab({ tripData, photos, addPhoto }) {
             return (
                 <div className="space-y-6">
+                    {/* Share Dashboard - Full Product Feature */}
+                    <div className="bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 rounded-lg p-5">
+                        <div className="flex items-center gap-3 mb-3">
+                            <span className="text-xl">🔗</span>
+                            <h3 className="font-semibold text-gray-900">Share Dashboard</h3>
+                            <span className="bg-blue-600 text-white text-xs font-medium px-2 py-0.5 rounded">FULL PRODUCT FEATURE</span>
+                        </div>
+                        <p className="text-gray-600 text-sm mb-4">In the real RouteBuilder product, you'll be able to share a link where team members can view itinerary and upload expense receipts!</p>
+                        
+                        {/* Fake Share Link */}
+                        <div className="flex items-center gap-2 mb-3">
+                            <div className="flex-grow bg-white border border-gray-200 rounded px-3 py-2 text-gray-500 text-sm">
+                                your-trip-dashboard.routebuilder.ai/share
+                            </div>
+                            <button className="bg-gray-100 text-gray-700 px-3 py-2 rounded text-sm font-medium flex items-center gap-1 hover:bg-gray-200">
+                                📋 Copy Link
+                            </button>
+                        </div>
+                        
+                        {/* Demo Note */}
+                        <div className="bg-amber-50 border border-amber-200 rounded p-3 mb-4">
+                            <p className="text-sm text-amber-800">📝 <strong>Demo Note:</strong> This demo is single-user to protect your privacy. The real product includes full multi-user sharing!</p>
+                        </div>
+                        
+                        {/* How it works */}
+                        <div className="mb-4">
+                            <h4 className="font-medium text-gray-700 text-sm mb-2">How it works in the full product:</h4>
+                            <div className="space-y-1 text-sm">
+                                <div className="flex items-center gap-2 text-gray-600">
+                                    <span className="text-green-500">✓</span>
+                                    Team members can view the full itinerary
+                                </div>
+                                <div className="flex items-center gap-2 text-gray-600">
+                                    <span className="text-green-500">✓</span>
+                                    Upload expense receipts directly to shared dashboard
+                                </div>
+                                <div className="flex items-center gap-2 text-gray-600">
+                                    <span className="text-green-500">✓</span>
+                                    Finance team can track expenses in real-time
+                                </div>
+                                <div className="flex items-center gap-2 text-gray-600">
+                                    <span className="text-green-500">✓</span>
+                                    Access from any device - data stays synced
+                                </div>
+                            </div>
+                        </div>
+                        
+                        {/* Privacy Options */}
+                        <div>
+                            <h4 className="font-medium text-gray-700 text-sm mb-2">🔒 Privacy & Control Options:</h4>
+                            <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
+                                <div className="bg-white border border-gray-200 rounded p-2">
+                                    <div className="font-medium text-gray-800 text-sm">🌐 Public</div>
+                                    <p className="text-xs text-gray-500">Anyone with link can view</p>
+                                </div>
+                                <div className="bg-white border border-gray-200 rounded p-2">
+                                    <div className="font-medium text-gray-800 text-sm">🔒 Private</div>
+                                    <p className="text-xs text-gray-500">Only you - must be logged in</p>
+                                </div>
+                                <div className="bg-white border border-gray-200 rounded p-2">
+                                    <div className="font-medium text-gray-800 text-sm">👥 Team Only</div>
+                                    <p className="text-xs text-gray-500">Company email required</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Daily Trip Digest - Coming Soon */}
+                    <div className="bg-gradient-to-r from-purple-50 to-blue-50 border border-purple-200 rounded-lg p-5">
+                        <div className="flex items-center gap-3 mb-3">
+                            <span className="text-xl">📱</span>
+                            <h3 className="font-semibold text-gray-900">Daily Trip Digest</h3>
+                            <span className="bg-purple-600 text-white text-xs font-medium px-2 py-0.5 rounded">COMING SOON</span>
+                        </div>
+                        <p className="text-gray-600 text-sm mb-4">Set up automatic daily emails with trip summaries sent to your admin or team.</p>
+                        
+                        <div className="bg-white border border-gray-200 rounded p-4 mb-4">
+                            <h4 className="font-medium text-gray-700 text-sm mb-2">How it works:</h4>
+                            <ol className="space-y-1 text-sm text-gray-600">
+                                <li>1. Add email addresses of people who need updates</li>
+                                <li>2. Set your preferred time (default: 6pm in traveler's timezone)</li>
+                                <li>3. Everyone gets an email: "Trip update: 2 meetings completed, $340 spent" with details</li>
+                                <li>4. Finance and admins stay informed without interrupting your meetings</li>
+                            </ol>
+                        </div>
+                        
+                        {/* Recipients Preview */}
+                        <div className="mb-4">
+                            <h4 className="text-xs font-medium text-gray-500 mb-2">Add Recipients (Preview)</h4>
+                            <div className="space-y-2">
+                                <div className="bg-white border border-gray-200 rounded px-3 py-2 text-gray-500 text-sm">
+                                    Admin: admin@apextechnologies.com
+                                </div>
+                                <div className="bg-white border border-gray-200 rounded px-3 py-2 text-gray-500 text-sm">
+                                    Finance: expense-reports@apextechnologies.com
+                                </div>
+                            </div>
+                            <button className="text-blue-600 text-sm font-medium mt-2 hover:text-blue-800">+ Add Another</button>
+                        </div>
+                        
+                        <div className="bg-amber-50 border border-amber-200 rounded p-3">
+                            <p className="text-sm text-amber-700">💡 This feature requires backend integration and will be available in the full product</p>
+                        </div>
+                    </div>
+
                     {/* Quick Reference */}
                     <div className="bg-white rounded-lg shadow-sm p-5">
                         <h3 className="font-semibold text-gray-900 mb-4">Quick Reference</h3>
