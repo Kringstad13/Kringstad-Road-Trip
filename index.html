@@ -167,6 +167,41 @@
         .dark .kid-card {
             background: linear-gradient(135deg, #2d2d44 0%, #3d3d54 100%);
         }
+        
+        /* Dark mode fixes for light gradients */
+        .dark .bg-gradient-to-r.from-blue-50,
+        .dark .bg-gradient-to-r.from-blue-100,
+        .dark .bg-gradient-to-r.from-blue-200,
+        .dark .bg-gradient-to-r.from-purple-50,
+        .dark .bg-gradient-to-r.from-green-50,
+        .dark .bg-gradient-to-r.from-cyan-50 {
+            background: linear-gradient(to right, #2d2d44, #3d3d54) !important;
+            color: #e5e5e5 !important;
+        }
+        
+        /* Override for any text within these gradients */
+        .dark .bg-gradient-to-r.from-blue-50 *,
+        .dark .bg-gradient-to-r.from-blue-100 *,
+        .dark .bg-gradient-to-r.from-blue-200 *,
+        .dark .bg-gradient-to-r.from-purple-50 *,
+        .dark .bg-gradient-to-r.from-green-50 *,
+        .dark .bg-gradient-to-r.from-cyan-50 * {
+            color: #e5e5e5 !important;
+        }
+        
+        /* Fix for border colors in dark mode */
+        .dark .border-blue-200,
+        .dark .border-blue-300,
+        .dark .border-purple-300,
+        .dark .border-green-200 {
+            border-color: #505050 !important;
+        }
+        
+        /* Fix for span badges with light backgrounds */
+        .dark span.bg-gradient-to-r {
+            background: linear-gradient(to right, #4a4a6a, #5a5a7a) !important;
+            color: #e5e5e5 !important;
+        }
     </style>
     <script>
         (function() {
