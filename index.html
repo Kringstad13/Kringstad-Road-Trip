@@ -52,6 +52,22 @@
             font-weight: 600;
             transition: background 0.3s;
         }
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+        
+        .nav-links a {
+            color: #64748b;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: #2563eb;
+        }
         
         .nav-button:hover {
             background: #1d4ed8;
@@ -884,7 +900,12 @@
     <nav>
         <div class="nav-container">
             <a href="#" class="logo">🗺️ RouteBuilder AI</a>
-            <a href="business.html" class="nav-button">For Business →</a>
+            <div class="nav-links">
+                <a href="#how-it-works">How It Works</a>
+                <a href="#features">Features</a>
+                <a href="#pricing">Pricing</a>
+                <a href="business.html" class="nav-button">For Business →</a>
+            </div>
         </div>
     </nav>
 
@@ -913,7 +934,7 @@
     </section>
 
     <!-- How It Works -->
-    <section class="how-it-works">
+    <section class="how-it-works" id="how-it-works">
         <h2>How RouteBuilder Works</h2>
         <p>From "where should we go?" to complete trip plan in 3 minutes.</p>
         <div class="steps">
@@ -942,7 +963,7 @@
     </section>
 
     <!-- Features Section -->
-    <section class="features">
+   <section class="features" id="features">
         <div class="section-header">
             <span class="section-badge">AI-Powered</span>
             <h2>Everything You Need in One Dashboard</h2>
