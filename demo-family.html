@@ -103,6 +103,39 @@
             border-radius: 20px;
         }
         
+        /* AI Helper Box */
+        .ai-helper-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 12px;
+            padding: 1.5rem;
+            color: white;
+            display: flex;
+            align-items: start;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .ai-helper-icon {
+            font-size: 2rem;
+            flex-shrink: 0;
+        }
+
+        .ai-helper-content {
+            flex: 1;
+        }
+
+        .ai-helper-title {
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .ai-helper-text {
+            opacity: 0.95;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+        
         /* Dark Mode Styles */
         .dark {
             background-color: #1a1a2e;
@@ -709,7 +742,7 @@ Best Family Trip Ever! 🎉`;
                                         <p className="text-sm text-blue-700">7 Days • San Francisco → Los Angeles • Family of 5</p>
                                     </div>
                                 </div>
-                                <a href="https://kringstad13.github.io/Kringstad-Road-Trip/landing.html" className="hidden md:block bg-blue-600 text-white px-4 py-2 rounded-lg font-semibold hover:bg-blue-700 transition text-sm">
+                                <a href="https://kringstad13.github.io/Kringstad-Road-Trip/" className="hidden md:block bg-blue-600 text-white px-4 py-2 rounded-lg font-semibold hover:bg-blue-700 transition text-sm">
                                     ← Back to RouteBuilder.ai
                                 </a>
                             </div>
@@ -756,6 +789,15 @@ Best Family Trip Ever! 🎉`;
         function OverviewTab({ tripData, completedPhases, togglePhaseComplete }) {
             return (
                 <div className="space-y-6">
+                    {/* AI Helper Box */}
+                    <div className="ai-helper-box">
+                        <div className="ai-helper-icon">🤖</div>
+                        <div className="ai-helper-content">
+                            <div className="ai-helper-title">AI Assistant Ready</div>
+                            <div className="ai-helper-text">Want to modify your trip? In the full product, you can chat with AI to add stops, change dates, swap hotels, or completely redesign your route. Just type what you want!</div>
+                        </div>
+                    </div>
+
                     {/* Fun Stats */}
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                         {[
@@ -841,6 +883,15 @@ Best Family Trip Ever! 🎉`;
         function PhasesTab({ tripData, completedPhases, togglePhaseComplete }) {
             return (
                 <div className="space-y-6">
+                    {/* AI Helper Box */}
+                    <div className="ai-helper-box">
+                        <div className="ai-helper-icon">🤖</div>
+                        <div className="ai-helper-content">
+                            <div className="ai-helper-title">AI Assistant Ready</div>
+                            <div className="ai-helper-text">Customize your stops! Chat with AI to add new destinations, remove stops you're not interested in, or get personalized restaurant and hotel recommendations based on your budget and preferences.</div>
+                        </div>
+                    </div>
+
                     {tripData.phases.map((phase) => (
                         <div key={phase.id} className={`bg-white rounded-2xl shadow-lg p-6 border-l-8 ${completedPhases.includes(phase.id) ? 'border-green-400 opacity-80' : ''}`} style={{ borderLeftColor: completedPhases.includes(phase.id) ? '#4ade80' : phase.color }}>
                             <div className="flex items-start justify-between mb-4">
@@ -921,6 +972,15 @@ Best Family Trip Ever! 🎉`;
             return (
                 <div className="space-y-6">
                     <div className="bg-white rounded-2xl shadow-lg p-6">
+                        {/* AI Helper Box */}
+                        <div className="ai-helper-box">
+                            <div className="ai-helper-icon">🤖</div>
+                            <div className="ai-helper-content">
+                                <div className="ai-helper-title">AI Assistant Ready</div>
+                                <div className="ai-helper-text">Organize your photos! The full product lets you share a link so everyone can upload photos from their phones. AI automatically organizes them by location and date - no more group text spam!</div>
+                            </div>
+                        </div>
+
                         <div className="flex items-center justify-between mb-6">
                             <h2 className="text-2xl font-bold">📸 Trip Photo Album</h2>
                             <div className="text-right">
@@ -1075,6 +1135,15 @@ Best Family Trip Ever! 🎉`;
             return (
                 <div className="space-y-6">
                     <div className="bg-white rounded-2xl shadow-lg p-6">
+                        {/* AI Helper Box */}
+                        <div className="ai-helper-box">
+                            <div className="ai-helper-icon">🤖</div>
+                            <div className="ai-helper-content">
+                                <div className="ai-helper-title">AI Assistant Ready</div>
+                                <div className="ai-helper-text">Customize your packing list! Ask AI to "add items for a toddler", "remove hiking gear", or "include camping equipment". The list automatically updates based on your trip specifics.</div>
+                            </div>
+                        </div>
+
                         <div className="flex items-center justify-between mb-6">
                             <h2 className="text-2xl font-bold">🎒 Family Packing Lists</h2>
                             <div className="text-right">
@@ -1151,6 +1220,15 @@ Best Family Trip Ever! 🎉`;
 
             return (
                 <div className="space-y-6">
+                    {/* AI Helper Box */}
+                    <div className="ai-helper-box">
+                        <div className="ai-helper-icon">🤖</div>
+                        <div className="ai-helper-content">
+                            <div className="ai-helper-title">AI Assistant Ready</div>
+                            <div className="ai-helper-text">Adjust your budget! The full product lets you chat with AI to increase category budgets, find cheaper alternatives, or get money-saving tips for your specific route.</div>
+                        </div>
+                    </div>
+
                     <div className="bg-white rounded-2xl shadow-lg p-6">
                         <h3 className="text-xl font-bold mb-4">💰 Trip Budget</h3>
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -1231,6 +1309,15 @@ Best Family Trip Ever! 🎉`;
 
             return (
                 <div className="space-y-6">
+                    {/* AI Helper Box */}
+                    <div className="ai-helper-box">
+                        <div className="ai-helper-icon">🤖</div>
+                        <div className="ai-helper-content">
+                            <div className="ai-helper-title">AI Assistant Ready</div>
+                            <div className="ai-helper-text">Create custom games! Ask AI to generate 50 more "Would You Rather" questions, create trivia about cities you're visiting, or design age-specific games for your family.</div>
+                        </div>
+                    </div>
+
                     {/* Fun Header */}
                     <div className="bg-gradient-to-r from-blue-100 via-orange-100 to-cyan-100 rounded-2xl p-6 text-center">
                         <h2 className="text-3xl font-bold text-gray-800 mb-2">🎮 Road Trip Games 🎉</h2>
