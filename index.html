@@ -1415,7 +1415,7 @@
         </div>
     </footer>
 
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+   <script>
         // Waitlist form submission
         document.getElementById('waitlistForm').addEventListener('submit', function(e) {
             e.preventDefault();
@@ -1451,4 +1451,15 @@
                 submitButton.textContent = originalText;
                 submitButton.disabled = false;
             })
+            .catch((error) => {
+                // Show error message
+                document.getElementById('errorMessage').style.display = 'block';
+                document.getElementById('successMessage').style.display = 'none';
+                submitButton.textContent = originalText;
+                submitButton.disabled = false;
+            });
+        });
+    </script>
+</body>
+</html>
            
