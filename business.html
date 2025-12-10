@@ -1879,13 +1879,14 @@
                 <select 
                     id="userType"
                     class="cta-input"
+                    style="color: rgba(250, 249, 247, 0.7);"
                 >
-                    <option value="">I am a...</option>
-                    <option value="corporate">Corporate / team planner</option>
-                    <option value="agent">Travel agent / professional</option>
-                    <option value="family">Family vacation planner</option>
-                    <option value="enthusiast">Road trip enthusiast</option>
-                    <option value="other">Other</option>
+                    <option value="" disabled selected style="color: rgba(250, 249, 247, 0.5);">I am a... (Select one)</option>
+                    <option value="corporate" style="color: var(--cream);">Corporate / team planner</option>
+                    <option value="agent" style="color: var(--cream);">Travel agent / professional</option>
+                    <option value="family" style="color: var(--cream);">Family vacation planner</option>
+                    <option value="enthusiast" style="color: var(--cream);">Road trip enthusiast</option>
+                    <option value="other" style="color: var(--cream);">Other</option>
                 </select>
                 <textarea
                     id="feedback"
@@ -1908,7 +1909,7 @@
             </div>
             <div id="errorMessage" class="message message-error hidden">
                 <p class="message-title">❌ Oops! Something went wrong.</p>
-                <p class="message-text">Please try again or email us at <a href="mailto:info@routebuilder.ai">info@routebuilder.ai</a></p>
+                <p class="message-text">Please try again or email us at <a href="/cdn-cgi/l/email-protection#a6cfc8c0c9e6d4c9d3d2c3c4d3cfcac2c3d488c7cf"><span class="__cf_email__" data-cfemail="f49d9a929bb4869b81809196819d98909186da959d">[email&#160;protected]</span></a></p>
             </div>
             
             <p class="cta-note"><span>🎁 First 100 signups</span> get lifetime 50% discount</p>
@@ -1940,7 +1941,7 @@
                 <div>
                     <h4 class="footer-column-title">Contact</h4>
                     <div class="footer-contact-item">
-                        Email: <a href="mailto:info@routebuilder.ai">info@routebuilder.ai</a>
+                        Email: <a href="/cdn-cgi/l/email-protection#1871767e77586a776d6c7d7a6d71747c7d6a367971"><span class="__cf_email__" data-cfemail="83eaede5ecc3f1ecf6f7e6e1f6eaefe7e6f1ade2ea">[email&#160;protected]</span></a>
                     </div>
                     <div class="footer-contact-item">
                         Phone: <a href="tel:+13202793969">320-279-3969</a>
@@ -1964,7 +1965,7 @@
         </div>
     </footer>
 
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
         document.getElementById('signupForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             
@@ -1987,10 +1988,37 @@
             successMessage.classList.add('hidden');
             errorMessage.classList.add('hidden');
             
+            // Prepare data
+            const data = {
+                name: name,
+                email: email,
+                userType: userType,
+                feedback: feedback,
+                type: 'Business',
+                timestamp: new Date().toISOString()
+            };
+            
             try {
-                // Send to Google Sheets
-                const response = await fetch('https://script.google.com/macros/s/AKfycbzCuBR4aKQk--KcfIv3qnUee63hyY7QuoAtkH6N8KGpqpRzw03UEdF7NlRUzxQzoNQMPg/exec', {
+                await fetch('https://script.google.com/macros/s/AKfycbzc1N8dWmfENx5PpTIQgMRDDywF5RxaPBy-AqW1kgZD32SYXC8XmaJnahb5C8aUlZlcrA/exec', {
                     method: 'POST',
                     mode: 'no-cors',
                     headers: {
-                        'Content-Type': 'application/jso
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data)
+                });
+                
+                // Show success message
+                form.classList.add('hidden');
+                successMessage.classList.remove('hidden');
+                
+            } catch (error) {
+                console.error('Error:', error);
+                errorMessage.classList.remove('hidden');
+                submitButton.disabled = false;
+                submitButton.textContent = 'Get Early Access';
+            }
+        });
+    </script>
+</body>
+</html>

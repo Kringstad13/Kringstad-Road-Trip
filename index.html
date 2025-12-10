@@ -758,12 +758,19 @@
         }
         
         .form-group input,
-        .form-group select {
+        .form-group select,
+        .form-group textarea {
             width: 100%;
             padding: 0.75rem;
             border: 2px solid #e5e7eb;
             border-radius: 8px;
             font-size: 1rem;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        }
+        
+        .form-group textarea {
+            resize: vertical;
+            min-height: 80px;
         }
         
         .submit-button {
@@ -1384,6 +1391,10 @@
                         <option value="other">Other</option>
                     </select>
                 </div>
+                <div class="form-group">
+                    <label for="feedback">Any feedback, suggestions, or questions? (Optional)</label>
+                    <textarea id="feedback" name="feedback" rows="3" placeholder="Let us know your thoughts..."></textarea>
+                </div>
                 <button type="submit" class="submit-button">Join the Waitlist - It's Free! 🚀</button>
                 <div class="form-note">
                     🎁 First 100 signups get 50% off for life when we launch!
@@ -1395,7 +1406,7 @@
             </div>
             <div class="error-message" id="errorMessage">
                 <h3>❌ Oops! Something went wrong.</h3>
-                <p>Please try again or email us at <a href="mailto:info@routebuilder.ai" style="color: white; text-decoration: underline;">info@routebuilder.ai</a></p>
+                <p>Please try again or email us at <a href="/cdn-cgi/l/email-protection#61080f070e21130e1415040314080d0504134f0008" style="color: white; text-decoration: underline;"><span class="__cf_email__" data-cfemail="d5bcbbb3ba95a7baa0a1b0b7a0bcb9b1b0a7fbb4bc">[email&#160;protected]</span></a></p>
             </div>
             <p class="form-note" style="color: white; opacity: 0.8;">No spam. Unsubscribe anytime. We respect your privacy.</p>
         </div>
@@ -1484,11 +1495,35 @@
                 name: formData.get('name'),
                 email: formData.get('email'),
                 userType: formData.get('userType'),
+                feedback: formData.get('feedback') || '',
+                type: 'Consumer',
                 timestamp: new Date().toISOString()
             };
             
-            // Google Apps Script Web App URL
-            const scriptURL = 'https://script.google.com/macros/s/AKfycbxgZ5vP8q9sT5yMqZxqxZVxhUW9X8FvBcI3qYqL0YGqxR8rRjMxYqLLvxm8X8L8X8L/exec';
+            const submitButton = document.getElementById('waitlistForm').querySelector('button[type="submit"]');
+            const originalText = submitButton.textContent;
+            submitButton.textContent = 'Submitting...';
+            submitButton.disabled = true;
             
-            fetch(scriptURL, {
-                me
+            fetch('https://script.google.com/macros/s/AKfycbzc1N8dWmfENx5PpTIQgMRDDywF5RxaPBy-AqW1kgZD32SYXC8XmaJnahb5C8aUlZlcrA/exec', {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data)
+            })
+            .then(() => {
+                document.getElementById('waitlistForm').style.display = 'none';
+                document.getElementById('successMessage').style.display = 'block';
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                document.getElementById('errorMessage').style.display = 'block';
+                submitButton.textContent = originalText;
+                submitButton.disabled = false;
+            });
+        });
+    </script>
+</body>
+</html>
