@@ -1474,7 +1474,7 @@
             <div class="footer-section">
                 <h3>Contact</h3>
                 <div class="contact-info">
-                    <p>Email: <a href="mailto:info@routebuilder.ai">info@routebuilder.ai</a></p>
+                    <p>Email: <a href="/cdn-cgi/l/email-protection#fd94939b92bd8f928889989f88949199988fd39c94"><span class="__cf_email__" data-cfemail="d2bbbcb4bd92a0bda7a6b7b0a7bbbeb6b7a0fcb3bb">[email&#160;protected]</span></a></p>
                     <p>Phone: <a href="tel:+13202793969">320-279-3969</a></p>
                     <p>Coming Q1 2026</p>
                 </div>
@@ -1485,7 +1485,7 @@
         </div>
     </footer>
 
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
         // Waitlist form submission
         document.getElementById('waitlistForm').addEventListener('submit', function(e) {
             e.preventDefault();
@@ -1508,6 +1508,7 @@
             fetch('https://script.google.com/macros/s/AKfycbyi2ZNa-pf884Y9seaOqDs_zK-XRHAvEZvIQRrdhNVGGQjteejcAUKN0qWN940Qo1kTnA/exec', {
                 method: 'POST',
                 mode: 'no-cors',
+                headers: {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify(data)
@@ -1519,6 +1520,7 @@
                 this.reset();
                 submitButton.textContent = originalText;
                 submitButton.disabled = false;
+            })
             })
             .catch(error => {
                 // Show error message
