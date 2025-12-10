@@ -805,8 +805,14 @@
         /* MOBILE WHITE BACKGROUNDS - 768px and under  */
         /* ============================================ */
         @media (max-width: 768px) {
-            /* Change gray section backgrounds to white */
-            .demo-preview {
+            /* Hide nav links on mobile, keep only logo and For Business button */
+            .nav-links a:not(.nav-button) {
+                display: none;
+            }
+            
+            .nav-links {
+                gap: 0;
+            }
                 background: #ffffff;
             }
             
