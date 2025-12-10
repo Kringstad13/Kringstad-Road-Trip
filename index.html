@@ -795,6 +795,17 @@ Best Family Trip Ever! 🎉`;
         function OverviewTab({ tripData, completedPhases, togglePhaseComplete }) {
             return (
                 <div className="space-y-6">
+                    {/* AI Helper Box */}
+                    <div className="bg-gradient-to-r from-purple-50 to-pink-50 border-2 border-purple-200 rounded-xl p-4">
+                        <div className="flex items-start gap-3">
+                            <span className="text-2xl">✨</span>
+                            <div>
+                                <h3 className="font-bold text-purple-900 mb-1">AI Created Your Itinerary</h3>
+                                <p className="text-sm text-purple-800">Based on your preferences, AI planned your route, selected stops, estimated driving times, and found family-friendly highlights along the way.</p>
+                            </div>
+                        </div>
+                    </div>
+
                     {/* Fun Stats */}
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                         {[
@@ -880,6 +891,17 @@ Best Family Trip Ever! 🎉`;
         function PhasesTab({ tripData, completedPhases, togglePhaseComplete }) {
             return (
                 <div className="space-y-6">
+                    {/* AI Helper Box */}
+                    <div className="bg-gradient-to-r from-purple-50 to-pink-50 border-2 border-purple-200 rounded-xl p-4">
+                        <div className="flex items-start gap-3">
+                            <span className="text-2xl">🤖</span>
+                            <div>
+                                <h3 className="font-bold text-purple-900 mb-1">AI Found the Best Stops</h3>
+                                <p className="text-sm text-purple-800">AI researched each destination, found kid-friendly activities, adult experiences, photo spots, and local recommendations tailored to your family.</p>
+                            </div>
+                        </div>
+                    </div>
+
                     {tripData.phases.map((phase) => (
                         <div key={phase.id} className={`bg-white rounded-2xl shadow-lg p-6 border-l-8 ${completedPhases.includes(phase.id) ? 'border-green-400 opacity-80' : ''}`} style={{ borderLeftColor: completedPhases.includes(phase.id) ? '#4ade80' : phase.color }}>
                             <div className="flex items-start justify-between mb-4">
@@ -959,6 +981,17 @@ Best Family Trip Ever! 🎉`;
             const totalPhotos = Object.values(photos).reduce((sum, arr) => sum + arr.length, 0);
             return (
                 <div className="space-y-6">
+                    {/* AI Helper Box */}
+                    <div className="bg-gradient-to-r from-purple-50 to-pink-50 border-2 border-purple-200 rounded-xl p-4">
+                        <div className="flex items-start gap-3">
+                            <span className="text-2xl">🤖</span>
+                            <div>
+                                <h3 className="font-bold text-purple-900 mb-1">AI Organizes Your Photos</h3>
+                                <p className="text-sm text-purple-800">AI automatically organizes photos by location and creates a visual timeline of your journey. In the full product, AI can even suggest the best photos for your album!</p>
+                            </div>
+                        </div>
+                    </div>
+
                     <div className="bg-white rounded-2xl shadow-lg p-6">
                         <div className="flex items-center justify-between mb-6">
                             <h2 className="text-2xl font-bold">📸 Trip Photo Album</h2>
@@ -1125,6 +1158,17 @@ Best Family Trip Ever! 🎉`;
 
             return (
                 <div className="space-y-6">
+                    {/* AI Helper Box */}
+                    <div className="bg-gradient-to-r from-purple-50 to-pink-50 border-2 border-purple-200 rounded-xl p-4">
+                        <div className="flex items-start gap-3">
+                            <span className="text-2xl">✨</span>
+                            <div>
+                                <h3 className="font-bold text-purple-900 mb-1">AI Built Your Packing Lists</h3>
+                                <p className="text-sm text-purple-800">Based on your destination, weather forecast, trip duration, and activities, AI created customized packing lists for each family member.</p>
+                            </div>
+                        </div>
+                    </div>
+
                     <div className="bg-white rounded-2xl shadow-lg p-6">
                         <div className="flex items-center justify-between mb-6">
                             <h2 className="text-2xl font-bold">🎒 Family Packing Lists</h2>
@@ -1237,6 +1281,17 @@ Best Family Trip Ever! 🎉`;
 
             return (
                 <div className="space-y-6">
+                    {/* AI Helper Box */}
+                    <div className="bg-gradient-to-r from-purple-50 to-pink-50 border-2 border-purple-200 rounded-xl p-4">
+                        <div className="flex items-start gap-3">
+                            <span className="text-2xl">💡</span>
+                            <div>
+                                <h3 className="font-bold text-purple-900 mb-1">AI Helps Track Your Spending</h3>
+                                <p className="text-sm text-purple-800">AI can categorize expenses automatically from receipt photos and alert you when you're approaching budget limits in any category.</p>
+                            </div>
+                        </div>
+                    </div>
+
                     <div className="bg-white rounded-2xl shadow-lg p-6">
                         <h3 className="text-xl font-bold mb-4">💰 Trip Budget</h3>
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -1447,6 +1502,17 @@ Best Family Trip Ever! 🎉`;
 
             return (
                 <div className="space-y-6">
+                    {/* AI Helper Box */}
+                    <div className="bg-gradient-to-r from-purple-50 to-pink-50 border-2 border-purple-200 rounded-xl p-4">
+                        <div className="flex items-start gap-3">
+                            <span className="text-2xl">🎮</span>
+                            <div>
+                                <h3 className="font-bold text-purple-900 mb-1">AI Generated Custom Games</h3>
+                                <p className="text-sm text-purple-800">These road trip games were created by AI specifically for your route! You can ask AI to create more games like "trivia about California history" or "I Spy challenges for the Pacific Coast Highway".</p>
+                            </div>
+                        </div>
+                    </div>
+
                     {/* Fun Header */}
                     <div className="bg-gradient-to-r from-blue-100 via-orange-100 to-cyan-100 rounded-2xl p-6 text-center">
                         <h2 className="text-3xl font-bold text-gray-800 mb-2">🎮 Road Trip Games 🎉</h2>
