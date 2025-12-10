@@ -441,7 +441,7 @@ Submitted by: ${tripData.traveler.name}
                     <div className="max-w-6xl mx-auto px-4 py-6">
                         {activeTab === 'overview' && <OverviewTab tripData={tripData} completedPhases={completedPhases} togglePhaseComplete={togglePhaseComplete} totalBudget={totalBudget} totalSpent={totalSpent} />}
                         {activeTab === 'itinerary' && <ItineraryTab tripData={tripData} completedPhases={completedPhases} togglePhaseComplete={togglePhaseComplete} />}
-                        {activeTab === 'expenses' && <ExpensesTab expenses={expenses} setExpenses={setExpenses} totalSpent={totalSpent} totalBudget={totalBudget} budget={budget} receipts={receipts} setReceipts={setReceipts} exportExpenseReport={exportExpenseReport} />}
+                        {activeTab === 'expenses' && <ExpensesTab expenses={expenses} setExpenses={setExpenses} totalSpent={totalSpent} totalBudget={totalBudget} budget={budget} setBudget={setBudget} receipts={receipts} setReceipts={setReceipts} exportExpenseReport={exportExpenseReport} />}
                         {activeTab === 'packing' && <PackingTab tripData={tripData} checkedItems={checkedItems} togglePackingItem={togglePackingItem} />}
                         {activeTab === 'documents' && <DocumentsTab tripData={tripData} photos={photos} addPhoto={addPhoto} />}
                     </div>
@@ -711,8 +711,10 @@ Submitted by: ${tripData.traveler.name}
             );
         }
 
-        function ExpensesTab({ expenses, setExpenses, totalSpent, totalBudget, budget, receipts, setReceipts, exportExpenseReport }) {
+        function ExpensesTab({ expenses, setExpenses, totalSpent, totalBudget, budget, setBudget, receipts, setReceipts, exportExpenseReport }) {
             const [newExpense, setNewExpense] = useState({ category: 'meals', description: '', amount: '' });
+            const [editingBudget, setEditingBudget] = useState(null);
+            const [editingBudgetValue, setEditingBudgetValue] = useState('');
 
             const addExpense = () => {
                 if (newExpense.description && newExpense.amount) {
@@ -722,6 +724,27 @@ Submitted by: ${tripData.traveler.name}
                     }));
                     setNewExpense({ category: 'meals', description: '', amount: '' });
                 }
+            };
+
+            const startEditingBudget = (category, currentBudget) => {
+                setEditingBudget(category);
+                setEditingBudgetValue(currentBudget.toString());
+            };
+
+            const saveBudget = (category) => {
+                const newBudget = parseFloat(editingBudgetValue) || 0;
+                setBudget(prev => ({
+                    ...prev,
+                    [category]: Math.max(0, newBudget)
+                }));
+                setEditingBudget(null);
+                setEditingBudgetValue('');
+            };
+
+            const adjustBudget = (category, change) => {
+                const currentBudget = parseFloat(editingBudgetValue) || 0;
+                const newBudget = Math.max(0, currentBudget + change);
+                setEditingBudgetValue(newBudget.toFixed(0));
             };
 
             const handleReceiptUpload = (category, event) => {
@@ -795,7 +818,63 @@ Submitted by: ${tripData.traveler.name}
                                         <h4 className="font-medium text-gray-900">{icons[category]} {labels[category]}</h4>
                                         <div className="text-right">
                                             <div className="font-semibold text-gray-900">${spent.toFixed(2)}</div>
-                                            <div className="text-xs text-gray-500">of ${budgetAmount}</div>
+                                            {editingBudget === category ? (
+                                                <div className="flex items-center gap-1 justify-end mt-1">
+                                                    <span className="text-xs text-gray-500">of $</span>
+                                                    <button 
+                                                        onClick={() => adjustBudget(category, -100)}
+                                                        className="bg-red-100 hover:bg-red-200 text-red-600 px-1 py-0.5 rounded font-bold text-xs"
+                                                    >
+                                                        −100
+                                                    </button>
+                                                    <button 
+                                                        onClick={() => adjustBudget(category, -10)}
+                                                        className="bg-red-100 hover:bg-red-200 text-red-600 px-1.5 py-0.5 rounded font-bold text-xs"
+                                                    >
+                                                        −10
+                                                    </button>
+                                                    <input 
+                                                        type="number" 
+                                                        value={editingBudgetValue}
+                                                        onChange={(e) => setEditingBudgetValue(e.target.value)}
+                                                        className="w-16 px-1 py-0.5 border rounded text-center text-xs"
+                                                    />
+                                                    <button 
+                                                        onClick={() => adjustBudget(category, 10)}
+                                                        className="bg-green-100 hover:bg-green-200 text-green-600 px-1.5 py-0.5 rounded font-bold text-xs"
+                                                    >
+                                                        +10
+                                                    </button>
+                                                    <button 
+                                                        onClick={() => adjustBudget(category, 100)}
+                                                        className="bg-green-100 hover:bg-green-200 text-green-600 px-1 py-0.5 rounded font-bold text-xs"
+                                                    >
+                                                        +100
+                                                    </button>
+                                                    <button 
+                                                        onClick={() => saveBudget(category)}
+                                                        className="bg-blue-100 hover:bg-blue-200 text-blue-600 px-2 py-0.5 rounded text-xs ml-1"
+                                                    >
+                                                        ✓
+                                                    </button>
+                                                    <button 
+                                                        onClick={() => setEditingBudget(null)}
+                                                        className="bg-gray-100 hover:bg-gray-200 text-gray-600 px-2 py-0.5 rounded text-xs"
+                                                    >
+                                                        ✕
+                                                    </button>
+                                                </div>
+                                            ) : (
+                                                <div className="text-xs text-gray-500 flex items-center gap-2 justify-end">
+                                                    <span>of ${budgetAmount}</span>
+                                                    <button 
+                                                        onClick={() => startEditingBudget(category, budgetAmount)}
+                                                        className="text-blue-600 hover:text-blue-700 text-xs"
+                                                    >
+                                                        ✏️
+                                                    </button>
+                                                </div>
+                                            )}
                                         </div>
                                     </div>
                                     <div className="bg-gray-200 rounded-full h-2 overflow-hidden mb-3">

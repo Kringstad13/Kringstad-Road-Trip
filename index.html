@@ -1060,6 +1060,7 @@ Best Family Trip Ever! 🎉`;
             const [newExpense, setNewExpense] = useState({ category: 'food', description: '', amount: '' });
             const [editingBudget, setEditingBudget] = useState(null);
             const [editingExpense, setEditingExpense] = useState({ category: null, index: null, amount: '' });
+            const [editingBudgetValue, setEditingBudgetValue] = useState('');
 
             const addExpense = () => {
                 if (newExpense.description && newExpense.amount) {
@@ -1090,6 +1091,24 @@ Best Family Trip Ever! 🎉`;
 
             const startEditing = (category, index, currentAmount) => {
                 setEditingExpense({ category, index, amount: currentAmount });
+            };
+
+            const startEditingBudget = (category, currentBudget) => {
+                setEditingBudget(category);
+                setEditingBudgetValue(currentBudget.toString());
+            };
+
+            const saveBudget = (category) => {
+                const newBudget = parseFloat(editingBudgetValue) || 0;
+                updateBudget(category, Math.max(0, newBudget));
+                setEditingBudget(null);
+                setEditingBudgetValue('');
+            };
+
+            const adjustBudget = (category, change) => {
+                const currentBudget = parseFloat(editingBudgetValue) || 0;
+                const newBudget = Math.max(0, currentBudget + change);
+                setEditingBudgetValue(newBudget.toFixed(0));
             };
 
             const handleReceiptUpload = (category, event) => {
@@ -1151,7 +1170,63 @@ Best Family Trip Ever! 🎉`;
                                         <h4 className="font-bold text-lg capitalize">{icons[category]} {category === 'misc' ? 'Extras' : category}</h4>
                                         <div className="text-right">
                                             <div className="text-2xl font-bold text-blue-600">${spent.toFixed(2)}</div>
-                                            <div className="text-sm text-gray-500">of ${budgetAmount}</div>
+                                            {editingBudget === category ? (
+                                                <div className="flex items-center gap-1 justify-end mt-1">
+                                                    <span className="text-xs text-gray-500">of $</span>
+                                                    <button 
+                                                        onClick={() => adjustBudget(category, -10)}
+                                                        className="bg-red-100 hover:bg-red-200 text-red-600 px-1.5 py-0.5 rounded font-bold text-xs"
+                                                    >
+                                                        −10
+                                                    </button>
+                                                    <button 
+                                                        onClick={() => adjustBudget(category, -1)}
+                                                        className="bg-red-100 hover:bg-red-200 text-red-600 px-2 py-0.5 rounded font-bold text-xs"
+                                                    >
+                                                        −
+                                                    </button>
+                                                    <input 
+                                                        type="number" 
+                                                        value={editingBudgetValue}
+                                                        onChange={(e) => setEditingBudgetValue(e.target.value)}
+                                                        className="w-16 px-1 py-0.5 border rounded text-center text-xs"
+                                                    />
+                                                    <button 
+                                                        onClick={() => adjustBudget(category, 1)}
+                                                        className="bg-green-100 hover:bg-green-200 text-green-600 px-2 py-0.5 rounded font-bold text-xs"
+                                                    >
+                                                        +
+                                                    </button>
+                                                    <button 
+                                                        onClick={() => adjustBudget(category, 10)}
+                                                        className="bg-green-100 hover:bg-green-200 text-green-600 px-1.5 py-0.5 rounded font-bold text-xs"
+                                                    >
+                                                        +10
+                                                    </button>
+                                                    <button 
+                                                        onClick={() => saveBudget(category)}
+                                                        className="bg-blue-100 hover:bg-blue-200 text-blue-600 px-2 py-0.5 rounded text-xs ml-1"
+                                                    >
+                                                        ✓
+                                                    </button>
+                                                    <button 
+                                                        onClick={() => setEditingBudget(null)}
+                                                        className="bg-gray-100 hover:bg-gray-200 text-gray-600 px-2 py-0.5 rounded text-xs"
+                                                    >
+                                                        ✕
+                                                    </button>
+                                                </div>
+                                            ) : (
+                                                <div className="text-sm text-gray-500 flex items-center gap-2 justify-end">
+                                                    <span>of ${budgetAmount}</span>
+                                                    <button 
+                                                        onClick={() => startEditingBudget(category, budgetAmount)}
+                                                        className="text-blue-600 hover:text-blue-700 text-xs"
+                                                    >
+                                                        ✏️
+                                                    </button>
+                                                </div>
+                                            )}
                                         </div>
                                     </div>
                                     <div className="bg-gray-200 rounded-full h-3 overflow-hidden mb-4">
