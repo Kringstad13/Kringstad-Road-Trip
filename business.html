@@ -1229,6 +1229,55 @@
 
         /* Mobile Responsive Styles */
         @media (max-width: 768px) {
+            /* ============================================ */
+            /* MOBILE WHITE BACKGROUNDS                     */
+            /* ============================================ */
+            body {
+                background: #ffffff;
+            }
+            
+            /* Remove grain texture on mobile */
+            body::before {
+                display: none;
+            }
+            
+            .nav {
+                background: rgba(255, 255, 255, 0.95);
+            }
+            
+            .hero {
+                background: #ffffff;
+            }
+            
+            .use-cases {
+                background: #ffffff;
+            }
+            
+            .expense-management {
+                background: #ffffff;
+            }
+            
+            .how-it-works {
+                background: #ffffff;
+            }
+            
+            .pricing {
+                background: #ffffff;
+            }
+            
+            .roi {
+                background: #ffffff;
+            }
+            
+            /* Add subtle borders to cards for definition on white bg */
+            .use-case-card,
+            .expense-feature-card,
+            .pricing-card,
+            .roi-card,
+            .step-example {
+                border: 1px solid rgba(26, 26, 46, 0.08);
+            }
+            
             .nav {
                 padding: 0.75rem 1rem;
             }
@@ -1909,7 +1958,7 @@
             </div>
             <div id="errorMessage" class="message message-error hidden">
                 <p class="message-title">❌ Oops! Something went wrong.</p>
-                <p class="message-text">Please try again or email us at <a href="/cdn-cgi/l/email-protection#462f28202906342933322324332f2a22233468272f"><span class="__cf_email__" data-cfemail="f29b9c949db2809d87869790879b9e969780dc939b">[email&#160;protected]</span></a></p>
+                <p class="message-text">Please try again or email us at <a href="mailto:info@routebuilder.ai">info@routebuilder.ai</a></p>
             </div>
             
             <p class="cta-note"><span>🎁 First 100 signups</span> get lifetime 50% discount</p>
@@ -1941,7 +1990,7 @@
                 <div>
                     <h4 class="footer-column-title">Contact</h4>
                     <div class="footer-contact-item">
-                        Email: <a href="/cdn-cgi/l/email-protection#4e272028210e3c213b3a2b2c3b27222a2b3c602f27"><span class="__cf_email__" data-cfemail="d3babdb5bc93a1bca6a7b6b1a6babfb7b6a1fdb2ba">[email&#160;protected]</span></a>
+                        Email: <a href="mailto:info@routebuilder.ai">info@routebuilder.ai</a>
                     </div>
                     <div class="footer-contact-item">
                         Phone: <a href="tel:+13202793969">320-279-3969</a>
@@ -1965,7 +2014,7 @@
         </div>
     </footer>
 
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    <script>
         document.getElementById('signupForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             
