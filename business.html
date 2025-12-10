@@ -1909,7 +1909,7 @@
             </div>
             <div id="errorMessage" class="message message-error hidden">
                 <p class="message-title">❌ Oops! Something went wrong.</p>
-                <p class="message-text">Please try again or email us at <a href="mailto:info@routebuilder.ai">info@routebuilder.ai</a></p>
+                <p class="message-text">Please try again or email us at <a href="/cdn-cgi/l/email-protection#462f28202906342933322324332f2a22233468272f"><span class="__cf_email__" data-cfemail="f29b9c949db2809d87869790879b9e969780dc939b">[email&#160;protected]</span></a></p>
             </div>
             
             <p class="cta-note"><span>🎁 First 100 signups</span> get lifetime 50% discount</p>
@@ -1941,7 +1941,7 @@
                 <div>
                     <h4 class="footer-column-title">Contact</h4>
                     <div class="footer-contact-item">
-                        Email: <a href="mailto:info@routebuilder.ai">info@routebuilder.ai</a>
+                        Email: <a href="/cdn-cgi/l/email-protection#4e272028210e3c213b3a2b2c3b27222a2b3c602f27"><span class="__cf_email__" data-cfemail="d3babdb5bc93a1bca6a7b6b1a6babfb7b6a1fdb2ba">[email&#160;protected]</span></a>
                     </div>
                     <div class="footer-contact-item">
                         Phone: <a href="tel:+13202793969">320-279-3969</a>
@@ -1965,7 +1965,7 @@
         </div>
     </footer>
 
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
         document.getElementById('signupForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             
@@ -1999,14 +1999,36 @@
             };
             
             try {
-                await fetch('https://script.google.com/macros/s/AKfycbzc1N8dWmfENx5PpTIQgMRDDywF5RxaPBy-AqW1kgZD32SYXC8XmaJnahb5C8aUlZlcrA/exec', {
+                await fetch('https://script.google.com/macros/s/AKfycbyi2ZNa-pf884Y9seaOqDs_zK-XRHAvEZvIQRrdhNVGGQjteejcAUKN0qWN940Qo1kTnA/exec', {
                     method: 'POST',
                     mode: 'no-cors',
                     headers: {
-                        'Content-Type': 'application/json',
+                        'Content-Type': 'application/json'
                     },
                     body: JSON.stringify(data)
                 });
                 
                 // Show success message
-                form.classList.add('hidd
+                successMessage.classList.remove('hidden');
+                errorMessage.classList.add('hidden');
+                form.reset();
+                
+                // Re-enable button after delay
+                setTimeout(() => {
+                    submitButton.disabled = false;
+                    submitButton.textContent = 'Join the Waitlist';
+                }, 2000);
+                
+            } catch (error) {
+                // Show error message
+                errorMessage.classList.remove('hidden');
+                successMessage.classList.add('hidden');
+                
+                // Re-enable button
+                submitButton.disabled = false;
+                submitButton.textContent = 'Join the Waitlist';
+            }
+        });
+    </script>
+</body>
+</html>

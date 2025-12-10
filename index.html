@@ -1474,7 +1474,7 @@
             <div class="footer-section">
                 <h3>Contact</h3>
                 <div class="contact-info">
-                    <p>Email: <a href="/cdn-cgi/l/email-protection#a3cacdc5cce3d1ccd6d7c6c1d6cacfc7c6d18dc2ca"><span class="__cf_email__" data-cfemail="0b62656d644b79647e7f6e697e62676f6e79256a62">[email&#160;protected]</span></a></p>
+                    <p>Email: <a href="mailto:info@routebuilder.ai">info@routebuilder.ai</a></p>
                     <p>Phone: <a href="tel:+13202793969">320-279-3969</a></p>
                     <p>Coming Q1 2026</p>
                 </div>
@@ -1505,8 +1505,29 @@
             submitButton.textContent = 'Submitting...';
             submitButton.disabled = true;
             
-            fetch('https://script.google.com/macros/s/AKfycbzc1N8dWmfENx5PpTIQgMRDDywF5RxaPBy-AqW1kgZD32SYXC8XmaJnahb5C8aUlZlcrA/exec', {
+            fetch('https://script.google.com/macros/s/AKfycbyi2ZNa-pf884Y9seaOqDs_zK-XRHAvEZvIQRrdhNVGGQjteejcAUKN0qWN940Qo1kTnA/exec', {
                 method: 'POST',
                 mode: 'no-cors',
-                headers: {
-                    'Content-T
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+            .then(() => {
+                // Show success message
+                document.getElementById('successMessage').style.display = 'block';
+                document.getElementById('errorMessage').style.display = 'none';
+                this.reset();
+                submitButton.textContent = originalText;
+                submitButton.disabled = false;
+            })
+            .catch(error => {
+                // Show error message
+                document.getElementById('errorMessage').style.display = 'block';
+                document.getElementById('successMessage').style.display = 'none';
+                submitButton.textContent = originalText;
+                submitButton.disabled = false;
+            });
+        });
+    </script>
+</body>
+</html>
