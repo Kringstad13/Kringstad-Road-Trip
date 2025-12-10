@@ -1569,6 +1569,16 @@
         </div>
     </section>
 
+    <!-- Dashboard Preview Section -->
+    <section style="padding: 4rem clamp(1rem, 5vw, 2rem); background: var(--cream-warm); text-align: center;">
+        <div style="max-width: 1200px; margin: 0 auto;">
+            <h2 style="font-size: clamp(2rem, 4vw, 2.5rem); margin-bottom: 1rem; color: var(--ink);">See It In Action</h2>
+            <p style="font-size: 1.1rem; color: var(--ink-muted); margin-bottom: 3rem;">Real expense tracking dashboard used by our corporate clients</p>
+            <img src="corporate-dashboard-preview.png" alt="Corporate Expense Dashboard Preview" style="max-width: 100%; border-radius: 20px; box-shadow: var(--shadow-lg);">
+            <a href="https://kringstad13.github.io/Kringstad-Road-Trip/demo-corporate.html" target="_blank" rel="noopener noreferrer" style="display: inline-block; margin-top: 2rem; background: var(--ink); color: var(--cream); padding: 1rem 2rem; border-radius: var(--radius-sm); text-decoration: none; font-weight: 600; transition: all 0.2s ease;">Try Interactive Demo →</a>
+        </div>
+    </section>
+
     <!-- Expense Management Section -->
     <section class="expense-management" id="expense-management">
         <div class="expense-content">
@@ -1598,6 +1608,11 @@
                     <div class="expense-feature-icon">👥</div>
                     <h3 class="expense-feature-title">Share with Finance Team</h3>
                     <p class="expense-feature-description">Give your admin or finance team view-only access. They can monitor expenses in real-time without interrupting your meetings. Everyone stays informed.</p>
+                </div>
+                <div class="expense-feature">
+                    <div class="expense-feature-icon">🏢</div>
+                    <h3 class="expense-feature-title">Multi-Trip Management</h3>
+                    <p class="expense-feature-description">Track multiple business trips simultaneously. Compare spending patterns, analyze trends, and optimize future travel budgets across your entire team.</p>
                 </div>
             </div>
 
@@ -1899,7 +1914,7 @@
             </div>
             <div id="errorMessage" class="message message-error hidden">
                 <p class="message-title">❌ Oops! Something went wrong.</p>
-                <p class="message-text">Please try again or email us at <a href="mailto:info@routebuilder.ai">info@routebuilder.ai</a></p>
+                <p class="message-text">Please try again or email us at <a href="/cdn-cgi/l/email-protection#e78e898188a7958892938285928e8b838295c9868e"><span class="__cf_email__" data-cfemail="375e59515877455842435255425e5b53524519565e">[email&#160;protected]</span></a></p>
             </div>
             
             <p class="cta-note"><span>🎁 First 100 signups</span> get lifetime 50% discount</p>
@@ -1931,7 +1946,7 @@
                 <div>
                     <h4 class="footer-column-title">Contact</h4>
                     <div class="footer-contact-item">
-                        Email: <a href="mailto:info@routebuilder.ai">info@routebuilder.ai</a>
+                        Email: <a href="/cdn-cgi/l/email-protection#b2dbdcd4ddf2c0ddc7c6d7d0c7dbded6d7c09cd3db"><span class="__cf_email__" data-cfemail="660f08000926140913120304130f0a02031448070f">[email&#160;protected]</span></a>
                     </div>
                     <div class="footer-contact-item">
                         Phone: <a href="tel:+13202793969">320-279-3969</a>
@@ -1955,7 +1970,7 @@
         </div>
     </footer>
 
-    <script>
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
         document.getElementById('signupForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             
@@ -1996,15 +2011,4 @@
                 
                 // Show success message
                 form.classList.add('hidden');
-                successMessage.classList.remove('hidden');
-                
-            } catch (error) {
-                // Show error message
-                errorMessage.classList.remove('hidden');
-                submitButton.disabled = false;
-                submitButton.textContent = 'Join the Waitlist — It\'s Free →';
-            }
-        });
-    </script>
-</body>
-</html>
+     
