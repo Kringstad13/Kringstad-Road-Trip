@@ -74,7 +74,7 @@
             left: 0;
             right: 0;
             z-index: 1000;
-            padding: 1rem 2rem;
+            padding: 1rem clamp(1rem, 5vw, 2rem);
             background: rgba(250, 249, 247, 0.9);
             backdrop-filter: blur(20px);
             border-bottom: 1px solid rgba(26, 26, 46, 0.06);
@@ -87,6 +87,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            gap: 1rem;
         }
 
         .nav-logo {
@@ -95,6 +96,7 @@
             gap: 0.75rem;
             text-decoration: none;
             color: var(--ink);
+            flex-shrink: 0;
         }
 
         .nav-logo-icon {
@@ -128,7 +130,8 @@
         .nav-links {
             display: flex;
             align-items: center;
-            gap: 2rem;
+            gap: 1rem;
+            flex-wrap: wrap;
         }
 
         .nav-link {
@@ -137,6 +140,7 @@
             font-size: 0.9rem;
             font-weight: 500;
             transition: color 0.2s ease;
+            white-space: nowrap;
         }
 
         .nav-link:hover {
@@ -152,6 +156,7 @@
             font-weight: 600;
             font-size: 0.9rem;
             transition: all 0.2s ease;
+            white-space: nowrap;
         }
 
         .nav-cta:hover {
@@ -162,7 +167,7 @@
         /* Hero Section */
         .hero {
             min-height: 100vh;
-            padding: 8rem 2rem 6rem;
+            padding: 8rem clamp(1rem, 5vw, 2rem) 6rem;
             display: flex;
             align-items: center;
             position: relative;
@@ -185,9 +190,10 @@
             max-width: 1200px;
             margin: 0 auto;
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: 1fr;
             gap: 4rem;
             align-items: center;
+            width: 100%;
         }
 
         .hero-text {
@@ -207,76 +213,50 @@
             color: var(--ink-muted);
             box-shadow: var(--shadow-sm);
             margin-bottom: 1.5rem;
-            animation: fadeInUp 0.6s ease;
         }
 
-        .hero-badge-dot {
-            width: 8px;
-            height: 8px;
-            background: var(--emerald);
-            border-radius: 50%;
-            animation: pulse 2s ease-in-out infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.7; transform: scale(1.1); }
-        }
-
-        .hero h1 {
-            font-size: clamp(2.5rem, 5vw, 3.75rem);
-            color: var(--ink);
+        .hero-title {
+            font-size: clamp(2rem, 5vw, 3.5rem);
             margin-bottom: 1.5rem;
-            animation: fadeInUp 0.6s ease 0.1s both;
+            line-height: 1.1;
         }
 
-        .hero h1 span {
-            color: var(--gold-dark);
-        }
-
-        .hero-subtitle {
-            font-size: 1.2rem;
+        .hero-description {
+            font-size: clamp(1rem, 2.5vw, 1.25rem);
             color: var(--ink-muted);
             margin-bottom: 2rem;
-            max-width: 500px;
-            animation: fadeInUp 0.6s ease 0.2s both;
+            line-height: 1.6;
+            max-width: 600px;
         }
 
         .hero-stats {
-            display: flex;
-            gap: 3rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 2rem;
             margin-bottom: 2.5rem;
-            animation: fadeInUp 0.6s ease 0.3s both;
         }
 
-        .hero-stat {
-            text-align: left;
-        }
-
-        .hero-stat-number {
+        .hero-stat-value {
             font-family: 'Fraunces', serif;
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: var(--ink);
-            line-height: 1;
+            font-size: 2rem;
+            font-weight: 600;
+            color: var(--gold-dark);
+            display: block;
+            margin-bottom: 0.25rem;
         }
 
         .hero-stat-label {
             font-size: 0.85rem;
             color: var(--ink-muted);
-            margin-top: 0.25rem;
         }
 
-        .hero-actions {
+        .hero-ctas {
             display: flex;
             gap: 1rem;
-            animation: fadeInUp 0.6s ease 0.4s both;
+            flex-wrap: wrap;
         }
 
         .btn-primary {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
             background: var(--ink);
             color: var(--cream);
             padding: 1rem 2rem;
@@ -284,21 +264,19 @@
             text-decoration: none;
             font-weight: 600;
             font-size: 1rem;
-            transition: all 0.3s ease;
-            border: none;
-            cursor: pointer;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            border: 2px solid transparent;
         }
 
         .btn-primary:hover {
             background: var(--ink-light);
             transform: translateY(-2px);
-            box-shadow: var(--shadow-md);
         }
 
         .btn-secondary {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
             background: var(--white);
             color: var(--ink);
             padding: 1rem 2rem;
@@ -306,445 +284,123 @@
             text-decoration: none;
             font-weight: 600;
             font-size: 1rem;
-            transition: all 0.3s ease;
-            border: 1px solid rgba(26, 26, 46, 0.1);
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            border: 2px solid var(--ink);
         }
 
         .btn-secondary:hover {
-            border-color: var(--ink);
+            background: var(--cream-warm);
             transform: translateY(-2px);
         }
 
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Hero Visual */
         .hero-visual {
             position: relative;
-            animation: fadeInUp 0.8s ease 0.3s both;
+            z-index: 1;
         }
 
-        .hero-card {
+        .hero-dashboard {
             background: var(--white);
             border-radius: var(--radius-lg);
             box-shadow: var(--shadow-lg);
             overflow: hidden;
-            position: relative;
+            transform: perspective(1000px) rotateY(-5deg);
+            transition: transform 0.3s ease;
         }
 
-        .hero-card-header {
-            background: linear-gradient(135deg, var(--ink) 0%, var(--ink-light) 100%);
-            padding: 1.5rem 2rem;
-            color: var(--cream);
+        .hero-dashboard:hover {
+            transform: perspective(1000px) rotateY(0deg);
         }
 
-        .hero-card-title {
-            font-size: 0.8rem;
+        .dashboard-header {
+            background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%);
+            color: var(--white);
+            padding: 1.5rem;
+        }
+
+        .dashboard-badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.25rem 0.75rem;
+            border-radius: 100px;
+            font-size: 0.75rem;
             font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            opacity: 0.7;
             margin-bottom: 0.5rem;
         }
 
-        .hero-card-route {
-            font-family: 'Fraunces', serif;
+        .dashboard-title {
             font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .dashboard-route {
             display: flex;
             align-items: center;
             gap: 1rem;
+            font-size: 1.25rem;
+            opacity: 0.9;
         }
 
-        .hero-card-arrow {
-            width: 40px;
-            height: 2px;
-            background: var(--gold);
-            position: relative;
-        }
-
-        .hero-card-arrow::after {
-            content: '';
-            position: absolute;
-            right: 0;
-            top: -4px;
-            border: solid var(--gold);
-            border-width: 0 2px 2px 0;
-            padding: 4px;
-            transform: rotate(-45deg);
-        }
-
-        .hero-card-body {
-            padding: 1.5rem 2rem;
-        }
-
-        .hero-card-tabs {
+        .dashboard-tabs {
             display: flex;
-            gap: 0.5rem;
+            border-bottom: 1px solid rgba(26, 26, 46, 0.08);
+            overflow-x: auto;
+        }
+
+        .dashboard-tab {
+            padding: 1rem 1.5rem;
+            background: none;
+            border: none;
+            color: var(--ink-muted);
+            font-weight: 500;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border-bottom: 2px solid transparent;
+            white-space: nowrap;
+        }
+
+        .dashboard-tab.active {
+            color: var(--ink);
+            border-bottom-color: var(--gold);
+        }
+
+        .dashboard-body {
+            padding: 1.5rem;
+        }
+
+        .dashboard-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
             margin-bottom: 1.5rem;
         }
 
-        .hero-card-tab {
-            padding: 0.5rem 1rem;
-            font-size: 0.8rem;
-            font-weight: 500;
-            border-radius: var(--radius-sm);
-            background: var(--cream);
-            color: var(--ink-muted);
-        }
-
-        .hero-card-tab.active {
-            background: var(--ink);
-            color: var(--cream);
-        }
-
-        .hero-card-details {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1rem;
-        }
-
-        .hero-card-detail {
-            padding: 1rem;
+        .dashboard-metric {
             background: var(--cream-warm);
+            padding: 1rem;
             border-radius: var(--radius-sm);
         }
 
-        .hero-card-detail-label {
-            font-size: 0.75rem;
+        .dashboard-metric-label {
+            font-size: 0.8rem;
             color: var(--ink-muted);
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            margin-bottom: 0.25rem;
+            margin-bottom: 0.5rem;
         }
 
-        .hero-card-detail-value {
+        .dashboard-metric-value {
             font-family: 'Fraunces', serif;
-            font-size: 1.1rem;
+            font-size: 1.5rem;
             font-weight: 600;
             color: var(--ink);
-        }
-
-        .hero-card-floating {
-            position: absolute;
-            background: var(--white);
-            border-radius: var(--radius-md);
-            box-shadow: var(--shadow-md);
-            padding: 1rem 1.25rem;
-            animation: float 3s ease-in-out infinite;
-        }
-
-        .hero-card-floating.ai {
-            top: -20px;
-            right: -20px;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .hero-card-floating.ai::before {
-            content: '✨';
-            font-size: 1.25rem;
-        }
-
-        .hero-card-floating.savings {
-            bottom: 30px;
-            left: -30px;
-            animation-delay: 1.5s;
-        }
-
-        .hero-card-floating-label {
-            font-size: 0.75rem;
-            color: var(--ink-muted);
-        }
-
-        .hero-card-floating-value {
-            font-family: 'Fraunces', serif;
-            font-size: 1.25rem;
-            font-weight: 700;
-            color: var(--emerald);
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
         }
 
         /* Use Cases Section */
         .use-cases {
-            padding: 6rem 2rem;
+            padding: 6rem clamp(1rem, 5vw, 2rem);
             background: var(--white);
-        }
-
-        /* Expense Management Section */
-        .expense-section {
-            padding: 6rem 2rem;
-            background: linear-gradient(135deg, var(--ink) 0%, var(--ink-light) 100%);
-            color: var(--cream);
-        }
-
-        .expense-content {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .expense-header {
-            text-align: center;
-            margin-bottom: 4rem;
-        }
-
-        .expense-header .section-eyebrow {
-            color: var(--gold);
-            background: rgba(201, 169, 98, 0.15);
-        }
-
-        .expense-header .section-title {
-            color: var(--cream);
-        }
-
-        .expense-header .section-subtitle {
-            color: rgba(250, 249, 247, 0.7);
-        }
-
-        .expense-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-            align-items: center;
-        }
-
-        @media (max-width: 900px) {
-            .expense-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        .expense-features {
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-        }
-
-        .expense-feature-card {
-            background: rgba(255, 255, 255, 0.08);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: var(--radius-md);
-            padding: 1.5rem;
-            transition: all 0.3s ease;
-        }
-
-        .expense-feature-card:hover {
-            background: rgba(255, 255, 255, 0.12);
-            transform: translateX(8px);
-        }
-
-        .expense-feature-icon {
-            font-size: 2rem;
-            margin-bottom: 0.75rem;
-        }
-
-        .expense-feature-title {
-            font-family: 'Fraunces', serif;
-            font-size: 1.25rem;
-            font-weight: 600;
-            color: var(--cream);
-            margin-bottom: 0.5rem;
-        }
-
-        .expense-feature-description {
-            font-size: 0.95rem;
-            color: rgba(250, 249, 247, 0.7);
-            line-height: 1.6;
-        }
-
-        .expense-mockup {
-            background: var(--white);
-            border-radius: var(--radius-lg);
-            box-shadow: var(--shadow-lg);
-            overflow: hidden;
-        }
-
-        .expense-mockup-header {
-            background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%);
-            padding: 1rem 1.5rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .expense-mockup-title {
-            font-family: 'Fraunces', serif;
-            color: var(--ink);
-            font-weight: 600;
-        }
-
-        .expense-mockup-badge {
-            background: var(--ink);
-            color: var(--gold);
-            padding: 0.25rem 0.75rem;
-            border-radius: 999px;
-            font-size: 0.75rem;
-            font-weight: 600;
-        }
-
-        .expense-mockup-body {
-            padding: 1.5rem;
-            background: var(--cream);
-        }
-
-        .expense-mockup-stats {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .expense-mockup-stat {
-            background: var(--white);
-            border-radius: var(--radius-sm);
-            padding: 1rem;
-            text-align: center;
-            border: 1px solid rgba(26, 26, 46, 0.08);
-        }
-
-        .expense-mockup-stat-value {
-            font-family: 'Fraunces', serif;
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--ink);
-        }
-
-        .expense-mockup-stat-value.green { color: var(--emerald); }
-        .expense-mockup-stat-value.gold { color: var(--gold-dark); }
-
-        .expense-mockup-stat-label {
-            font-size: 0.7rem;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            color: var(--ink-muted);
-            margin-top: 0.25rem;
-        }
-
-        .expense-mockup-receipt {
-            background: var(--white);
-            border-radius: var(--radius-sm);
-            padding: 1rem;
-            margin-bottom: 1rem;
-            border: 1px solid rgba(26, 26, 46, 0.08);
-        }
-
-        .expense-mockup-receipt-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 0.75rem;
-            padding-bottom: 0.75rem;
-            border-bottom: 1px dashed rgba(26, 26, 46, 0.1);
-        }
-
-        .expense-mockup-receipt-title {
-            font-weight: 600;
-            color: var(--ink);
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .expense-mockup-receipt-amount {
-            font-family: 'Fraunces', serif;
-            font-weight: 700;
-            color: var(--ink);
-        }
-
-        .expense-mockup-receipt-details {
-            display: flex;
-            gap: 1rem;
-            font-size: 0.85rem;
-            color: var(--ink-muted);
-        }
-
-        .expense-mockup-receipt-photo {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-size: 0.8rem;
-            color: var(--emerald);
-            margin-top: 0.5rem;
-        }
-
-        .expense-mockup-categories {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 0.5rem;
-        }
-
-        .expense-mockup-category {
-            text-align: center;
-            padding: 0.75rem 0.5rem;
-            background: var(--white);
-            border-radius: var(--radius-sm);
-            border: 1px solid rgba(26, 26, 46, 0.08);
-        }
-
-        .expense-mockup-category-icon {
-            font-size: 1.25rem;
-            margin-bottom: 0.25rem;
-        }
-
-        .expense-mockup-category-name {
-            font-size: 0.7rem;
-            color: var(--ink-muted);
-        }
-
-        .expense-mockup-category-amount {
-            font-family: 'Fraunces', serif;
-            font-weight: 600;
-            font-size: 0.9rem;
-            color: var(--ink);
-        }
-
-        .expense-bottom-features {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 1.5rem;
-            margin-top: 4rem;
-            padding-top: 3rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        @media (max-width: 900px) {
-            .expense-bottom-features {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        .expense-bottom-feature {
-            text-align: center;
-        }
-
-        .expense-bottom-feature-icon {
-            font-size: 2.5rem;
-            margin-bottom: 0.75rem;
-        }
-
-        .expense-bottom-feature-title {
-            font-family: 'Fraunces', serif;
-            font-size: 1rem;
-            font-weight: 600;
-            color: var(--cream);
-            margin-bottom: 0.5rem;
-        }
-
-        .expense-bottom-feature-desc {
-            font-size: 0.85rem;
-            color: rgba(250, 249, 247, 0.6);
         }
 
         .use-cases-content {
@@ -759,22 +415,24 @@
 
         .section-eyebrow {
             display: inline-block;
-            font-size: 0.8rem;
+            background: var(--gold-light);
+            color: var(--gold-dark);
+            padding: 0.5rem 1rem;
+            border-radius: 100px;
+            font-size: 0.85rem;
             font-weight: 600;
             text-transform: uppercase;
-            letter-spacing: 0.15em;
-            color: var(--gold-dark);
+            letter-spacing: 0.05em;
             margin-bottom: 1rem;
         }
 
         .section-title {
-            font-size: clamp(2rem, 4vw, 2.75rem);
-            color: var(--ink);
+            font-size: clamp(2rem, 4vw, 2.5rem);
             margin-bottom: 1rem;
         }
 
         .section-subtitle {
-            font-size: 1.1rem;
+            font-size: clamp(1rem, 2vw, 1.125rem);
             color: var(--ink-muted);
             max-width: 600px;
             margin: 0 auto;
@@ -782,16 +440,14 @@
 
         .use-cases-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 2rem;
         }
 
         .use-case-card {
-            background: var(--cream);
-            border-radius: var(--radius-lg);
-            padding: 2.5rem;
-            position: relative;
-            overflow: hidden;
+            background: var(--cream-warm);
+            padding: 2rem;
+            border-radius: var(--radius-md);
             transition: all 0.3s ease;
         }
 
@@ -800,279 +456,435 @@
             box-shadow: var(--shadow-md);
         }
 
-        .use-case-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 4px;
-            height: 100%;
-            background: var(--gold);
-        }
-
         .use-case-icon {
             width: 60px;
             height: 60px;
             background: var(--white);
-            border-radius: var(--radius-md);
+            border-radius: var(--radius-sm);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.75rem;
+            font-size: 2rem;
             margin-bottom: 1.5rem;
-            box-shadow: var(--shadow-sm);
         }
 
         .use-case-title {
-            font-size: 1.5rem;
-            color: var(--ink);
+            font-size: 1.25rem;
             margin-bottom: 0.75rem;
         }
 
         .use-case-description {
             color: var(--ink-muted);
-            margin-bottom: 1.5rem;
-            font-size: 1rem;
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
         }
 
         .use-case-example {
             background: var(--white);
-            border-radius: var(--radius-md);
-            padding: 1.5rem;
-            margin-bottom: 1.5rem;
+            padding: 1rem;
+            border-radius: var(--radius-sm);
+            font-size: 0.85rem;
         }
 
-        .use-case-example-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1rem;
-            padding-bottom: 1rem;
-            border-bottom: 1px solid rgba(26, 26, 46, 0.06);
-        }
-
-        .use-case-example-title {
+        .example-label {
             font-weight: 600;
-            color: var(--ink);
-            font-size: 0.9rem;
+            color: var(--gold-dark);
+            display: block;
+            margin-bottom: 0.5rem;
         }
 
-        .use-case-example-badge {
-            font-size: 0.75rem;
-            font-weight: 600;
-            color: var(--emerald);
-            background: rgba(45, 106, 79, 0.1);
-            padding: 0.25rem 0.75rem;
-            border-radius: 100px;
-        }
-
-        .use-case-example-details {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 0.75rem;
-        }
-
-        .use-case-example-detail {
+        .example-detail {
             display: flex;
             align-items: center;
             gap: 0.5rem;
-            font-size: 0.85rem;
+            margin-bottom: 0.25rem;
             color: var(--ink-muted);
         }
 
-        .use-case-example-detail span {
-            color: var(--ink);
-            font-weight: 500;
-        }
-
-        .use-case-features {
+        .example-features {
+            margin-top: 1rem;
             display: flex;
             flex-wrap: wrap;
             gap: 0.5rem;
         }
 
-        .use-case-feature {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.35rem;
-            font-size: 0.85rem;
-            color: var(--ink-muted);
-            background: var(--white);
-            padding: 0.5rem 0.75rem;
+        .example-feature {
+            background: var(--cream-warm);
+            padding: 0.25rem 0.75rem;
             border-radius: 100px;
+            font-size: 0.75rem;
+            color: var(--ink-muted);
         }
 
-        .use-case-feature::before {
-            content: '✓';
-            color: var(--emerald);
-            font-weight: 700;
+        /* Expense Section */
+        .expense-management {
+            padding: 6rem clamp(1rem, 5vw, 2rem);
+            background: var(--cream-warm);
         }
 
-        /* Process Section */
-        .process {
-            padding: 6rem 2rem;
-            background: linear-gradient(180deg, var(--cream) 0%, var(--cream-warm) 100%);
-        }
-
-        .process-content {
-            max-width: 1000px;
+        .expense-content {
+            max-width: 1200px;
             margin: 0 auto;
         }
 
-        .process-steps {
-            display: flex;
-            flex-direction: column;
-            gap: 3rem;
+        .expense-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
         }
 
-        .process-step {
+        .expense-feature {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: var(--radius-md);
+        }
+
+        .expense-feature-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--gold-light);
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .expense-feature-title {
+            font-size: 1.125rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .expense-feature-description {
+            color: var(--ink-muted);
+            font-size: 0.95rem;
+        }
+
+        .expense-demo {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            box-shadow: var(--shadow-md);
             display: grid;
-            grid-template-columns: auto 1fr;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+
+        .expense-demo-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .expense-demo-title {
+            font-size: 1.5rem;
+        }
+
+        .expense-demo-budget {
+            text-align: right;
+        }
+
+        .expense-budget-label {
+            font-size: 0.85rem;
+            color: var(--ink-muted);
+            margin-bottom: 0.25rem;
+        }
+
+        .expense-budget-amounts {
+            display: flex;
+            gap: 1rem;
+            justify-content: flex-end;
+        }
+
+        .expense-budget-amount {
+            font-family: 'Fraunces', serif;
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+
+        .expense-budget-spent {
+            color: var(--emerald);
+        }
+
+        .expense-budget-remaining {
+            color: var(--ink-muted);
+        }
+
+        .expense-receipts {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .expense-receipt {
+            background: var(--cream-warm);
+            padding: 1rem;
+            border-radius: var(--radius-sm);
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .expense-receipt-details {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+
+        .expense-receipt-vendor {
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .expense-receipt-info {
+            font-size: 0.85rem;
+            color: var(--ink-muted);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+
+        .expense-receipt-amount {
+            font-family: 'Fraunces', serif;
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--ink);
+        }
+
+        .expense-receipt-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.25rem;
+            background: var(--emerald-light);
+            color: var(--white);
+            padding: 0.25rem 0.75rem;
+            border-radius: 100px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-top: 0.5rem;
+        }
+
+        .expense-categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+        }
+
+        .expense-category {
+            background: var(--cream-warm);
+            padding: 1rem;
+            border-radius: var(--radius-sm);
+            text-align: center;
+        }
+
+        .expense-category-icon {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .expense-category-label {
+            font-size: 0.85rem;
+            color: var(--ink-muted);
+            margin-bottom: 0.25rem;
+        }
+
+        .expense-category-amount {
+            font-family: 'Fraunces', serif;
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--ink);
+        }
+
+        .expense-features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .expense-mini-feature {
+            background: var(--white);
+            padding: 1.5rem;
+            border-radius: var(--radius-sm);
+            text-align: center;
+        }
+
+        .expense-mini-feature-icon {
+            font-size: 2rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .expense-mini-feature-title {
+            font-weight: 600;
+            font-size: 0.95rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .expense-mini-feature-description {
+            font-size: 0.85rem;
+            color: var(--ink-muted);
+        }
+
+        /* How It Works Section */
+        .how-it-works {
+            padding: 6rem clamp(1rem, 5vw, 2rem);
+            background: var(--white);
+        }
+
+        .how-it-works-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .steps {
+            display: grid;
+            gap: 3rem;
+            margin-top: 4rem;
+        }
+
+        .step {
+            display: grid;
+            grid-template-columns: 1fr;
             gap: 2rem;
             align-items: start;
         }
 
-        .process-step-number {
+        .step-number {
             width: 60px;
             height: 60px;
-            background: var(--ink);
-            color: var(--gold);
-            border-radius: 50%;
+            background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%);
+            color: var(--white);
+            border-radius: var(--radius-sm);
             display: flex;
             align-items: center;
             justify-content: center;
             font-family: 'Fraunces', serif;
-            font-size: 1.5rem;
-            font-weight: 700;
+            font-size: 2rem;
+            font-weight: 600;
             flex-shrink: 0;
         }
 
-        .process-step-content {
-            background: var(--white);
-            border-radius: var(--radius-lg);
-            padding: 2rem;
-            box-shadow: var(--shadow-sm);
+        .step-content {
+            flex: 1;
         }
 
-        .process-step-title {
-            font-size: 1.35rem;
-            color: var(--ink);
+        .step-title {
+            font-size: 1.5rem;
             margin-bottom: 0.75rem;
         }
 
-        .process-step-description {
+        .step-description {
             color: var(--ink-muted);
-            margin-bottom: 1.25rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
         }
 
-        .process-step-example {
-            background: var(--cream);
-            padding: 1.25rem;
+        .step-example {
+            background: var(--cream-warm);
+            padding: 1.5rem;
             border-radius: var(--radius-sm);
-            font-family: 'DM Sans', sans-serif;
-            font-size: 0.95rem;
-            color: var(--ink);
-            border-left: 3px solid var(--gold);
+            border-left: 4px solid var(--gold);
+        }
+
+        .step-example-label {
+            font-weight: 600;
+            color: var(--gold-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .step-example-text {
+            color: var(--ink-muted);
+            font-style: italic;
+            line-height: 1.6;
         }
 
         /* Pricing Section */
         .pricing {
-            padding: 6rem 2rem;
-            background: var(--white);
+            padding: 6rem clamp(1rem, 5vw, 2rem);
+            background: var(--cream-warm);
         }
 
         .pricing-content {
-            max-width: 1100px;
+            max-width: 1200px;
             margin: 0 auto;
         }
 
         .pricing-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1.5rem;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 4rem;
         }
 
         .pricing-card {
-            background: var(--cream);
-            border-radius: var(--radius-lg);
-            padding: 2.5rem;
-            position: relative;
+            background: var(--white);
+            padding: 2rem;
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-sm);
             transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
         }
 
         .pricing-card:hover {
             transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
         }
 
         .pricing-card.featured {
-            background: var(--ink);
-            color: var(--cream);
+            border: 2px solid var(--gold);
+            position: relative;
         }
 
-        .pricing-card.featured .pricing-card-price,
-        .pricing-card.featured .pricing-card-title {
-            color: var(--cream);
-        }
-
-        .pricing-card.featured .pricing-card-description,
-        .pricing-card.featured .pricing-card-feature {
-            color: rgba(250, 249, 247, 0.7);
-        }
-
-        .pricing-card.featured .pricing-card-feature::before {
-            color: var(--gold);
-        }
-
-        .pricing-badge {
+        .pricing-card-badge {
             position: absolute;
             top: -12px;
             left: 50%;
             transform: translateX(-50%);
             background: var(--gold);
-            color: var(--ink);
-            font-size: 0.75rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
+            color: var(--white);
             padding: 0.5rem 1rem;
             border-radius: 100px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
         }
 
         .pricing-card-eyebrow {
-            font-size: 0.8rem;
+            font-size: 0.85rem;
             font-weight: 600;
+            color: var(--ink-muted);
             text-transform: uppercase;
-            letter-spacing: 0.1em;
-            color: var(--gold-dark);
+            letter-spacing: 0.05em;
             margin-bottom: 0.5rem;
-        }
-
-        .pricing-card.featured .pricing-card-eyebrow {
-            color: var(--gold);
         }
 
         .pricing-card-title {
             font-size: 1.5rem;
-            color: var(--ink);
             margin-bottom: 0.5rem;
         }
 
         .pricing-card-price {
             font-family: 'Fraunces', serif;
             font-size: 3rem;
-            font-weight: 700;
-            color: var(--ink);
-            margin-bottom: 0.25rem;
+            font-weight: 600;
+            color: var(--gold-dark);
+            margin: 1rem 0;
         }
 
-        .pricing-card-price span {
+        .pricing-card-period {
             font-size: 1rem;
             font-weight: 400;
-            opacity: 0.7;
+            color: var(--ink-muted);
         }
 
         .pricing-card-description {
-            font-size: 0.9rem;
             color: var(--ink-muted);
             margin-bottom: 2rem;
         }
@@ -1080,189 +892,162 @@
         .pricing-card-features {
             list-style: none;
             margin-bottom: 2rem;
+            flex-grow: 1;
         }
 
         .pricing-card-feature {
+            padding: 0.75rem 0;
+            border-bottom: 1px solid rgba(26, 26, 46, 0.06);
             display: flex;
             align-items: flex-start;
             gap: 0.75rem;
-            font-size: 0.95rem;
-            color: var(--ink-muted);
-            margin-bottom: 0.75rem;
+        }
+
+        .pricing-card-feature:last-child {
+            border-bottom: none;
         }
 
         .pricing-card-feature::before {
             content: '✓';
             color: var(--emerald);
-            font-weight: 700;
+            font-weight: 600;
             flex-shrink: 0;
         }
 
         .pricing-card-cta {
-            display: block;
-            width: 100%;
-            text-align: center;
-            padding: 1rem;
-            border-radius: var(--radius-sm);
-            font-weight: 600;
-            text-decoration: none;
-            transition: all 0.2s ease;
-        }
-
-        .pricing-card .pricing-card-cta {
             background: var(--ink);
             color: var(--cream);
+            padding: 1rem;
+            border-radius: var(--radius-sm);
+            text-decoration: none;
+            font-weight: 600;
+            text-align: center;
+            transition: all 0.2s ease;
+            display: block;
         }
 
-        .pricing-card .pricing-card-cta:hover {
+        .pricing-card-cta:hover {
             background: var(--ink-light);
+            transform: translateY(-2px);
         }
 
         .pricing-card.featured .pricing-card-cta {
             background: var(--gold);
-            color: var(--ink);
+            color: var(--white);
         }
 
         .pricing-card.featured .pricing-card-cta:hover {
-            background: var(--gold-light);
+            background: var(--gold-dark);
         }
 
-        /* ROI Calculator */
+        /* ROI Section */
         .roi {
-            padding: 6rem 2rem;
-            background: var(--ink);
-            color: var(--cream);
+            padding: 6rem clamp(1rem, 5vw, 2rem);
+            background: var(--white);
         }
 
         .roi-content {
-            max-width: 1000px;
+            max-width: 1200px;
             margin: 0 auto;
-        }
-
-        .roi .section-eyebrow {
-            color: var(--gold);
-        }
-
-        .roi .section-title {
-            color: var(--cream);
-        }
-
-        .roi .section-subtitle {
-            color: rgba(250, 249, 247, 0.7);
         }
 
         .roi-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 2rem;
-            margin-top: 3rem;
+            margin-top: 4rem;
         }
 
         .roi-card {
-            background: rgba(250, 249, 247, 0.05);
-            border-radius: var(--radius-lg);
+            background: var(--cream-warm);
             padding: 2rem;
+            border-radius: var(--radius-md);
             text-align: center;
-            border: 1px solid rgba(250, 249, 247, 0.1);
         }
 
         .roi-card-icon {
-            font-size: 2.5rem;
+            font-size: 3rem;
             margin-bottom: 1rem;
         }
 
         .roi-card-label {
-            font-size: 0.85rem;
-            color: rgba(250, 249, 247, 0.6);
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
+            font-size: 0.9rem;
+            color: var(--ink-muted);
             margin-bottom: 0.5rem;
         }
 
         .roi-card-value {
             font-family: 'Fraunces', serif;
             font-size: 2.5rem;
-            font-weight: 700;
-            color: var(--gold);
+            font-weight: 600;
+            color: var(--gold-dark);
+            margin-bottom: 0.5rem;
         }
 
         .roi-card-comparison {
-            font-size: 0.85rem;
-            color: rgba(250, 249, 247, 0.5);
-            margin-top: 0.5rem;
+            font-size: 0.9rem;
+            color: var(--ink-muted);
         }
 
         .roi-card-comparison span {
+            color: var(--coral);
             text-decoration: line-through;
         }
 
         /* CTA Section */
         .cta {
-            padding: 6rem 2rem;
-            background: linear-gradient(135deg, var(--cream-warm) 0%, var(--cream) 100%);
-        }
-
-        .cta-content {
-            max-width: 700px;
-            margin: 0 auto;
+            padding: 6rem clamp(1rem, 5vw, 2rem);
+            background: linear-gradient(135deg, var(--ink) 0%, var(--ink-light) 100%);
+            color: var(--cream);
             text-align: center;
         }
 
+        .cta-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
         .cta-title {
-            font-size: clamp(2rem, 4vw, 2.75rem);
-            color: var(--ink);
+            font-size: clamp(2rem, 4vw, 2.5rem);
             margin-bottom: 1rem;
         }
 
         .cta-subtitle {
-            font-size: 1.1rem;
-            color: var(--ink-muted);
-            margin-bottom: 2rem;
-        }
-
-        .cta-form {
-            display: flex;
-            gap: 1rem;
-            max-width: 500px;
-            margin: 0 auto 1.5rem;
+            font-size: clamp(1rem, 2vw, 1.125rem);
+            opacity: 0.9;
+            margin-bottom: 3rem;
         }
 
         .cta-form-full {
-            display: flex;
-            flex-direction: column;
+            display: grid;
             gap: 1rem;
-            max-width: 500px;
-            margin: 0 auto 1.5rem;
+            margin-bottom: 2rem;
         }
 
         .cta-input {
-            width: 100%;
-            padding: 1rem 1.25rem;
-            border: 1px solid rgba(26, 26, 46, 0.15);
+            padding: 1rem;
+            border: 2px solid rgba(250, 249, 247, 0.2);
             border-radius: var(--radius-sm);
+            background: rgba(250, 249, 247, 0.05);
+            color: var(--cream);
             font-size: 1rem;
-            font-family: inherit;
-            background: var(--white);
             transition: all 0.2s ease;
+            font-family: 'DM Sans', sans-serif;
+        }
+
+        .cta-input::placeholder {
+            color: rgba(250, 249, 247, 0.5);
         }
 
         .cta-input:focus {
             outline: none;
-            border-color: var(--ink);
+            border-color: var(--gold);
+            background: rgba(250, 249, 247, 0.1);
         }
 
         .cta-textarea {
-            resize: none;
+            resize: vertical;
             min-height: 80px;
-        }
-
-        select.cta-input {
-            cursor: pointer;
-            appearance: none;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%236b6b8a' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
-            background-repeat: no-repeat;
-            background-position: right 1rem center;
-            padding-right: 2.5rem;
         }
 
         .btn-full {
@@ -1270,74 +1055,64 @@
             justify-content: center;
         }
 
-        .btn-primary:disabled {
-            opacity: 0.7;
-            cursor: not-allowed;
-        }
-
-        .message {
-            padding: 1.25rem;
-            border-radius: var(--radius-sm);
-            margin-bottom: 1rem;
-            max-width: 500px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .message-success {
-            background: rgba(45, 106, 79, 0.1);
-            border: 1px solid var(--emerald);
-        }
-
-        .message-error {
-            background: rgba(224, 122, 95, 0.1);
-            border: 1px solid var(--coral);
-        }
-
-        .message-title {
-            font-weight: 600;
-            margin-bottom: 0.25rem;
-        }
-
-        .message-success .message-title {
-            color: var(--emerald);
-        }
-
-        .message-error .message-title {
-            color: var(--coral);
-        }
-
-        .message-text {
-            font-size: 0.9rem;
-            color: var(--ink-muted);
-        }
-
-        .hidden {
-            display: none !important;
-        }
-
         .cta-note {
-            font-size: 0.85rem;
-            color: var(--ink-muted);
+            font-size: 0.9rem;
+            color: rgba(250, 249, 247, 0.8);
+            margin-top: 1rem;
         }
 
         .cta-note span {
-            color: var(--gold-dark);
+            color: var(--gold-light);
             font-weight: 600;
         }
 
         .cta-privacy {
-            font-size: 0.8rem;
-            color: var(--ink-muted);
-            opacity: 0.7;
-            margin-top: 0.5rem;
+            font-size: 0.85rem;
+            color: rgba(250, 249, 247, 0.6);
+            margin-top: 1rem;
+        }
+
+        .message {
+            padding: 2rem;
+            border-radius: var(--radius-md);
+            text-align: center;
+        }
+
+        .message-success {
+            background: var(--emerald);
+            color: var(--white);
+        }
+
+        .message-error {
+            background: var(--coral);
+            color: var(--white);
+        }
+
+        .message-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .message-text {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
+        .message-text a {
+            color: var(--white);
+            text-decoration: underline;
+        }
+
+        .hidden {
+            display: none;
         }
 
         /* Footer */
         .footer {
-            padding: 4rem 2rem 2rem;
             background: var(--ink);
             color: var(--cream);
+            padding: 4rem clamp(1rem, 5vw, 2rem) 2rem;
         }
 
         .footer-content {
@@ -1347,18 +1122,9 @@
 
         .footer-grid {
             display: grid;
-            grid-template-columns: 2fr 1fr 1fr;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 3rem;
             margin-bottom: 3rem;
-            padding-bottom: 2rem;
-            border-bottom: 1px solid rgba(250, 249, 247, 0.1);
-        }
-
-        @media (max-width: 768px) {
-            .footer-grid {
-                grid-template-columns: 1fr;
-                gap: 2rem;
-            }
         }
 
         .footer-logo {
@@ -1372,7 +1138,7 @@
             width: 40px;
             height: 40px;
             background: var(--gold);
-            border-radius: 10px;
+            border-radius: var(--radius-sm);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -1386,17 +1152,15 @@
         }
 
         .footer-description {
-            font-size: 0.9rem;
-            color: rgba(250, 249, 247, 0.6);
+            color: rgba(250, 249, 247, 0.7);
             line-height: 1.6;
+            font-size: 0.95rem;
         }
 
         .footer-column-title {
-            font-family: 'Fraunces', serif;
             font-size: 1rem;
             font-weight: 600;
             margin-bottom: 1rem;
-            color: var(--cream);
         }
 
         .footer-links {
@@ -1408,144 +1172,230 @@
         }
 
         .footer-links a {
-            color: rgba(250, 249, 247, 0.6);
+            color: rgba(250, 249, 247, 0.7);
             text-decoration: none;
-            font-size: 0.9rem;
             transition: color 0.2s ease;
+            font-size: 0.95rem;
         }
 
         .footer-links a:hover {
-            color: var(--gold);
+            color: var(--cream);
         }
 
         .footer-contact-item {
-            color: rgba(250, 249, 247, 0.6);
-            font-size: 0.9rem;
+            color: rgba(250, 249, 247, 0.7);
             margin-bottom: 0.75rem;
+            font-size: 0.95rem;
         }
 
         .footer-contact-item a {
-            color: rgba(250, 249, 247, 0.6);
+            color: var(--gold-light);
             text-decoration: none;
+            transition: color 0.2s ease;
         }
 
         .footer-contact-item a:hover {
             color: var(--gold);
         }
 
-        .footer-bottom {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        @media (max-width: 768px) {
-            .footer-bottom {
-                flex-direction: column;
-                gap: 1rem;
-                text-align: center;
-            }
-        }
-
-        .footer-copy {
-            font-size: 0.85rem;
-            color: rgba(250, 249, 247, 0.4);
-        }
-
         .footer-back-link {
-            color: var(--gold);
+            color: var(--gold-light);
             text-decoration: none;
-            font-size: 0.85rem;
-            display: flex;
+            transition: color 0.2s ease;
+            display: inline-flex;
             align-items: center;
             gap: 0.5rem;
+            font-size: 0.95rem;
         }
 
         .footer-back-link:hover {
-            text-decoration: underline;
+            color: var(--gold);
         }
 
-        /* Responsive */
-        @media (max-width: 968px) {
-            .hero-content {
-                grid-template-columns: 1fr;
-                text-align: center;
-            }
+        .footer-bottom {
+            padding-top: 2rem;
+            border-top: 1px solid rgba(250, 249, 247, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
 
-            .hero-subtitle {
-                margin-left: auto;
-                margin-right: auto;
-            }
+        .footer-copy {
+            color: rgba(250, 249, 247, 0.5);
+            font-size: 0.9rem;
+        }
 
-            .hero-stats {
-                justify-content: center;
-            }
-
-            .hero-actions {
-                justify-content: center;
-            }
-
-            .hero-visual {
-                max-width: 500px;
-                margin: 0 auto;
-            }
-
-            .use-cases-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .pricing-grid {
-                grid-template-columns: 1fr;
-                max-width: 400px;
-                margin: 0 auto;
-            }
-
-            .roi-grid {
-                grid-template-columns: 1fr;
+        /* Mobile Responsive Styles */
+        @media (max-width: 768px) {
+            .nav {
+                padding: 0.75rem 1rem;
             }
 
             .nav-links {
                 display: none;
             }
 
-            .cta-form {
-                flex-direction: column;
+            .nav-logo-badge {
+                display: none;
             }
-        }
 
-        @media (max-width: 640px) {
+            .hero {
+                padding: 6rem 1rem 4rem;
+                min-height: auto;
+            }
+
+            .hero-content {
+                gap: 2rem;
+            }
+
+            .hero-title {
+                font-size: 2rem;
+            }
+
             .hero-stats {
-                flex-direction: column;
-                gap: 1.5rem;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 1rem;
             }
 
-            .process-step {
+            .hero-stat-value {
+                font-size: 1.5rem;
+            }
+
+            .hero-ctas {
+                flex-direction: column;
+            }
+
+            .btn-primary,
+            .btn-secondary {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .hero-dashboard {
+                transform: none;
+            }
+
+            .dashboard-tabs {
+                -webkit-overflow-scrolling: touch;
+            }
+
+            .dashboard-tab {
+                padding: 0.75rem 1rem;
+            }
+
+            .dashboard-row {
                 grid-template-columns: 1fr;
             }
 
-            .process-step-number {
-                width: 48px;
-                height: 48px;
+            .use-cases,
+            .expense-management,
+            .how-it-works,
+            .pricing,
+            .roi,
+            .cta {
+                padding: 4rem 1rem;
+            }
+
+            .section-title {
+                font-size: 1.75rem;
+            }
+
+            .use-cases-grid,
+            .expense-grid,
+            .pricing-grid,
+            .roi-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .step {
+                grid-template-columns: 60px 1fr;
+                gap: 1rem;
+            }
+
+            .step-title {
                 font-size: 1.25rem;
             }
 
-            .footer-content {
+            .expense-demo {
+                padding: 1rem;
+                gap: 1.5rem;
+            }
+
+            .expense-demo-header {
                 flex-direction: column;
-                gap: 1rem;
+                align-items: flex-start;
+            }
+
+            .expense-demo-budget {
+                text-align: left;
+                width: 100%;
+            }
+
+            .expense-budget-amounts {
+                justify-content: flex-start;
+            }
+
+            .expense-receipt {
+                grid-template-columns: 1fr;
+                text-align: left;
+            }
+
+            .expense-receipt-amount {
+                text-align: left;
+            }
+
+            .expense-categories {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
                 text-align: center;
+            }
+        }
+
+        @media (min-width: 769px) {
+            .hero-content {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .step {
+                grid-template-columns: 60px 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-stats {
+                grid-template-columns: 1fr;
+            }
+
+            .expense-categories {
+                grid-template-columns: 1fr;
+            }
+
+            .roi-card-value {
+                font-size: 2rem;
             }
         }
     </style>
 </head>
 <body>
-
     <!-- Navigation -->
     <nav class="nav">
         <div class="nav-content">
             <a href="#" class="nav-logo">
                 <div class="nav-logo-icon">🗺️</div>
-                <span class="nav-logo-text">RouteBuilder AI</span>
-                <span class="nav-logo-badge">For Business</span>
+                <div>
+                    <div class="nav-logo-text">RouteBuilder AI</div>
+                    <div class="nav-logo-badge">For Business</div>
+                </div>
             </a>
             <div class="nav-links">
                 <a href="https://kringstad13.github.io/Kringstad-Road-Trip/landing.html" class="nav-link">← Back to Main Site</a>
@@ -1563,70 +1413,70 @@
         <div class="hero-content">
             <div class="hero-text">
                 <div class="hero-badge">
-                    <span class="hero-badge-dot"></span>
-                    Now accepting early access signups
+                    <span>Now accepting early access signups</span>
                 </div>
-                <h1>Professional Trip Planning in <span>3 Minutes</span></h1>
-                <p class="hero-subtitle">AI-powered dashboards for travel agents, corporate coordinators, and professionals who value their time. Generate complete itineraries for $9—not $150.</p>
+                <h1 class="hero-title">Professional Trip Planning in 3 Minutes</h1>
+                <p class="hero-description">AI-powered dashboards for travel agents, corporate coordinators, and professionals who value their time. Generate complete itineraries for $9—not $150.</p>
+                
                 <div class="hero-stats">
-                    <div class="hero-stat">
-                        <div class="hero-stat-number">6+ hrs</div>
-                        <div class="hero-stat-label">Saved per trip</div>
+                    <div>
+                        <span class="hero-stat-value">6+ hrs</span>
+                        <span class="hero-stat-label">Saved per trip</span>
                     </div>
-                    <div class="hero-stat">
-                        <div class="hero-stat-number">94%</div>
-                        <div class="hero-stat-label">Cost reduction</div>
+                    <div>
+                        <span class="hero-stat-value">94%</span>
+                        <span class="hero-stat-label">Cost reduction</span>
                     </div>
-                    <div class="hero-stat">
-                        <div class="hero-stat-number">$9</div>
-                        <div class="hero-stat-label">Per dashboard</div>
+                    <div>
+                        <span class="hero-stat-value">$9</span>
+                        <span class="hero-stat-label">Per dashboard</span>
                     </div>
                 </div>
-                <div class="hero-actions">
-                    <a href="#signup" class="btn-primary">Join Waitlist →</a>
-                    <a href="https://kringstad13.github.io/Kringstad-Road-Trip/demo-corporate.html" class="btn-secondary" target="_blank">See Corporate Demo</a>
+
+                <div class="hero-ctas">
+                    <a href="#signup" class="btn-primary">
+                        Join Waitlist →
+                    </a>
+                    <a href="https://kringstad13.github.io/Kringstad-Road-Trip/demo-corporate.html" class="btn-secondary">
+                        See Corporate Demo
+                    </a>
                 </div>
             </div>
+
             <div class="hero-visual">
-                <div class="hero-card">
-                    <div class="hero-card-floating ai">
-                        <span style="font-size: 0.85rem; font-weight: 600; color: var(--ink);">AI Generated</span>
-                    </div>
-                    <div class="hero-card-floating savings">
-                        <div class="hero-card-floating-label">Time saved</div>
-                        <div class="hero-card-floating-value">6.5 hours</div>
-                    </div>
-                    <div class="hero-card-header">
-                        <div class="hero-card-title">Corporate Travel Dashboard</div>
-                        <div class="hero-card-route">
-                            Chicago
-                            <span class="hero-card-arrow"></span>
-                            Denver
+                <div class="hero-dashboard">
+                    <div class="dashboard-header">
+                        <div class="dashboard-badge">AI Generated</div>
+                        <div class="dashboard-title">Corporate Travel Dashboard</div>
+                        <div class="dashboard-route">
+                            <span>Chicago</span>
+                            <span>→</span>
+                            <span>Denver</span>
                         </div>
                     </div>
-                    <div class="hero-card-body">
-                        <div class="hero-card-tabs">
-                            <span class="hero-card-tab active">Route</span>
-                            <span class="hero-card-tab">Hotels</span>
-                            <span class="hero-card-tab">Budget</span>
-                            <span class="hero-card-tab">Expenses</span>
-                        </div>
-                        <div class="hero-card-details">
-                            <div class="hero-card-detail">
-                                <div class="hero-card-detail-label">Duration</div>
-                                <div class="hero-card-detail-value">5 Days</div>
+                    <div class="dashboard-tabs">
+                        <button class="dashboard-tab active">Route</button>
+                        <button class="dashboard-tab">Hotels</button>
+                        <button class="dashboard-tab">Budget</button>
+                        <button class="dashboard-tab">Expenses</button>
+                    </div>
+                    <div class="dashboard-body">
+                        <div class="dashboard-row">
+                            <div class="dashboard-metric">
+                                <div class="dashboard-metric-label">Duration</div>
+                                <div class="dashboard-metric-value">5 Days</div>
                             </div>
-                            <div class="hero-card-detail">
-                                <div class="hero-card-detail-label">Budget</div>
-                                <div class="hero-card-detail-value">$2,400</div>
+                            <div class="dashboard-metric">
+                                <div class="dashboard-metric-label">Budget</div>
+                                <div class="dashboard-metric-value">$2,400</div>
                             </div>
-                            <div class="hero-card-detail">
-                                <div class="hero-card-detail-label">Hotels</div>
-                                <div class="hero-card-detail-value">6 Options</div>
+                            <div class="dashboard-metric">
+                                <div class="dashboard-metric-label">Hotels</div>
+                                <div class="dashboard-metric-value">6 Options</div>
                             </div>
-                            <div class="hero-card-detail">
-                                <div class="hero-card-detail-label">Meetings</div>
-                                <div class="hero-card-detail-value">3 Cities</div>
+                            <div class="dashboard-metric">
+                                <div class="dashboard-metric-label">Meetings</div>
+                                <div class="dashboard-metric-value">3 Cities</div>
                             </div>
                         </div>
                     </div>
@@ -1644,59 +1494,75 @@
                 <p class="section-subtitle">Whether you're managing corporate travel or delighting vacation clients, RouteBuilder adapts to your needs.</p>
             </div>
             <div class="use-cases-grid">
-                <!-- Corporate Travel -->
                 <div class="use-case-card">
                     <div class="use-case-icon">🏢</div>
                     <h3 class="use-case-title">Corporate Travel Coordinators</h3>
                     <p class="use-case-description">Plan multi-city business trips with conference-ready hotels, client dinner venues, and automated expense tracking.</p>
-                    
                     <div class="use-case-example">
-                        <div class="use-case-example-header">
-                            <span class="use-case-example-title">Example: Regional Sales Trip</span>
-                            <span class="use-case-example-badge">5-Day Itinerary</span>
+                        <span class="example-label">Example: Regional Sales Trip</span>
+                        <div class="example-detail">
+                            <span>📅</span>
+                            <span>5-Day Itinerary</span>
                         </div>
-                        <div class="use-case-example-details">
-                            <div class="use-case-example-detail">📍 <span>Chicago → Denver</span></div>
-                            <div class="use-case-example-detail">👤 <span>1 Executive</span></div>
-                            <div class="use-case-example-detail">💰 <span>$2,400 Budget</span></div>
-                            <div class="use-case-example-detail">🏨 <span>Business Class Hotels</span></div>
+                        <div class="example-detail">
+                            <span>📍</span>
+                            <span>Chicago → Denver</span>
                         </div>
-                    </div>
-
-                    <div class="use-case-features">
-                        <span class="use-case-feature">Conference hotels</span>
-                        <span class="use-case-feature">Client dinner spots</span>
-                        <span class="use-case-feature">Receipt tracking</span>
-                        <span class="use-case-feature">Expense reports</span>
-                        <span class="use-case-feature">Meeting schedules</span>
+                        <div class="example-detail">
+                            <span>👤</span>
+                            <span>1 Executive</span>
+                        </div>
+                        <div class="example-detail">
+                            <span>💰</span>
+                            <span>$2,400 Budget</span>
+                        </div>
+                        <div class="example-detail">
+                            <span>🏨</span>
+                            <span>Business Class Hotels</span>
+                        </div>
+                        <div class="example-features">
+                            <span class="example-feature">Conference hotels</span>
+                            <span class="example-feature">Client dinner spots</span>
+                            <span class="example-feature">Receipt tracking</span>
+                            <span class="example-feature">Expense reports</span>
+                            <span class="example-feature">Meeting schedules</span>
+                        </div>
                     </div>
                 </div>
 
-                <!-- Travel Agent -->
                 <div class="use-case-card">
                     <div class="use-case-icon">✈️</div>
                     <h3 class="use-case-title">Travel Agents & Planners</h3>
                     <p class="use-case-description">Impress clients with polished, professional dashboards featuring family-friendly activities, dining, and accommodations.</p>
-                    
                     <div class="use-case-example">
-                        <div class="use-case-example-header">
-                            <span class="use-case-example-title">Example: Premium Family Vacation</span>
-                            <span class="use-case-example-badge">7-Day Itinerary</span>
+                        <span class="example-label">Example: Premium Family Vacation</span>
+                        <div class="example-detail">
+                            <span>📅</span>
+                            <span>7-Day Itinerary</span>
                         </div>
-                        <div class="use-case-example-details">
-                            <div class="use-case-example-detail">📍 <span>San Francisco → LA</span></div>
-                            <div class="use-case-example-detail">👨‍👩‍👧‍👦 <span>Family of 5</span></div>
-                            <div class="use-case-example-detail">💰 <span>$4,500 Budget</span></div>
-                            <div class="use-case-example-detail">🏨 <span>Family Suites</span></div>
+                        <div class="example-detail">
+                            <span>📍</span>
+                            <span>San Francisco → LA</span>
                         </div>
-                    </div>
-
-                    <div class="use-case-features">
-                        <span class="use-case-feature">Custom branding</span>
-                        <span class="use-case-feature">Kid-friendly stops</span>
-                        <span class="use-case-feature">Pool hotels</span>
-                        <span class="use-case-feature">Activity planning</span>
-                        <span class="use-case-feature">Road trip games</span>
+                        <div class="example-detail">
+                            <span>👨‍👩‍👧‍👦</span>
+                            <span>Family of 5</span>
+                        </div>
+                        <div class="example-detail">
+                            <span>💰</span>
+                            <span>$4,500 Budget</span>
+                        </div>
+                        <div class="example-detail">
+                            <span>🏨</span>
+                            <span>Family Suites</span>
+                        </div>
+                        <div class="example-features">
+                            <span class="example-feature">Custom branding</span>
+                            <span class="example-feature">Kid-friendly stops</span>
+                            <span class="example-feature">Pool hotels</span>
+                            <span class="example-feature">Activity planning</span>
+                            <span class="example-feature">Road trip games</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1704,179 +1570,180 @@
     </section>
 
     <!-- Expense Management Section -->
-    <section class="expense-section" id="expense-management">
+    <section class="expense-management" id="expense-management">
         <div class="expense-content">
-            <div class="expense-header">
+            <div class="section-header">
                 <span class="section-eyebrow">Built for Business</span>
                 <h2 class="section-title">Expense Tracking That Actually Works</h2>
                 <p class="section-subtitle">Snap receipt photos, track spending by category, and export professional expense reports—all from one dashboard.</p>
             </div>
-            
+
             <div class="expense-grid">
-                <div class="expense-features">
-                    <div class="expense-feature-card">
-                        <div class="expense-feature-icon">📸</div>
-                        <h3 class="expense-feature-title">Receipt Photo Upload</h3>
-                        <p class="expense-feature-description">Snap a photo of any receipt and attach it directly to your expense. No more lost receipts or crumpled papers in your wallet. Everything stays organized and audit-ready.</p>
-                    </div>
-                    
-                    <div class="expense-feature-card">
-                        <div class="expense-feature-icon">📊</div>
-                        <h3 class="expense-feature-title">Real-Time Budget Tracking</h3>
-                        <p class="expense-feature-description">See exactly where you stand against your travel budget. Visual progress bars show spending by category: flights, hotels, meals, transportation, and miscellaneous.</p>
-                    </div>
-                    
-                    <div class="expense-feature-card">
-                        <div class="expense-feature-icon">📄</div>
-                        <h3 class="expense-feature-title">One-Click Expense Reports</h3>
-                        <p class="expense-feature-description">Export a complete, formatted expense report with all receipts attached. Compatible with most corporate expense systems. Submit to finance in seconds, not hours.</p>
-                    </div>
-                    
-                    <div class="expense-feature-card">
-                        <div class="expense-feature-icon">👥</div>
-                        <h3 class="expense-feature-title">Share with Finance Team</h3>
-                        <p class="expense-feature-description">Give your admin or finance team view-only access. They can monitor expenses in real-time without interrupting your meetings. Everyone stays informed.</p>
-                    </div>
+                <div class="expense-feature">
+                    <div class="expense-feature-icon">📸</div>
+                    <h3 class="expense-feature-title">Receipt Photo Upload</h3>
+                    <p class="expense-feature-description">Snap a photo of any receipt and attach it directly to your expense. No more lost receipts or crumpled papers in your wallet. Everything stays organized and audit-ready.</p>
                 </div>
-                
-                <div class="expense-mockup">
-                    <div class="expense-mockup-header">
-                        <span class="expense-mockup-title">💰 Expense Dashboard</span>
-                        <span class="expense-mockup-badge">Denver Trip</span>
+                <div class="expense-feature">
+                    <div class="expense-feature-icon">📊</div>
+                    <h3 class="expense-feature-title">Real-Time Budget Tracking</h3>
+                    <p class="expense-feature-description">See exactly where you stand against your travel budget. Visual progress bars show spending by category: flights, hotels, meals, transportation, and miscellaneous.</p>
+                </div>
+                <div class="expense-feature">
+                    <div class="expense-feature-icon">📄</div>
+                    <h3 class="expense-feature-title">One-Click Expense Reports</h3>
+                    <p class="expense-feature-description">Export a complete, formatted expense report with all receipts attached. Compatible with most corporate expense systems. Submit to finance in seconds, not hours.</p>
+                </div>
+                <div class="expense-feature">
+                    <div class="expense-feature-icon">👥</div>
+                    <h3 class="expense-feature-title">Share with Finance Team</h3>
+                    <p class="expense-feature-description">Give your admin or finance team view-only access. They can monitor expenses in real-time without interrupting your meetings. Everyone stays informed.</p>
+                </div>
+            </div>
+
+            <div class="expense-demo">
+                <div class="expense-demo-header">
+                    <div>
+                        <div class="expense-demo-title">💰 Expense Dashboard</div>
+                        <div style="font-size: 0.9rem; color: var(--ink-muted); margin-top: 0.5rem;">Denver Trip</div>
                     </div>
-                    <div class="expense-mockup-body">
-                        <div class="expense-mockup-stats">
-                            <div class="expense-mockup-stat">
-                                <div class="expense-mockup-stat-value">$2,400</div>
-                                <div class="expense-mockup-stat-label">Budget</div>
+                    <div class="expense-demo-budget">
+                        <div class="expense-budget-label">Budget Status</div>
+                        <div class="expense-budget-amounts">
+                            <div>
+                                <div class="expense-budget-label">Total</div>
+                                <div class="expense-budget-amount">$2,400</div>
                             </div>
-                            <div class="expense-mockup-stat">
-                                <div class="expense-mockup-stat-value gold">$1,847</div>
-                                <div class="expense-mockup-stat-label">Spent</div>
+                            <div>
+                                <div class="expense-budget-label">Spent</div>
+                                <div class="expense-budget-amount expense-budget-spent">$1,847</div>
                             </div>
-                            <div class="expense-mockup-stat">
-                                <div class="expense-mockup-stat-value green">$553</div>
-                                <div class="expense-mockup-stat-label">Remaining</div>
+                            <div>
+                                <div class="expense-budget-label">Remaining</div>
+                                <div class="expense-budget-amount expense-budget-remaining">$553</div>
                             </div>
                         </div>
-                        
-                        <div class="expense-mockup-receipt">
-                            <div class="expense-mockup-receipt-header">
-                                <span class="expense-mockup-receipt-title">🍽️ Guard and Grace</span>
-                                <span class="expense-mockup-receipt-amount">$247.50</span>
-                            </div>
-                            <div class="expense-mockup-receipt-details">
+                    </div>
+                </div>
+
+                <div class="expense-receipts">
+                    <div class="expense-receipt">
+                        <div class="expense-receipt-details">
+                            <div class="expense-receipt-vendor">🍽️ Guard and Grace</div>
+                            <div class="expense-receipt-info">
                                 <span>📍 Denver, CO</span>
                                 <span>📅 Mar 10, 2025</span>
                                 <span>🏷️ Client Dinner</span>
                             </div>
-                            <div class="expense-mockup-receipt-photo">
-                                ✓ Receipt photo attached
-                            </div>
+                            <div class="expense-receipt-badge">✓ Receipt photo attached</div>
                         </div>
-                        
-                        <div class="expense-mockup-receipt">
-                            <div class="expense-mockup-receipt-header">
-                                <span class="expense-mockup-receipt-title">🏨 Ritz-Carlton Denver</span>
-                                <span class="expense-mockup-receipt-amount">$897.00</span>
-                            </div>
-                            <div class="expense-mockup-receipt-details">
+                        <div class="expense-receipt-amount">$247.50</div>
+                    </div>
+                    <div class="expense-receipt">
+                        <div class="expense-receipt-details">
+                            <div class="expense-receipt-vendor">🏨 Ritz-Carlton Denver</div>
+                            <div class="expense-receipt-info">
                                 <span>📍 Denver, CO</span>
                                 <span>📅 Mar 10-13</span>
                                 <span>🏷️ Hotel</span>
                             </div>
-                            <div class="expense-mockup-receipt-photo">
-                                ✓ Receipt photo attached
-                            </div>
+                            <div class="expense-receipt-badge">✓ Receipt photo attached</div>
                         </div>
-                        
-                        <div class="expense-mockup-categories">
-                            <div class="expense-mockup-category">
-                                <div class="expense-mockup-category-icon">✈️</div>
-                                <div class="expense-mockup-category-name">Flights</div>
-                                <div class="expense-mockup-category-amount">$423</div>
-                            </div>
-                            <div class="expense-mockup-category">
-                                <div class="expense-mockup-category-icon">🏨</div>
-                                <div class="expense-mockup-category-name">Hotels</div>
-                                <div class="expense-mockup-category-amount">$897</div>
-                            </div>
-                            <div class="expense-mockup-category">
-                                <div class="expense-mockup-category-icon">🍽️</div>
-                                <div class="expense-mockup-category-name">Meals</div>
-                                <div class="expense-mockup-category-amount">$412</div>
-                            </div>
-                            <div class="expense-mockup-category">
-                                <div class="expense-mockup-category-icon">🚕</div>
-                                <div class="expense-mockup-category-name">Transport</div>
-                                <div class="expense-mockup-category-amount">$115</div>
-                            </div>
-                        </div>
+                        <div class="expense-receipt-amount">$897.00</div>
+                    </div>
+                </div>
+
+                <div class="expense-categories">
+                    <div class="expense-category">
+                        <div class="expense-category-icon">✈️</div>
+                        <div class="expense-category-label">Flights</div>
+                        <div class="expense-category-amount">$423</div>
+                    </div>
+                    <div class="expense-category">
+                        <div class="expense-category-icon">🏨</div>
+                        <div class="expense-category-label">Hotels</div>
+                        <div class="expense-category-amount">$897</div>
+                    </div>
+                    <div class="expense-category">
+                        <div class="expense-category-icon">🍽️</div>
+                        <div class="expense-category-label">Meals</div>
+                        <div class="expense-category-amount">$412</div>
+                    </div>
+                    <div class="expense-category">
+                        <div class="expense-category-icon">🚕</div>
+                        <div class="expense-category-label">Transport</div>
+                        <div class="expense-category-amount">$115</div>
                     </div>
                 </div>
             </div>
-            
-            <div class="expense-bottom-features">
-                <div class="expense-bottom-feature">
-                    <div class="expense-bottom-feature-icon">🔒</div>
-                    <h4 class="expense-bottom-feature-title">Secure & Private</h4>
-                    <p class="expense-bottom-feature-desc">Your financial data is encrypted and never shared with third parties</p>
+
+            <div class="expense-features-grid">
+                <div class="expense-mini-feature">
+                    <div class="expense-mini-feature-icon">🔒</div>
+                    <h4 class="expense-mini-feature-title">Secure & Private</h4>
+                    <p class="expense-mini-feature-description">Your financial data is encrypted and never shared with third parties</p>
                 </div>
-                <div class="expense-bottom-feature">
-                    <div class="expense-bottom-feature-icon">📱</div>
-                    <h4 class="expense-bottom-feature-title">Works Offline</h4>
-                    <p class="expense-bottom-feature-desc">Add receipts without WiFi. Syncs automatically when connected</p>
+                <div class="expense-mini-feature">
+                    <div class="expense-mini-feature-icon">📱</div>
+                    <h4 class="expense-mini-feature-title">Works Offline</h4>
+                    <p class="expense-mini-feature-description">Add receipts without WiFi. Syncs automatically when connected</p>
                 </div>
-                <div class="expense-bottom-feature">
-                    <div class="expense-bottom-feature-icon">🧾</div>
-                    <h4 class="expense-bottom-feature-title">IRS Compliant</h4>
-                    <p class="expense-bottom-feature-desc">Date, amount, vendor, and purpose captured for tax records</p>
+                <div class="expense-mini-feature">
+                    <div class="expense-mini-feature-icon">🧾</div>
+                    <h4 class="expense-mini-feature-title">IRS Compliant</h4>
+                    <p class="expense-mini-feature-description">Date, amount, vendor, and purpose captured for tax records</p>
                 </div>
-                <div class="expense-bottom-feature">
-                    <div class="expense-bottom-feature-icon">⚡</div>
-                    <h4 class="expense-bottom-feature-title">Instant Export</h4>
-                    <p class="expense-bottom-feature-desc">Download CSV or PDF reports compatible with most systems</p>
+                <div class="expense-mini-feature">
+                    <div class="expense-mini-feature-icon">⚡</div>
+                    <h4 class="expense-mini-feature-title">Instant Export</h4>
+                    <p class="expense-mini-feature-description">Download CSV or PDF reports compatible with most systems</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Process Section -->
-    <section class="process" id="how-it-works">
-        <div class="process-content">
+    <!-- How It Works Section -->
+    <section class="how-it-works" id="how-it-works">
+        <div class="how-it-works-content">
             <div class="section-header">
                 <span class="section-eyebrow">Simple Process</span>
                 <h2 class="section-title">From Request to Dashboard in 3 Minutes</h2>
                 <p class="section-subtitle">No training required. Just describe the trip in plain English and let AI handle the rest.</p>
             </div>
-            <div class="process-steps">
-                <div class="process-step">
-                    <div class="process-step-number">1</div>
-                    <div class="process-step-content">
-                        <h3 class="process-step-title">Describe the Trip Requirements</h3>
-                        <p class="process-step-description">Enter the basics: origin, destination, dates, budget, and trip type. Add any special requirements in plain English.</p>
-                        <div class="process-step-example">
-                            <strong>Corporate example:</strong> "Chicago to Denver, 5 days, $2,400 budget. Need hotels with conference rooms and client dinner restaurants. Executive traveling solo."
+
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3 class="step-title">Describe the Trip Requirements</h3>
+                        <p class="step-description">Enter the basics: origin, destination, dates, budget, and trip type. Add any special requirements in plain English.</p>
+                        <div class="step-example">
+                            <div class="step-example-label">Corporate example:</div>
+                            <div class="step-example-text">"Chicago to Denver, 5 days, $2,400 budget. Need hotels with conference rooms and client dinner restaurants. Executive traveling solo."</div>
                         </div>
                     </div>
                 </div>
-                <div class="process-step">
-                    <div class="process-step-number">2</div>
-                    <div class="process-step-content">
-                        <h3 class="process-step-title">AI Builds Your Custom Dashboard</h3>
-                        <p class="process-step-description">In under 3 minutes, receive a complete dashboard with routes, accommodations, dining, packing lists, and budget tracking—all tailored to your specific needs.</p>
-                        <div class="process-step-example">
-                            <strong>Travel agent example:</strong> "San Francisco to LA, 7 days, family of 5 with kids ages 4, 8, and 12. $4,500 budget. Want beaches, theme parks, and family-friendly dining."
+
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3 class="step-title">AI Builds Your Custom Dashboard</h3>
+                        <p class="step-description">In under 3 minutes, receive a complete dashboard with routes, accommodations, dining, packing lists, and budget tracking—all tailored to your specific needs.</p>
+                        <div class="step-example">
+                            <div class="step-example-label">Travel agent example:</div>
+                            <div class="step-example-text">"San Francisco to LA, 7 days, family of 5 with kids ages 4, 8, and 12. $4,500 budget. Want beaches, theme parks, and family-friendly dining."</div>
                         </div>
                     </div>
                 </div>
-                <div class="process-step">
-                    <div class="process-step-number">3</div>
-                    <div class="process-step-content">
-                        <h3 class="process-step-title">Refine with Unlimited Modifications</h3>
-                        <p class="process-step-description">Need changes? Just ask in plain English. "Swap the second hotel for something with a pool" or "Add vegetarian restaurant options." No limits, no extra charges.</p>
-                        <div class="process-step-example">
-                            <strong>Modification example:</strong> "Move the Monterey stay to day 3 instead of day 4, add the aquarium as a must-see stop, and increase the dining budget by $200."
+
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h3 class="step-title">Refine with Unlimited Modifications</h3>
+                        <p class="step-description">Need changes? Just ask in plain English. "Swap the second hotel for something with a pool" or "Add vegetarian restaurant options." No limits, no extra charges.</p>
+                        <div class="step-example">
+                            <div class="step-example-label">Modification example:</div>
+                            <div class="step-example-text">"Move the Monterey stay to day 3 instead of day 4, add the aquarium as a must-see stop, and increase the dining budget by $200."</div>
                         </div>
                     </div>
                 </div>
@@ -1892,8 +1759,9 @@
                 <h2 class="section-title">Plans That Scale With You</h2>
                 <p class="section-subtitle">Start with pay-per-trip. Graduate to Pro when you're ready.</p>
             </div>
+
             <div class="pricing-grid">
-                <!-- Consumer -->
+                <!-- Pay Per Trip -->
                 <div class="pricing-card">
                     <span class="pricing-card-eyebrow">Pay Per Trip</span>
                     <h3 class="pricing-card-title">Occasional Use</h3>
@@ -1909,12 +1777,12 @@
                     <a href="#signup" class="pricing-card-cta">Get Started</a>
                 </div>
 
-                <!-- Pro -->
+                <!-- Pro Plan -->
                 <div class="pricing-card featured">
-                    <span class="pricing-badge">Best for Agents</span>
+                    <div class="pricing-card-badge">Best for Agents</div>
                     <span class="pricing-card-eyebrow">Monthly</span>
                     <h3 class="pricing-card-title">Pro Plan</h3>
-                    <div class="pricing-card-price">$29<span>/mo</span></div>
+                    <div class="pricing-card-price">$29<span class="pricing-card-period">/mo</span></div>
                     <p class="pricing-card-description">For travel agents managing multiple clients.</p>
                     <ul class="pricing-card-features">
                         <li class="pricing-card-feature">5 active dashboards included</li>
@@ -2031,7 +1899,7 @@
             </div>
             <div id="errorMessage" class="message message-error hidden">
                 <p class="message-title">❌ Oops! Something went wrong.</p>
-                <p class="message-text">Please try again or email us at <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="78101d141417380a170d0c1d1a0d11141c1d0a561911">[email&#160;protected]</a></p>
+                <p class="message-text">Please try again or email us at <a href="mailto:info@routebuilder.ai">info@routebuilder.ai</a></p>
             </div>
             
             <p class="cta-note"><span>🎁 First 100 signups</span> get lifetime 50% discount</p>
@@ -2063,7 +1931,10 @@
                 <div>
                     <h4 class="footer-column-title">Contact</h4>
                     <div class="footer-contact-item">
-                        Email: <a href="mailto:hello@routebuilder.ai">hello@routebuilder.ai</a>
+                        Email: <a href="mailto:info@routebuilder.ai">info@routebuilder.ai</a>
+                    </div>
+                    <div class="footer-contact-item">
+                        Phone: <a href="tel:+13202793969">320-279-3969</a>
                     </div>
                     <div class="footer-contact-item">
                         Launching Q1 2026
@@ -2084,7 +1955,7 @@
         </div>
     </footer>
 
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    <script>
         document.getElementById('signupForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             
@@ -2129,4 +2000,11 @@
                 
             } catch (error) {
                 // Show error message
-            
+                errorMessage.classList.remove('hidden');
+                submitButton.disabled = false;
+                submitButton.textContent = 'Join the Waitlist — It\'s Free →';
+            }
+        });
+    </script>
+</body>
+</html>
