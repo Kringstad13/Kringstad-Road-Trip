@@ -176,52 +176,6 @@
             background: #1d4ed8;
         }
         
-        /* Pain Points Section */
-        .pain-points {
-            padding: 60px 5%;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        
-        .pain-points h2 {
-            font-size: 2.5rem;
-            text-align: center;
-            margin-bottom: 1rem;
-        }
-        
-        .pain-points > p {
-            text-align: center;
-            font-size: 1.1rem;
-            color: #666;
-            margin-bottom: 3rem;
-        }
-        
-        .pain-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-        
-        .pain-card {
-            background: white;
-            padding: 2rem;
-            border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-        }
-        
-        .pain-icon {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-        }
-        
-        .pain-card h3 {
-            margin-bottom: 0.5rem;
-        }
-        
-        .pain-card p {
-            color: #666;
-        }
-        
         /* How It Works */
         .how-it-works {
             padding: 60px 5%;
@@ -416,77 +370,6 @@
             align-items: center;
             gap: 0.5rem;
             margin-bottom: 1rem;
-        }
-        
-        /* Modifications Section */
-        .modifications {
-            padding: 60px 5%;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        
-        .modifications h2 {
-            font-size: 2.5rem;
-            text-align: center;
-            margin-bottom: 1rem;
-        }
-        
-        .modifications > p {
-            text-align: center;
-            font-size: 1.1rem;
-            color: #666;
-            margin-bottom: 3rem;
-        }
-        
-        .mod-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-        }
-        
-        .mod-category {
-            background: white;
-            padding: 2rem;
-            border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-        }
-        
-        .mod-category h3 {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            margin-bottom: 1rem;
-        }
-        
-        .mod-category ul {
-            list-style: none;
-        }
-        
-        .mod-category li {
-            padding: 0.5rem 0;
-            padding-left: 1.5rem;
-            position: relative;
-            color: #666;
-        }
-        
-        .mod-category li:before {
-            content: "•";
-            position: absolute;
-            left: 0;
-            color: #2563eb;
-        }
-        
-        .mod-footer {
-            background: #f0f9ff;
-            padding: 2rem;
-            border-radius: 12px;
-            text-align: center;
-            margin-top: 2rem;
-        }
-        
-        .mod-footer h3 {
-            color: #2563eb;
-            margin-bottom: 0.5rem;
         }
         
         /* All Features Section */
@@ -922,15 +805,8 @@
                 background: #ffffff;
             }
             
-            .mod-footer {
-                background: #ffffff;
-                border: 1px solid #e5e7eb;
-            }
-            
             /* Add subtle borders to cards for definition on white bg */
-            .pain-card,
             .feature-card,
-            .mod-category,
             .feature-column,
             .pricing-card,
             .use-case-card,
@@ -945,9 +821,7 @@
                 font-size: 2rem;
             }
             
-            .pain-points h2,
             .how-it-works h2,
-            .modifications h2,
             .all-features h2,
             .pricing h2,
             .use-cases h2,
@@ -1010,7 +884,7 @@
     <nav>
         <div class="nav-container">
             <a href="#" class="logo">🗺️ RouteBuilder AI</a>
-            <a href="#signup" class="nav-button">Join Waitlist</a>
+            <a href="business.html" class="nav-button">For Business →</a>
         </div>
     </nav>
 
@@ -1035,34 +909,6 @@
             <p><strong>7 days</strong> • Family of 5 • $4,800 budget • Beach stops and Disneyland</p>
             <p style="color: #666; margin-top: 1rem;">This is a real example of what our AI generates. Click below to explore the full interactive dashboard with all tabs, features, and AI-generated content.</p>
             <a href="demo-family.html" class="demo-link">Explore Full Dashboard →</a>
-        </div>
-    </section>
-
-    <!-- Pain Points Section -->
-    <section class="pain-points">
-        <h2>Road Trip Planning is Exhausting</h2>
-        <p>Sound familiar? We've been there too.</p>
-        <div class="pain-grid">
-            <div class="pain-card">
-                <div class="pain-icon">⏰</div>
-                <h3>6+ Hours of Research</h3>
-                <p>Endless tabs: Google Maps, TripAdvisor, Hotels.com, Yelp, Pinterest... and you're still not sure if you found the best options.</p>
-            </div>
-            <div class="pain-card">
-                <div class="pain-icon">😩</div>
-                <h3>Decision Fatigue</h3>
-                <p>500 hotels, 300 restaurants, infinite routes. By the time you decide, you're too tired to be excited about the trip.</p>
-            </div>
-            <div class="pain-card">
-                <div class="pain-icon">📝</div>
-                <h3>Scattered Information</h3>
-                <p>Hotels in one app, restaurants in another, packing list on a sticky note. Nothing is organized in one place.</p>
-            </div>
-            <div class="pain-card">
-                <div class="pain-icon">👨‍👩‍👧‍👦</div>
-                <h3>Kid-Friendly Chaos</h3>
-                <p>Finding hotels with pools, restaurants with kids menus, activities for multiple ages... it's a full-time job.</p>
-            </div>
         </div>
     </section>
 
@@ -1226,54 +1072,6 @@
                     <p>Share your dashboard with travel companions. Everyone can view and contribute!</p>
                 </div>
             </div>
-        </div>
-    </section>
-
-    <!-- Modifications Section -->
-    <section class="modifications">
-        <h2>Unlimited AI Modifications</h2>
-        <p>Not quite right? Just ask. Our AI adjusts your entire trip instantly.</p>
-        <div class="mod-grid">
-            <div class="mod-category">
-                <h3>🛏️ Accommodations</h3>
-                <ul>
-                    <li>"Make hotels cheaper"</li>
-                    <li>"I need pools at every stop"</li>
-                    <li>"Switch to Airbnbs instead"</li>
-                    <li>"Find pet-friendly options"</li>
-                </ul>
-            </div>
-            <div class="mod-category">
-                <h3>🍽️ Dining</h3>
-                <ul>
-                    <li>"Add vegetarian options"</li>
-                    <li>"More local restaurants"</li>
-                    <li>"Kid-friendly only"</li>
-                    <li>"Remove fast food"</li>
-                </ul>
-            </div>
-            <div class="mod-category">
-                <h3>🗺️ Route</h3>
-                <ul>
-                    <li>"Add a stop in Denver"</li>
-                    <li>"Take the scenic route"</li>
-                    <li>"Shorter driving days"</li>
-                    <li>"Skip Oklahoma City"</li>
-                </ul>
-            </div>
-            <div class="mod-category">
-                <h3>💰 Budget</h3>
-                <ul>
-                    <li>"Increase to $5,000 total"</li>
-                    <li>"More budget for food"</li>
-                    <li>"Find the cheapest route"</li>
-                    <li>"Luxury upgrade everything"</li>
-                </ul>
-            </div>
-        </div>
-        <div class="mod-footer">
-            <h3>No Limits. No Extra Charges.</h3>
-            <p>Modify as many times as you want. The AI never gets tired of helping.</p>
         </div>
     </section>
 
@@ -1471,7 +1269,7 @@
             </div>
             <div class="error-message" id="errorMessage">
                 <h3>❌ Oops! Something went wrong.</h3>
-                <p>Please try again or email us at <a href="mailto:info@routebuilder.ai" style="color: white; text-decoration: underline;">info@routebuilder.ai</a></p>
+                <p>Please try again or email us at <a href="/cdn-cgi/l/email-protection#70191e161f30021f0504151205191c1415025e1119" style="color: white; text-decoration: underline;"><span class="__cf_email__" data-cfemail="31585f575e71435e4445545344585d5554431f5058">[email&#160;protected]</span></a></p>
             </div>
             <p class="form-note" style="color: white; opacity: 0.8;">No spam. Unsubscribe anytime. We respect your privacy.</p>
         </div>
@@ -1539,7 +1337,7 @@
             <div class="footer-section">
                 <h3>Contact</h3>
                 <div class="contact-info">
-                    <p>Email: <a href="mailto:info@routebuilder.ai">info@routebuilder.ai</a></p>
+                    <p>Email: <a href="/cdn-cgi/l/email-protection#85ecebe3eac5f7eaf0f1e0e7f0ece9e1e0f7abe4ec"><span class="__cf_email__" data-cfemail="d8b1b6beb798aab7adacbdbaadb1b4bcbdaaf6b9b1">[email&#160;protected]</span></a></p>
                     <p>Phone: <a href="tel:+13202793969">320-279-3969</a></p>
                     <p>Coming Q1 2026</p>
                 </div>
@@ -1550,7 +1348,7 @@
         </div>
     </footer>
 
-    <script>
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
         // Waitlist form submission
         document.getElementById('waitlistForm').addEventListener('submit', function(e) {
             e.preventDefault();
@@ -1586,14 +1384,4 @@
                 submitButton.textContent = originalText;
                 submitButton.disabled = false;
             })
-            .catch(error => {
-                // Show error message
-                document.getElementById('errorMessage').style.display = 'block';
-                document.getElementById('successMessage').style.display = 'none';
-                submitButton.textContent = originalText;
-                submitButton.disabled = false;
-            });
-        });
-    </script>
-</body>
-</html>
+           
