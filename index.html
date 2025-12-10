@@ -1059,6 +1059,7 @@ Best Family Trip Ever! 🎉`;
         function BudgetTab({ expenses, setExpenses, totalSpent, totalBudget, budget, updateBudget, receipts, setReceipts }) {
             const [newExpense, setNewExpense] = useState({ category: 'food', description: '', amount: '' });
             const [editingBudget, setEditingBudget] = useState(null);
+            const [editingExpense, setEditingExpense] = useState({ category: null, index: null, amount: '' });
 
             const addExpense = () => {
                 if (newExpense.description && newExpense.amount) {
@@ -1068,6 +1069,27 @@ Best Family Trip Ever! 🎉`;
                     }));
                     setNewExpense({ category: 'food', description: '', amount: '' });
                 }
+            };
+
+            const updateExpense = (category, index, newAmount) => {
+                setExpenses(prev => ({
+                    ...prev,
+                    [category]: prev[category].map((exp, i) => 
+                        i === index ? { ...exp, amount: newAmount } : exp
+                    )
+                }));
+                setEditingExpense({ category: null, index: null, amount: '' });
+            };
+
+            const deleteExpense = (category, index) => {
+                setExpenses(prev => ({
+                    ...prev,
+                    [category]: prev[category].filter((_, i) => i !== index)
+                }));
+            };
+
+            const startEditing = (category, index, currentAmount) => {
+                setEditingExpense({ category, index, amount: currentAmount });
             };
 
             const handleReceiptUpload = (category, event) => {
@@ -1162,9 +1184,58 @@ Best Family Trip Ever! 🎉`;
                                     
                                     <div className="space-y-2 max-h-32 overflow-y-auto">
                                         {expenses[category].map((expense, idx) => (
-                                            <div key={idx} className="flex justify-between text-sm py-2 border-b">
-                                                <span>{expense.description}</span>
-                                                <span className="font-semibold">${expense.amount}</span>
+                                            <div key={idx} className="flex justify-between items-center text-sm py-2 border-b gap-2">
+                                                <span className="truncate flex-1">{expense.description}</span>
+                                                {editingExpense.category === category && editingExpense.index === idx ? (
+                                                    <div className="flex items-center gap-1">
+                                                        <button 
+                                                            onClick={() => updateExpense(category, idx, Math.max(0, parseFloat(editingExpense.amount) - 1).toFixed(2))}
+                                                            className="bg-red-100 hover:bg-red-200 text-red-600 px-2 py-1 rounded font-bold text-xs"
+                                                        >
+                                                            −
+                                                        </button>
+                                                        <input 
+                                                            type="number" 
+                                                            value={editingExpense.amount}
+                                                            onChange={(e) => setEditingExpense({...editingExpense, amount: e.target.value})}
+                                                            className="w-16 px-2 py-1 border rounded text-center text-xs"
+                                                        />
+                                                        <button 
+                                                            onClick={() => updateExpense(category, idx, (parseFloat(editingExpense.amount) + 1).toFixed(2))}
+                                                            className="bg-green-100 hover:bg-green-200 text-green-600 px-2 py-1 rounded font-bold text-xs"
+                                                        >
+                                                            +
+                                                        </button>
+                                                        <button 
+                                                            onClick={() => updateExpense(category, idx, editingExpense.amount)}
+                                                            className="bg-blue-100 hover:bg-blue-200 text-blue-600 px-2 py-1 rounded text-xs"
+                                                        >
+                                                            ✓
+                                                        </button>
+                                                        <button 
+                                                            onClick={() => setEditingExpense({ category: null, index: null, amount: '' })}
+                                                            className="bg-gray-100 hover:bg-gray-200 text-gray-600 px-2 py-1 rounded text-xs"
+                                                        >
+                                                            ✕
+                                                        </button>
+                                                    </div>
+                                                ) : (
+                                                    <div className="flex items-center gap-2">
+                                                        <span className="font-semibold">${expense.amount}</span>
+                                                        <button 
+                                                            onClick={() => startEditing(category, idx, expense.amount)}
+                                                            className="text-blue-600 hover:text-blue-700 text-xs"
+                                                        >
+                                                            ✏️
+                                                        </button>
+                                                        <button 
+                                                            onClick={() => deleteExpense(category, idx)}
+                                                            className="text-red-600 hover:text-red-700 text-xs"
+                                                        >
+                                                            🗑️
+                                                        </button>
+                                                    </div>
+                                                )}
                                             </div>
                                         ))}
                                         {expenses[category].length === 0 && <p className="text-gray-400 text-sm text-center py-4">No expenses yet!</p>}
