@@ -667,9 +667,6 @@
             const [receipts, setReceipts] = useState({ fuel: [], hotels: [], food: [], activities: [], misc: [] });
             const [countdown, setCountdown] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
             const [isOnline, setIsOnline] = useState(navigator.onLine);
-            const [bingoCard, setBingoCard] = useState([]);
-            const [bingoMarked, setBingoMarked] = useState({});
-            const [bingoWin, setBingoWin] = useState(false);
             const [budget, setBudget] = useState({
                 fuel: 200,
                 hotels: 2800,
@@ -715,56 +712,6 @@
                     document.documentElement.classList.remove('dark');
                 }
 }, [darkMode]);
-
-            const californiaItems = [
-                { emoji: "🌴", name: "Palm Tree" },
-                { emoji: "🏄", name: "Surfboard" },
-                { emoji: "🍔", name: "In-N-Out" },
-                { emoji: "🚗", name: "Convertible" },
-                { emoji: "⭐", name: "Hollywood Sign" },
-                { emoji: "🍇", name: "Vineyard" },
-                { emoji: "⛱️", name: "Beach Umbrella" },
-                { emoji: "🚘", name: "Tesla" },
-                { emoji: "🎡", name: "Ferris Wheel" },
-                { emoji: "🦭", name: "Sea Lion" },
-                { emoji: "🌉", name: "Golden Gate" },
-                { emoji: "🎬", name: "Movie Studio" },
-                { emoji: "🌊", name: "Surfer" },
-                { emoji: "🛹", name: "Skateboarder" },
-                { emoji: "🌅", name: "Beach Sunset" },
-                { emoji: "🚐", name: "VW Van" },
-                { emoji: "🏖️", name: "Lifeguard Tower" },
-                { emoji: "🌵", name: "Cactus" },
-                { emoji: "🦅", name: "Pelican" },
-                { emoji: "🎸", name: "Street Musician" },
-                { emoji: "🛍️", name: "Shopping Bag" },
-                { emoji: "☕", name: "Coffee Shop" },
-                { emoji: "🌻", name: "Sunflower Field" },
-                { emoji: "🚁", name: "Helicopter" }
-            ];
-
-            const generateBingoCard = () => {
-                const shuffled = [...californiaItems].sort(() => Math.random() - 0.5);
-                const selected = shuffled.slice(0, 24);
-                selected.splice(12, 0, { emoji: "⭐", name: "FREE", isFree: true });
-                setBingoCard(selected);
-                setBingoMarked({ 12: true });
-                setBingoWin(false);
-            };
-
-            const toggleBingoCell = (index) => {
-                if (bingoCard[index]?.isFree) return;
-                const newMarked = { ...bingoMarked, [index]: !bingoMarked[index] };
-                setBingoMarked(newMarked);
-                const winPatterns = [
-                    [0,1,2,3,4], [5,6,7,8,9], [10,11,12,13,14], [15,16,17,18,19], [20,21,22,23,24],
-                    [0,5,10,15,20], [1,6,11,16,21], [2,7,12,17,22], [3,8,13,18,23], [4,9,14,19,24],
-                    [0,6,12,18,24], [4,8,12,16,20]
-                ];
-                setBingoWin(winPatterns.some(pattern => pattern.every(idx => newMarked[idx])));
-            };
-
-            useEffect(() => { generateBingoCard(); }, []);
 
             const totalMiles = tripData.phases.reduce((sum, phase) => sum + phase.miles, 0);
             const totalHours = tripData.phases.reduce((sum, phase) => sum + phase.hours, 0);
@@ -1577,11 +1524,64 @@ Best Family Trip Ever! 🎉`;
             );
         }
 
-        function GamesTab({ tripData }) {
+function GamesTab({ tripData }) {
             const [currentWYR, setCurrentWYR] = useState(0);
             const [selectedCity, setSelectedCity] = useState('San Francisco');
             const [scavengerFound, setScavengerFound] = useState([]);
             const [expandedGame, setExpandedGame] = useState(null);
+            const [bingoCard, setBingoCard] = useState([]);
+            const [bingoMarked, setBingoMarked] = useState({});
+            const [bingoWin, setBingoWin] = useState(false);
+
+            const californiaItems = [
+                { emoji: "🌴", name: "Palm Tree" },
+                { emoji: "🏄", name: "Surfboard" },
+                { emoji: "🍔", name: "In-N-Out" },
+                { emoji: "🚗", name: "Convertible" },
+                { emoji: "⭐", name: "Hollywood Sign" },
+                { emoji: "🍇", name: "Vineyard" },
+                { emoji: "⛱️", name: "Beach Umbrella" },
+                { emoji: "🚘", name: "Tesla" },
+                { emoji: "🎡", name: "Ferris Wheel" },
+                { emoji: "🦭", name: "Sea Lion" },
+                { emoji: "🌉", name: "Golden Gate" },
+                { emoji: "🎬", name: "Movie Studio" },
+                { emoji: "🌊", name: "Surfer" },
+                { emoji: "🛹", name: "Skateboarder" },
+                { emoji: "🌅", name: "Beach Sunset" },
+                { emoji: "🚐", name: "VW Van" },
+                { emoji: "🏖️", name: "Lifeguard Tower" },
+                { emoji: "🌵", name: "Cactus" },
+                { emoji: "🦅", name: "Pelican" },
+                { emoji: "🎸", name: "Street Musician" },
+                { emoji: "🛍️", name: "Shopping Bag" },
+                { emoji: "☕", name: "Coffee Shop" },
+                { emoji: "🌻", name: "Sunflower Field" },
+                { emoji: "🚁", name: "Helicopter" }
+            ];
+
+            const generateBingoCard = () => {
+                const shuffled = [...californiaItems].sort(() => Math.random() - 0.5);
+                const selected = shuffled.slice(0, 24);
+                selected.splice(12, 0, { emoji: "⭐", name: "FREE", isFree: true });
+                setBingoCard(selected);
+                setBingoMarked({ 12: true });
+                setBingoWin(false);
+            };
+
+            const toggleBingoCell = (index) => {
+                if (bingoCard[index]?.isFree) return;
+                const newMarked = { ...bingoMarked, [index]: !bingoMarked[index] };
+                setBingoMarked(newMarked);
+                const winPatterns = [
+                    [0,1,2,3,4], [5,6,7,8,9], [10,11,12,13,14], [15,16,17,18,19], [20,21,22,23,24],
+                    [0,5,10,15,20], [1,6,11,16,21], [2,7,12,17,22], [3,8,13,18,23], [4,9,14,19,24],
+                    [0,6,12,18,24], [4,8,12,16,20]
+                ];
+                setBingoWin(winPatterns.some(pattern => pattern.every(idx => newMarked[idx])));
+            };
+
+            useEffect(() => { generateBingoCard(); }, []);
 
             const toggleScavengerItem = (item) => {
                 setScavengerFound(prev => prev.includes(item) ? prev.filter(i => i !== item) : [...prev, item]);
