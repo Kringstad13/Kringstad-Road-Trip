@@ -575,38 +575,6 @@
                 { category: "🍎 Snacks & Drinks", items: ["Reusable water bottles", "Juice boxes & drink pouches", "Fresh fruit (apples, grapes)", "Trail mix & nuts", "String cheese & snack packs", "Pretzels & crackers", "Coffee for early mornings", "Small cooler with ice packs", "Trash bags for the car", "Treats for good behavior 😉"] },
                { category: "🚗 Car Comfort", items: ["Travel pillows & blankets", "Car trash can/bag", "Paper towels & tissues", "Stain remover wipes", "Window sun shades", "First aid kit", "Hand sanitizer & wipes", "Air freshener", "Umbrella", "Roadside emergency kit"] }
             ],
-            californiaGames: [
-                { 
-                    name: "🚗 California Road Trip Bingo", 
-                    description: "Spot California sights!",
-                    instructions: "Find these California items: palm tree, surfboard, In-N-Out, convertible, Hollywood sign, vineyard, beach umbrella, Tesla. First to find 5 wins! Each phone gets a different card!"
-                },
-                { 
-                    name: "🚙 License Plate Bingo", 
-                    description: "Find plates from all 50 states!",
-                    instructions: "Print or draw a US map. Cross off states as you spot their license plates! First to get 25 states wins. Bonus: Hawaii and Alaska are worth 5 points each!"
-                },
-                { 
-                    name: "📋 Road Trip Scavenger Hunt", 
-                    description: "Find items on the list!",
-                    instructions: "Check off as you spot them: red barn, water tower, state sign, billboard with animal, RV, motorcycle, American flag, wind turbine, train, hay bales. First to 10 wins!"
-                },
-                { 
-                    name: "✏️ Tic Tac Toe Tournament", 
-                    description: "Classic X's and O's!",
-                    instructions: "Draw a grid on paper. Take turns placing X or O. First to get 3 in a row wins! Play best of 5 rounds. Winner picks the next road trip snack!"
-                },
-                { 
-                    name: "⬜ Dots and Boxes", 
-                    description: "Connect dots to make boxes!",
-                    instructions: "Draw a grid of dots (6x6). Take turns drawing one line between dots. Complete a box? Write your initial and go again. Most boxes wins!"
-                },
-                { 
-                    name: "🔤 The Alphabet Game", 
-                    description: "Find letters A-Z on signs!",
-                    instructions: "Find letters A through Z IN ORDER on signs outside. First person to get to Z wins! Letters inside the car don't count."
-                }
-            ],
             games: [
                 { 
                     name: "🎵 Name That Tune", 
@@ -1524,15 +1492,39 @@ Best Family Trip Ever! 🎉`;
             );
         }
 
-function GamesTab({ tripData }) {
+
+        function GamesTab({ tripData }) {
             const [currentWYR, setCurrentWYR] = useState(0);
             const [selectedCity, setSelectedCity] = useState('San Francisco');
             const [scavengerFound, setScavengerFound] = useState([]);
             const [expandedGame, setExpandedGame] = useState(null);
+            
+            // California Bingo State
             const [bingoCard, setBingoCard] = useState([]);
             const [bingoMarked, setBingoMarked] = useState({});
             const [bingoWin, setBingoWin] = useState(false);
+            
+            // License Plate Bingo State
+            const [foundStates, setFoundStates] = useState([]);
+            
+            // Road Trip Scavenger Hunt State  
+            const [roadScavengerFound, setRoadScavengerFound] = useState([]);
+            
+            // Tic Tac Toe State
+            const [tttBoard, setTttBoard] = useState(Array(9).fill(null));
+            const [tttXNext, setTttXNext] = useState(true);
+            const [tttScores, setTttScores] = useState({ X: 0, O: 0 });
+            
+            // Dots and Boxes State
+            const [dotLines, setDotLines] = useState({});
+            const [dotBoxes, setDotBoxes] = useState({});
+            const [dotPlayer, setDotPlayer] = useState(1);
+            const [dotScores, setDotScores] = useState({ 1: 0, 2: 0 });
+            
+            // Alphabet Game State
+            const [alphabetFound, setAlphabetFound] = useState([]);
 
+            // ========== CALIFORNIA BINGO ==========
             const californiaItems = [
                 { emoji: "🌴", name: "Palm Tree" },
                 { emoji: "🏄", name: "Surfboard" },
@@ -1581,13 +1573,170 @@ function GamesTab({ tripData }) {
                 setBingoWin(winPatterns.some(pattern => pattern.every(idx => newMarked[idx])));
             };
 
-            useEffect(() => { generateBingoCard(); }, []);
+            // ========== LICENSE PLATE BINGO ==========
+            const allStates = [
+                "AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DE", "FL", "GA",
+                "HI", "ID", "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MD",
+                "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ",
+                "NM", "NY", "NC", "ND", "OH", "OK", "OR", "PA", "RI", "SC",
+                "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY"
+            ];
+            
+            const stateNames = {
+                "AL": "Alabama", "AK": "Alaska", "AZ": "Arizona", "AR": "Arkansas", "CA": "California",
+                "CO": "Colorado", "CT": "Connecticut", "DE": "Delaware", "FL": "Florida", "GA": "Georgia",
+                "HI": "Hawaii", "ID": "Idaho", "IL": "Illinois", "IN": "Indiana", "IA": "Iowa",
+                "KS": "Kansas", "KY": "Kentucky", "LA": "Louisiana", "ME": "Maine", "MD": "Maryland",
+                "MA": "Massachusetts", "MI": "Michigan", "MN": "Minnesota", "MS": "Mississippi", "MO": "Missouri",
+                "MT": "Montana", "NE": "Nebraska", "NV": "Nevada", "NH": "New Hampshire", "NJ": "New Jersey",
+                "NM": "New Mexico", "NY": "New York", "NC": "North Carolina", "ND": "North Dakota", "OH": "Ohio",
+                "OK": "Oklahoma", "OR": "Oregon", "PA": "Pennsylvania", "RI": "Rhode Island", "SC": "South Carolina",
+                "SD": "South Dakota", "TN": "Tennessee", "TX": "Texas", "UT": "Utah", "VT": "Vermont",
+                "VA": "Virginia", "WA": "Washington", "WV": "West Virginia", "WI": "Wisconsin", "WY": "Wyoming"
+            };
 
+            const toggleState = (state) => {
+                setFoundStates(prev => 
+                    prev.includes(state) ? prev.filter(s => s !== state) : [...prev, state]
+                );
+            };
+
+            // ========== ROAD TRIP SCAVENGER HUNT ==========
+            const roadScavengerList = [
+                { item: "🚜 Tractor", points: 5 },
+                { item: "🌾 Hay Bales", points: 5 },
+                { item: "🚂 Train", points: 10 },
+                { item: "🏔️ Mountain", points: 5 },
+                { item: "🌈 Rainbow", points: 25 },
+                { item: "🦌 Deer", points: 15 },
+                { item: "🚁 Helicopter", points: 20 },
+                { item: "🎡 Ferris Wheel", points: 15 },
+                { item: "🚐 VW Bus", points: 20 },
+                { item: "🏕️ Campsite", points: 10 },
+                { item: "🌻 Sunflowers", points: 10 },
+                { item: "🐄 Cows", points: 5 },
+                { item: "🐴 Horses", points: 10 },
+                { item: "🦅 Bird of Prey", points: 15 },
+                { item: "⛵ Sailboat", points: 15 },
+                { item: "🏰 Castle/Mansion", points: 20 },
+                { item: "🎈 Hot Air Balloon", points: 25 },
+                { item: "🚒 Fire Truck", points: 10 },
+                { item: "🏍️ Motorcycle Gang", points: 15 },
+                { item: "🛸 Something Weird", points: 30 }
+            ];
+
+            const toggleRoadScavenger = (item) => {
+                setRoadScavengerFound(prev => prev.includes(item) ? prev.filter(i => i !== item) : [...prev, item]);
+            };
+
+            const roadScavengerPoints = roadScavengerList.filter(i => roadScavengerFound.includes(i.item)).reduce((sum, i) => sum + i.points, 0);
+
+            // Keep original scavenger hunt too
             const toggleScavengerItem = (item) => {
                 setScavengerFound(prev => prev.includes(item) ? prev.filter(i => i !== item) : [...prev, item]);
             };
-
             const scavengerPoints = scavengerHuntItems.filter(i => scavengerFound.includes(i.item)).reduce((sum, i) => sum + i.points, 0);
+
+            // ========== TIC TAC TOE ==========
+            const calculateTTTWinner = (squares) => {
+                const lines = [
+                    [0, 1, 2], [3, 4, 5], [6, 7, 8],
+                    [0, 3, 6], [1, 4, 7], [2, 5, 8],
+                    [0, 4, 8], [2, 4, 6]
+                ];
+                for (let [a, b, c] of lines) {
+                    if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
+                        return squares[a];
+                    }
+                }
+                return null;
+            };
+
+            const handleTTTClick = (i) => {
+                if (tttBoard[i] || calculateTTTWinner(tttBoard)) return;
+                const newBoard = [...tttBoard];
+                newBoard[i] = tttXNext ? 'X' : 'O';
+                setTttBoard(newBoard);
+                setTttXNext(!tttXNext);
+                
+                const winner = calculateTTTWinner(newBoard);
+                if (winner) {
+                    setTttScores(prev => ({ ...prev, [winner]: prev[winner] + 1 }));
+                }
+            };
+
+            const resetTTT = () => {
+                setTttBoard(Array(9).fill(null));
+                setTttXNext(true);
+            };
+
+            const tttWinner = calculateTTTWinner(tttBoard);
+            const tttDraw = !tttWinner && tttBoard.every(cell => cell !== null);
+
+            // ========== DOTS AND BOXES ==========
+            const DOT_SIZE = 5;
+            
+            const getLineKey = (r1, c1, r2, c2) => {
+                const sorted = [[r1,c1], [r2,c2]].sort((a,b) => a[0]-b[0] || a[1]-b[1]);
+                return `${sorted[0][0]},${sorted[0][1]}-${sorted[1][0]},${sorted[1][1]}`;
+            };
+
+            const handleDotLine = (r1, c1, r2, c2) => {
+                const key = getLineKey(r1, c1, r2, c2);
+                if (dotLines[key]) return;
+                
+                const newLines = { ...dotLines, [key]: dotPlayer };
+                setDotLines(newLines);
+                
+                const newBoxes = { ...dotBoxes };
+                let boxesCompleted = 0;
+                
+                for (let r = 0; r < DOT_SIZE - 1; r++) {
+                    for (let c = 0; c < DOT_SIZE - 1; c++) {
+                        const boxKey = `${r},${c}`;
+                        if (!newBoxes[boxKey]) {
+                            const top = getLineKey(r, c, r, c+1);
+                            const bottom = getLineKey(r+1, c, r+1, c+1);
+                            const left = getLineKey(r, c, r+1, c);
+                            const right = getLineKey(r, c+1, r+1, c+1);
+                            if (newLines[top] && newLines[bottom] && newLines[left] && newLines[right]) {
+                                newBoxes[boxKey] = dotPlayer;
+                                boxesCompleted++;
+                            }
+                        }
+                    }
+                }
+                
+                setDotBoxes(newBoxes);
+                
+                if (boxesCompleted > 0) {
+                    setDotScores(prev => ({ ...prev, [dotPlayer]: prev[dotPlayer] + boxesCompleted }));
+                } else {
+                    setDotPlayer(dotPlayer === 1 ? 2 : 1);
+                }
+            };
+
+            const resetDots = () => {
+                setDotLines({});
+                setDotBoxes({});
+                setDotPlayer(1);
+                setDotScores({ 1: 0, 2: 0 });
+            };
+
+            // ========== ALPHABET GAME ==========
+            const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
+            
+            const toggleAlphabet = (letter) => {
+                const idx = alphabet.indexOf(letter);
+                if (idx === alphabetFound.length) {
+                    setAlphabetFound([...alphabetFound, letter]);
+                }
+            };
+
+            const resetAlphabet = () => setAlphabetFound([]);
+
+            // Initialize games
+            useEffect(() => { generateBingoCard(); }, []);
 
             return (
                 <div className="space-y-6">
@@ -1596,29 +1745,253 @@ function GamesTab({ tripData }) {
                         <div className="ai-helper-icon">🤖</div>
                         <div className="ai-helper-content">
                             <div className="ai-helper-title">AI Assistant Ready</div>
-                            <div className="ai-helper-text">Create custom games! Ask AI to generate 50 more "Would You Rather" questions, create trivia about cities you're visiting, or design age-specific games for your family.</div>
+                            <div className="ai-helper-text">Create custom games! Ask AI to generate more questions, create trivia about cities you're visiting, or design age-specific games.</div>
                         </div>
                     </div>
 
                     {/* Fun Header */}
                     <div className="bg-gradient-to-r from-blue-100 via-orange-100 to-cyan-100 rounded-2xl p-6 text-center">
                         <h2 className="text-3xl font-bold text-gray-800 mb-2">🎮 Road Trip Games 🎉</h2>
-                        <p className="text-gray-600">Fun games for the whole car - no internet needed!</p>
+                        <p className="text-gray-600">Interactive games for the whole car!</p>
                     </div>
 
-                    {/* AI Games Coming Soon */}
-                    <div className="bg-gradient-to-r from-purple-50 to-blue-50 border-2 border-purple-200 rounded-xl p-6">
-                        <h3 className="font-bold text-lg text-purple-900 mb-3">🤖 AI Game Generator - Coming Soon!</h3>
-                        <p className="text-sm text-purple-800 mb-4">Ask AI to create MORE games with custom questions for YOUR trip:</p>
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-2 text-sm">
-                            <div className="bg-white rounded-lg p-3 text-purple-700">→ "Create trivia about the cities we're visiting"</div>
-                            <div className="bg-white rounded-lg p-3 text-purple-700">→ "Make 50 'Would You Rather' questions for kids"</div>
-                            <div className="bg-white rounded-lg p-3 text-purple-700">→ "Add a scavenger hunt for Route 66 landmarks"</div>
-                            <div className="bg-white rounded-lg p-3 text-purple-700">→ "Create 'I Spy' prompts for our exact route"</div>
+                    {/* ========== 1. CALIFORNIA ROAD TRIP BINGO ========== */}
+                    <div className="bg-white rounded-2xl shadow-lg p-6">
+                        <div className="flex items-center justify-between mb-4">
+                            <h2 className="text-2xl font-bold">🚗 California Road Trip Bingo</h2>
+                            <button onClick={generateBingoCard} className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition">🔀 New Card</button>
+                        </div>
+                        
+                        {bingoWin && (
+                            <div className="mb-4 p-4 bg-green-100 rounded-xl text-center">
+                                <span className="text-3xl">🎉</span>
+                                <span className="text-green-700 font-bold text-xl ml-2">BINGO! You won!</span>
+                            </div>
+                        )}
+                        
+                        <div className="grid grid-cols-5 gap-2 mb-4">
+                            {bingoCard.map((item, idx) => (
+                                <button
+                                    key={idx}
+                                    onClick={() => toggleBingoCell(idx)}
+                                    className={`aspect-square p-2 rounded-xl border-2 transition-all transform hover:scale-105 flex flex-col items-center justify-center ${
+                                        bingoMarked[idx] 
+                                            ? item.isFree ? 'bg-yellow-400 border-yellow-500' : 'bg-green-400 border-green-500' 
+                                            : 'bg-gray-100 border-gray-300 hover:border-blue-400'
+                                    }`}
+                                >
+                                    <span className="text-2xl">{item.emoji}</span>
+                                    <span className="text-xs text-center mt-1 hidden sm:block">{item.name}</span>
+                                </button>
+                            ))}
+                        </div>
+                        
+                        <div className="flex justify-between text-sm text-gray-600">
+                            <span>Found: {Object.values(bingoMarked).filter(Boolean).length - 1} / 24</span>
+                            <span>Get 5 in a row to win!</span>
                         </div>
                     </div>
 
-                    {/* Would You Rather - Kid Friendly */}
+                    {/* ========== 2. LICENSE PLATE BINGO ========== */}
+                    <div className="bg-white rounded-2xl shadow-lg p-6">
+                        <div className="flex items-center justify-between mb-4">
+                            <h2 className="text-2xl font-bold">🚙 License Plate Bingo</h2>
+                            <div className="text-right">
+                                <div className="text-2xl font-bold text-blue-600">{foundStates.length}/50</div>
+                                <button onClick={() => setFoundStates([])} className="text-xs text-gray-500 hover:text-red-500">Reset</button>
+                            </div>
+                        </div>
+                        <p className="text-gray-600 mb-4">Tap states when you spot their license plates!</p>
+                        
+                        <div className="grid grid-cols-5 sm:grid-cols-10 gap-1">
+                            {allStates.map(state => (
+                                <button
+                                    key={state}
+                                    onClick={() => toggleState(state)}
+                                    title={stateNames[state]}
+                                    className={`p-2 rounded-lg text-xs font-bold transition-all ${
+                                        foundStates.includes(state) 
+                                            ? 'bg-green-500 text-white' 
+                                            : 'bg-gray-100 hover:bg-blue-100'
+                                    }`}
+                                >
+                                    {state}
+                                </button>
+                            ))}
+                        </div>
+                        
+                        {foundStates.length >= 25 && (
+                            <div className="mt-4 p-3 bg-yellow-100 rounded-xl text-center">
+                                🏆 <strong>Halfway there!</strong> {foundStates.length >= 50 ? "🎉 YOU GOT ALL 50!" : `${50 - foundStates.length} more to go!`}
+                            </div>
+                        )}
+                    </div>
+
+                    {/* ========== 3. ROAD TRIP SCAVENGER HUNT ========== */}
+                    <div className="bg-white rounded-2xl shadow-lg p-6">
+                        <div className="flex items-center justify-between mb-4">
+                            <h2 className="text-2xl font-bold">📋 Road Trip Scavenger Hunt</h2>
+                            <div className="text-right">
+                                <div className="text-3xl font-bold text-orange-600">{roadScavengerPoints}</div>
+                                <div className="text-sm text-gray-500">points</div>
+                            </div>
+                        </div>
+                        <p className="text-gray-600 mb-4">Find these items on your trip! Tap when spotted.</p>
+                        
+                        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                            {roadScavengerList.map((item, idx) => (
+                                <button
+                                    key={idx}
+                                    onClick={() => toggleRoadScavenger(item.item)}
+                                    className={`p-3 rounded-xl text-left transition-all ${
+                                        roadScavengerFound.includes(item.item) 
+                                            ? 'bg-green-100 border-2 border-green-400' 
+                                            : 'bg-gray-100 hover:bg-orange-50 border-2 border-transparent'
+                                    }`}
+                                >
+                                    <div className="font-semibold">{item.item}</div>
+                                    <div className="text-xs text-gray-500">+{item.points} pts</div>
+                                </button>
+                            ))}
+                        </div>
+                    </div>
+
+                    {/* ========== 4. TIC TAC TOE ========== */}
+                    <div className="bg-white rounded-2xl shadow-lg p-6">
+                        <div className="flex items-center justify-between mb-4">
+                            <h2 className="text-2xl font-bold">✏️ Tic Tac Toe</h2>
+                            <div className="flex gap-4 text-center">
+                                <div><span className="text-2xl">❌</span><div className="font-bold">{tttScores.X}</div></div>
+                                <div><span className="text-2xl">⭕</span><div className="font-bold">{tttScores.O}</div></div>
+                            </div>
+                        </div>
+                        
+                        <div className="flex flex-col items-center">
+                            <div className="grid grid-cols-3 gap-2 mb-4">
+                                {tttBoard.map((cell, i) => (
+                                    <button
+                                        key={i}
+                                        onClick={() => handleTTTClick(i)}
+                                        className="w-20 h-20 bg-gray-100 rounded-xl text-4xl font-bold hover:bg-blue-50 transition flex items-center justify-center"
+                                    >
+                                        {cell === 'X' ? '❌' : cell === 'O' ? '⭕' : ''}
+                                    </button>
+                                ))}
+                            </div>
+                            
+                            {tttWinner && <div className="text-xl font-bold text-green-600 mb-2">🎉 {tttWinner === 'X' ? '❌' : '⭕'} Wins!</div>}
+                            {tttDraw && <div className="text-xl font-bold text-orange-600 mb-2">🤝 It's a Draw!</div>}
+                            {!tttWinner && !tttDraw && <div className="text-gray-600 mb-2">{tttXNext ? '❌' : '⭕'}'s turn</div>}
+                            
+                            <button onClick={resetTTT} className="px-6 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600">New Game</button>
+                        </div>
+                    </div>
+
+                    {/* ========== 5. DOTS AND BOXES ========== */}
+                    <div className="bg-white rounded-2xl shadow-lg p-6">
+                        <div className="flex items-center justify-between mb-4">
+                            <h2 className="text-2xl font-bold">⬜ Dots and Boxes</h2>
+                            <div className="flex gap-4 text-center">
+                                <div><span className="w-4 h-4 bg-blue-500 inline-block rounded"></span><div className="font-bold">P1: {dotScores[1]}</div></div>
+                                <div><span className="w-4 h-4 bg-red-500 inline-block rounded"></span><div className="font-bold">P2: {dotScores[2]}</div></div>
+                            </div>
+                        </div>
+                        
+                        <div className="flex flex-col items-center">
+                            <div className="text-sm text-gray-600 mb-2">Player {dotPlayer}'s turn ({dotPlayer === 1 ? '🔵 Blue' : '🔴 Red'})</div>
+                            
+                            <div className="relative" style={{ width: '200px', height: '200px' }}>
+                                {/* Dots */}
+                                {Array.from({ length: DOT_SIZE }, (_, r) =>
+                                    Array.from({ length: DOT_SIZE }, (_, c) => (
+                                        <div key={`dot-${r}-${c}`} className="absolute w-3 h-3 bg-gray-800 rounded-full" style={{ left: `${c * 40 - 6}px`, top: `${r * 40 - 6}px` }} />
+                                    ))
+                                )}
+                                
+                                {/* Horizontal lines */}
+                                {Array.from({ length: DOT_SIZE }, (_, r) =>
+                                    Array.from({ length: DOT_SIZE - 1 }, (_, c) => {
+                                        const key = getLineKey(r, c, r, c + 1);
+                                        return (
+                                            <button
+                                                key={`h-${r}-${c}`}
+                                                onClick={() => handleDotLine(r, c, r, c + 1)}
+                                                className={`absolute h-2 rounded transition-all ${dotLines[key] ? (dotLines[key] === 1 ? 'bg-blue-500' : 'bg-red-500') : 'bg-gray-200 hover:bg-gray-400'}`}
+                                                style={{ left: `${c * 40}px`, top: `${r * 40 - 4}px`, width: '32px' }}
+                                            />
+                                        );
+                                    })
+                                )}
+                                
+                                {/* Vertical lines */}
+                                {Array.from({ length: DOT_SIZE - 1 }, (_, r) =>
+                                    Array.from({ length: DOT_SIZE }, (_, c) => {
+                                        const key = getLineKey(r, c, r + 1, c);
+                                        return (
+                                            <button
+                                                key={`v-${r}-${c}`}
+                                                onClick={() => handleDotLine(r, c, r + 1, c)}
+                                                className={`absolute w-2 rounded transition-all ${dotLines[key] ? (dotLines[key] === 1 ? 'bg-blue-500' : 'bg-red-500') : 'bg-gray-200 hover:bg-gray-400'}`}
+                                                style={{ left: `${c * 40 - 4}px`, top: `${r * 40}px`, height: '32px' }}
+                                            />
+                                        );
+                                    })
+                                )}
+                                
+                                {/* Boxes */}
+                                {Object.entries(dotBoxes).map(([key, player]) => {
+                                    const [r, c] = key.split(',').map(Number);
+                                    return (
+                                        <div
+                                            key={`box-${key}`}
+                                            className={`absolute rounded ${player === 1 ? 'bg-blue-200' : 'bg-red-200'}`}
+                                            style={{ left: `${c * 40 + 2}px`, top: `${r * 40 + 2}px`, width: '28px', height: '28px' }}
+                                        />
+                                    );
+                                })}
+                            </div>
+                            
+                            <button onClick={resetDots} className="mt-4 px-6 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600">New Game</button>
+                        </div>
+                    </div>
+
+                    {/* ========== 6. ALPHABET GAME ========== */}
+                    <div className="bg-white rounded-2xl shadow-lg p-6">
+                        <div className="flex items-center justify-between mb-4">
+                            <h2 className="text-2xl font-bold">🔤 The Alphabet Game</h2>
+                            <button onClick={resetAlphabet} className="px-4 py-2 bg-gray-200 rounded-lg hover:bg-gray-300 text-sm">Reset</button>
+                        </div>
+                        <p className="text-gray-600 mb-4">Find letters A-Z IN ORDER on signs outside the car. Tap when you spot the next letter!</p>
+                        
+                        <div className="grid grid-cols-9 sm:grid-cols-13 gap-2 mb-4">
+                            {alphabet.map((letter, idx) => (
+                                <button
+                                    key={letter}
+                                    onClick={() => toggleAlphabet(letter)}
+                                    disabled={idx !== alphabetFound.length}
+                                    className={`w-10 h-10 rounded-lg font-bold text-lg transition-all ${
+                                        alphabetFound.includes(letter)
+                                            ? 'bg-green-500 text-white'
+                                            : idx === alphabetFound.length
+                                                ? 'bg-yellow-400 text-gray-800 animate-pulse'
+                                                : 'bg-gray-200 text-gray-400'
+                                    }`}
+                                >
+                                    {letter}
+                                </button>
+                            ))}
+                        </div>
+                        
+                        <div className="text-center">
+                            {alphabetFound.length === 26 ? (
+                                <div className="text-2xl font-bold text-green-600">🎉 YOU WIN! You found all 26 letters!</div>
+                            ) : (
+                                <div className="text-gray-600">Next letter: <span className="text-2xl font-bold text-yellow-600">{alphabet[alphabetFound.length]}</span></div>
+                            )}
+                        </div>
+                    </div>
+
+                    {/* Would You Rather */}
                     <div className="bg-white rounded-2xl shadow-lg p-6">
                         <h2 className="text-2xl font-bold mb-4 flex items-center gap-2">
                             <span className="bounce">🤔</span> Would You Rather?
@@ -1636,7 +2009,7 @@ function GamesTab({ tripData }) {
                         <p className="text-center text-sm text-gray-500 mt-3">Question {currentWYR + 1} of {wouldYouRatherQuestions.length}</p>
                     </div>
 
-                    {/* Scavenger Hunt */}
+                    {/* California Scavenger Hunt (original) */}
                     <div className="bg-white rounded-2xl shadow-lg p-6">
                         <div className="flex items-center justify-between mb-4">
                             <h2 className="text-2xl font-bold flex items-center gap-2">
@@ -1647,7 +2020,7 @@ function GamesTab({ tripData }) {
                                 <div className="text-sm text-gray-500">points earned!</div>
                             </div>
                         </div>
-                        <p className="text-gray-600 mb-4">Find these items on your trip! Check them off when you spot them.</p>
+                        <p className="text-gray-600 mb-4">Find these California items on your trip!</p>
                         <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
                             {scavengerHuntItems.map((item, idx) => (
                                 <button
@@ -1680,78 +2053,6 @@ function GamesTab({ tripData }) {
                             {californiaFacts[selectedCity].map((fact, idx) => (
                                 <div key={idx} className="bg-gradient-to-r from-blue-50 to-purple-50 border-l-4 border-blue-400 p-4 rounded-r-xl">
                                     <p className="text-gray-800">{fact}</p>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-
-{/* Interactive California Bingo */}
-                    <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 mb-6">
-                        <div className="flex items-center justify-between mb-4">
-                            <h3 className="text-xl font-bold text-gray-800 dark:text-white">🚗 California Road Trip Bingo</h3>
-                            <button 
-                                onClick={generateBingoCard}
-                                className="px-3 py-1 bg-blue-500 text-white rounded-lg text-sm hover:bg-blue-600 transition-colors"
-                            >
-                                🔀 New Card
-                            </button>
-                        </div>
-                        
-                        {bingoWin && (
-                            <div className="mb-4 p-3 bg-green-100 dark:bg-green-900 rounded-lg text-center">
-                                <span className="text-2xl">🎉</span>
-                                <span className="text-green-700 dark:text-green-300 font-bold ml-2">BINGO! You won!</span>
-                            </div>
-                        )}
-                        
-                        <div className="grid grid-cols-5 gap-1 sm:gap-2 mb-4">
-                            {bingoCard.map((item, idx) => (
-                                <button
-                                    key={idx}
-                                    onClick={() => toggleBingoCell(idx)}
-                                    className={`aspect-square p-1 sm:p-2 rounded-lg border-2 transition-all transform hover:scale-105 flex flex-col items-center justify-center ${
-                                        bingoMarked[idx] 
-                                            ? item.isFree 
-                                                ? 'bg-yellow-400 border-yellow-500' 
-                                                : 'bg-green-400 border-green-500 dark:bg-green-600' 
-                                            : 'bg-gray-100 dark:bg-gray-700 border-gray-300 dark:border-gray-600 hover:border-blue-400'
-                                    }`}
-                                >
-                                    <span className="text-lg sm:text-2xl">{item.emoji}</span>
-                                    <span className="text-xs text-center leading-tight mt-1 text-gray-700 dark:text-gray-300 hidden sm:block">{item.name}</span>
-                                </button>
-                            ))}
-                        </div>
-                        
-                        <div className="flex items-center justify-between text-sm text-gray-600 dark:text-gray-400">
-                            <span>Found: {Object.values(bingoMarked).filter(Boolean).length - 1} / 24</span>
-                            <span className="text-xs">Tap items when you spot them!</span>
-                        </div>
-                        
-                        <p className="mt-3 text-xs text-gray-500 dark:text-gray-400 text-center">
-                            Get 5 in a row (horizontal, vertical, or diagonal) to win!
-                        </p>
-                    </div>
-
-{/* California Fun Facts Games */}
-                    <div className="bg-white rounded-2xl shadow-lg p-6 mb-6">
-                        <h2 className="text-2xl font-bold mb-6">🌴 California Fun Facts</h2>
-                        <div className="space-y-3">
-                            {tripData.californiaGames.map((game, idx) => (
-                                <div key={`ca-${idx}`} className="border-2 border-amber-200 rounded-xl overflow-hidden">
-                                    <button onClick={() => setExpandedGame(expandedGame === `ca-${idx}` ? null : `ca-${idx}`)} className="w-full p-4 text-left hover:bg-amber-50 transition flex justify-between items-center">
-                                        <div>
-                                            <h3 className="font-bold text-lg">{game.name}</h3>
-                                            <p className="text-gray-600 text-sm">{game.description}</p>
-                                        </div>
-                                        <span className="text-2xl">{expandedGame === `ca-${idx}` ? '−' : '+'}</span>
-                                    </button>
-                                    {expandedGame === `ca-${idx}` && (
-                                        <div className="p-4 bg-gradient-to-r from-amber-50 to-yellow-50 border-t-2 border-amber-200">
-                                            <h4 className="font-semibold mb-2">How to Play:</h4>
-                                            <p className="text-gray-700">{game.instructions}</p>
-                                        </div>
-                                    )}
                                 </div>
                             ))}
                         </div>
