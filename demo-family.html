@@ -1685,6 +1685,54 @@ Best Family Trip Ever! 🎉`;
                         </div>
                     </div>
 
+{/* Interactive California Bingo */}
+                    <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 mb-6">
+                        <div className="flex items-center justify-between mb-4">
+                            <h3 className="text-xl font-bold text-gray-800 dark:text-white">🚗 California Road Trip Bingo</h3>
+                            <button 
+                                onClick={generateBingoCard}
+                                className="px-3 py-1 bg-blue-500 text-white rounded-lg text-sm hover:bg-blue-600 transition-colors"
+                            >
+                                🔀 New Card
+                            </button>
+                        </div>
+                        
+                        {bingoWin && (
+                            <div className="mb-4 p-3 bg-green-100 dark:bg-green-900 rounded-lg text-center">
+                                <span className="text-2xl">🎉</span>
+                                <span className="text-green-700 dark:text-green-300 font-bold ml-2">BINGO! You won!</span>
+                            </div>
+                        )}
+                        
+                        <div className="grid grid-cols-5 gap-1 sm:gap-2 mb-4">
+                            {bingoCard.map((item, idx) => (
+                                <button
+                                    key={idx}
+                                    onClick={() => toggleBingoCell(idx)}
+                                    className={`aspect-square p-1 sm:p-2 rounded-lg border-2 transition-all transform hover:scale-105 flex flex-col items-center justify-center ${
+                                        bingoMarked[idx] 
+                                            ? item.isFree 
+                                                ? 'bg-yellow-400 border-yellow-500' 
+                                                : 'bg-green-400 border-green-500 dark:bg-green-600' 
+                                            : 'bg-gray-100 dark:bg-gray-700 border-gray-300 dark:border-gray-600 hover:border-blue-400'
+                                    }`}
+                                >
+                                    <span className="text-lg sm:text-2xl">{item.emoji}</span>
+                                    <span className="text-xs text-center leading-tight mt-1 text-gray-700 dark:text-gray-300 hidden sm:block">{item.name}</span>
+                                </button>
+                            ))}
+                        </div>
+                        
+                        <div className="flex items-center justify-between text-sm text-gray-600 dark:text-gray-400">
+                            <span>Found: {Object.values(bingoMarked).filter(Boolean).length - 1} / 24</span>
+                            <span className="text-xs">Tap items when you spot them!</span>
+                        </div>
+                        
+                        <p className="mt-3 text-xs text-gray-500 dark:text-gray-400 text-center">
+                            Get 5 in a row (horizontal, vertical, or diagonal) to win!
+                        </p>
+                    </div>
+
 {/* California Fun Facts Games */}
                     <div className="bg-white rounded-2xl shadow-lg p-6 mb-6">
                         <h2 className="text-2xl font-bold mb-6">🌴 California Fun Facts</h2>
