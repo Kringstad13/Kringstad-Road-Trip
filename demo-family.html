@@ -573,12 +573,23 @@
                 { category: "🎢 Theme Park Ready", items: ["VERY comfortable walking shoes", "Small backpack or fanny pack", "Portable phone chargers", "Sunscreen (reapply often!)", "Empty water bottles", "Blister band-aids", "Ponchos for water rides", "Autograph book & marker", "Snacks (check park rules)", "Disney/Universal app downloaded"] },
                 { category: "🎮 Entertainment", items: ["Tablets with downloaded movies", "Nintendo Switch / games", "Kids' headphones (volume limited)", "Card games (Uno, etc.)", "Coloring books & crayons", "Audiobooks for the car", "Road trip playlist ready", "Travel games", "Books & magazines", "Mad Libs / activity books"] },
                 { category: "🍎 Snacks & Drinks", items: ["Reusable water bottles", "Juice boxes & drink pouches", "Fresh fruit (apples, grapes)", "Trail mix & nuts", "String cheese & snack packs", "Pretzels & crackers", "Coffee for early mornings", "Small cooler with ice packs", "Trash bags for the car", "Treats for good behavior 😉"] },
-                { category: "🚗 Car Comfort", items: ["Travel pillows & blankets", "Car trash can/bag", "Paper towels & tissues", "Stain remover wipes", "Window sun shades", "First aid kit", "Hand sanitizer & wipes", "Air freshener", "Umbrella", "Roadside emergency kit"] }
+               { category: "🚗 Car Comfort", items: ["Travel pillows & blankets", "Car trash can/bag", "Paper towels & tissues", "Stain remover wipes", "Window sun shades", "First aid kit", "Hand sanitizer & wipes", "Air freshener", "Umbrella", "Roadside emergency kit"] }
             ],
-           { 
+            californiaGames: [
+                { 
+                    name: "🚗 California Road Trip Bingo", 
+                    description: "Spot California sights!",
+                    instructions: "Find these California items: palm tree, surfboard, In-N-Out, convertible, Hollywood sign, vineyard, beach umbrella, Tesla. First to find 5 wins! Each phone gets a different card!"
+                },
+                { 
+                    name: "🚙 License Plate Bingo", 
+                    description: "Find plates from all 50 states!",
+                    instructions: "Print or draw a US map. Cross off states as you spot their license plates! First to get 25 states wins. Bonus: Hawaii and Alaska are worth 5 points each!"
+                },
+                { 
                     name: "📋 Road Trip Scavenger Hunt", 
                     description: "Find items on the list!",
-                    instructions: "Print this list and check off as you spot them: red barn, water tower, state sign, billboard with animal, RV, motorcycle, American flag, wind turbine, train, hay bales. First to 10 wins!"
+                    instructions: "Check off as you spot them: red barn, water tower, state sign, billboard with animal, RV, motorcycle, American flag, wind turbine, train, hay bales. First to 10 wins!"
                 },
                 { 
                     name: "✏️ Tic Tac Toe Tournament", 
@@ -586,20 +597,63 @@
                     instructions: "Draw a grid on paper. Take turns placing X or O. First to get 3 in a row wins! Play best of 5 rounds. Winner picks the next road trip snack!"
                 },
                 { 
-                    name: "🔤 Hangman", 
-                    description: "Guess the word!",
-                    instructions: "One person thinks of a word and draws blanks for each letter. Others guess letters. Wrong guesses add body parts. Solve it before the stick figure is complete!"
-                },
-                { 
                     name: "⬜ Dots and Boxes", 
                     description: "Connect dots to make boxes!",
                     instructions: "Draw a grid of dots (6x6). Take turns drawing one line between dots. Complete a box? Write your initial and go again. Most boxes wins!"
                 },
                 { 
-                    name: "🏠 M.A.S.H.", 
-                    description: "Predict your future!",
-                    instructions: "Write MASH (Mansion, Apartment, Shack, House). Add 4 options each for: spouse, job, car, city, kids. Draw a spiral, count lines, cross off every Nth item until one remains in each!"
+                    name: "🔤 The Alphabet Game", 
+                    description: "Find letters A-Z on signs!",
+                    instructions: "Find letters A through Z IN ORDER on signs outside. First person to get to Z wins! Letters inside the car don't count."
+                }
+            ],
+            games: [
+                { 
+                    name: "🎵 Name That Tune", 
+                    description: "Guess the song!",
+                    instructions: "Play 5 seconds of a song. First person to name the song AND artist gets a point! Take turns picking the genre. Play to 10 points."
                 },
+                { 
+                    name: "🌈 Color Car Game", 
+                    description: "Pick a color and count!",
+                    instructions: "Each person picks a car color. Count how many you see in 10 minutes. Most cars wins! (No white or black - too easy!)"
+                },
+                { 
+                    name: "📖 Story Round Robin", 
+                    description: "Make up a story together!",
+                    instructions: "First person says one sentence to start a story. Each person adds ONE sentence. See how creative (or silly) it gets!"
+                },
+                { 
+                    name: "🧠 20 Questions", 
+                    description: "Guess what I'm thinking!",
+                    instructions: "One person thinks of something. Others ask yes/no questions to figure it out. 20 questions max. Take turns thinking!"
+                },
+                { 
+                    name: "✨ Two Truths and a Lie", 
+                    description: "Can you spot the fib?",
+                    instructions: "Each person shares 3 statements - 2 true, 1 false. Others guess the lie. Great way to learn fun facts about each other!"
+                },
+                { 
+                    name: "👁️ I Spy", 
+                    description: "Classic guessing game!",
+                    instructions: "One person says 'I spy with my little eye, something that is [color].' Others guess what it is. Take turns being the spy!"
+                },
+                { 
+                    name: "🐄 Count the Animals", 
+                    description: "Farm animal spotting!",
+                    instructions: "Each person picks a farm animal (cows, horses, sheep). Count how many you see on your side of the car in 30 minutes. Most animals wins!"
+                },
+                { 
+                    name: "🚌 Punch Buggy", 
+                    description: "Spot the VW Beetles!",
+                    instructions: "First person to spot a Volkswagen Beetle calls out 'Punch Buggy [color]!' Keep a tally. Most Beetles spotted by end of trip wins! (No actual punching!)"
+                },
+                { 
+                    name: "😅 Fortunately/Unfortunately", 
+                    description: "Silly story twists!",
+                    instructions: "First person starts: 'Fortunately, we're going to Disneyland!' Next person: 'Unfortunately, it's closed.' Next: 'Fortunately...' Keep alternating!"
+                }
+            ]
         };
 
         function App() {
