@@ -489,7 +489,7 @@ Submitted by: ${tripData.traveler.name}
                                         <span className={`px-2 py-1 rounded text-xs font-medium ${isOnline ? 'bg-green-500/80' : 'bg-gray-500/80'}`}>
                                             {isOnline ? '● Online' : '○ Offline'}
                                         </span>
-                                        <button onClick={() => { navigator.clipboard.writeText('Business trip dashboard shared!'); alert('Share link copied! 📋'); }} className="px-3 py-1 bg-white/20 hover:bg-white/30 rounded text-xs font-medium">
+                                        <button onClick={() => { if (navigator.share) { navigator.share({ title: 'Business Trip Dashboard', text: 'Check out my business trip itinerary!' }).catch(() => {}); } else { navigator.clipboard.writeText('Business trip dashboard shared!'); alert('Share link copied! 📋'); } }} className="px-3 py-1 bg-white/20 hover:bg-white/30 rounded text-xs font-medium">
                                             📤 Share
                                         </button>
                                         <button onClick={exportExpenseReport} className="px-3 py-1 bg-white/20 hover:bg-white/30 rounded text-xs font-medium">
